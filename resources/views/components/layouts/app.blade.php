@@ -11,7 +11,7 @@
 <body x-data class="min-h-screen bg-background font-sans text-foreground antialiased">
     @include('partials.sidebar')
 
-    <div class="app-shift flex min-h-screen flex-col transition-[padding] duration-200 ease-in-out">
+    <div class="app-shift flex min-h-screen flex-col">
 
         @include('partials.navbar', ['breadcrumbs' => $breadcrumbs, 'title' => $title])
         @include('partials.topbar-horizontal')

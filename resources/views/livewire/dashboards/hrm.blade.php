@@ -6,25 +6,28 @@
         </x-slot:actions>
     </x-page-header>
 
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+    <div class="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <x-ui.stat label="Employees" value="248" icon="users" tone="primary" trend="+12" />
         <x-ui.stat label="Present Today" value="214" icon="user-check" tone="success" trend="86%" />
         <x-ui.stat label="On Leave" value="18" icon="palmtree" tone="warning" trend="+3" />
         <x-ui.stat label="New Hires (MTD)" value="9" icon="sparkles" tone="info" trend="+4" />
     </div>
 
+    {{-- Attendance ring + breakdown + dept chart --}}
     <div class="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <x-ui.card title="Headcount by Department" subtitle="Distribution" class="lg:col-span-2">
-            <div class="h-72"><canvas id="hrmDept"></canvas></div>
+        <x-ui.card title="Attendance Today" subtitle="Live status">
+            <div class="flex flex-col items-center">
+                <x-ui.gauge :value="86" tone="success" sub="214 / 248" label="Present rate" :size="140" />
+                <div class="mt-4 grid w-full grid-cols-2 gap-2.5">
+                    @foreach ([['Present','214','text-success','bg-success/10'],['Absent','16','text-destructive','bg-destructive/10'],['Late','12','text-[hsl(var(--warning))]','bg-warning/10'],['Leave','18','text-info','bg-info/10']] as [$l,$n,$tc,$bg])
+                        <div class="flex items-center gap-2 rounded-lg {{ $bg }} p-2.5"><span class="{{ $tc }} text-lg font-bold">{{ $n }}</span><span class="text-xs font-medium text-muted-foreground">{{ $l }}</span></div>
+                    @endforeach
+                </div>
+            </div>
         </x-ui.card>
 
-        <x-ui.card title="Attendance Today" subtitle="Live status">
-            <div class="mx-auto h-44 max-w-44"><canvas id="hrmAttendance"></canvas></div>
-            <div class="mt-4 grid grid-cols-2 gap-3">
-                @foreach ([['Present','214','text-success','bg-success/10'],['Absent','16','text-destructive','bg-destructive/10'],['Late','12','text-[hsl(var(--warning))]','bg-warning/10'],['Leave','18','text-info','bg-info/10']] as [$l,$n,$tc,$bg])
-                    <div class="flex items-center gap-2 rounded-lg {{ $bg }} p-2.5"><span class="{{ $tc }} text-lg font-bold">{{ $n }}</span><span class="text-xs font-medium text-muted-foreground">{{ $l }}</span></div>
-                @endforeach
-            </div>
+        <x-ui.card title="Headcount by Department" subtitle="Distribution" class="lg:col-span-2">
+            <div class="h-64"><canvas id="hrmDept"></canvas></div>
         </x-ui.card>
     </div>
 
@@ -75,10 +78,9 @@
     <script>
         {
             const t = window.akChartTheme();
-            new Chart(hrmDept, { type:'bar', data:{ labels:['Engineering','Sales','Design','Marketing','Finance','Support','HR'], datasets:[{ label:'Employees', data:[82,48,34,28,22,20,14], backgroundColor:t.c1, borderRadius:6, maxBarThickness:36 }]},
+            const el = document.getElementById('hrmDept');
+            if (el) new Chart(el, { type:'bar', data:{ labels:['Engineering','Sales','Design','Marketing','Finance','Support','HR'], datasets:[{ label:'Employees', data:[82,48,34,28,22,20,14], backgroundColor:t.c1, borderRadius:6, maxBarThickness:34 }]},
                 options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{ x:{grid:{display:false},ticks:{color:t.text}}, y:{grid:{color:t.grid},ticks:{color:t.text}} } } });
-            new Chart(hrmAttendance, { type:'doughnut', data:{ labels:['Present','Absent','Late','Leave'], datasets:[{ data:[214,16,12,18], backgroundColor:[t.c2,t.c5,t.c3,t.c1], borderWidth:0 }]},
-                options:{ responsive:true, maintainAspectRatio:false, cutout:'72%', plugins:{legend:{display:false}} } });
         }
     </script>
     @endscript

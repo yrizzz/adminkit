@@ -6,7 +6,7 @@
 
 <div x-show="$store.ui.layout === 'horizontal'" x-cloak
      class="sticky top-16 z-20 hidden border-b border-border bg-background/80 backdrop-blur-lg lg:block">
-    <nav class="flex items-center gap-0.5 overflow-x-auto px-4 py-1.5">
+    <nav class="flex flex-wrap items-center gap-0.5 px-4 py-1.5">
         @foreach ($items as $item)
             @php($active = Menu::active($item))
             @if (Menu::hasChildren($item))

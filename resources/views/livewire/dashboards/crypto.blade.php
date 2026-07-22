@@ -6,6 +6,16 @@
         </x-slot:actions>
     </x-page-header>
 
+    {{-- Ticker strip --}}
+    <div class="mb-4 flex gap-3 overflow-x-auto rounded-xl border border-border bg-card p-2">
+        @foreach ([['BTC','$67,412','+2.4%',1],['ETH','$3,540','+3.1%',1],['SOL','$182','+18.0%',1],['BNB','$598','-0.8%',0],['XRP','$0.62','+1.2%',1],['ADA','$0.58','+4.5%',1],['DOGE','$0.16','-2.1%',0]] as [$sym,$price,$chg,$up])
+            <div class="flex shrink-0 items-center gap-2 rounded-lg px-3 py-1.5">
+                <span class="grid size-7 place-items-center rounded-full bg-primary/10 text-[0.6rem] font-bold text-primary">{{ $sym }}</span>
+                <div class="leading-tight"><p class="text-sm font-semibold">{{ $price }}</p><p class="text-xs font-medium {{ $up ? 'text-success' : 'text-destructive' }}">{{ $chg }}</p></div>
+            </div>
+        @endforeach
+    </div>
+
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <x-ui.stat label="Portfolio Value" value="$68,204" icon="wallet" tone="primary" trend="+5.8%" />
         <x-ui.stat label="24h Change" value="+$3,910" icon="trending-up" tone="success" trend="+6.1%" />

@@ -56,7 +56,7 @@
                 </button>
             </div>
 
-            <div class="w-full max-w-sm animate-in-up">
+            <div class="w-full max-w-sm">
                 <a href="{{ route('dashboard') }}" class="mb-8 flex items-center justify-center gap-2.5 lg:hidden">
                     <span class="grid size-10 place-items-center rounded-xl bg-gradient-to-br from-primary to-sidebar-primary text-white"><i data-lucide="gem" class="size-5"></i></span>
                     <span class="text-lg font-bold">{{ $cfg['name'] }}</span>

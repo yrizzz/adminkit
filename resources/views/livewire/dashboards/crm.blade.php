@@ -6,45 +6,62 @@
         </x-slot:actions>
     </x-page-header>
 
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+    <div class="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <x-ui.stat label="New Leads" value="892" icon="user-plus" tone="primary" trend="+12.4%" />
         <x-ui.stat label="Open Deals" value="$412K" icon="handshake" tone="info" trend="+7.8%" />
         <x-ui.stat label="Revenue Won" value="$186K" icon="badge-dollar-sign" tone="success" trend="+15.2%" />
         <x-ui.stat label="Conversion" value="24.6%" icon="percent" tone="warning" trend="+2.1%" />
     </div>
 
-    <div class="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <x-ui.card title="Deal Pipeline" subtitle="Value by stage" class="lg:col-span-2">
-            <div class="h-72"><canvas id="crmPipeline"></canvas></div>
-        </x-ui.card>
-
-        <x-ui.card title="Lead Sources" subtitle="Where leads come from">
-            <div class="mx-auto h-52 max-w-52"><canvas id="crmSources"></canvas></div>
-            <div class="mt-4 space-y-2">
-                @foreach ([['Website','38%','chart-1'],['Referral','26%','chart-2'],['Social','20%','chart-3'],['Cold Call','16%','chart-4']] as [$l,$v,$c])
-                    <div class="flex items-center gap-2 text-sm"><span class="size-2.5 rounded-full" style="background:hsl(var(--{{ $c }}))"></span><span class="flex-1 text-muted-foreground">{{ $l }}</span><span class="font-semibold">{{ $v }}</span></div>
-                @endforeach
+    {{-- Deal pipeline kanban --}}
+    <div class="mt-5 mb-2 flex items-center justify-between">
+        <h3 class="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Deal Pipeline</h3>
+        <span class="text-xs text-muted-foreground">$412K in play</span>
+    </div>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        @php
+            $stages = [
+                ['New', '$96K', 'chart-1', [['Acme Corp','$24K','Aisha Rahman'],['Globex','$18K','David Chen'],['Wayne Ent','$12K','Priya Sharma']]],
+                ['Contacted', '$74K', 'chart-2', [['Initech','$32K','Marcus Johnson'],['Umbrella','$22K','Layla Farouk']]],
+                ['Proposal', '$120K', 'chart-3', [['Stark Inc','$68K','Aisha Rahman'],['Soylent','$28K','David Chen']]],
+                ['Won', '$186K', 'chart-5', [['Cyberdyne','$92K','Priya Sharma'],['Tyrell','$54K','Marcus Johnson']]],
+            ];
+        @endphp
+        @foreach ($stages as [$stage, $sum, $c, $deals])
+            <div class="rounded-2xl border border-border bg-muted/30 p-3">
+                <div class="mb-3 flex items-center justify-between px-1">
+                    <span class="flex items-center gap-2 text-sm font-semibold"><span class="size-2.5 rounded-full" style="background: hsl(var(--{{ $c }}))"></span>{{ $stage }}</span>
+                    <span class="text-xs font-semibold text-muted-foreground">{{ $sum }}</span>
+                </div>
+                <div class="space-y-2.5">
+                    @foreach ($deals as [$co,$val,$owner])
+                        <div class="cursor-grab rounded-xl border border-border bg-card p-3 shadow-sm hover:shadow-md">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-semibold">{{ $co }}</span>
+                                <span class="text-sm font-bold text-primary">{{ $val }}</span>
+                            </div>
+                            <div class="mt-2.5 flex items-center gap-2">
+                                <x-ui.avatar :name="$owner" size="xs" />
+                                <span class="truncate text-xs text-muted-foreground">{{ $owner }}</span>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
-        </x-ui.card>
+        @endforeach
     </div>
 
-    <div class="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-5">
-        {{-- Kanban summary --}}
-        <div class="grid grid-cols-2 gap-4 lg:col-span-2 xl:grid-cols-2">
-            @foreach ([['New','24','$96K','chart-1'],['Contacted','18','$74K','chart-2'],['Proposal','11','$120K','chart-3'],['Won','9','$186K','chart-5']] as [$stage,$n,$v,$c])
-                <div class="ak-card p-4">
-                    <div class="mb-2 flex items-center justify-between"><span class="text-sm font-semibold">{{ $stage }}</span><span class="size-2.5 rounded-full" style="background:hsl(var(--{{ $c }}))"></span></div>
-                    <p class="text-2xl font-bold">{{ $n }}</p><p class="text-xs text-muted-foreground">deals · {{ $v }}</p>
-                </div>
-            @endforeach
-        </div>
-
-        <x-ui.card title="Recent Activity" subtitle="Team touchpoints" class="lg:col-span-3">
-            <ol class="relative space-y-5 border-s border-border ps-5">
-                @foreach ([['phone','Called Acme Corp','Priya · 12m ago','text-info bg-info/10'],['mail','Sent proposal to Globex','David · 40m ago','text-primary bg-primary/10'],['check-check','Closed deal with Umbrella ($18.9K)','Marcus · 2h ago','text-success bg-success/10'],['calendar','Scheduled demo with Initech','Layla · 4h ago','text-[hsl(var(--warning))] bg-warning/10'],['user-plus','New lead: Soylent Inc','System · 6h ago','text-muted-foreground bg-muted']] as [$ico,$text,$meta,$tone])
+    {{-- Chart + activity + sources --}}
+    <div class="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
+        <x-ui.card title="Pipeline Value" subtitle="By stage" class="lg:col-span-2">
+            <div class="h-64"><canvas id="crmPipeline"></canvas></div>
+        </x-ui.card>
+        <x-ui.card title="Recent Activity" subtitle="Team touchpoints">
+            <ol class="relative space-y-4 border-s border-border ps-5">
+                @foreach ([['phone','Called Acme Corp','12m','text-info bg-info/10'],['mail','Proposal to Globex','40m','text-primary bg-primary/10'],['check-check','Closed Umbrella $18.9K','2h','text-success bg-success/10'],['calendar','Demo with Initech','4h','text-[hsl(var(--warning))] bg-warning/10']] as [$ico,$text,$t,$tone])
                     <li class="relative">
                         <span class="absolute -start-[1.85rem] grid size-7 place-items-center rounded-full ring-4 ring-card {{ $tone }}"><i data-lucide="{{ $ico }}" class="size-3.5"></i></span>
-                        <p class="text-sm font-medium">{{ $text }}</p><p class="text-xs text-muted-foreground">{{ $meta }}</p>
+                        <p class="text-sm font-medium leading-snug">{{ $text }}</p><p class="text-xs text-muted-foreground">{{ $t }} ago</p>
                     </li>
                 @endforeach
             </ol>
@@ -55,10 +72,9 @@
     <script>
         {
             const t = window.akChartTheme();
-            new Chart(crmPipeline, { type:'bar', data:{ labels:['New','Contacted','Proposal','Negotiation','Won'], datasets:[{ label:'Value ($K)', data:[96,74,120,88,186], backgroundColor:[t.c1,t.c2,t.c3,t.c4,t.c5], borderRadius:8, maxBarThickness:44 }]},
+            const el = document.getElementById('crmPipeline');
+            if (el) new Chart(el, { type:'bar', data:{ labels:['New','Contacted','Proposal','Negotiation','Won'], datasets:[{ label:'Value ($K)', data:[96,74,120,88,186], backgroundColor:[t.c1,t.c2,t.c3,t.c4,t.c5], borderRadius:8, maxBarThickness:44 }]},
                 options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{ x:{grid:{color:t.grid},ticks:{color:t.text,callback:v=>'$'+v+'K'}}, y:{grid:{display:false},ticks:{color:t.text}} } } });
-            new Chart(crmSources, { type:'doughnut', data:{ labels:['Website','Referral','Social','Cold Call'], datasets:[{ data:[38,26,20,16], backgroundColor:[t.c1,t.c2,t.c3,t.c4], borderWidth:0, hoverOffset:6 }]},
-                options:{ responsive:true, maintainAspectRatio:false, cutout:'70%', plugins:{legend:{display:false}} } });
         }
     </script>
     @endscript
