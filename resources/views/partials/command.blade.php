@@ -11,7 +11,7 @@
             return this.items.filter(i => (i.label + ' ' + (i.group||'')).toLowerCase().includes(t)).slice(0, 20);
         },
         open() { $store.ui.commandOpen = true; this.q = ''; $nextTick(() => { this.$refs.input.focus(); window.renderIcons && window.renderIcons(); }); },
-        go(href) { if (href && href !== '#') window.location.href = href; }
+        go(href) { if (href && href !== '#') { $store.ui.commandOpen = false; window.Livewire ? Livewire.navigate(href) : (window.location.href = href); } }
     }"
     x-init="$watch('$store.ui.commandOpen', v => { if (v) open(); })"
     @keydown.window.prevent.cmd.k="open()"

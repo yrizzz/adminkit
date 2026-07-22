@@ -12,7 +12,7 @@
     </button>
 
     {{-- Horizontal layout brand --}}
-    <a href="{{ route('dashboard') }}" x-show="$store.ui.layout === 'horizontal'" x-cloak
+    <a href="{{ route('dashboard') }}" wire:navigate x-show="$store.ui.layout === 'horizontal'" x-cloak
        class="me-2 hidden items-center gap-2.5 lg:flex">
         <span class="grid size-9 place-items-center rounded-xl bg-gradient-to-br from-primary to-sidebar-primary text-white shadow-lg shadow-primary/30">
             <i data-lucide="gem" class="size-5"></i>
@@ -28,7 +28,7 @@
 
     {{-- Breadcrumb --}}
     <nav aria-label="Breadcrumb" class="hidden min-w-0 items-center gap-1.5 text-sm sm:flex">
-        <a href="{{ route('dashboard') }}" class="flex items-center text-muted-foreground hover:text-foreground">
+        <a href="{{ route('dashboard') }}" wire:navigate class="flex items-center text-muted-foreground hover:text-foreground">
             <i data-lucide="house" class="size-4"></i>
         </a>
         @foreach ($crumbs as $c)
@@ -145,8 +145,8 @@
                 </div>
             </div>
             <div class="my-1 border-t border-border"></div>
-            <x-ui.dropdown-item icon="circle-user" :href="route('settings')">Profile</x-ui.dropdown-item>
-            <x-ui.dropdown-item icon="settings" :href="route('settings')">Settings</x-ui.dropdown-item>
+            <x-ui.dropdown-item icon="circle-user" :href="route('settings')" wire:navigate>Profile</x-ui.dropdown-item>
+            <x-ui.dropdown-item icon="settings" :href="route('settings')" wire:navigate>Settings</x-ui.dropdown-item>
             <x-ui.dropdown-item icon="credit-card" href="#">Billing</x-ui.dropdown-item>
             <x-ui.dropdown-item icon="life-buoy" href="#">Support</x-ui.dropdown-item>
             <div class="my-1 border-t border-border"></div>

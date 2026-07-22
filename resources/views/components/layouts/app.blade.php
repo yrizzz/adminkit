@@ -11,14 +11,13 @@
 <body x-data class="min-h-screen bg-background font-sans text-foreground antialiased">
     @include('partials.sidebar')
 
-    <div class="flex min-h-screen flex-col transition-[padding] duration-200 ease-in-out"
-         :class="$store.ui.layout === 'vertical' ? ($store.ui.sidebarCollapsed ? 'lg:ps-[76px]' : 'lg:ps-64') : ''">
+    <div class="app-shift flex min-h-screen flex-col transition-[padding] duration-200 ease-in-out">
 
         @include('partials.navbar', ['breadcrumbs' => $breadcrumbs, 'title' => $title])
         @include('partials.topbar-horizontal')
 
         <main class="flex-1 p-4 sm:p-6">
-            <div class="mx-auto w-full max-w-[1600px] animate-in-up">
+            <div class="mx-auto w-full max-w-[1600px]">
                 {{ $slot }}
             </div>
         </main>
@@ -30,6 +29,7 @@
     @include('partials.command')
     <x-ui.toaster />
 
+    @livewireScripts
     @stack('scripts')
 </body>
 </html>

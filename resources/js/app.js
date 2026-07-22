@@ -1,83 +1,80 @@
-import Alpine from 'alpinejs';
-import focus from '@alpinejs/focus';
-import collapse from '@alpinejs/collapse';
-import persist from '@alpinejs/persist';
 import { createIcons, icons } from 'lucide';
 import Chart from 'chart.js/auto';
 
 /* ---------------------------------------------------------------
- * Third-party globals
+ * Third-party globals. Alpine is provided by Livewire (bundled),
+ * so we don't import/start it here — we register onto it instead.
  * ------------------------------------------------------------- */
 window.Chart = Chart;
-window.Alpine = Alpine;
 
-Alpine.plugin(focus);
-Alpine.plugin(collapse);
-Alpine.plugin(persist);
-
-/* Render / refresh Lucide icons ([data-lucide] -> <svg>) */
 const renderIcons = () => createIcons({ icons, attrs: { 'stroke-width': 2 } });
 window.renderIcons = renderIcons;
 
+/* Tiny localStorage helper (mirrors the anti-FOUC keys in <head>) */
+const LS = {
+    get(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+};
+
 /* ---------------------------------------------------------------
  * Global UI store — theme, direction, layout, sidebar, accent…
- * Persisted to localStorage so preferences survive reloads.
+ * Registered on Livewire's Alpine instance (survives wire:navigate).
  * ------------------------------------------------------------- */
-Alpine.store('ui', {
-    theme: Alpine.$persist('system').as('ak_theme'), // light | dark | system
-    direction: Alpine.$persist('ltr').as('ak_dir'), // ltr | rtl
-    layout: Alpine.$persist('vertical').as('ak_layout'), // vertical | horizontal
-    accent: Alpine.$persist('blue').as('ak_accent'),
-    radius: Alpine.$persist('lg').as('ak_radius'),
-    sidebarCollapsed: Alpine.$persist(false).as('ak_sb_collapsed'),
-    navbarFixed: Alpine.$persist(true).as('ak_navbar_fixed'),
-    compact: Alpine.$persist(false).as('ak_compact'),
+document.addEventListener('alpine:init', () => {
+    Alpine.store('ui', {
+        theme: LS.get('ak_theme', 'system'),
+        direction: LS.get('ak_dir', 'ltr'),
+        layout: LS.get('ak_layout', 'vertical'),
+        accent: LS.get('ak_accent', 'blue'),
+        radius: LS.get('ak_radius', 'lg'),
+        sidebarCollapsed: LS.get('ak_sb_collapsed', false),
+        navbarFixed: LS.get('ak_navbar_fixed', true),
+        compact: LS.get('ak_compact', false),
 
-    // transient (not persisted)
-    sidebarMobileOpen: false,
-    customizerOpen: false,
-    commandOpen: false,
+        // transient
+        sidebarMobileOpen: false,
+        customizerOpen: false,
+        commandOpen: false,
 
-    init() {
-        this.apply();
-        // React to OS theme changes when in "system" mode
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-            if (this.theme === 'system') this.apply();
-        });
-    },
+        init() {
+            this.apply();
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                if (this.theme === 'system') this.apply();
+            });
+        },
 
-    get isDark() {
-        return this.theme === 'dark' || (this.theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-    },
+        get isDark() {
+            return this.theme === 'dark' || (this.theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        },
 
-    apply() {
-        const html = document.documentElement;
-        html.classList.toggle('dark', this.isDark);
-        html.setAttribute('dir', this.direction);
-        html.dataset.accent = this.accent;
-        html.dataset.radius = this.radius;
-        html.dataset.layout = this.layout;
-        html.classList.toggle('is-compact', this.compact);
-    },
+        apply() {
+            const html = document.documentElement;
+            html.classList.toggle('dark', this.isDark);
+            html.setAttribute('dir', this.direction);
+            html.dataset.accent = this.accent;
+            html.dataset.radius = this.radius;
+            html.dataset.layout = this.layout;
+            html.classList.toggle('sidebar-collapsed', this.sidebarCollapsed);
+            html.classList.toggle('is-compact', this.compact);
+        },
 
-    setTheme(v) { this.theme = v; this.apply(); },
-    toggleTheme() { this.setTheme(this.isDark ? 'light' : 'dark'); },
-
-    setDirection(v) { this.direction = v; this.apply(); },
-    toggleDirection() { this.setDirection(this.direction === 'rtl' ? 'ltr' : 'rtl'); },
-
-    setLayout(v) { this.layout = v; this.apply(); },
-    setAccent(v) { this.accent = v; this.apply(); },
-    setRadius(v) { this.radius = v; this.apply(); },
-    setCompact(v) { this.compact = v; this.apply(); },
-
-    toggleSidebar() { this.sidebarCollapsed = !this.sidebarCollapsed; },
-    openMobileSidebar() { this.sidebarMobileOpen = true; },
-    closeMobileSidebar() { this.sidebarMobileOpen = false; },
+        setTheme(v) { this.theme = v; LS.set('ak_theme', v); this.apply(); },
+        toggleTheme() { this.setTheme(this.isDark ? 'light' : 'dark'); },
+        setDirection(v) { this.direction = v; LS.set('ak_dir', v); this.apply(); },
+        toggleDirection() { this.setDirection(this.direction === 'rtl' ? 'ltr' : 'rtl'); },
+        setLayout(v) { this.layout = v; LS.set('ak_layout', v); this.apply(); },
+        setAccent(v) { this.accent = v; LS.set('ak_accent', v); this.apply(); },
+        setRadius(v) { this.radius = v; LS.set('ak_radius', v); this.apply(); },
+        setCompact(v) { this.compact = v; LS.set('ak_compact', v); this.apply(); },
+        toggleSidebar() { this.sidebarCollapsed = !this.sidebarCollapsed; LS.set('ak_sb_collapsed', this.sidebarCollapsed); this.apply(); },
+        setNavbarFixed(v) { this.navbarFixed = v; LS.set('ak_navbar_fixed', v); },
+        openMobileSidebar() { this.sidebarMobileOpen = true; },
+        closeMobileSidebar() { this.sidebarMobileOpen = false; },
+    });
 });
 
 /* ---------------------------------------------------------------
- * Toast helper (window.toast(...)) dispatched to the toaster.
+ * Toast helper — window.toast('msg', { variant, title })
  * ------------------------------------------------------------- */
 window.toast = (message, opts = {}) => {
     window.dispatchEvent(new CustomEvent('toast', {
@@ -102,8 +99,13 @@ window.akChartTheme = () => {
 };
 
 /* ---------------------------------------------------------------
- * Boot
+ * Icons: render on first load and after every SPA navigation.
  * ------------------------------------------------------------- */
-Alpine.start();
-renderIcons();
-document.addEventListener('livewire:navigated', renderIcons);
+document.addEventListener('DOMContentLoaded', renderIcons);
+
+/* After each SPA navigation, re-apply theme/layout to <html> (Livewire's
+   morph resets client-set attributes) and re-render icons. */
+document.addEventListener('livewire:navigated', () => {
+    if (window.Alpine && Alpine.store('ui')) Alpine.store('ui').apply();
+    renderIcons();
+});

@@ -15,7 +15,9 @@ class Menu
         }
 
         if (! empty($item['route']) && Route::has($item['route'])) {
-            return route($item['route'], $item['params'] ?? []);
+            $url = route($item['route'], $item['params'] ?? []);
+
+            return $url.(! empty($item['hash']) ? '#'.$item['hash'] : '');
         }
 
         // Every leaf is navigable — generate a scaffold page URL from its label.

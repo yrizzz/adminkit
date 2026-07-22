@@ -26,7 +26,7 @@
                     </div>
                 </div>
             @else
-                <a href="{{ Menu::href($item) }}"
+                <a href="{{ Menu::href($item) }}" wire:navigate
                    class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-accent {{ $active ? 'bg-accent text-primary' : 'text-foreground' }}">
                     <i data-lucide="{{ $item['icon'] ?? 'dot' }}" class="size-4"></i>
                     {{ $item['label'] }}

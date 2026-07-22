@@ -11,8 +11,7 @@
         @include('partials.horizontal-child', ['item' => $child, 'level' => $level + 1])
     @endforeach
 @else
-    <a href="{{ $href }}"
-       @if ($href === '#') @click.prevent="window.toast && window.toast('{{ addslashes($item['label']) }} — halaman scaffold template', {variant:'info'})" @endif
+    <a href="{{ $href }}" wire:navigate
        class="flex items-center gap-2 rounded-lg py-1.5 pe-2.5 text-sm font-medium text-foreground hover:bg-accent {{ Menu::active($item) ? 'text-primary' : '' }}"
        style="padding-inline-start: {{ $pad }}rem">
         <span class="h-px w-2 bg-current opacity-40"></span>{{ $item['label'] }}

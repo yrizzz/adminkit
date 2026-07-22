@@ -40,7 +40,7 @@
     </li>
 @else
     <li>
-        <a href="{{ $href }}" class="{{ $linkClass }}">
+        <a href="{{ $href }}" wire:navigate class="{{ $linkClass }}">
             @if ($isSub)
                 <span class="nav-node"></span>
             @else

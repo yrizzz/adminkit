@@ -67,6 +67,7 @@
     </div>
 
     <x-ui.toaster />
+    @livewireScripts
     @stack('scripts')
 </body>
 </html>

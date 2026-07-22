@@ -17,7 +17,7 @@
 >
     {{-- Brand --}}
     <div class="sidebar-brand flex h-16 items-center gap-2.5 px-4">
-        <a href="{{ route('dashboard') }}" class="flex items-center gap-2.5 overflow-hidden">
+        <a href="{{ route('dashboard') }}" wire:navigate class="flex items-center gap-2.5 overflow-hidden">
             <span class="grid size-9 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-sidebar-primary to-primary text-white shadow-lg shadow-primary/30">
                 <i data-lucide="gem" class="size-5"></i>
             </span>
@@ -66,7 +66,7 @@
 
     {{-- User card --}}
     <div class="mt-auto border-t border-sidebar-border p-3">
-        <a href="{{ route('settings') }}" class="sidebar-usercard flex items-center gap-3 rounded-xl p-2 transition-colors hover:bg-white/5">
+        <a href="{{ route('settings') }}" wire:navigate class="sidebar-usercard flex items-center gap-3 rounded-xl p-2 transition-colors hover:bg-white/5">
             <x-ui.avatar :name="auth()->user()?->name ?? 'Guest User'" size="sm" status="online" />
             <div class="sidebar-usercard-text min-w-0 flex-1">
                 <p class="truncate text-sm font-semibold text-white">{{ auth()->user()?->name ?? 'Guest User' }}</p>

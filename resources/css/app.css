@@ -352,6 +352,17 @@
     }
 }
 
+/* Content offset for the fixed sidebar — driven by <html> attrs (set pre-paint),
+   so the page never slides in from the side on load. Transition only fires on toggle. */
+@media (min-width: 1024px) {
+    html[data-layout='vertical'] .app-shift {
+        padding-inline-start: 16rem; /* matches sidebar w-64 */
+    }
+    html[data-layout='vertical'].sidebar-collapsed .app-shift {
+        padding-inline-start: 76px; /* matches collapsed rail */
+    }
+}
+
 /* Collapsed "icon rail" sidebar (desktop only) */
 @media (min-width: 1024px) {
     aside.is-rail .nav-label,

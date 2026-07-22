@@ -21,10 +21,12 @@
             d.dataset.accent = get('ak_accent', 'blue');
             d.dataset.radius = get('ak_radius', 'lg');
             d.dataset.layout = get('ak_layout', 'vertical');
+            d.classList.toggle('sidebar-collapsed', get('ak_sb_collapsed', false));
             if (get('ak_compact', false)) d.classList.add('is-compact');
         } catch (e) {}
     })();
 </script>
 
 @vite(['resources/css/app.css', 'resources/js/app.js'])
+@livewireStyles
 @stack('head')
