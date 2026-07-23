@@ -1,0 +1,39 @@
+# Auto-deploy: every push to `main` SSHes into the VPS and runs deploy.sh.
+#
+# Set these repo secrets first (Settings → Secrets and variables → Actions):
+#   VPS_HOST        e.g. 203.0.113.10  (or your domain)
+#   VPS_USER        e.g. deploy
+#   VPS_SSH_KEY     a PRIVATE ssh key whose public key is in the VPS user's
+#                   ~/.ssh/authorized_keys
+#   VPS_PORT        (optional) ssh port, defaults to 22
+#   VPS_APP_PATH    absolute path to the app on the VPS, e.g. /var/www/adminpanel
+#
+# Prefer to deploy by hand instead? Delete this file and just run
+# `bash deploy.sh` on the VPS.
+
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:        # lets you trigger a deploy manually from the Actions tab
+
+concurrency:
+  group: deploy-production   # never run two deploys at once
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT || 22 }}
+          script_stop: true
+          script: |
+            cd "${{ secrets.VPS_APP_PATH }}"
+            bash deploy.sh
