@@ -353,6 +353,9 @@
         border-radius: 9999px;
         background: hsl(var(--sidebar-muted));
         transition: all 0.15s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .nav-sub:hover .nav-node { background: hsl(var(--sidebar-foreground)); }
     .nav-sub:hover::after { background: hsl(var(--sidebar-foreground) / 0.5); }
@@ -365,6 +368,7 @@
         height: 0.62rem;
         background: hsl(var(--sidebar-primary));
         box-shadow: 0 0 0 3px hsl(var(--sidebar)), 0 0 9px 1px hsl(var(--sidebar-primary) / 0.6);
+        margin: -0.06rem 0;
     }
     /* active branch turns blue: the node, its connector, and the rail above it */
     .nav-sub.active::after { background: hsl(var(--sidebar-primary)); }
