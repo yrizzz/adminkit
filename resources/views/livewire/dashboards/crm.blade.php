@@ -57,14 +57,17 @@
             <div class="h-64"><canvas id="crmPipeline"></canvas></div>
         </x-ui.card>
         <x-ui.card title="Recent Activity" subtitle="Team touchpoints">
-            <ol class="relative space-y-4 border-s border-border ps-5">
+            <ul class="space-y-1">
                 @foreach ([['phone','Called Acme Corp','12m','text-info bg-info/10'],['mail','Proposal to Globex','40m','text-primary bg-primary/10'],['check-check','Closed Umbrella $18.9K','2h','text-success bg-success/10'],['calendar','Demo with Initech','4h','text-[hsl(var(--warning))] bg-warning/10']] as [$ico,$text,$t,$tone])
-                    <li class="relative">
-                        <span class="absolute -start-[1.85rem] grid size-7 place-items-center rounded-full ring-4 ring-card {{ $tone }}"><i data-lucide="{{ $ico }}" class="size-3.5"></i></span>
-                        <p class="text-sm font-medium leading-snug">{{ $text }}</p><p class="text-xs text-muted-foreground">{{ $t }} ago</p>
+                    <li class="flex items-center gap-3 rounded-lg px-2 py-2 hover:bg-accent/50">
+                        <span class="grid size-9 shrink-0 place-items-center rounded-lg {{ $tone }}"><i data-lucide="{{ $ico }}" class="size-4"></i></span>
+                        <div class="min-w-0 flex-1">
+                            <p class="truncate text-sm font-medium leading-snug">{{ $text }}</p>
+                            <p class="text-xs text-muted-foreground">{{ $t }} ago</p>
+                        </div>
                     </li>
                 @endforeach
-            </ol>
+            </ul>
         </x-ui.card>
     </div>
 
@@ -74,7 +77,7 @@
             const t = window.akChartTheme();
             const el = document.getElementById('crmPipeline');
             if (el) new Chart(el, { type:'bar', data:{ labels:['New','Contacted','Proposal','Negotiation','Won'], datasets:[{ label:'Value ($K)', data:[96,74,120,88,186], backgroundColor:[t.c1,t.c2,t.c3,t.c4,t.c5], borderRadius:8, maxBarThickness:44 }]},
-                options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{ x:{grid:{color:t.grid},ticks:{color:t.text,callback:v=>'$'+v+'K'}}, y:{grid:{display:false},ticks:{color:t.text}} } } });
+                options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{ x:{grace:'6%',grid:{color:t.grid},ticks:{color:t.text,callback:v=>'$'+v+'K'}}, y:{grid:{display:false},ticks:{color:t.text}} } } });
         }
     </script>
     @endscript

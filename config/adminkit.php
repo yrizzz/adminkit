@@ -29,7 +29,7 @@ return [
                 [
                     'label' => 'Dashboards',
                     'icon'  => 'monitor',
-                    'badge' => ['text' => '12', 'variant' => 'neutral'],
+                    'badge' => ['text' => '13', 'variant' => 'neutral'],
                     'route' => 'dashboard',
                     'children' => [
                         ['label' => 'Sales',     'route' => 'dashboard.show', 'params' => 'sales'],
@@ -44,6 +44,7 @@ return [
                         ['label' => 'Personal',  'route' => 'dashboard.show', 'params' => 'personal'],
                         ['label' => 'Stocks',    'route' => 'dashboard.show', 'params' => 'stocks'],
                         ['label' => 'Course',    'route' => 'dashboard.show', 'params' => 'course'],
+                        ['label' => 'Timeline',  'route' => 'dashboard.show', 'params' => 'timeline'],
                     ],
                 ],
             ],

@@ -1,5 +1,5 @@
 <div>
-    <x-page-header title="Good morning, Aisha ☀️" :subtitle="'Tuesday, '.now()->format('F j').' · you have 5 tasks today'">
+    <x-page-header title="Good morning, Yrizzz ☀️" :subtitle="'Tuesday, '.now()->format('F j').' · you have 5 tasks today'">
         <x-slot:actions>
             <x-ui.button variant="outline" icon="plus">Quick add</x-ui.button>
         </x-slot:actions>

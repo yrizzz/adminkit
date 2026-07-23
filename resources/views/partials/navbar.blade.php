@@ -34,7 +34,7 @@
         @foreach ($crumbs as $c)
             <i data-lucide="chevron-right" class="rtl-flip size-4 text-muted-foreground/50"></i>
             @if (! $loop->last && ! empty($c['href']))
-                <a href="{{ $c['href'] }}" class="truncate text-muted-foreground hover:text-foreground">{{ $c['label'] }}</a>
+                <a href="{{ $c['href'] }}" wire:navigate class="truncate text-muted-foreground hover:text-foreground">{{ $c['label'] }}</a>
             @else
                 <span class="truncate font-medium text-foreground">{{ $c['label'] }}</span>
             @endif

@@ -21,6 +21,7 @@ class DashboardView extends Component
         'personal'  => ['Personal Dashboard', 'Your day, habits, money & goals'],
         'stocks'    => ['Stocks Dashboard', 'Portfolio, holdings & market movers'],
         'course'    => ['Course Dashboard', 'Courses, students & enrollments'],
+        'timeline'  => ['Timeline Dashboard', 'Activity stream, events & milestones'],
     ];
 
     public function mount(string $name): void

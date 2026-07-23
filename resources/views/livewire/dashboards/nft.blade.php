@@ -22,7 +22,7 @@
             <div class="space-y-3">
                 @foreach ([['Cosmic Ape #482','2.4 ETH','01:24:08','from-violet-500 to-fuchsia-500'],['Neon Punk #119','1.8 ETH','03:52:41','from-cyan-500 to-blue-500'],['Pixel Cat #77','0.9 ETH','06:10:22','from-amber-500 to-orange-500'],['Meta Bot #305','3.1 ETH','12:05:59','from-emerald-500 to-teal-500']] as [$name,$bid,$time,$grad])
                     <div class="flex items-center gap-3">
-                        <span class="size-11 shrink-0 rounded-xl bg-gradient-to-br {{ $grad }}"></span>
+                        <img src="https://api.dicebear.com/9.x/shapes/svg?seed={{ urlencode($name) }}" alt="{{ $name }}" loading="lazy" class="size-11 shrink-0 rounded-xl bg-gradient-to-br {{ $grad }} object-cover" />
                         <div class="min-w-0 flex-1"><p class="truncate text-sm font-medium">{{ $name }}</p><p class="text-xs text-muted-foreground">Current bid · {{ $bid }}</p></div>
                         <span class="rounded-md bg-muted px-2 py-1 font-mono text-xs font-semibold">{{ $time }}</span>
                     </div>
@@ -37,6 +37,7 @@
         @foreach ([['Azuki #1204','4.2','from-rose-500 to-pink-500'],['Bored Ape #88','12.8','from-amber-400 to-yellow-500'],['Doodle #542','2.1','from-sky-400 to-indigo-500'],['Clone X #77','3.6','from-fuchsia-500 to-purple-600'],['Moonbird #310','5.9','from-emerald-400 to-cyan-500'],['Meebit #920','1.4','from-orange-400 to-red-500']] as [$name,$price,$grad])
             <div class="ak-card overflow-hidden transition-all hover:-translate-y-1 hover:shadow-lg">
                 <div class="relative aspect-square bg-gradient-to-br {{ $grad }}">
+                    <img src="https://api.dicebear.com/9.x/shapes/svg?seed={{ urlencode($name) }}" alt="{{ $name }}" loading="lazy" class="absolute inset-0 size-full object-cover" />
                     <span class="absolute end-2 top-2 rounded-full bg-black/30 px-2 py-0.5 text-[0.65rem] font-bold text-white backdrop-blur">#{{ $loop->iteration }}</span>
                 </div>
                 <div class="p-3">

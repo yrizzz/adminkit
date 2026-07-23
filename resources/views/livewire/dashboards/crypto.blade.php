@@ -92,7 +92,7 @@
             g.addColorStop(0,'hsla'+t.c2.slice(3,-1)+' / .3)'); g.addColorStop(1,'hsla'+t.c2.slice(3,-1)+' / 0)');
             const d=[]; let v=52; for(let i=0;i<30;i++){ v += (Math.sin(i/3)+ (Math.random()-.4))*1.5; d.push(Math.max(40,v)); }
             new Chart(cryptoPerf, { type:'line', data:{ labels:d.map((_,i)=>i+1), datasets:[{ label:'Portfolio ($k)', data:d, borderColor:t.c2, backgroundColor:g, fill:true, tension:.4, pointRadius:0, borderWidth:2.5 }]},
-                options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{ x:{grid:{display:false},ticks:{color:t.text,maxTicksLimit:8}}, y:{grid:{color:t.grid},ticks:{color:t.text,callback:v=>'$'+v+'k'}} } } });
+                options:{ responsive:true, maintainAspectRatio:false, layout:{padding:{left:2,right:16,top:6,bottom:0}}, plugins:{legend:{display:false}}, scales:{ x:{offset:false,grid:{display:false},ticks:{color:t.text,maxTicksLimit:8}}, y:{grid:{color:t.grid},ticks:{color:t.text,callback:v=>'$'+v+'k'}} } } });
             new Chart(cryptoAlloc, { type:'doughnut', data:{ labels:['BTC','ETH','SOL','Others'], datasets:[{ data:[48,29,14,9], backgroundColor:[t.c1,t.c2,t.c3,t.c4], borderWidth:0, hoverOffset:6 }]},
                 options:{ responsive:true, maintainAspectRatio:false, cutout:'70%', plugins:{legend:{display:false}} } });
         }

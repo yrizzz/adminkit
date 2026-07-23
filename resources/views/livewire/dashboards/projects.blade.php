@@ -48,15 +48,17 @@
         </x-ui.card>
 
         <x-ui.card title="Upcoming Milestones" subtitle="Deadlines">
-            <ol class="relative space-y-5 border-s border-border ps-5">
+            <ul class="space-y-1">
                 @foreach ([['Design system v2','Apr 24','2 days','text-destructive bg-destructive/10'],['API integration','Apr 28','6 days','text-[hsl(var(--warning))] bg-warning/10'],['Beta release','May 03','11 days','text-info bg-info/10'],['Marketing site','May 10','18 days','text-muted-foreground bg-muted']] as [$task,$date,$left,$tone])
-                    <li class="relative">
-                        <span class="absolute -start-[1.85rem] grid size-7 place-items-center rounded-full ring-4 ring-card {{ $tone }}"><i data-lucide="flag" class="size-3.5"></i></span>
-                        <p class="text-sm font-medium">{{ $task }}</p>
-                        <p class="text-xs text-muted-foreground">{{ $date }} · <span class="font-medium">{{ $left }}</span></p>
+                    <li class="flex items-center gap-3 rounded-lg px-2 py-2 hover:bg-accent/50">
+                        <span class="grid size-9 shrink-0 place-items-center rounded-lg {{ $tone }}"><i data-lucide="flag" class="size-4"></i></span>
+                        <div class="min-w-0 flex-1">
+                            <p class="truncate text-sm font-medium">{{ $task }}</p>
+                            <p class="text-xs text-muted-foreground">{{ $date }} · <span class="font-medium">{{ $left }}</span></p>
+                        </div>
                     </li>
                 @endforeach
-            </ol>
+            </ul>
         </x-ui.card>
     </div>
 

@@ -37,7 +37,7 @@
                     style="transition: stroke-dashoffset .6s cubic-bezier(.22,1,.36,1)" />
         </svg>
         <div class="absolute inset-0 flex flex-col items-center justify-center">
-            <span class="text-2xl font-bold leading-none">{{ $display ?? $val . '%' }}</span>
+            <span class="font-bold leading-none" style="font-size: {{ max(11, round($size * 0.22)) }}px">{{ $display ?? $val . '%' }}</span>
             @if ($sub)<span class="mt-1 text-[0.7rem] text-muted-foreground">{{ $sub }}</span>@endif
         </div>
     </div>

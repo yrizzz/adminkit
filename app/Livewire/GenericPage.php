@@ -20,11 +20,17 @@ class GenericPage extends Component
         $trail = Menu::trail($this->path);
         $title = $trail ? end($trail) : (string) Str::of($this->path)->replace('-', ' ')->title();
 
-        $crumbs = ! empty($trail)
-            ? array_map(fn ($label) => ['label' => $label], $trail)
-            : [['label' => $title]];
+        $crumbs = Menu::breadcrumbs($this->path);
+        if (empty($crumbs)) {
+            $crumbs = [['label' => $title, 'href' => null]];
+        }
 
-        return view('livewire.pages.generic', [
+        // Use a real, hand-built page when one exists for this slug; otherwise
+        // fall back to the ready-to-fill scaffold.
+        $custom = 'livewire.pages.content.'.$this->path;
+        $view = view()->exists($custom) ? $custom : 'livewire.pages.generic';
+
+        return view($view, [
             'pageTitle' => $title,
             'section'   => $trail[0] ?? 'Pages',
         ])->layout('components.layouts.app', [

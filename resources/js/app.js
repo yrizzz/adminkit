@@ -7,6 +7,15 @@ import Chart from 'chart.js/auto';
  * ------------------------------------------------------------- */
 window.Chart = Chart;
 
+/* Give every value (linear) axis a little headroom so lines/bars never touch
+   the plot edge. Applies globally to all line/bar/area charts; pie/doughnut
+   (no scales) and radar (radialLinear) are unaffected. */
+Chart.defaults.scales.linear.grace = '8%';
+
+/* Reserve a little space around the plot so edge tick labels (e.g. the first
+   and last week on a line chart) aren't clipped by the canvas bounds. */
+Chart.defaults.layout.padding = { top: 6, right: 14, bottom: 0, left: 6 };
+
 const renderIcons = () => createIcons({ icons, attrs: { 'stroke-width': 2 } });
 window.renderIcons = renderIcons;
 
@@ -106,6 +115,11 @@ document.addEventListener('DOMContentLoaded', renderIcons);
 /* After each SPA navigation, re-apply theme/layout to <html> (Livewire's
    morph resets client-set attributes) and re-render icons. */
 document.addEventListener('livewire:navigated', () => {
-    if (window.Alpine && Alpine.store('ui')) Alpine.store('ui').apply();
+    if (window.Alpine && Alpine.store('ui')) {
+        Alpine.store('ui').apply();
+        // On mobile, a nav link keeps the off-canvas sidebar open across the SPA
+        // navigation — close it so the new page isn't hidden behind it.
+        Alpine.store('ui').closeMobileSidebar();
+    }
     renderIcons();
 });

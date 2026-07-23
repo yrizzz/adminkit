@@ -107,4 +107,62 @@ class Menu
 
         return $found;
     }
+
+    /** First navigable leaf under an item (itself if it's already a leaf). */
+    public static function firstLeaf(array $item): ?array
+    {
+        if (! self::hasChildren($item)) {
+            return $item;
+        }
+
+        foreach ($item['children'] as $child) {
+            if ($leaf = self::firstLeaf($child)) {
+                return $leaf;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Clickable breadcrumb trail for a scaffold page slug.
+     * Each ancestor links to its first child page; the current page has no link.
+     *
+     * @return array<int, array{label: string, href: ?string}>
+     */
+    public static function breadcrumbs(string $slug): array
+    {
+        $path = [];
+
+        $dfs = function (array $items, array $acc) use (&$dfs, &$path, $slug) {
+            foreach ($items as $item) {
+                $node = array_merge($acc, [$item]);
+                if (self::hasChildren($item)) {
+                    if ($dfs($item['children'], $node)) {
+                        return true;
+                    }
+                } elseif (Str::slug($item['label']) === $slug) {
+                    $path = $node;
+
+                    return true;
+                }
+            }
+
+            return false;
+        };
+
+        foreach (config('adminkit.menu', []) as $group) {
+            if ($dfs($group['items'], [])) {
+                break;
+            }
+        }
+
+        $last = count($path) - 1;
+
+        return array_map(function ($item, $i) use ($last) {
+            $leaf = $i === $last ? null : self::firstLeaf($item);
+
+            return ['label' => $item['label'], 'href' => $leaf ? self::href($leaf) : null];
+        }, $path, array_keys($path));
+    }
 }

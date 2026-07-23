@@ -3,7 +3,7 @@
 
     <div x-data="{ tab: 'profile' }" class="grid grid-cols-1 gap-6 lg:grid-cols-[220px_1fr]">
         {{-- Side nav --}}
-        <nav class="flex gap-1 overflow-x-auto lg:flex-col">
+        <nav class="no-scrollbar flex gap-1 overflow-x-auto lg:flex-col">
             @foreach (['profile' => ['Profile','user'], 'appearance' => ['Appearance','palette'], 'notifications' => ['Notifications','bell'], 'security' => ['Security','shield']] as $k => [$l, $ico])
                 <button @click="tab = '{{ $k }}'" :class="tab === '{{ $k }}' ? 'bg-accent text-foreground' : 'text-muted-foreground hover:bg-accent/50'"
                         class="flex items-center gap-2.5 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors">
@@ -17,14 +17,14 @@
             <div x-show="tab === 'profile'">
                 <x-ui.card title="Profile" subtitle="Update your personal information">
                     <div class="mb-6 flex items-center gap-4">
-                        <x-ui.avatar :name="auth()->user()?->name ?? 'Aisha Rahman'" size="xl" />
+                        <x-ui.avatar :name="auth()->user()?->name ?? 'Yrizzz'" size="xl" />
                         <div>
                             <x-ui.button variant="outline" size="sm" icon="upload">Change photo</x-ui.button>
                             <p class="mt-1.5 text-xs text-muted-foreground">JPG, PNG or GIF. Max 2MB.</p>
                         </div>
                     </div>
                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                        <x-ui.input label="Full name" :value="auth()->user()?->name ?? 'Aisha Rahman'" icon="user" />
+                        <x-ui.input label="Full name" :value="auth()->user()?->name ?? 'Yrizzz'" icon="user" />
                         <x-ui.input label="Email" type="email" :value="auth()->user()?->email ?? 'admin@adminkit.test'" icon="mail" />
                         <x-ui.input label="Phone" value="+62 812 3456 7890" icon="phone" />
                         <x-ui.input label="Location" value="Jakarta, Indonesia" icon="map-pin" />

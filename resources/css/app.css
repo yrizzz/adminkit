@@ -201,6 +201,15 @@
     [dir='rtl'] .rtl-flip {
         transform: scaleX(-1);
     }
+    /* Interactive elements get a pointer cursor (Tailwind v4 defaults buttons to
+       the arrow cursor). Excludes disabled controls. */
+    button:not(:disabled),
+    [role='button']:not(:disabled),
+    [role='tab']:not(:disabled),
+    summary,
+    label[for] {
+        cursor: pointer;
+    }
     /* Custom scrollbars */
     ::-webkit-scrollbar {
         width: 10px;
@@ -220,6 +229,36 @@
     }
     .scrollbar-sidebar::-webkit-scrollbar-thumb {
         background-color: hsl(0 0% 100% / 0.12);
+    }
+    /* Hide scrollbar entirely (used by the horizontal menu track) */
+    .no-scrollbar {
+        scrollbar-width: none;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    /* Skeleton shimmer (used by the Placeholders demos) */
+    .skeleton {
+        position: relative;
+        overflow: hidden;
+        background-color: hsl(var(--muted));
+        border-radius: 0.375rem;
+    }
+    .skeleton::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        transform: translateX(-100%);
+        background: linear-gradient(90deg, transparent, hsl(var(--foreground) / 0.07), transparent);
+        animation: ak-shimmer 1.5s infinite;
+    }
+    @keyframes ak-shimmer {
+        100% { transform: translateX(100%); }
+    }
+    /* Carousel autoplay progress bar */
+    @keyframes ak-cbar {
+        from { width: 0%; }
+        to { width: 100%; }
     }
     /* Focus ring */
     :focus-visible {
@@ -274,25 +313,33 @@
 
     /* ── Tree submenu ────────────────────────────────── */
     .nav-sublist {
-        @apply relative ms-[1.15rem] mt-1 space-y-0.5 border-s ps-3;
-        border-color: hsl(var(--sidebar-foreground) / 0.2);
+        @apply relative ms-[1.4rem] mt-1 space-y-0.5 ps-4;
+    }
+    /* Nested lists add NO extra indent and draw NO rail of their own — every item,
+       at any depth, sits on ONE shared vertical line. Hierarchy is shown by
+       indenting the label (see .nav-label padding), not the dots. */
+    .nav-sublist .nav-sublist {
+        margin-inline-start: 0;
+        padding-inline-start: 0;
+    }
+    .nav-sublist .nav-sublist::before {
+        content: none;
+    }
+    /* the single continuous rail — runs straight through every node */
+    .nav-sublist::before {
+        content: '';
+        position: absolute;
+        inset-inline-start: 1.79rem;
+        inset-block-start: -0.5rem;
+        inset-block-end: 0.5rem;
+        width: 2px;
+        border-radius: 9999px;
+        background: hsl(var(--sidebar-foreground) / 0.16);
     }
     .nav-sub {
         position: relative;
         padding-inline-start: 0.6rem;
         gap: 0.6rem;
-    }
-    /* elbow connector bridging the vertical rail to the node */
-    .nav-sub::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        inset-inline-start: -0.75rem;
-        width: 1.35rem;
-        height: 2px;
-        transform: translateY(-50%);
-        background: hsl(var(--sidebar-foreground) / 0.28);
-        transition: background-color 0.15s ease;
     }
     .nav-node {
         position: relative;
@@ -307,41 +354,34 @@
     .nav-sub:hover .nav-node {
         background: hsl(var(--sidebar-foreground));
     }
-    .nav-sub:hover::after {
-        background: hsl(var(--sidebar-foreground) / 0.55);
-    }
     .nav-sub.active {
         background: hsl(var(--sidebar-accent) / 0.55);
         color: #fff;
     }
     .nav-sub.active .nav-node {
+        width: 0.62rem;
+        height: 0.62rem;
         background: hsl(var(--sidebar-primary));
-        box-shadow: 0 0 0 3px hsl(var(--sidebar-primary) / 0.22);
+        /* dark ring in the sidebar colour separates the dot from the blue line so
+           the active page reads as a distinct "station", plus a soft glow */
+        box-shadow: 0 0 0 3px hsl(var(--sidebar)), 0 0 9px 1px hsl(var(--sidebar-primary) / 0.6);
     }
-    .nav-sub.active::after {
-        background: hsl(var(--sidebar-primary));
-    }
-
-    /* Active trail — blue vertical spine from the top of the tree down to the active node */
+    /* Blue overlay sitting exactly on the shared rail — the dots sit ON the line,
+       so the highlight runs continuously from the top of the branch straight down
+       through the active card, then turns neutral gray below it. */
     .nav-sub::before {
         content: '';
         position: absolute;
-        top: -0.4rem;
-        bottom: -0.4rem;
-        inset-inline-start: -0.75rem;
-        width: 2px;
+        inset-inline-start: 0.75rem;
+        inset-block: -0.5rem;
+        width: 3px;
+        border-radius: 9999px;
         background: transparent;
         transition: background-color 0.15s ease;
     }
-    /* items above the active one: full blue segment */
-    .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before {
-        background: hsl(var(--sidebar-primary));
-    }
-    /* the active item: blue from the top down to its node (center) */
+    .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before,
     .nav-sub.active::before {
-        top: -0.4rem;
-        bottom: 50%;
-        background: hsl(var(--sidebar-primary));
+        background: hsl(var(--sidebar-primary) / 0.9);
     }
 
     /* Page-enter animation: fade + zoom "pop" from center (no directional slide) */
@@ -360,6 +400,12 @@
     }
     html[data-layout='vertical'].sidebar-collapsed .app-shift {
         padding-inline-start: 76px; /* matches collapsed rail */
+    }
+    /* Horizontal layout: bars stay full width, but header + body content share the
+       same 2rem side inset so the logo, menu and body line up with a bit of breathing room */
+    html[data-layout='horizontal'] .app-shift > header,
+    html[data-layout='horizontal'] .app-shift > main {
+        padding-inline: 2rem;
     }
 }
 

@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
         // Primary demo admin
         User::updateOrCreate(
             ['email' => 'admin@adminkit.test'],
-            ['name' => 'Aisha Rahman', 'password' => Hash::make('password')],
+            ['name' => 'Yrizzz', 'password' => Hash::make('password')],
         );
 
         // A few demo teammates (used by the Tables page)

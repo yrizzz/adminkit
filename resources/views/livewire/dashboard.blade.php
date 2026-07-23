@@ -1,5 +1,5 @@
 <div>
-    <x-page-header title="Welcome back, Aisha 👋" subtitle="Here's what's happening with your projects today.">
+    <x-page-header title="Welcome back, Yrizzz 👋" subtitle="Here's what's happening with your projects today.">
         <x-slot:actions>
             <x-ui.button variant="outline" icon="calendar">Last 30 days</x-ui.button>
             <x-ui.button icon="download" @click="window.toast('Exporting report…', {variant:'success', title:'Export started'})">Export</x-ui.button>
@@ -72,21 +72,23 @@
         </x-ui.card>
 
         <x-ui.card title="Activity Feed" subtitle="Recent team activity">
-            <ol class="relative space-y-5 border-s border-border ps-5">
+            <ul class="space-y-1">
                 @foreach ([
-                    ['user-plus','Aisha added a new user','2 minutes ago','text-info bg-info/10'],
+                    ['user-plus','Yrizzz added a new user','2 minutes ago','text-info bg-info/10'],
                     ['check-check','Order #4821 completed','18 minutes ago','text-success bg-success/10'],
                     ['git-commit-horizontal','Deployed v1.4.2 to production','1 hour ago','text-primary bg-primary/10'],
                     ['message-square','New comment on “Q3 report”','3 hours ago','text-[hsl(var(--warning))] bg-warning/10'],
                     ['upload','Uploaded 12 new assets','Yesterday','text-muted-foreground bg-muted'],
                 ] as [$ico,$text,$time,$tone])
-                    <li class="relative">
-                        <span class="absolute -start-[1.85rem] grid size-7 place-items-center rounded-full ring-4 ring-card {{ $tone }}"><i data-lucide="{{ $ico }}" class="size-3.5"></i></span>
-                        <p class="text-sm font-medium">{{ $text }}</p>
-                        <p class="text-xs text-muted-foreground">{{ $time }}</p>
+                    <li class="flex items-center gap-3 rounded-lg px-2 py-2 hover:bg-accent/50">
+                        <span class="grid size-9 shrink-0 place-items-center rounded-lg {{ $tone }}"><i data-lucide="{{ $ico }}" class="size-4"></i></span>
+                        <div class="min-w-0 flex-1">
+                            <p class="truncate text-sm font-medium">{{ $text }}</p>
+                            <p class="text-xs text-muted-foreground">{{ $time }}</p>
+                        </div>
                     </li>
                 @endforeach
-            </ol>
+            </ul>
         </x-ui.card>
     </div>
 
