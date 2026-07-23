@@ -108,12 +108,32 @@ window.akChartTheme = () => {
 };
 
 /* ---------------------------------------------------------------
- * Icons: render on first load and after every SPA navigation.
+ * Active menu sync — the server marks items active by PATH only, so
+ * menu items that share a page and differ only by #hash (e.g. UI
+ * Elements sections) can't be told apart server-side. Here we refine
+ * the active state client-side using the full path + hash.
  * ------------------------------------------------------------- */
-document.addEventListener('DOMContentLoaded', renderIcons);
+const normalize = (u) => (u.pathname.replace(/\/+$/, '') || '/') + u.hash;
+window.syncMenuActive = () => {
+    if (!location.hash) return; // path-only URLs: trust the server-rendered active state
+    const want = normalize(location);
+    const links = [...document.querySelectorAll('aside a.nav-sub[href]')];
+    const match = links.find((a) => {
+        try { return normalize(new URL(a.href, location.origin)) === want; } catch (e) { return false; }
+    });
+    if (!match) return;
+    document.querySelectorAll('aside .nav-sub.active').forEach((el) => el.classList.remove('active'));
+    match.classList.add('active');
+};
+
+/* ---------------------------------------------------------------
+ * Boot hooks: first load + after every SPA navigation + hash change.
+ * ------------------------------------------------------------- */
+document.addEventListener('DOMContentLoaded', () => { renderIcons(); syncMenuActive(); });
+window.addEventListener('hashchange', () => syncMenuActive());
 
 /* After each SPA navigation, re-apply theme/layout to <html> (Livewire's
-   morph resets client-set attributes) and re-render icons. */
+   morph resets client-set attributes), re-render icons, refine active. */
 document.addEventListener('livewire:navigated', () => {
     if (window.Alpine && Alpine.store('ui')) {
         Alpine.store('ui').apply();
@@ -122,4 +142,5 @@ document.addEventListener('livewire:navigated', () => {
         Alpine.store('ui').closeMobileSidebar();
     }
     renderIcons();
+    syncMenuActive();
 });

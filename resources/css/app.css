@@ -388,6 +388,11 @@
     .nav-sub.active::before {
         background: hsl(var(--sidebar-primary) / 0.9);
     }
+    /* the active item ends the blue trail exactly at its node (dot) */
+    .nav-sub.active::before {
+        inset-block-start: -0.4rem;
+        inset-block-end: 50%;
+    }
 
     /* Page-enter animation: fade + zoom "pop" from center (no directional slide) */
     .animate-in-up {
