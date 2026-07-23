@@ -25,7 +25,7 @@
             @else
                 <i data-lucide="{{ $item['icon'] ?? 'dot' }}" class="nav-icon size-[1.15rem]"></i>
             @endif
-            <span class="nav-label flex-1 truncate text-start" @if ($level > 1) style="padding-inline-start: {{ ($level - 1) * 0.85 }}rem" @endif>{{ $item['label'] }}</span>
+            <span class="nav-label flex-1 truncate text-start">{{ $item['label'] }}</span>
             @if ($badge)
                 <span class="nav-badge rounded-md px-1.5 py-0.5 text-[0.65rem] font-bold leading-none {{ $tone }}">{{ $badge['text'] }}</span>
             @endif
@@ -46,7 +46,7 @@
             @else
                 <i data-lucide="{{ $item['icon'] ?? 'dot' }}" class="nav-icon size-[1.15rem]"></i>
             @endif
-            <span class="nav-label flex-1 truncate" @if ($level > 1) style="padding-inline-start: {{ ($level - 1) * 0.85 }}rem" @endif>{{ $item['label'] }}</span>
+            <span class="nav-label flex-1 truncate">{{ $item['label'] }}</span>
             @if ($badge)
                 <span class="nav-badge rounded-md px-1.5 py-0.5 text-[0.65rem] font-bold leading-none {{ $tone }}">{{ $badge['text'] }}</span>
             @endif
