@@ -1,12 +1,6 @@
 <div>
-    <x-page-header :title="'Two Step Verification'" subtitle="Authentication · one-time code entry">
-        <x-slot:actions>
-            <x-ui.button variant="outline" icon="arrow-left" class="[&>svg]:rtl-flip" :href="route('dashboard')">Dashboard</x-ui.button>
-        </x-slot:actions>
-    </x-page-header>
 
-    <x-ui.card :padded="false" class="overflow-hidden">
-        <div class="relative grid min-h-[68vh] place-items-center px-6 py-14">
+        <div class="relative grid min-h-screen place-items-center px-6 py-14">
             <div class="pointer-events-none absolute -end-24 -top-24 size-80 rounded-full bg-primary/10 blur-3xl"></div>
 
             <div x-data="{
@@ -73,5 +67,4 @@
                 </div>
             </div>
         </div>
-    </x-ui.card>
 </div>

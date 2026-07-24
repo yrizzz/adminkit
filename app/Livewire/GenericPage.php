@@ -30,10 +30,20 @@ class GenericPage extends Component
         $custom = 'livewire.pages.content.'.$this->path;
         $view = view()->exists($custom) ? $custom : 'livewire.pages.generic';
 
-        return view($view, [
+        $section = $trail[0] ?? 'Pages';
+
+        $page = view($view, [
             'pageTitle' => $title,
-            'section'   => $trail[0] ?? 'Pages',
-        ])->layout('components.layouts.app', [
+            'section'   => $section,
+        ]);
+
+        // Authentication screens get their own standalone, full-screen layout —
+        // no sidebar or navbar, the page paints the whole viewport itself.
+        if ($section === 'Authentication') {
+            return $page->layout('components.layouts.auth', ['title' => $title]);
+        }
+
+        return $page->layout('components.layouts.app', [
             'title'       => $title,
             'breadcrumbs' => $crumbs,
         ]);

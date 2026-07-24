@@ -1,12 +1,6 @@
 <div>
-    <x-page-header :title="'Under Maintenance'" subtitle="Authentication · scheduled downtime screen">
-        <x-slot:actions>
-            <x-ui.button variant="outline" icon="arrow-left" class="[&>svg]:rtl-flip" :href="route('dashboard')">Dashboard</x-ui.button>
-        </x-slot:actions>
-    </x-page-header>
 
-    <x-ui.card :padded="false" class="overflow-hidden">
-        <div class="relative grid min-h-[68vh] place-items-center px-6 py-14 text-center">
+        <div class="relative grid min-h-screen place-items-center px-6 py-14 text-center">
             <div class="pointer-events-none absolute -start-24 -top-24 size-80 rounded-full bg-warning/15 blur-3xl"></div>
             <div class="pointer-events-none absolute -bottom-24 -end-24 size-80 rounded-full bg-primary/10 blur-3xl"></div>
 
@@ -52,5 +46,4 @@
                 </p>
             </div>
         </div>
-    </x-ui.card>
 </div>

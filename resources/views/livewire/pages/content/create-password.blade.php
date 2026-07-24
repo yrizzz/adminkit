@@ -1,13 +1,6 @@
 <div>
-    <x-page-header :title="'Create Password'" subtitle="Authentication · first-time password setup">
-        <x-slot:actions>
-            <x-ui.badge variant="muted">Preview</x-ui.badge>
-            <x-ui.button variant="outline" icon="arrow-left" class="[&>svg]:rtl-flip" :href="route('dashboard')">Dashboard</x-ui.button>
-        </x-slot:actions>
-    </x-page-header>
 
-    <x-ui.card :padded="false" class="overflow-hidden">
-        <div class="grid min-h-[68vh] lg:grid-cols-2">
+        <div class="grid min-h-screen lg:grid-cols-2">
             @include('livewire.pages.content.partials.auth-brand', [
                 'brandTitle'  => 'One last step — secure your account.',
                 'brandText'   => 'You were invited to the workspace. Set a password to finish activating your account.',
@@ -98,5 +91,4 @@
                 </div>
             </div>
         </div>
-    </x-ui.card>
 </div>

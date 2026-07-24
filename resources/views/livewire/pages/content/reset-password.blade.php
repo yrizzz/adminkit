@@ -1,13 +1,6 @@
 <div>
-    <x-page-header :title="'Reset Password'" subtitle="Authentication · set a new password">
-        <x-slot:actions>
-            <x-ui.badge variant="muted">Preview</x-ui.badge>
-            <x-ui.button variant="outline" icon="arrow-left" class="[&>svg]:rtl-flip" :href="route('dashboard')">Dashboard</x-ui.button>
-        </x-slot:actions>
-    </x-page-header>
 
-    <x-ui.card :padded="false" class="overflow-hidden">
-        <div class="grid min-h-[68vh] lg:grid-cols-2">
+        <div class="grid min-h-screen lg:grid-cols-2">
             @include('livewire.pages.content.partials.auth-brand', [
                 'brandTitle'  => 'Choose a new password.',
                 'brandText'   => 'For your security the reset link expires in 60 minutes and can only be used once.',
@@ -95,5 +88,4 @@
                 </div>
             </div>
         </div>
-    </x-ui.card>
 </div>

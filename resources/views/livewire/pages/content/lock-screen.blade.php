@@ -1,12 +1,6 @@
 <div>
-    <x-page-header :title="'Lock Screen'" subtitle="Authentication · session locked, re-enter password">
-        <x-slot:actions>
-            <x-ui.button variant="outline" icon="arrow-left" class="[&>svg]:rtl-flip" :href="route('dashboard')">Dashboard</x-ui.button>
-        </x-slot:actions>
-    </x-page-header>
 
-    <x-ui.card :padded="false" class="overflow-hidden">
-        <div class="relative grid min-h-[68vh] place-items-center px-6 py-14">
+        <div class="relative grid min-h-screen place-items-center px-6 py-14">
             <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-sidebar-primary/10"></div>
 
             <div x-data="{
@@ -61,5 +55,4 @@
                 </p>
             </div>
         </div>
-    </x-ui.card>
 </div>
