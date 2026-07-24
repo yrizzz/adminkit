@@ -37,9 +37,9 @@ class GenericPage extends Component
             'section'   => $section,
         ]);
 
-        // Authentication screens get their own standalone, full-screen layout —
-        // no sidebar or navbar, the page paints the whole viewport itself.
-        if ($section === 'Authentication') {
+        // Authentication and Error screens get their own standalone, full-screen
+        // layout — no sidebar or navbar, the page paints the whole viewport itself.
+        if (in_array($section, ['Authentication', 'Error'], true)) {
             return $page->layout('components.layouts.auth', ['title' => $title]);
         }
 
