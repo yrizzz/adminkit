@@ -87,7 +87,14 @@ document.addEventListener('alpine:init', () => {
  * ------------------------------------------------------------- */
 window.toast = (message, opts = {}) => {
     window.dispatchEvent(new CustomEvent('toast', {
-        detail: { message, variant: opts.variant || 'default', title: opts.title },
+        detail: {
+            message,
+            variant: opts.variant || 'default',
+            title: opts.title,
+            // top-start | top-center | top-end | bottom-start | bottom-center | bottom-end
+            position: opts.position || 'bottom-end',
+            duration: opts.duration ?? 4200,
+        },
     }));
 };
 
