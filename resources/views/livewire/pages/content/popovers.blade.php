@@ -7,10 +7,10 @@
     <x-ui.card>
         <div class="flex flex-wrap items-center justify-center gap-8 py-10">
             @foreach ([
-                ['Top','-top-2 start-1/2 -translate-x-1/2 -translate-y-full rtl:translate-x-1/2'],
-                ['Bottom','-bottom-2 start-1/2 -translate-x-1/2 translate-y-full rtl:translate-x-1/2'],
-                ['Start','-start-2 top-1/2 -translate-y-1/2 -translate-x-full rtl:translate-x-full'],
-                ['End','-end-2 top-1/2 -translate-y-1/2 translate-x-full rtl:-translate-x-full'],
+                ['Top','bottom-full mb-2 start-1/2 -translate-x-1/2 rtl:translate-x-1/2'],
+                ['Bottom','top-full mt-2 start-1/2 -translate-x-1/2 rtl:translate-x-1/2'],
+                ['Start','end-full me-2 top-1/2 -translate-y-1/2'],
+                ['End','start-full ms-2 top-1/2 -translate-y-1/2'],
             ] as [$label,$pos])
                 <div x-data="{ open: false }" @click.outside="open = false" class="relative">
                     <x-ui.button variant="outline" @click="open = ! open">{{ $label }}</x-ui.button>
