@@ -272,10 +272,10 @@ return [
                     'icon'  => 'clipboard-list',
                     'route' => 'forms',
                     'children' => [
-                        ['label' => 'Elements',   'route' => 'forms', 'hash' => 'elements'],
-                        ['label' => 'Layouts',    'route' => 'forms', 'hash' => 'layouts'],
-                        ['label' => 'Validation', 'route' => 'forms', 'hash' => 'validation'],
-                        ['label' => 'Wizard',     'route' => 'forms', 'hash' => 'wizard'],
+                        ['label' => 'Form Elements',   'href' => '#'],
+                        ['label' => 'Form Layouts',    'href' => '#'],
+                        ['label' => 'Form Validation', 'href' => '#'],
+                        ['label' => 'Form Wizard',     'href' => '#'],
                     ],
                 ],
                 [
@@ -284,9 +284,9 @@ return [
                     'badge' => ['text' => '3', 'variant' => 'success'],
                     'route' => 'tables',
                     'children' => [
-                        ['label' => 'Basic Tables', 'route' => 'tables', 'hash' => 'basic'],
-                        ['label' => 'Data Table',   'route' => 'tables', 'hash' => 'data-table'],
-                        ['label' => 'Editable',     'route' => 'tables', 'hash' => 'editable'],
+                        ['label' => 'Basic Tables', 'href' => '#'],
+                        ['label' => 'Data Table',   'href' => '#'],
+                        ['label' => 'Editable',     'href' => '#'],
                     ],
                 ],
             ],
