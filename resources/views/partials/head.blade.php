@@ -21,6 +21,8 @@
             d.dataset.accent = get('ak_accent', 'blue');
             d.dataset.radius = get('ak_radius', 'lg');
             d.dataset.layout = get('ak_layout', 'vertical');
+            d.dataset.sidebarColor = get('ak_sb_color', 'dark');
+            d.dataset.navbarColor = get('ak_nb_color', 'default');
             d.classList.toggle('sidebar-collapsed', get('ak_sb_collapsed', false));
             if (get('ak_compact', false)) d.classList.add('is-compact');
         } catch (e) {}
