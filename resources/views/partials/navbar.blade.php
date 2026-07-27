@@ -2,7 +2,8 @@
 @php($crumbs = $breadcrumbs ?? [])
 
 <header
-    class="sticky top-0 z-30 flex h-16 items-center gap-2 border-b border-border bg-background/80 px-4 backdrop-blur-lg supports-[backdrop-filter]:bg-background/60"
+    :data-navbar-color="$store.ui.navbarColor"
+    class="sticky top-0 z-30 flex h-16 items-center gap-2 border-b border-border px-4 backdrop-blur-lg transition-colors duration-200"
     :class="$store.ui.navbarFixed ? 'sticky top-0' : ''"
 >
     {{-- Mobile: open sidebar --}}
