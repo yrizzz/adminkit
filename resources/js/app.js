@@ -39,6 +39,8 @@ document.addEventListener('alpine:init', () => {
         sidebarCollapsed: LS.get('ak_sb_collapsed', false),
         navbarFixed: LS.get('ak_navbar_fixed', true),
         compact: LS.get('ak_compact', false),
+        sidebarColor: LS.get('ak_sb_color', 'dark'),
+        navbarColor: LS.get('ak_nb_color', 'default'),
 
         // transient
         sidebarMobileOpen: false,
@@ -63,6 +65,8 @@ document.addEventListener('alpine:init', () => {
             html.dataset.accent = this.accent;
             html.dataset.radius = this.radius;
             html.dataset.layout = this.layout;
+            html.dataset.sidebarColor = this.sidebarColor;
+            html.dataset.navbarColor = this.navbarColor;
             html.classList.toggle('sidebar-collapsed', this.sidebarCollapsed);
             html.classList.toggle('is-compact', this.compact);
         },
@@ -75,6 +79,8 @@ document.addEventListener('alpine:init', () => {
         setAccent(v) { this.accent = v; LS.set('ak_accent', v); this.apply(); },
         setRadius(v) { this.radius = v; LS.set('ak_radius', v); this.apply(); },
         setCompact(v) { this.compact = v; LS.set('ak_compact', v); this.apply(); },
+        setSidebarColor(v) { this.sidebarColor = v; LS.set('ak_sb_color', v); this.apply(); },
+        setNavbarColor(v) { this.navbarColor = v; LS.set('ak_nb_color', v); this.apply(); },
         toggleSidebar() { this.sidebarCollapsed = !this.sidebarCollapsed; LS.set('ak_sb_collapsed', this.sidebarCollapsed); this.apply(); },
         setNavbarFixed(v) { this.navbarFixed = v; LS.set('ak_navbar_fixed', v); },
         openMobileSidebar() { this.sidebarMobileOpen = true; },

@@ -12,14 +12,14 @@
            x-transition:leave="transition ease-in duration-200"
            x-transition:leave-start="translate-x-0"
            x-transition:leave-end="ltr:translate-x-full rtl:-translate-x-full"
-           class="fixed inset-y-0 end-0 z-[95] flex w-[22rem] max-w-[90vw] flex-col bg-card text-card-foreground shadow-2xl">
+           class="fixed inset-y-0 end-0 z-[95] flex w-[24rem] max-w-[92vw] flex-col bg-card text-card-foreground shadow-2xl">
 
         <div class="flex items-center justify-between border-b border-border px-5 py-4">
             <div class="flex items-center gap-2">
                 <i data-lucide="palette" class="size-5 text-primary"></i>
                 <div>
                     <h2 class="font-semibold leading-none">Customizer</h2>
-                    <p class="mt-1 text-xs text-muted-foreground">Preview & tweak the theme live</p>
+                    <p class="mt-1 text-xs text-muted-foreground">Preview & tweak theme, sidebar, & navbar live</p>
                 </div>
             </div>
             <button type="button" @click="$store.ui.customizerOpen = false" class="rounded-lg p-1.5 text-muted-foreground hover:bg-accent hover:text-foreground">
@@ -39,6 +39,83 @@
                             <i data-lucide="{{ $ico }}" class="size-5"></i>{{ $mode }}
                         </button>
                     @endforeach
+                </div>
+            </section>
+
+            {{-- Sidebar Theme & Background Images --}}
+            <section>
+                <h3 class="mb-2.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Sidebar Style & Colors</h3>
+                <div class="grid grid-cols-4 gap-2 mb-2">
+                    @foreach ([
+                        'dark' => 'Dark',
+                        'light' => 'Light',
+                        'primary' => 'Primary',
+                        'gradient' => 'Gradient',
+                    ] as $sc => $lbl)
+                        <button type="button" @click="$store.ui.setSidebarColor('{{ $sc }}')"
+                                :class="$store.ui.sidebarColor === '{{ $sc }}' ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
+                                class="rounded-xl border p-2 text-center text-xs transition-all">
+                            {{ $lbl }}
+                        </button>
+                    @endforeach
+                </div>
+                <div class="grid grid-cols-4 gap-2">
+                    <button type="button" @click="$store.ui.setSidebarColor('transparent')"
+                            :class="$store.ui.sidebarColor === 'transparent' ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
+                            class="rounded-xl border p-2 text-center text-xs transition-all">
+                        Glass
+                    </button>
+                    <button type="button" @click="$store.ui.setSidebarColor('image1')"
+                            :class="$store.ui.sidebarColor === 'image1' ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
+                            class="rounded-xl border p-2 text-center text-xs transition-all flex items-center justify-center gap-1">
+                        <i data-lucide="image" class="size-3"></i>Img 1
+                    </button>
+                    <button type="button" @click="$store.ui.setSidebarColor('image2')"
+                            :class="$store.ui.sidebarColor === 'image2' ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
+                            class="rounded-xl border p-2 text-center text-xs transition-all flex items-center justify-center gap-1">
+                        <i data-lucide="image" class="size-3"></i>Img 2
+                    </button>
+                    <button type="button" @click="$store.ui.setSidebarColor('image3')"
+                            :class="$store.ui.sidebarColor === 'image3' ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
+                            class="rounded-xl border p-2 text-center text-xs transition-all flex items-center justify-center gap-1">
+                        <i data-lucide="image" class="size-3"></i>Img 3
+                    </button>
+                </div>
+            </section>
+
+            {{-- Header / Navbar Theme & Background Images --}}
+            <section>
+                <h3 class="mb-2.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Header / Navbar Style</h3>
+                <div class="grid grid-cols-4 gap-2 mb-2">
+                    @foreach ([
+                        'default' => 'Default',
+                        'light' => 'Light',
+                        'dark' => 'Dark',
+                        'primary' => 'Primary',
+                    ] as $nc => $lbl)
+                        <button type="button" @click="$store.ui.setNavbarColor('{{ $nc }}')"
+                                :class="$store.ui.navbarColor === '{{ $nc }}' ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
+                                class="rounded-xl border p-2 text-center text-xs transition-all">
+                            {{ $lbl }}
+                        </button>
+                    @endforeach
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                    <button type="button" @click="$store.ui.setNavbarColor('transparent')"
+                            :class="$store.ui.navbarColor === 'transparent' ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
+                            class="rounded-xl border p-2 text-center text-xs transition-all">
+                        Transparent
+                    </button>
+                    <button type="button" @click="$store.ui.setNavbarColor('image1')"
+                            :class="$store.ui.navbarColor === 'image1' ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
+                            class="rounded-xl border p-2 text-center text-xs transition-all flex items-center justify-center gap-1">
+                        <i data-lucide="image" class="size-3"></i>Header Img 1
+                    </button>
+                    <button type="button" @click="$store.ui.setNavbarColor('image2')"
+                            :class="$store.ui.navbarColor === 'image2' ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
+                            class="rounded-xl border p-2 text-center text-xs transition-all flex items-center justify-center gap-1">
+                        <i data-lucide="image" class="size-3"></i>Header Img 2
+                    </button>
                 </div>
             </section>
 
