@@ -1,51 +1,48 @@
 # AdminKit
 
-Admin panel starter kit berbasis Laravel 13 + Livewire 4 + Tailwind CSS v4 + Alpine.js.
+A modern admin panel starter kit built on Laravel 13, Livewire 4, Tailwind CSS v4, and Alpine.js.
 
-## Fitur Utama
+## Key Features
 
-- **Authentication**: Form login, register, dan reset password.
-- **Layout & Navigasi**: Pilihan tampilan Vertical Sidebar & Horizontal Topbar menu dengan dukungan RTL & LTR.
-- **Theme & Kustomisasi**: Mode Light/Dark/System, kustomisasi warna aksen, dan border radius (tersimpan di `localStorage`).
-- **Komponen UI**: Button, Badge, Card, Input, Modal, Alert, Stat Box, Toaster, dan komponen Blade modular lainnya (`resources/views/components/ui/*`).
-- **Halaman Starter**: Dashboard analytics, Data Tables, Forms, Settings, dan UI Elements showcase.
+- **Authentication**: Pre-built Login, Register, and Password Reset screens.
+- **Layouts & Navigation**: Vertical Sidebar and Horizontal Topbar navigation modes with full RTL & LTR support.
+- **Theming**: Light, Dark, and System modes with customizable accent colors and border radius presets (persisted in `localStorage`).
+- **UI Component Library**: Clean Blade components for Buttons, Badges, Cards, Inputs, Modals, Alerts, Stat cards, Toaster, and more (`resources/views/components/ui/*`).
+- **Starter Pages**: Dashboard analytics, Data Tables, Forms, Settings, and UI Elements showcase.
 
-## Cara Penggunaan
+## Getting Started
 
-1. Menggunakan Composer (Rekomendasi):
-   ```bash
-   composer create-project yrizzz/adminkit nama-project
-   ```
+### 1. Create Project via Composer (Recommended)
 
-2. Atau clone manual dari repository:
-   ```bash
-   git clone https://github.com/yrizzz/adminkit.git
-   cd adminkit
-   ```
+```bash
+composer create-project yrizzz/adminkit my-app
+```
 
-2. Install dependensi:
-   ```bash
-   composer install
-   npm install
-   ```
+### 2. Manual Installation (Alternative)
 
-3. Konfigurasi environment & database:
-   ```bash
-   cp .env.example .env
-   php artisan key:generate
-   php artisan migrate --seed
-   ```
+```bash
+git clone https://github.com/yrizzz/adminkit.git
+cd adminkit
 
-4. Build asset & jalankan aplikasi:
-   ```bash
-   npm run build
-   php artisan serve
-   ```
+# Install dependencies
+composer install
+npm install
 
-### Akun Demo
+# Setup environment & database
+cp .env.example .env
+php artisan key:generate
+php artisan migrate --seed
+
+# Build assets & serve
+npm run build
+php artisan serve
+```
+
+### Demo Credentials
+
 - **Email**: `admin@adminkit.test`
 - **Password**: `password`
 
-## Lisensi
+## License
 
-Aplikasi ini menggunakan lisensi [MIT](LICENSE).
+This project is open-sourced software licensed under the [MIT license](LICENSE).
