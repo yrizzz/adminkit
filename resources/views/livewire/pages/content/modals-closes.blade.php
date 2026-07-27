@@ -186,15 +186,71 @@
         <x-slot:footer><x-ui.button class="w-full" variant="success" x-on:click="$dispatch('close-modal', 'm-success')">Continue</x-ui.button></x-slot:footer>
     </x-ui.modal>
 
-    <x-ui.modal name="m-scroll" title="Terms of Service">
-        <div class="max-h-[50vh] space-y-3 overflow-y-auto pe-1 text-sm text-muted-foreground">
-            @for ($i = 1; $i <= 14; $i++)
-                <p><span class="font-semibold text-foreground">{{ $i }}.</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-            @endfor
+    <x-ui.modal name="m-scroll" title="Tambah Menu" maxWidth="max-w-lg">
+        <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-muted-foreground">Menu</label>
+                    <x-ui.input placeholder="Nama menu" />
+                    <p class="mt-1 text-[0.7rem] text-muted-foreground">Gunakan underscore sebagai pengganti spasi</p>
+                </div>
+                <div>
+                    <label class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-muted-foreground">Path</label>
+                    <x-ui.input placeholder="/path" />
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-muted-foreground">Kategori</label>
+                    <select class="flex h-10 w-full rounded-xl border border-input bg-background px-3 text-sm font-medium shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                        <option>Pilih salah satu</option>
+                        <option>Main</option>
+                        <option>General</option>
+                        <option>Pages</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-muted-foreground">Status</label>
+                    <select class="flex h-10 w-full rounded-xl border border-input bg-background px-3 text-sm font-medium shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                        <option>Aktif</option>
+                        <option>Non-Aktif</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-muted-foreground">Icon</label>
+                    <x-ui.input placeholder="layout-grid" icon="box" />
+                </div>
+                <div>
+                    <label class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-muted-foreground">Tampilkan ke navbar</label>
+                    <select class="flex h-10 w-full rounded-xl border border-input bg-background px-3 text-sm font-medium shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                        <option>Ya</option>
+                        <option>Tidak</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <div class="flex items-center justify-between mb-2">
+                    <label class="text-xs font-bold uppercase tracking-wider text-muted-foreground">Divisi yang diizinkan</label>
+                    <span class="text-xs font-medium text-primary hover:underline cursor-pointer">Pilih semua</span>
+                </div>
+                <div class="grid grid-cols-2 gap-2.5 rounded-xl border border-border bg-muted/20 p-3 text-xs">
+                    @foreach (['AdminDigitalPrinting', 'AdminMarketing', 'AdminMediaLuarRuang', 'Direksi', 'IT', 'KabagMediaLuarRuang', 'KabagPrinting', 'Keuangan', 'Marketing', 'Operasional', 'Operator', 'Perizinan', 'Preproduksi', 'Purchasing', 'Warehouse'] as $div)
+                        <label class="flex items-center gap-2 font-medium cursor-pointer">
+                            <input type="checkbox" class="size-4 rounded border-border bg-background text-primary" checked />
+                            <span>{{ $div }}</span>
+                        </label>
+                    @endforeach
+                </div>
+            </div>
         </div>
         <x-slot:footer>
-            <x-ui.button variant="outline" x-on:click="$dispatch('close-modal', 'm-scroll')">Decline</x-ui.button>
-            <x-ui.button x-on:click="$dispatch('close-modal', 'm-scroll'); window.toast('Terms accepted', { variant: 'success' })">Accept</x-ui.button>
+            <x-ui.button variant="outline" x-on:click="$dispatch('close-modal', 'm-scroll')">Tutup</x-ui.button>
+            <x-ui.button x-on:click="$dispatch('close-modal', 'm-scroll'); window.toast('Menu berhasil disimpan', { variant: 'success' })">Simpan</x-ui.button>
         </x-slot:footer>
     </x-ui.modal>
 

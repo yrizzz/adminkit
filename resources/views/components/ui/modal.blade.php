@@ -1,8 +1,10 @@
 @props([
-    'name'     => 'modal',
-    'title'    => null,
-    'maxWidth' => 'max-w-lg',
-    'position' => 'center',
+    'name'      => 'modal',
+    'title'     => null,
+    'maxWidth'  => 'max-w-lg',
+    'position'  => 'center',
+    'maxHeight' => 'max-h-[85vh]',
+    'scrollable'=> true,
 ])
 
 @php
@@ -80,10 +82,10 @@ $leaveClass = $leaveTransitions[$position] ?? $leaveTransitions['center'];
                 x-trap.noscroll="open"
                 x-transition:enter="ease-out duration-200" x-transition:enter-start="{{ $enterClass }}" x-transition:enter-end="opacity-100 translate-y-0 translate-x-0 scale-100"
                 x-transition:leave="ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0 translate-x-0 scale-100" x-transition:leave-end="{{ $leaveClass }}"
-                class="relative w-full {{ $isDrawer ? 'h-full rounded-none border-y-0' : 'rounded-2xl shadow-2xl' }} {{ $maxWidth }} overflow-hidden border border-border bg-card text-card-foreground flex flex-col"
+                class="relative w-full {{ $isDrawer ? 'h-full rounded-none border-y-0' : 'rounded-2xl shadow-2xl ' . $maxHeight }} {{ $maxWidth }} overflow-hidden border border-border bg-card text-card-foreground flex flex-col"
             >
                 @if ($title || isset($header))
-                    <div class="flex items-center justify-between gap-4 border-b border-border px-6 py-4 shrink-0">
+                    <div class="flex items-center justify-between gap-4 border-b border-border bg-card px-6 py-4 shrink-0 z-10">
                         <div>
                             @if ($title)<h3 class="text-lg font-semibold">{{ $title }}</h3>@endif
                             {{ $header ?? '' }}
@@ -94,10 +96,10 @@ $leaveClass = $leaveTransitions[$position] ?? $leaveTransitions['center'];
                     </div>
                 @endif
 
-                <div class="px-6 py-5 flex-1 overflow-y-auto">{{ $slot }}</div>
+                <div class="px-6 py-5 flex-1 min-h-0 {{ $scrollable ? 'overflow-y-auto' : '' }}">{{ $slot }}</div>
 
                 @isset($footer)
-                    <div class="flex items-center justify-end gap-3 border-t border-border bg-muted/30 px-6 py-4 shrink-0">{{ $footer }}</div>
+                    <div class="flex items-center justify-end gap-3 border-t border-border bg-muted/30 px-6 py-4 shrink-0 z-10">{{ $footer }}</div>
                 @endisset
             </div>
         </div>
