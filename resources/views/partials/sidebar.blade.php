@@ -9,7 +9,7 @@
     x-data="{ hovering: false }"
     :data-sidebar-color="$store.ui.sidebarColor"
     @mouseenter="hovering = true" @mouseleave="hovering = false"
-    class="fixed inset-y-0 start-0 z-50 flex w-64 flex-col text-sidebar-foreground shadow-xl transition-[transform,width,background-color,background-image] duration-200 ease-in-out lg:shadow-none"
+    class="main-sidebar fixed inset-y-0 start-0 z-50 flex w-64 flex-col text-sidebar-foreground shadow-xl transition-[transform,width,background-color,background-image] duration-200 ease-in-out lg:shadow-none"
     :class="[
         $store.ui.sidebarMobileOpen ? 'translate-x-0' : 'max-lg:ltr:-translate-x-full max-lg:rtl:translate-x-full',
         ($store.ui.sidebarCollapsed && !hovering) ? 'lg:w-[76px] is-rail' : 'lg:w-64',

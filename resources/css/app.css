@@ -132,10 +132,17 @@
 [data-radius='xl']   { --radius: 1rem; }
 
 /* ============================================================
-   SIDEBAR COLOR & BACKGROUND IMAGE OVERRIDES
+   SIDEBAR COLOR & BACKGROUND IMAGE OVERRIDES (Main Sidebar Only)
    ============================================================ */
 
-html[data-sidebar-color='dark'] aside {
+/* Customizer drawer MUST always stay clean card background */
+aside.customizer-drawer {
+    background-color: hsl(var(--card)) !important;
+    background-image: none !important;
+    color: hsl(var(--card-foreground)) !important;
+}
+
+html[data-sidebar-color='dark'] aside.main-sidebar {
     background-color: #0f172a !important;
     background-image: none !important;
     color: #e2e8f0 !important;
@@ -143,7 +150,7 @@ html[data-sidebar-color='dark'] aside {
     --sidebar-muted: 215 16.3% 46.9%;
     --sidebar-accent: 217.2 32.6% 17.5%;
 }
-html[data-sidebar-color='light'] aside {
+html[data-sidebar-color='light'] aside.main-sidebar {
     background-color: #ffffff !important;
     background-image: none !important;
     color: #0f172a !important;
@@ -152,18 +159,18 @@ html[data-sidebar-color='light'] aside {
     --sidebar-muted: 215.4 16.3% 46.9%;
     --sidebar-accent: 210 40% 96.1%;
 }
-html[data-sidebar-color='light'] aside .sidebar-brand-text,
-html[data-sidebar-color='light'] aside .sidebar-usercard-text p,
-html[data-sidebar-color='light'] aside .nav-link {
+html[data-sidebar-color='light'] aside.main-sidebar .sidebar-brand-text,
+html[data-sidebar-color='light'] aside.main-sidebar .sidebar-usercard-text p,
+html[data-sidebar-color='light'] aside.main-sidebar .nav-link {
     color: #0f172a !important;
 }
-html[data-sidebar-color='light'] aside .sidebar-search input {
+html[data-sidebar-color='light'] aside.main-sidebar .sidebar-search input {
     background-color: #f1f5f9 !important;
     color: #0f172a !important;
     border-color: #cbd5e1 !important;
 }
 
-html[data-sidebar-color='primary'] aside {
+html[data-sidebar-color='primary'] aside.main-sidebar {
     background-color: hsl(var(--primary)) !important;
     background-image: none !important;
     color: #ffffff !important;
@@ -171,13 +178,13 @@ html[data-sidebar-color='primary'] aside {
     --sidebar-muted: 0 0% 85%;
     --sidebar-accent: 0 0% 100% / 0.15;
 }
-html[data-sidebar-color='primary'] aside .sidebar-brand-text,
-html[data-sidebar-color='primary'] aside .sidebar-usercard-text p,
-html[data-sidebar-color='primary'] aside .nav-link {
+html[data-sidebar-color='primary'] aside.main-sidebar .sidebar-brand-text,
+html[data-sidebar-color='primary'] aside.main-sidebar .sidebar-usercard-text p,
+html[data-sidebar-color='primary'] aside.main-sidebar .nav-link {
     color: #ffffff !important;
 }
 
-html[data-sidebar-color='gradient'] aside {
+html[data-sidebar-color='gradient'] aside.main-sidebar {
     background: linear-gradient(180deg, hsl(var(--primary)) 0%, #0f172a 100%) !important;
     background-image: linear-gradient(180deg, hsl(var(--primary)) 0%, #0f172a 100%) !important;
     color: #ffffff !important;
@@ -185,13 +192,13 @@ html[data-sidebar-color='gradient'] aside {
     --sidebar-muted: 0 0% 80%;
     --sidebar-accent: 0 0% 100% / 0.15;
 }
-html[data-sidebar-color='gradient'] aside .sidebar-brand-text,
-html[data-sidebar-color='gradient'] aside .sidebar-usercard-text p,
-html[data-sidebar-color='gradient'] aside .nav-link {
+html[data-sidebar-color='gradient'] aside.main-sidebar .sidebar-brand-text,
+html[data-sidebar-color='gradient'] aside.main-sidebar .sidebar-usercard-text p,
+html[data-sidebar-color='gradient'] aside.main-sidebar .nav-link {
     color: #ffffff !important;
 }
 
-html[data-sidebar-color='transparent'] aside {
+html[data-sidebar-color='transparent'] aside.main-sidebar {
     background-color: rgba(15, 23, 42, 0.55) !important;
     background-image: none !important;
     backdrop-filter: blur(20px) !important;
@@ -202,14 +209,14 @@ html[data-sidebar-color='transparent'] aside {
     --sidebar-muted: 0 0% 75%;
     --sidebar-accent: 0 0% 100% / 0.15;
 }
-html[data-sidebar-color='transparent'] aside .sidebar-brand-text,
-html[data-sidebar-color='transparent'] aside .sidebar-usercard-text p,
-html[data-sidebar-color='transparent'] aside .nav-link {
+html[data-sidebar-color='transparent'] aside.main-sidebar .sidebar-brand-text,
+html[data-sidebar-color='transparent'] aside.main-sidebar .sidebar-usercard-text p,
+html[data-sidebar-color='transparent'] aside.main-sidebar .nav-link {
     color: #ffffff !important;
 }
 
 /* Sidebar Image Presets */
-html[data-sidebar-color='image1'] aside {
+html[data-sidebar-color='image1'] aside.main-sidebar {
     background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=600&auto=format&fit=crop&q=80') !important;
     background-size: cover !important;
     background-position: center !important;
@@ -218,13 +225,13 @@ html[data-sidebar-color='image1'] aside {
     --sidebar-muted: 0 0% 80%;
     --sidebar-accent: 0 0% 100% / 0.2;
 }
-html[data-sidebar-color='image1'] aside .sidebar-brand-text,
-html[data-sidebar-color='image1'] aside .sidebar-usercard-text p,
-html[data-sidebar-color='image1'] aside .nav-link {
+html[data-sidebar-color='image1'] aside.main-sidebar .sidebar-brand-text,
+html[data-sidebar-color='image1'] aside.main-sidebar .sidebar-usercard-text p,
+html[data-sidebar-color='image1'] aside.main-sidebar .nav-link {
     color: #ffffff !important;
 }
 
-html[data-sidebar-color='image2'] aside {
+html[data-sidebar-color='image2'] aside.main-sidebar {
     background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.82), rgba(15, 23, 42, 0.92)), url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=600&auto=format&fit=crop&q=80') !important;
     background-size: cover !important;
     background-position: center !important;
@@ -233,13 +240,13 @@ html[data-sidebar-color='image2'] aside {
     --sidebar-muted: 0 0% 80%;
     --sidebar-accent: 0 0% 100% / 0.2;
 }
-html[data-sidebar-color='image2'] aside .sidebar-brand-text,
-html[data-sidebar-color='image2'] aside .sidebar-usercard-text p,
-html[data-sidebar-color='image2'] aside .nav-link {
+html[data-sidebar-color='image2'] aside.main-sidebar .sidebar-brand-text,
+html[data-sidebar-color='image2'] aside.main-sidebar .sidebar-usercard-text p,
+html[data-sidebar-color='image2'] aside.main-sidebar .nav-link {
     color: #ffffff !important;
 }
 
-html[data-sidebar-color='image3'] aside {
+html[data-sidebar-color='image3'] aside.main-sidebar {
     background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=80') !important;
     background-size: cover !important;
     background-position: center !important;
@@ -248,9 +255,9 @@ html[data-sidebar-color='image3'] aside {
     --sidebar-muted: 0 0% 80%;
     --sidebar-accent: 0 0% 100% / 0.2;
 }
-html[data-sidebar-color='image3'] aside .sidebar-brand-text,
-html[data-sidebar-color='image3'] aside .sidebar-usercard-text p,
-html[data-sidebar-color='image3'] aside .nav-link {
+html[data-sidebar-color='image3'] aside.main-sidebar .sidebar-brand-text,
+html[data-sidebar-color='image3'] aside.main-sidebar .sidebar-usercard-text p,
+html[data-sidebar-color='image3'] aside.main-sidebar .nav-link {
     color: #ffffff !important;
 }
 
