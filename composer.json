@@ -3,7 +3,7 @@
     "name": "yrizzz/adminkit",
     "type": "project",
     "description": "Modern, themeable admin panel starter kit built on Laravel 13, Livewire 4, Tailwind CSS v4, and Alpine.js.",
-    "keywords": ["laravel", "framework"],
+    "keywords": ["laravel", "framework", "admin", "adminpanel", "livewire", "tailwindcss", "adminkit"],
     "license": "MIT",
     "require": {
         "php": "^8.3",
