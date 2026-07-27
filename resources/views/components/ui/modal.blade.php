@@ -5,6 +5,7 @@
     'position'  => 'center',
     'maxHeight' => 'max-h-[85vh]',
     'scrollable'=> true,
+    'showClose' => true,
 ])
 
 @php
@@ -66,7 +67,7 @@ $leaveClass = $leaveTransitions[$position] ?? $leaveTransitions['center'];
     x-data="{ open: false }"
     x-on:open-modal.window="$event.detail === '{{ $name }}' && (open = true)"
     x-on:close-modal.window="$event.detail === '{{ $name }}' && (open = false)"
-    x-on:keydown.escape.window="open = false"
+    x-on:keydown.escape.window="open = false; $dispatch('close-modal', '{{ $name }}')"
 >
     <template x-teleport="body">
         <div x-show="open" x-cloak class="fixed inset-0 z-[100] flex {{ $wrapperClass }}">
@@ -74,7 +75,7 @@ $leaveClass = $leaveTransitions[$position] ?? $leaveTransitions['center'];
                 x-show="open"
                 x-transition:enter="ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
                 x-transition:leave="ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-                class="absolute inset-0 bg-background/70 backdrop-blur-sm" @click="open = false"
+                class="absolute inset-0 bg-background/70 backdrop-blur-sm" @click="open = false; $dispatch('close-modal', '{{ $name }}')"
             ></div>
 
             <div
@@ -84,15 +85,17 @@ $leaveClass = $leaveTransitions[$position] ?? $leaveTransitions['center'];
                 x-transition:leave="ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0 translate-x-0 scale-100" x-transition:leave-end="{{ $leaveClass }}"
                 class="relative w-full {{ $isDrawer ? 'h-full rounded-none border-y-0' : 'rounded-2xl shadow-2xl ' . $maxHeight }} {{ $maxWidth }} overflow-hidden border border-border bg-card text-card-foreground flex flex-col"
             >
-                @if ($title || isset($header))
+                @if ($title || isset($header) || $showClose)
                     <div class="flex items-center justify-between gap-4 border-b border-border bg-card px-6 py-4 shrink-0 z-10">
                         <div>
                             @if ($title)<h3 class="text-lg font-semibold">{{ $title }}</h3>@endif
                             {{ $header ?? '' }}
                         </div>
-                        <button type="button" @click="open = false" class="rounded-lg p-1.5 text-muted-foreground hover:bg-accent hover:text-foreground">
-                            <i data-lucide="x" class="size-5"></i>
-                        </button>
+                        @if ($showClose)
+                            <button type="button" @click="open = false; $dispatch('close-modal', '{{ $name }}')" class="rounded-lg p-1.5 text-muted-foreground hover:bg-accent hover:text-foreground transition-colors cursor-pointer ms-auto">
+                                <i data-lucide="x" class="size-5"></i>
+                            </button>
+                        @endif
                     </div>
                 @endif
 
