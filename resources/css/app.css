@@ -331,37 +331,25 @@ header[data-navbar-color='light'] {
     color: #0f172a !important;
     border-bottom: 1px solid #e2e8f0 !important;
 }
-html[data-navbar-color='light'] header button,
-html[data-navbar-color='light'] header nav,
-html[data-navbar-color='light'] header span {
-    color: #0f172a !important;
-}
 
-html[data-navbar-color='dark'] header {
+html[data-navbar-color='dark'] header,
+header[data-navbar-color='dark'] {
     background-color: #0f172a !important;
     background-image: none !important;
     color: #ffffff !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
-html[data-navbar-color='dark'] header button,
-html[data-navbar-color='dark'] header nav,
-html[data-navbar-color='dark'] header span {
-    color: #f8fafc !important;
-}
 
-html[data-navbar-color='primary'] header {
+html[data-navbar-color='primary'] header,
+header[data-navbar-color='primary'] {
     background-color: hsl(var(--primary)) !important;
     background-image: none !important;
     color: #ffffff !important;
     border-bottom: 1px solid transparent !important;
 }
-html[data-navbar-color='primary'] header button,
-html[data-navbar-color='primary'] header nav,
-html[data-navbar-color='primary'] header span {
-    color: #ffffff !important;
-}
 
-html[data-navbar-color='transparent'] header {
+html[data-navbar-color='transparent'] header,
+header[data-navbar-color='transparent'] {
     background-color: transparent !important;
     background-image: none !important;
     backdrop-filter: blur(12px) !important;
@@ -369,27 +357,70 @@ html[data-navbar-color='transparent'] header {
     border-bottom: 1px solid transparent !important;
 }
 
-html[data-navbar-color='image1'] header {
+html[data-navbar-color='image1'] header,
+header[data-navbar-color='image1'] {
     background-image: linear-gradient(90deg, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=1200&auto=format&fit=crop&q=80') !important;
     background-size: cover !important;
     background-position: center !important;
     color: #ffffff !important;
 }
-html[data-navbar-color='image1'] header button,
-html[data-navbar-color='image1'] header nav,
-html[data-navbar-color='image1'] header span {
-    color: #ffffff !important;
-}
 
-html[data-navbar-color='image2'] header {
+html[data-navbar-color='image2'] header,
+header[data-navbar-color='image2'] {
     background-image: linear-gradient(90deg, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&auto=format&fit=crop&q=80') !important;
     background-size: cover !important;
     background-position: center !important;
     color: #ffffff !important;
 }
-html[data-navbar-color='image2'] header button,
-html[data-navbar-color='image2'] header nav,
-html[data-navbar-color='image2'] header span {
+
+/* High Contrast Text & Hover States for Colored/Dark/Gradient/Image Headers */
+:is(html[data-navbar-color='primary'], html[data-navbar-color='dark'], html[data-navbar-color='gradient'], html[data-navbar-color='gradient1'], html[data-navbar-color='gradient2'], html[data-navbar-color='gradient3'], html[data-navbar-color='image1'], html[data-navbar-color='image2']) header,
+:is(header[data-navbar-color='primary'], header[data-navbar-color='dark'], header[data-navbar-color='gradient'], header[data-navbar-color='gradient1'], header[data-navbar-color='gradient2'], header[data-navbar-color='gradient3'], header[data-navbar-color='image1'], header[data-navbar-color='image2']) {
+    color: #ffffff !important;
+}
+
+:is(html[data-navbar-color='primary'], html[data-navbar-color='dark'], html[data-navbar-color='gradient'], html[data-navbar-color='gradient1'], html[data-navbar-color='gradient2'], html[data-navbar-color='gradient3'], html[data-navbar-color='image1'], html[data-navbar-color='image2']) header nav a,
+:is(html[data-navbar-color='primary'], html[data-navbar-color='dark'], html[data-navbar-color='gradient'], html[data-navbar-color='gradient1'], html[data-navbar-color='gradient2'], html[data-navbar-color='gradient3'], html[data-navbar-color='image1'], html[data-navbar-color='image2']) header nav svg,
+:is(header[data-navbar-color='primary'], header[data-navbar-color='dark'], header[data-navbar-color='gradient'], header[data-navbar-color='gradient1'], header[data-navbar-color='gradient2'], header[data-navbar-color='gradient3'], header[data-navbar-color='image1'], header[data-navbar-color='image2']) nav a,
+:is(header[data-navbar-color='primary'], header[data-navbar-color='dark'], header[data-navbar-color='gradient'], header[data-navbar-color='gradient1'], header[data-navbar-color='gradient2'], header[data-navbar-color='gradient3'], header[data-navbar-color='image1'], header[data-navbar-color='image2']) nav svg {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+:is(html[data-navbar-color='primary'], html[data-navbar-color='dark'], html[data-navbar-color='gradient'], html[data-navbar-color='gradient1'], html[data-navbar-color='gradient2'], html[data-navbar-color='gradient3'], html[data-navbar-color='image1'], html[data-navbar-color='image2']) header nav span,
+:is(header[data-navbar-color='primary'], header[data-navbar-color='dark'], header[data-navbar-color='gradient'], header[data-navbar-color='gradient1'], header[data-navbar-color='gradient2'], header[data-navbar-color='gradient3'], header[data-navbar-color='image1'], header[data-navbar-color='image2']) nav span {
+    color: #ffffff !important;
+}
+
+:is(html[data-navbar-color='primary'], html[data-navbar-color='dark'], html[data-navbar-color='gradient'], html[data-navbar-color='gradient1'], html[data-navbar-color='gradient2'], html[data-navbar-color='gradient3'], html[data-navbar-color='image1'], html[data-navbar-color='image2']) header button,
+:is(html[data-navbar-color='primary'], html[data-navbar-color='dark'], html[data-navbar-color='gradient'], html[data-navbar-color='gradient1'], html[data-navbar-color='gradient2'], html[data-navbar-color='gradient3'], html[data-navbar-color='image1'], html[data-navbar-color='image2']) header button i,
+:is(html[data-navbar-color='primary'], html[data-navbar-color='dark'], html[data-navbar-color='gradient'], html[data-navbar-color='gradient1'], html[data-navbar-color='gradient2'], html[data-navbar-color='gradient3'], html[data-navbar-color='image1'], html[data-navbar-color='image2']) header button svg,
+:is(html[data-navbar-color='primary'], html[data-navbar-color='dark'], html[data-navbar-color='gradient'], html[data-navbar-color='gradient1'], html[data-navbar-color='gradient2'], html[data-navbar-color='gradient3'], html[data-navbar-color='image1'], html[data-navbar-color='image2']) header button span,
+:is(header[data-navbar-color='primary'], header[data-navbar-color='dark'], header[data-navbar-color='gradient'], header[data-navbar-color='gradient1'], header[data-navbar-color='gradient2'], header[data-navbar-color='gradient3'], header[data-navbar-color='image1'], header[data-navbar-color='image2']) button,
+:is(header[data-navbar-color='primary'], header[data-navbar-color='dark'], header[data-navbar-color='gradient'], header[data-navbar-color='gradient1'], header[data-navbar-color='gradient2'], header[data-navbar-color='gradient3'], header[data-navbar-color='image1'], header[data-navbar-color='image2']) button i,
+:is(header[data-navbar-color='primary'], header[data-navbar-color='dark'], header[data-navbar-color='gradient'], header[data-navbar-color='gradient1'], header[data-navbar-color='gradient2'], header[data-navbar-color='gradient3'], header[data-navbar-color='image1'], header[data-navbar-color='image2']) button svg,
+:is(header[data-navbar-color='primary'], header[data-navbar-color='dark'], header[data-navbar-color='gradient'], header[data-navbar-color='gradient1'], header[data-navbar-color='gradient2'], header[data-navbar-color='gradient3'], header[data-navbar-color='image1'], header[data-navbar-color='image2']) button span {
+    color: #ffffff !important;
+}
+
+/* Translucent hover state for all buttons on colored headers */
+:is(html[data-navbar-color='primary'], html[data-navbar-color='dark'], html[data-navbar-color='gradient'], html[data-navbar-color='gradient1'], html[data-navbar-color='gradient2'], html[data-navbar-color='gradient3'], html[data-navbar-color='image1'], html[data-navbar-color='image2']) header button:hover,
+:is(header[data-navbar-color='primary'], header[data-navbar-color='dark'], header[data-navbar-color='gradient'], header[data-navbar-color='gradient1'], header[data-navbar-color='gradient2'], header[data-navbar-color='gradient3'], header[data-navbar-color='image1'], header[data-navbar-color='image2']) button:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+}
+
+/* Translucent search button on colored headers */
+:is(html[data-navbar-color='primary'], html[data-navbar-color='dark'], html[data-navbar-color='gradient'], html[data-navbar-color='gradient1'], html[data-navbar-color='gradient2'], html[data-navbar-color='gradient3'], html[data-navbar-color='image1'], html[data-navbar-color='image2']) header button.me-1,
+:is(header[data-navbar-color='primary'], header[data-navbar-color='dark'], header[data-navbar-color='gradient'], header[data-navbar-color='gradient1'], header[data-navbar-color='gradient2'], header[data-navbar-color='gradient3'], header[data-navbar-color='image1'], header[data-navbar-color='image2']) button.me-1 {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    color: #ffffff !important;
+}
+
+:is(html[data-navbar-color='primary'], html[data-navbar-color='dark'], html[data-navbar-color='gradient'], html[data-navbar-color='gradient1'], html[data-navbar-color='gradient2'], html[data-navbar-color='gradient3'], html[data-navbar-color='image1'], html[data-navbar-color='image2']) header kbd,
+:is(header[data-navbar-color='primary'], header[data-navbar-color='dark'], header[data-navbar-color='gradient'], header[data-navbar-color='gradient1'], header[data-navbar-color='gradient2'], header[data-navbar-color='gradient3'], header[data-navbar-color='image1'], header[data-navbar-color='image2']) kbd {
+    background-color: rgba(255, 255, 255, 0.22) !important;
+    border-color: rgba(255, 255, 255, 0.35) !important;
     color: #ffffff !important;
 }
 
