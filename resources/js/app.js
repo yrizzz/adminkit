@@ -19,10 +19,15 @@ Chart.defaults.layout.padding = { top: 6, right: 14, bottom: 0, left: 6 };
 const renderIcons = () => createIcons({ icons, attrs: { 'stroke-width': 2 } });
 window.renderIcons = renderIcons;
 
-/* Tiny localStorage helper (mirrors the anti-FOUC keys in <head>) */
+/* Tiny localStorage + Cookie sync helper (mirrors the anti-FOUC keys in <head> & server Blade) */
 const LS = {
     get(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
-    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+    set(k, v) {
+        try {
+            localStorage.setItem(k, JSON.stringify(v));
+            document.cookie = `${k}=${encodeURIComponent(v)};path=/;max-age=31536000;SameSite=Lax`;
+        } catch (e) {}
+    },
 };
 
 /* ---------------------------------------------------------------
@@ -71,6 +76,11 @@ const registerUIStore = () => {
             html.dataset.navbarColor = this.navbarColor;
             html.classList.toggle('sidebar-collapsed', this.sidebarCollapsed);
             html.classList.toggle('is-compact', this.compact);
+
+            const aside = document.querySelector('aside.main-sidebar');
+            if (aside) aside.setAttribute('data-sidebar-color', this.sidebarColor);
+            const header = document.querySelector('header');
+            if (header) header.setAttribute('data-navbar-color', this.navbarColor);
         },
 
         setTheme(v) { this.theme = v; LS.set('ak_theme', v); this.apply(); },
@@ -154,7 +164,7 @@ window.syncMenuActive = () => {
 };
 
 /* ---------------------------------------------------------------
- * Boot hooks
+ * Boot & Livewire Navigation hooks for zero-FOUC transitions
  * ------------------------------------------------------------- */
 document.addEventListener('DOMContentLoaded', () => {
     registerUIStore();
@@ -162,6 +172,14 @@ document.addEventListener('DOMContentLoaded', () => {
     syncMenuActive();
 });
 window.addEventListener('hashchange', () => syncMenuActive());
+
+document.addEventListener('livewire:navigating', () => {
+    if (window.Alpine && Alpine.store('ui')) {
+        const ui = Alpine.store('ui');
+        document.documentElement.dataset.sidebarColor = ui.sidebarColor;
+        document.documentElement.dataset.navbarColor = ui.navbarColor;
+    }
+});
 
 document.addEventListener('livewire:navigated', () => {
     registerUIStore();

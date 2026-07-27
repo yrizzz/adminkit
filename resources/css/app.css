@@ -190,9 +190,9 @@ html[data-sidebar-color='primary'] aside.main-sidebar .nav-link {
     color: #ffffff !important;
 }
 
-html[data-sidebar-color='gradient'] aside.main-sidebar {
-    background: linear-gradient(180deg, hsl(var(--primary)) 0%, #0f172a 100%) !important;
-    background-image: linear-gradient(180deg, hsl(var(--primary)) 0%, #0f172a 100%) !important;
+html[data-sidebar-color='gradient'] aside.main-sidebar,
+html[data-sidebar-color='gradient1'] aside.main-sidebar {
+    background: linear-gradient(180deg, #1e1b4b 0%, #0f172a 100%) !important;
     color: #ffffff !important;
     --sidebar-foreground: 0 0% 100%;
     --sidebar-muted: 0 0% 80%;
@@ -202,6 +202,43 @@ html[data-sidebar-color='gradient'] aside.main-sidebar .sidebar-brand-text,
 html[data-sidebar-color='gradient'] aside.main-sidebar .sidebar-usercard-text p,
 html[data-sidebar-color='gradient'] aside.main-sidebar .nav-link {
     color: #ffffff !important;
+}
+
+html[data-sidebar-color='gradient2'] aside.main-sidebar {
+    background: linear-gradient(180deg, #0d9488 0%, #064e3b 100%) !important;
+    color: #ffffff !important;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-muted: 0 0% 85%;
+    --sidebar-accent: 0 0% 100% / 0.15;
+}
+html[data-sidebar-color='gradient2'] aside.main-sidebar .sidebar-brand-text,
+html[data-sidebar-color='gradient2'] aside.main-sidebar .sidebar-usercard-text p,
+html[data-sidebar-color='gradient2'] aside.main-sidebar .nav-link {
+    color: #ffffff !important;
+}
+
+html[data-sidebar-color='gradient3'] aside.main-sidebar {
+    background: linear-gradient(180deg, #e11d48 0%, #4c0519 100%) !important;
+    color: #ffffff !important;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-muted: 0 0% 85%;
+    --sidebar-accent: 0 0% 100% / 0.15;
+}
+html[data-sidebar-color='gradient3'] aside.main-sidebar .sidebar-brand-text,
+html[data-sidebar-color='gradient3'] aside.main-sidebar .sidebar-usercard-text p,
+html[data-sidebar-color='gradient3'] aside.main-sidebar .nav-link {
+    color: #ffffff !important;
+}
+
+/* Sidebar divider & search border overrides */
+aside.main-sidebar .sidebar-search input {
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+aside.main-sidebar div.border-t {
+    border-color: rgba(255, 255, 255, 0.12) !important;
+}
+html[data-sidebar-color='light'] aside.main-sidebar div.border-t {
+    border-color: #e2e8f0 !important;
 }
 
 html[data-sidebar-color='transparent'] aside.main-sidebar {
@@ -579,9 +616,13 @@ html[data-navbar-color='image2'] header span {
     .nav-sub.active .nav-node {
         width: 0.5rem;
         height: 0.5rem;
-        background: hsl(var(--sidebar-primary));
-        box-shadow: 0 0 0 3px hsl(var(--sidebar)), 0 0 9px 1px hsl(var(--sidebar-primary) / 0.6);
+        background: #ffffff;
+        box-shadow: 0 0 0 2.5px rgba(255, 255, 255, 0.35), 0 0 8px rgba(255, 255, 255, 0.4);
         transform: scale(1.24);
+    }
+    html[data-sidebar-color='light'] .nav-sub.active .nav-node {
+        background: hsl(var(--primary));
+        box-shadow: 0 0 0 2.5px rgba(0, 0, 0, 0.12), 0 0 8px hsl(var(--primary) / 0.3);
     }
     /* active branch turns blue: the node, its connector, and the rail above it */
     .nav-sub.active::after { background: hsl(var(--sidebar-primary)); }

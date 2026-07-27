@@ -2,9 +2,13 @@
     'title'       => 'Dashboard',
     'breadcrumbs' => [],
 ])
+@php
+    $sbColor = $_COOKIE['ak_sb_color'] ?? 'dark';
+    $nbColor = $_COOKIE['ak_nb_color'] ?? 'default';
+@endphp
 
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth" data-sidebar-color="{{ $sbColor }}" data-navbar-color="{{ $nbColor }}">
 <head>
     @include('partials.head', ['title' => $title])
 </head>

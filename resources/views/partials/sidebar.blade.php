@@ -7,6 +7,7 @@
 
 <aside
     x-data="{ hovering: false }"
+    data-sidebar-color="{{ $_COOKIE['ak_sb_color'] ?? 'dark' }}"
     :data-sidebar-color="$store.ui.sidebarColor"
     @mouseenter="hovering = true" @mouseleave="hovering = false"
     class="main-sidebar fixed inset-y-0 start-0 z-50 flex w-64 flex-col text-sidebar-foreground shadow-xl transition-[transform,width] duration-200 ease-in-out lg:shadow-none"

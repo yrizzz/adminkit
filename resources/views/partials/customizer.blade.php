@@ -50,7 +50,7 @@
                         'dark' => ['lbl' => 'Dark', 'dot' => 'bg-slate-900 border border-slate-700'],
                         'light' => ['lbl' => 'Light', 'dot' => 'bg-white border border-slate-300'],
                         'primary' => ['lbl' => 'Primary', 'dot' => 'bg-primary'],
-                        'gradient' => ['lbl' => 'Gradient', 'dot' => 'bg-gradient-to-tr from-primary to-slate-900'],
+                        'transparent' => ['lbl' => 'Glass', 'dot' => 'bg-slate-500/30 border border-slate-400'],
                     ] as $sc => $cfg)
                         <button type="button" @click="$store.ui.setSidebarColor ? $store.ui.setSidebarColor('{{ $sc }}') : ($store.ui.sidebarColor = '{{ $sc }}', $store.ui.apply && $store.ui.apply())"
                                 :class="$store.ui.sidebarColor === '{{ $sc }}' ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
@@ -60,17 +60,27 @@
                         </button>
                     @endforeach
                 </div>
-                <div class="grid grid-cols-4 gap-2">
-                    <button type="button" @click="$store.ui.setSidebarColor ? $store.ui.setSidebarColor('transparent') : ($store.ui.sidebarColor = 'transparent', $store.ui.apply && $store.ui.apply())"
-                            :class="$store.ui.sidebarColor === 'transparent' ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
-                            class="flex items-center justify-center gap-1.5 rounded-xl border p-2 text-center text-xs transition-all">
-                        <span class="size-2.5 shrink-0 rounded-full border border-slate-400 bg-slate-500/30"></span>
-                        <span>Glass</span>
-                    </button>
+                {{-- Sidebar Gradients --}}
+                <div class="grid grid-cols-3 gap-2 mb-2">
+                    @foreach ([
+                        'gradient1' => ['lbl' => 'Grad 1', 'dot' => 'bg-gradient-to-br from-indigo-900 to-slate-900'],
+                        'gradient2' => ['lbl' => 'Grad 2', 'dot' => 'bg-gradient-to-br from-teal-600 to-emerald-900'],
+                        'gradient3' => ['lbl' => 'Grad 3', 'dot' => 'bg-gradient-to-br from-rose-600 to-rose-950'],
+                    ] as $gKey => $gCfg)
+                        <button type="button" @click="$store.ui.setSidebarColor ? $store.ui.setSidebarColor('{{ $gKey }}') : ($store.ui.sidebarColor = '{{ $gKey }}', $store.ui.apply && $store.ui.apply())"
+                                :class="($store.ui.sidebarColor === '{{ $gKey }}' || ($store.ui.sidebarColor === 'gradient' && '{{ $gKey }}' === 'gradient1')) ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
+                                class="flex items-center justify-center gap-1.5 rounded-xl border p-2 text-center text-xs transition-all">
+                            <span class="size-2.5 shrink-0 rounded-full {{ $gCfg['dot'] }}"></span>
+                            <span>{{ $gCfg['lbl'] }}</span>
+                        </button>
+                    @endforeach
+                </div>
+                {{-- Sidebar Images --}}
+                <div class="grid grid-cols-3 gap-2">
                     @foreach (['image1' => 'Img 1', 'image2' => 'Img 2', 'image3' => 'Img 3'] as $imgKey => $imgLbl)
                         <button type="button" @click="$store.ui.setSidebarColor ? $store.ui.setSidebarColor('{{ $imgKey }}') : ($store.ui.sidebarColor = '{{ $imgKey }}', $store.ui.apply && $store.ui.apply())"
                                 :class="$store.ui.sidebarColor === '{{ $imgKey }}' ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
-                                class="flex items-center justify-center gap-1 rounded-xl border p-2 text-center text-xs transition-all">
+                                class="flex items-center justify-center gap-1.5 rounded-xl border p-2 text-center text-xs transition-all">
                             <i data-lucide="image" class="size-3 shrink-0"></i>
                             <span>{{ $imgLbl }}</span>
                         </button>
@@ -96,6 +106,22 @@
                         </button>
                     @endforeach
                 </div>
+                {{-- Header Gradients --}}
+                <div class="grid grid-cols-3 gap-2 mb-2">
+                    @foreach ([
+                        'gradient1' => ['lbl' => 'Grad 1', 'dot' => 'bg-gradient-to-r from-indigo-900 to-slate-900'],
+                        'gradient2' => ['lbl' => 'Grad 2', 'dot' => 'bg-gradient-to-r from-teal-600 to-emerald-900'],
+                        'gradient3' => ['lbl' => 'Grad 3', 'dot' => 'bg-gradient-to-r from-rose-600 to-rose-950'],
+                    ] as $gKey => $gCfg)
+                        <button type="button" @click="$store.ui.setNavbarColor ? $store.ui.setNavbarColor('{{ $gKey }}') : ($store.ui.navbarColor = '{{ $gKey }}', $store.ui.apply && $store.ui.apply())"
+                                :class="($store.ui.navbarColor === '{{ $gKey }}' || ($store.ui.navbarColor === 'gradient' && '{{ $gKey }}' === 'gradient1')) ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
+                                class="flex items-center justify-center gap-1.5 rounded-xl border p-2 text-center text-xs transition-all">
+                            <span class="size-2.5 shrink-0 rounded-full {{ $gCfg['dot'] }}"></span>
+                            <span>{{ $gCfg['lbl'] }}</span>
+                        </button>
+                    @endforeach
+                </div>
+                {{-- Header Images & Glass --}}
                 <div class="grid grid-cols-3 gap-2">
                     <button type="button" @click="$store.ui.setNavbarColor ? $store.ui.setNavbarColor('transparent') : ($store.ui.navbarColor = 'transparent', $store.ui.apply && $store.ui.apply())"
                             :class="$store.ui.navbarColor === 'transparent' ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
