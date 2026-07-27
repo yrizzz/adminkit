@@ -6,6 +6,7 @@
 [![PHP](https://img.shields.io/badge/PHP-8.3%2B-777BB4?style=flat-square)](https://php.net)
 [![Laravel](https://img.shields.io/badge/Laravel-13.x-FF2D20?style=flat-square)](https://laravel.com)
 [![Livewire](https://img.shields.io/badge/Livewire-4.x-4E5BA6?style=flat-square)](https://livewire.laravel.com)
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Saweria-FFDD00?style=flat-square&logo=buy-me-a-coffee&logoColor=black)](https://saweria.co/yrizzz)
 
 **The Lightweight, Themeable Admin Panel Starter Kit for Laravel 13 & Livewire 4.**
 
@@ -73,6 +74,18 @@ php artisan serve
 | **URL** | `http://127.0.0.1:8000` |
 | **Email** | `admin@adminkit.test` |
 | **Password** | `password` |
+
+---
+
+## ☕️ Support & Buy Me a Coffee
+
+If you find **AdminKit** helpful and want to support its development, you can buy me a coffee via Saweria:
+
+<a href="https://saweria.co/yrizzz" target="_blank">
+    <img src="https://img.shields.io/badge/Support%20via-Saweria-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy Me A Coffee via Saweria">
+</a>
+
+Your support is greatly appreciated! ❤️
 
 ---
 
