@@ -77,9 +77,15 @@ php artisan serve
 
 ---
 
-## ☕️ Support & Buy Me a Coffee
+## ☕️ Support & Sponsor
 
-If you find **AdminKit** helpful and want to support its development, you can buy me a coffee via Saweria:
+If you find **AdminKit** helpful and want to support its development, you can sponsor via:
+
+- **Saweria**: [https://saweria.co/yrizzz](https://saweria.co/yrizzz)
+- **BNB Chain (BEP-20)**:
+  ```text
+  0xc708ba9b4764deaaf3b24147ff0c5c8ed7ea4c80
+  ```
 
 <a href="https://saweria.co/yrizzz" target="_blank">
     <img src="https://img.shields.io/badge/Support%20via-Saweria-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy Me A Coffee via Saweria">
