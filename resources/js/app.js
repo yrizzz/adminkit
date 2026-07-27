@@ -29,8 +29,10 @@ const LS = {
  * Global UI store — theme, direction, layout, sidebar, accent…
  * Registered on Livewire's Alpine instance (survives wire:navigate).
  * ------------------------------------------------------------- */
-document.addEventListener('alpine:init', () => {
-    Alpine.store('ui', {
+const registerUIStore = () => {
+    if (typeof window.Alpine === 'undefined') return;
+
+    const storeObj = {
         theme: LS.get('ak_theme', 'system'),
         direction: LS.get('ak_dir', 'ltr'),
         layout: LS.get('ak_layout', 'vertical'),
@@ -85,8 +87,24 @@ document.addEventListener('alpine:init', () => {
         setNavbarFixed(v) { this.navbarFixed = v; LS.set('ak_navbar_fixed', v); },
         openMobileSidebar() { this.sidebarMobileOpen = true; },
         closeMobileSidebar() { this.sidebarMobileOpen = false; },
-    });
-});
+    };
+
+    try {
+        if (window.Alpine.store('ui')) {
+            Object.assign(window.Alpine.store('ui'), storeObj);
+            window.Alpine.store('ui').apply();
+        } else {
+            window.Alpine.store('ui', storeObj);
+        }
+    } catch (e) {
+        window.Alpine.store('ui', storeObj);
+    }
+};
+
+document.addEventListener('alpine:init', registerUIStore);
+if (window.Alpine) {
+    registerUIStore();
+}
 
 /* ---------------------------------------------------------------
  * Toast helper — window.toast('msg', { variant, title })
@@ -97,7 +115,6 @@ window.toast = (message, opts = {}) => {
             message,
             variant: opts.variant || 'default',
             title: opts.title,
-            // top-start | top-center | top-end | bottom-start | bottom-center | bottom-end
             position: opts.position || 'bottom-end',
             duration: opts.duration ?? 4200,
         },
@@ -121,14 +138,11 @@ window.akChartTheme = () => {
 };
 
 /* ---------------------------------------------------------------
- * Active menu sync — the server marks items active by PATH only, so
- * menu items that share a page and differ only by #hash (e.g. UI
- * Elements sections) can't be told apart server-side. Here we refine
- * the active state client-side using the full path + hash.
+ * Active menu sync
  * ------------------------------------------------------------- */
 const normalize = (u) => (u.pathname.replace(/\/+$/, '') || '/') + u.hash;
 window.syncMenuActive = () => {
-    if (!location.hash) return; // path-only URLs: trust the server-rendered active state
+    if (!location.hash) return;
     const want = normalize(location);
     const links = [...document.querySelectorAll('aside a.nav-sub[href]')];
     const match = links.find((a) => {
@@ -140,18 +154,19 @@ window.syncMenuActive = () => {
 };
 
 /* ---------------------------------------------------------------
- * Boot hooks: first load + after every SPA navigation + hash change.
+ * Boot hooks
  * ------------------------------------------------------------- */
-document.addEventListener('DOMContentLoaded', () => { renderIcons(); syncMenuActive(); });
+document.addEventListener('DOMContentLoaded', () => {
+    registerUIStore();
+    renderIcons();
+    syncMenuActive();
+});
 window.addEventListener('hashchange', () => syncMenuActive());
 
-/* After each SPA navigation, re-apply theme/layout to <html> (Livewire's
-   morph resets client-set attributes), re-render icons, refine active. */
 document.addEventListener('livewire:navigated', () => {
+    registerUIStore();
     if (window.Alpine && Alpine.store('ui')) {
         Alpine.store('ui').apply();
-        // On mobile, a nav link keeps the off-canvas sidebar open across the SPA
-        // navigation — close it so the new page isn't hidden behind it.
         Alpine.store('ui').closeMobileSidebar();
     }
     renderIcons();

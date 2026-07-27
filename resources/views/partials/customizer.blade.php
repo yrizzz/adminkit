@@ -52,7 +52,7 @@
                         'primary' => 'Primary',
                         'gradient' => 'Gradient',
                     ] as $sc => $lbl)
-                        <button type="button" @click="$store.ui.setSidebarColor('{{ $sc }}')"
+                        <button type="button" @click="$store.ui.setSidebarColor ? $store.ui.setSidebarColor('{{ $sc }}') : ($store.ui.sidebarColor = '{{ $sc }}', $store.ui.apply && $store.ui.apply())"
                                 :class="$store.ui.sidebarColor === '{{ $sc }}' ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
                                 class="rounded-xl border p-2 text-center text-xs transition-all">
                             {{ $lbl }}
@@ -60,22 +60,22 @@
                     @endforeach
                 </div>
                 <div class="grid grid-cols-4 gap-2">
-                    <button type="button" @click="$store.ui.setSidebarColor('transparent')"
+                    <button type="button" @click="$store.ui.setSidebarColor ? $store.ui.setSidebarColor('transparent') : ($store.ui.sidebarColor = 'transparent', $store.ui.apply && $store.ui.apply())"
                             :class="$store.ui.sidebarColor === 'transparent' ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
                             class="rounded-xl border p-2 text-center text-xs transition-all">
                         Glass
                     </button>
-                    <button type="button" @click="$store.ui.setSidebarColor('image1')"
+                    <button type="button" @click="$store.ui.setSidebarColor ? $store.ui.setSidebarColor('image1') : ($store.ui.sidebarColor = 'image1', $store.ui.apply && $store.ui.apply())"
                             :class="$store.ui.sidebarColor === 'image1' ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
                             class="rounded-xl border p-2 text-center text-xs transition-all flex items-center justify-center gap-1">
                         <i data-lucide="image" class="size-3"></i>Img 1
                     </button>
-                    <button type="button" @click="$store.ui.setSidebarColor('image2')"
+                    <button type="button" @click="$store.ui.setSidebarColor ? $store.ui.setSidebarColor('image2') : ($store.ui.sidebarColor = 'image2', $store.ui.apply && $store.ui.apply())"
                             :class="$store.ui.sidebarColor === 'image2' ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
                             class="rounded-xl border p-2 text-center text-xs transition-all flex items-center justify-center gap-1">
                         <i data-lucide="image" class="size-3"></i>Img 2
                     </button>
-                    <button type="button" @click="$store.ui.setSidebarColor('image3')"
+                    <button type="button" @click="$store.ui.setSidebarColor ? $store.ui.setSidebarColor('image3') : ($store.ui.sidebarColor = 'image3', $store.ui.apply && $store.ui.apply())"
                             :class="$store.ui.sidebarColor === 'image3' ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
                             class="rounded-xl border p-2 text-center text-xs transition-all flex items-center justify-center gap-1">
                         <i data-lucide="image" class="size-3"></i>Img 3
@@ -93,7 +93,7 @@
                         'dark' => 'Dark',
                         'primary' => 'Primary',
                     ] as $nc => $lbl)
-                        <button type="button" @click="$store.ui.setNavbarColor('{{ $nc }}')"
+                        <button type="button" @click="$store.ui.setNavbarColor ? $store.ui.setNavbarColor('{{ $nc }}') : ($store.ui.navbarColor = '{{ $nc }}', $store.ui.apply && $store.ui.apply())"
                                 :class="$store.ui.navbarColor === '{{ $nc }}' ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
                                 class="rounded-xl border p-2 text-center text-xs transition-all">
                             {{ $lbl }}
@@ -101,17 +101,17 @@
                     @endforeach
                 </div>
                 <div class="grid grid-cols-3 gap-2">
-                    <button type="button" @click="$store.ui.setNavbarColor('transparent')"
+                    <button type="button" @click="$store.ui.setNavbarColor ? $store.ui.setNavbarColor('transparent') : ($store.ui.navbarColor = 'transparent', $store.ui.apply && $store.ui.apply())"
                             :class="$store.ui.navbarColor === 'transparent' ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
                             class="rounded-xl border p-2 text-center text-xs transition-all">
                         Transparent
                     </button>
-                    <button type="button" @click="$store.ui.setNavbarColor('image1')"
+                    <button type="button" @click="$store.ui.setNavbarColor ? $store.ui.setNavbarColor('image1') : ($store.ui.navbarColor = 'image1', $store.ui.apply && $store.ui.apply())"
                             :class="$store.ui.navbarColor === 'image1' ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
                             class="rounded-xl border p-2 text-center text-xs transition-all flex items-center justify-center gap-1">
                         <i data-lucide="image" class="size-3"></i>Header Img 1
                     </button>
-                    <button type="button" @click="$store.ui.setNavbarColor('image2')"
+                    <button type="button" @click="$store.ui.setNavbarColor ? $store.ui.setNavbarColor('image2') : ($store.ui.navbarColor = 'image2', $store.ui.apply && $store.ui.apply())"
                             :class="$store.ui.navbarColor === 'image2' ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
                             class="rounded-xl border p-2 text-center text-xs transition-all flex items-center justify-center gap-1">
                         <i data-lucide="image" class="size-3"></i>Header Img 2
