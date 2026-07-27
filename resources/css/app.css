@@ -135,10 +135,17 @@
    SIDEBAR COLOR & BACKGROUND IMAGE OVERRIDES (Main Sidebar Only)
    ============================================================ */
 
-/* Default base for main sidebar: Always dark (#0f172a) instantly to eliminate any flash of white */
+/* Main sidebar is STAY DARK (#0f172a) by default in both Light & Dark modes */
 aside.main-sidebar {
-    background-color: #0f172a;
-    color: #e2e8f0;
+    background-color: #0f172a !important;
+    color: #e2e8f0 !important;
+    --sidebar: 222 32% 11%;
+    --sidebar-foreground: 220 14% 75%;
+    --sidebar-muted: 220 10% 46%;
+    --sidebar-border: 222 24% 18%;
+    --sidebar-accent: 222 26% 16%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-primary: 221 83% 60%;
 }
 
 /* Customizer drawer MUST always stay clean card background */
