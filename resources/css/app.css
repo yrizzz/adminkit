@@ -388,6 +388,30 @@ header[data-navbar-color='image2'] {
     color: #ffffff !important;
 }
 
+/* Header Gradients */
+html[data-navbar-color='gradient'] header,
+header[data-navbar-color='gradient'],
+html[data-navbar-color='gradient1'] header,
+header[data-navbar-color='gradient1'] {
+    background: linear-gradient(90deg, #1e1b4b 0%, #0f172a 100%) !important;
+    color: #ffffff !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+html[data-navbar-color='gradient2'] header,
+header[data-navbar-color='gradient2'] {
+    background: linear-gradient(90deg, #0d9488 0%, #064e3b 100%) !important;
+    color: #ffffff !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+html[data-navbar-color='gradient3'] header,
+header[data-navbar-color='gradient3'] {
+    background: linear-gradient(90deg, #e11d48 0%, #4c0519 100%) !important;
+    color: #ffffff !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
 /* Header Custom Gradient */
 html[data-navbar-color='custom_gradient'] header,
 header[data-navbar-color='custom_gradient'] {

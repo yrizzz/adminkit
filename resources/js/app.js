@@ -100,8 +100,48 @@ const registerUIStore = () => {
         setAccent(v) { this.accent = v; LS.set('ak_accent', v); this.apply(); },
         setRadius(v) { this.radius = v; LS.set('ak_radius', v); this.apply(); },
         setCompact(v) { this.compact = v; LS.set('ak_compact', v); this.apply(); },
-        setSidebarColor(v) { this.sidebarColor = v; LS.set('ak_sb_color', v); this.apply(); },
-        setNavbarColor(v) { this.navbarColor = v; LS.set('ak_nb_color', v); this.apply(); },
+        setSidebarColor(v) {
+            this.sidebarColor = v;
+            LS.set('ak_sb_color', v);
+            if (v === 'gradient1' || v === 'gradient') {
+                this.sidebarGradientFrom = '#1e1b4b';
+                this.sidebarGradientTo = '#0f172a';
+                LS.set('ak_sb_grad_from', '#1e1b4b');
+                LS.set('ak_sb_grad_to', '#0f172a');
+            } else if (v === 'gradient2') {
+                this.sidebarGradientFrom = '#0d9488';
+                this.sidebarGradientTo = '#064e3b';
+                LS.set('ak_sb_grad_from', '#0d9488');
+                LS.set('ak_sb_grad_to', '#064e3b');
+            } else if (v === 'gradient3') {
+                this.sidebarGradientFrom = '#e11d48';
+                this.sidebarGradientTo = '#4c0519';
+                LS.set('ak_sb_grad_from', '#e11d48');
+                LS.set('ak_sb_grad_to', '#4c0519');
+            }
+            this.apply();
+        },
+        setNavbarColor(v) {
+            this.navbarColor = v;
+            LS.set('ak_nb_color', v);
+            if (v === 'gradient1' || v === 'gradient') {
+                this.navbarGradientFrom = '#1e1b4b';
+                this.navbarGradientTo = '#0f172a';
+                LS.set('ak_nb_grad_from', '#1e1b4b');
+                LS.set('ak_nb_grad_to', '#0f172a');
+            } else if (v === 'gradient2') {
+                this.navbarGradientFrom = '#0d9488';
+                this.navbarGradientTo = '#064e3b';
+                LS.set('ak_nb_grad_from', '#0d9488');
+                LS.set('ak_nb_grad_to', '#064e3b');
+            } else if (v === 'gradient3') {
+                this.navbarGradientFrom = '#e11d48';
+                this.navbarGradientTo = '#4c0519';
+                LS.set('ak_nb_grad_from', '#e11d48');
+                LS.set('ak_nb_grad_to', '#4c0519');
+            }
+            this.apply();
+        },
         setSidebarGradient(from, to) {
             if (from) { this.sidebarGradientFrom = from; LS.set('ak_sb_grad_from', from); }
             if (to) { this.sidebarGradientTo = to; LS.set('ak_sb_grad_to', to); }
