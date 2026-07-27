@@ -1,56 +1,157 @@
-# AdminKit — Laravel Admin Kit
+# ⚡ AdminKit — Laravel 13 Admin Panel Starter Kit
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Laravel-13.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel 13">
+  <img src="https://img.shields.io/badge/Livewire-4.x-4E5BA6?style=for-the-badge&logo=livewire&logoColor=white" alt="Livewire 4">
+  <img src="https://img.shields.io/badge/Tailwind_CSS-v4.0-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS v4">
+  <img src="https://img.shields.io/badge/Alpine.js-3.x-8BC0D0?style=for-the-badge&logo=alpine.js&logoColor=white" alt="Alpine.js">
+  <img src="https://img.shields.io/badge/PHP-8.3%2B-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.3">
+  <img src="https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge" alt="License">
+</p>
 
-> Menu structure & nesting are modelled on the *Velvet* admin template (as requested); components and design system are original/shadcn-inspired.
+A modern, highly customizable, and themeable admin panel starter kit built on **Laravel 13**, **Livewire 4**, **Tailwind CSS v4**, and **Alpine.js**, featuring a sleek **shadcn/UI-inspired** design system.
 
-## ✨ What's included
+---
 
-- **Authentication** — Login, Register, Forgot-password (real session auth, demo user seeded)
-- **App shell** — dark sidebar (grouped, multi-level nested menu, badges, search, collapse/icon-rail, mobile off-canvas), sticky navbar (breadcrumb, ⌘K command palette, notifications, language, theme toggle, profile), footer (version / Laravel / PHP / execution time)
-- **Layouts** — **Vertical** & **Horizontal**, switchable at runtime
-- **Direction** — full **RTL / LTR** support (logical properties)
-- **Theming** — Light / Dark / System, 7 accent colors, 5 radius presets — all persisted to `localStorage`, applied before first paint (no FOUC). Live **Theme Customizer** drawer.
-- **Component library** (`resources/views/components/ui/*`) — button, badge, card, input, avatar, dropdown, modal, alert, stat, toaster, icon (Lucide)
-- **Pages** — Dashboard (Chart.js widgets), UI Elements showcase, Data Table (sort/search/select), Charts, Forms (wizard), Settings, Icons, Widgets
+## ✨ Features at a Glance
 
-## 🚀 Run it
+- 🔐 **Authentication System** — Fully functioning session login, registration, and forgot-password pages with seeded demo credentials.
+- 🎨 **Live Theme Customizer Drawer**
+  - **Color Schemes**: Light, Dark, and System automatic detection.
+  - **7 Vibrant Accent Colors**: Blue, Indigo, Violet, Emerald, Rose, Amber, Cyan.
+  - **5 Border Radius Presets**: Sharp (0px), Small (0.3rem), Medium (0.5rem), Large (0.75rem), Full (1.0rem).
+  - **Instant Persistence**: Theme choices saved instantly in `localStorage` without page flash (FOUC).
+- 🔄 **Dynamic Layout & Direction Support**
+  - **Layout Modes**: Vertical Sidebar & Horizontal Topbar menu navigation.
+  - **Text Direction**: Complete LTR and RTL support built using CSS logical properties.
+  - **Sidebar Modes**: Expanded, Collapsed, Icon-Rail, and Mobile Off-canvas drawer.
+- ⌨️ **Command Palette (⌘K / Ctrl+K)** — Instant quick search modal across all navigation links and app actions.
+- 🧩 **Shadcn-Inspired UI Components** (`resources/views/components/ui/*`) — Clean, accessible Blade components including:
+  - Button, Badge, Card, Input, Avatar, Dropdown, Modal, Alert, Stat Box, Toaster, and Lucide Icons.
+- 📊 **Pre-built Starter Pages**
+  - **Dashboard**: Live Chart.js analytics widgets, stat summary cards, activity feeds.
+  - **Data Tables**: Interactive client-side sorting, searching, pagination, and multi-select filters.
+  - **Forms**: Multi-step wizard form, input groups, toggles, custom selects.
+  - **UI Showcase**: Live playground for all UI elements, alerts, buttons, and modals.
+  - **Settings, Icons, Charts, Widgets**.
 
-```bash
-composer install
-npm install
+---
 
-# Database (SQLite, pre-configured) + demo data
-php artisan migrate:fresh --seed
+## 🚀 Quick Start Guide
 
-# Build assets (or `npm run dev` for HMR)
-npm run build
+### Prerequisites
+- PHP >= 8.3
+- Composer >= 2.0
+- Node.js >= 18.x & NPM
 
-# Serve
-php artisan serve      # http://127.0.0.1:8000
+### Step-by-Step Installation
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/yrizzz/adminkit.git
+   cd adminkit
+   ```
+
+2. **Install Backend & Frontend Dependencies**
+   ```bash
+   composer install
+   npm install
+   ```
+
+3. **Configure Environment**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+4. **Run Database Migrations & Seed Demo Data**
+   ```bash
+   # Pre-configured with SQLite out of the box
+   php artisan migrate:fresh --seed
+   ```
+
+5. **Build Assets & Start Local Server**
+   ```bash
+   # Compile frontend assets
+   npm run build
+
+   # Serve application locally
+   php artisan serve
+   ```
+   Access the admin panel at: `http://127.0.0.1:8000`
+
+---
+
+## 🔑 Demo Credentials
+
+| Role | Email | Password |
+|:---|:---|:---|
+| **Administrator** | `admin@adminkit.test` | `password` |
+
+---
+
+## 🗂️ Project Architecture & Key Files
+
+```text
+adminkit/
+├── app/
+│   └── Support/
+│       └── Menu.php                 # Navigation helper (active state, URL builder, search index)
+├── config/
+│   └── adminkit.php                 # App configuration & complete navigation structure
+├── resources/
+│   ├── css/
+│   │   └── app.css                  # CSS design tokens (HSL), theme variables, accents, RTL rules
+│   ├── js/
+│   │   └── app.js                   # Alpine.js global UI state store ($store.ui)
+│   └── views/
+│       ├── components/
+│       │   ├── layouts/             # app.blade.php (authed shell) & guest.blade.php (auth pages)
+│       │   └── ui/                  # Reusable shadcn-like UI Blade components
+│       ├── pages/                   # Main view templates (dashboard, tables, forms, settings)
+│       └── partials/                # Sidebar, Navbar, Topbar, Customizer drawer, Command palette
+└── routes/
+    └── web.php                      # Application routes
 ```
 
-### Demo credentials
+---
+
+## ⚙️ Configuration & Customization
+
+### 1. Navigation Menu (`config/adminkit.php`)
+Easily customize menu items, headers, submenus, badges, and icons:
+
+```php
+'menu' => [
+    [
+        'title' => 'Main',
+        'is_header' => true,
+    ],
+    [
+        'title' => 'Dashboard',
+        'icon' => 'layout-dashboard',
+        'route' => 'dashboard',
+        'badge' => ['text' => 'New', 'variant' => 'primary'],
+    ],
+    // ...
+]
 ```
-Email:    admin@adminkit.test
-Password: password
-```
 
-## 🗂️ Key files
+### 2. Styling & Theme Tokens (`resources/css/app.css`)
+Tailwind CSS v4 `@theme` variables and custom HSL color definitions allow seamless brand adjustments.
 
-| Path | Purpose |
-|------|---------|
-| `config/adminkit.php` | App meta + the whole navigation tree |
-| `app/Support/Menu.php` | Menu helpers (active state, href, flatten) |
-| `resources/css/app.css` | Design tokens (HSL), themes, accents, radius, RTL, rail mode |
-| `resources/js/app.js` | Alpine store (`$store.ui`): theme/direction/layout/sidebar |
-| `resources/views/components/layouts/` | `app` (authed shell) + `guest` (auth) |
-| `resources/views/partials/` | sidebar, navbar, footer, topbar-horizontal, customizer, command, menu-item |
-| `resources/views/pages/` | dashboard, tables, charts, forms, settings, icons, widgets, ui-elements |
-
-## 🧭 Navigation notes
-
-Menu items without a real page point to `#` and show an info toast ("scaffold" pages). The wired-up real pages are: Dashboard, Sign In / Up / Reset, UI Elements, Icons, Widgets, Tables, Charts, Forms, Settings.
+---
 
 
 
-> Lucide icons are currently bundled whole for convenience; tree-shake to a curated set before production to shrink the JS bundle.
+---
+
+## 📝 License
+
+This project is open-sourced software licensed under the [MIT license](LICENSE).
+
+---
+
+<p align="center">
+  Crafted with ❤️ by <a href="https://github.com/yrizzz">Aris Edy Handoko (yrizzz)</a>
+</p>

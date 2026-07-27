@@ -1,8 +1,8 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "yrizzz/adminkit",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "Modern, themeable admin panel starter kit built on Laravel 13, Livewire 4, Tailwind CSS v4, and Alpine.js.",
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
