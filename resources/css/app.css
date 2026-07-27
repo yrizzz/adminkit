@@ -112,17 +112,17 @@
     --sidebar-border: 217 33% 17%;
     --sidebar-accent: 217 33% 17%;
     --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-primary: 221 83% 60%;
+    --sidebar-primary: var(--primary);
 }
 
-/* --- Accent color presets (swap --primary + --ring at runtime) --- */
-[data-accent='blue']   { --primary: 221 83% 53%; --ring: 221 83% 53%; --sidebar-primary: 221 83% 62%; }
-[data-accent='violet'] { --primary: 262 83% 58%; --ring: 262 83% 58%; --sidebar-primary: 262 83% 66%; }
-[data-accent='green']  { --primary: 142 71% 45%; --ring: 142 71% 45%; --sidebar-primary: 142 64% 52%; --primary-foreground: 0 0% 100%; }
-[data-accent='rose']   { --primary: 347 77% 50%; --ring: 347 77% 50%; --sidebar-primary: 347 77% 60%; }
-[data-accent='orange'] { --primary: 25 95% 53%;  --ring: 25 95% 53%;  --sidebar-primary: 25 95% 58%; }
-[data-accent='amber']  { --primary: 38 92% 50%;  --ring: 38 92% 50%;  --sidebar-primary: 38 92% 55%; --primary-foreground: 26 40% 12%; }
-[data-accent='teal']   { --primary: 173 80% 40%; --ring: 173 80% 40%; --sidebar-primary: 173 70% 48%; }
+/* --- Accent color presets (swap --primary + --ring + --sidebar-primary at runtime) --- */
+[data-accent='blue']   { --primary: 221 83% 53%; --ring: 221 83% 53%; --sidebar-primary: 221 83% 53%; }
+[data-accent='violet'] { --primary: 262 83% 58%; --ring: 262 83% 58%; --sidebar-primary: 262 83% 58%; }
+[data-accent='green']  { --primary: 142 71% 45%; --ring: 142 71% 45%; --sidebar-primary: 142 71% 45%; --primary-foreground: 0 0% 100%; }
+[data-accent='rose']   { --primary: 347 77% 50%; --ring: 347 77% 50%; --sidebar-primary: 347 77% 50%; }
+[data-accent='orange'] { --primary: 25 95% 53%;  --ring: 25 95% 53%;  --sidebar-primary: 25 95% 53%; }
+[data-accent='amber']  { --primary: 38 92% 50%;  --ring: 38 92% 50%;  --sidebar-primary: 38 92% 50%; --primary-foreground: 26 40% 12%; }
+[data-accent='teal']   { --primary: 173 80% 40%; --ring: 173 80% 40%; --sidebar-primary: 173 80% 40%; }
 
 /* --- Radius presets --- */
 [data-radius='none'] { --radius: 0rem; }
@@ -145,7 +145,7 @@ aside.main-sidebar {
     --sidebar-border: 222 24% 18%;
     --sidebar-accent: 222 26% 16%;
     --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-primary: 221 83% 60%;
+    --sidebar-primary: var(--primary);
 }
 
 /* Customizer drawer MUST always stay clean card background */
