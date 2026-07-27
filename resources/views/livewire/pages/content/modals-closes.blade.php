@@ -186,71 +186,46 @@
         <x-slot:footer><x-ui.button class="w-full" variant="success" x-on:click="$dispatch('close-modal', 'm-success')">Continue</x-ui.button></x-slot:footer>
     </x-ui.modal>
 
-    <x-ui.modal name="m-scroll" title="Tambah Menu" maxWidth="max-w-lg">
-        <div class="space-y-4">
-            <div class="grid grid-cols-2 gap-3">
-                <div>
-                    <label class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-muted-foreground">Menu</label>
-                    <x-ui.input placeholder="Nama menu" />
-                    <p class="mt-1 text-[0.7rem] text-muted-foreground">Gunakan underscore sebagai pengganti spasi</p>
-                </div>
-                <div>
-                    <label class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-muted-foreground">Path</label>
-                    <x-ui.input placeholder="/path" />
-                </div>
+    <x-ui.modal name="m-scroll" title="Terms & Account Agreement" maxWidth="max-w-lg">
+        <div class="space-y-4 text-sm">
+            <div class="rounded-xl border border-border bg-muted/40 p-4 space-y-2">
+                <h4 class="font-semibold text-foreground">1. System Access & Security Policy</h4>
+                <p class="text-xs text-muted-foreground leading-relaxed">
+                    By accessing the AdminKit Control Panel, you agree to maintain confidential access credentials and adhere to organizational data privacy standards. All administrative actions are recorded in security logs for compliance.
+                </p>
             </div>
 
-            <div class="grid grid-cols-2 gap-3">
-                <div>
-                    <label class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-muted-foreground">Kategori</label>
-                    <select class="flex h-10 w-full rounded-xl border border-input bg-background px-3 text-sm font-medium shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-                        <option>Pilih salah satu</option>
-                        <option>Main</option>
-                        <option>General</option>
-                        <option>Pages</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-muted-foreground">Status</label>
-                    <select class="flex h-10 w-full rounded-xl border border-input bg-background px-3 text-sm font-medium shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-                        <option>Aktif</option>
-                        <option>Non-Aktif</option>
-                    </select>
-                </div>
+            <div class="rounded-xl border border-border bg-muted/40 p-4 space-y-2">
+                <h4 class="font-semibold text-foreground">2. User Roles & Permission Matrices</h4>
+                <p class="text-xs text-muted-foreground leading-relaxed">
+                    Administrative rights are strictly bound to assigned role definitions (Admin, Editor, Auditor, Viewer). Role escalation requests require double-factor verification from an active System Administrator.
+                </p>
             </div>
 
-            <div class="grid grid-cols-2 gap-3">
-                <div>
-                    <label class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-muted-foreground">Icon</label>
-                    <x-ui.input placeholder="layout-grid" icon="box" />
-                </div>
-                <div>
-                    <label class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-muted-foreground">Tampilkan ke navbar</label>
-                    <select class="flex h-10 w-full rounded-xl border border-input bg-background px-3 text-sm font-medium shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-                        <option>Ya</option>
-                        <option>Tidak</option>
-                    </select>
-                </div>
+            <div class="rounded-xl border border-border bg-muted/40 p-4 space-y-2">
+                <h4 class="font-semibold text-foreground">3. Data Retention & Privacy Standards</h4>
+                <p class="text-xs text-muted-foreground leading-relaxed">
+                    All analytics telemetry, transactional records, and user management events are retained in encrypted storage in accordance with standard data privacy regulations.
+                </p>
             </div>
 
-            <div>
-                <div class="flex items-center justify-between mb-2">
-                    <label class="text-xs font-bold uppercase tracking-wider text-muted-foreground">Divisi yang diizinkan</label>
-                    <span class="text-xs font-medium text-primary hover:underline cursor-pointer">Pilih semua</span>
-                </div>
-                <div class="grid grid-cols-2 gap-2.5 rounded-xl border border-border bg-muted/20 p-3 text-xs">
-                    @foreach (['AdminDigitalPrinting', 'AdminMarketing', 'AdminMediaLuarRuang', 'Direksi', 'IT', 'KabagMediaLuarRuang', 'KabagPrinting', 'Keuangan', 'Marketing', 'Operasional', 'Operator', 'Perizinan', 'Preproduksi', 'Purchasing', 'Warehouse'] as $div)
-                        <label class="flex items-center gap-2 font-medium cursor-pointer">
-                            <input type="checkbox" class="size-4 rounded border-border bg-background text-primary" checked />
-                            <span>{{ $div }}</span>
-                        </label>
-                    @endforeach
-                </div>
+            <div class="rounded-xl border border-border bg-muted/40 p-4 space-y-2">
+                <h4 class="font-semibold text-foreground">4. Acceptable Usage Guidelines</h4>
+                <p class="text-xs text-muted-foreground leading-relaxed">
+                    System APIs and batch processing jobs must not be used to execute automated vulnerability scans or unauthorized bulk exports without prior operational approval.
+                </p>
+            </div>
+
+            <div class="rounded-xl border border-border bg-muted/40 p-4 space-y-2">
+                <h4 class="font-semibold text-foreground">5. Service Availability & Maintenance</h4>
+                <p class="text-xs text-muted-foreground leading-relaxed">
+                    Scheduled system maintenance windows occur on weekends with prior notice. Emergency patches may be applied immediately to ensure system security.
+                </p>
             </div>
         </div>
         <x-slot:footer>
-            <x-ui.button variant="outline" x-on:click="$dispatch('close-modal', 'm-scroll')">Tutup</x-ui.button>
-            <x-ui.button x-on:click="$dispatch('close-modal', 'm-scroll'); window.toast('Menu berhasil disimpan', { variant: 'success' })">Simpan</x-ui.button>
+            <x-ui.button variant="outline" x-on:click="$dispatch('close-modal', 'm-scroll')">Decline</x-ui.button>
+            <x-ui.button x-on:click="$dispatch('close-modal', 'm-scroll'); window.toast('Terms accepted successfully', { variant: 'success' })">Accept & Continue</x-ui.button>
         </x-slot:footer>
     </x-ui.modal>
 
