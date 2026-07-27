@@ -7,7 +7,7 @@
 [![Laravel](https://img.shields.io/badge/Laravel-13.x-FF2D20?style=flat-square)](https://laravel.com)
 [![Livewire](https://img.shields.io/badge/Livewire-4.x-4E5BA6?style=flat-square)](https://livewire.laravel.com)
 
-**The Lightweight, Shadcn-Inspired Admin Panel Starter Kit for Laravel 13 & Livewire 4.**
+**The Lightweight, Themeable Admin Panel Starter Kit for Laravel 13 & Livewire 4.**
 
 AdminKit provides a fast, elegant, and fully themeable admin foundation built natively with **Laravel 13**, **Livewire 4**, **Tailwind CSS v4**, and **Alpine.js**. No React or Vue build step required.
 
@@ -16,7 +16,7 @@ AdminKit provides a fast, elegant, and fully themeable admin foundation built na
 ## 🔥 Why AdminKit?
 
 - ⚡ **Lightweight & Blazing Fast**: Powered natively by Blade, Livewire 4, and Alpine.js. Zero heavy JavaScript framework overhead.
-- 🎨 **Shadcn/UI Inspired**: Beautiful, minimal, accessible design system right out of the box.
+- 🎨 **Modern Design System**: Beautiful, minimal, and accessible UI components right out of the box.
 - 🌓 **Instant Theme Engine**: Light, Dark, and System modes with 7 accent color themes and 5 border radius presets — saved in `localStorage` with **zero FOUC** (flash of unstyled content).
 - 🔄 **Dual Layout & RTL Native**: Switch between **Vertical Sidebar** and **Horizontal Topbar** layouts with built-in LTR & RTL support.
 - ⌨️ **Command Palette (⌘K)**: Built-in keyboard-driven global search palette for quick navigation.
