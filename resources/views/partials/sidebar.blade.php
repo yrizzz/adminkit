@@ -20,7 +20,7 @@
     {{-- Brand --}}
     <div class="sidebar-brand flex h-16 items-center gap-2.5 px-4">
         <a href="{{ route('dashboard') }}" wire:navigate class="flex items-center gap-2.5 overflow-hidden">
-            <span class="grid size-9 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-sidebar-primary to-primary text-white shadow-lg shadow-primary/30">
+            <span class="grid size-9 shrink-0 place-items-center rounded-xl bg-sidebar-primary text-white shadow-lg shadow-sidebar-primary/30">
                 <i data-lucide="gem" class="size-5"></i>
             </span>
             <span class="sidebar-brand-text text-lg font-bold tracking-tight text-sidebar-foreground">{{ $cfg['name'] }}</span>

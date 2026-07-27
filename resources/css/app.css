@@ -641,11 +641,17 @@ header[data-navbar-color='custom_gradient'] {
     }
     /* Top-level active: soft block + accent pill */
     .nav-link.active:not(.nav-sub) {
-        @apply bg-sidebar-accent;
+        background: hsl(var(--sidebar-primary) / 0.2) !important;
+        color: #ffffff !important;
     }
     .nav-link.active:not(.nav-sub)::before {
         content: '';
-        @apply absolute inset-y-1.5 start-0 w-1 rounded-full bg-sidebar-primary;
+        position: absolute;
+        inset-y: 0.375rem;
+        start: 0;
+        width: 0.25rem;
+        border-radius: 9999px;
+        background: hsl(var(--sidebar-primary)) !important;
     }
     .nav-group-label {
         @apply px-3 pb-1.5 pt-4 text-[0.68rem] font-semibold uppercase tracking-wider text-sidebar-muted;
@@ -702,22 +708,26 @@ header[data-navbar-color='custom_gradient'] {
     .nav-sub:hover .nav-node { background: hsl(var(--sidebar-foreground)); }
     .nav-sub:hover::after { background: hsl(var(--sidebar-foreground) / 0.5); }
     .nav-sub.active {
-        background: hsl(var(--sidebar-accent) / 0.55);
-        color: #fff;
+        background: hsl(var(--sidebar-primary) / 0.22) !important;
+        color: #ffffff !important;
     }
     .nav-sub.active .nav-node {
         width: 0.5rem;
         height: 0.5rem;
-        background: #ffffff;
-        box-shadow: 0 0 0 2.5px rgba(255, 255, 255, 0.35), 0 0 8px rgba(255, 255, 255, 0.4);
+        background: hsl(var(--sidebar-primary)) !important;
+        box-shadow: 0 0 0 2.5px hsl(var(--sidebar-primary) / 0.35), 0 0 10px hsl(var(--sidebar-primary) / 0.7) !important;
         transform: scale(1.24);
     }
-    html[data-sidebar-color='light'] .nav-sub.active .nav-node {
-        background: hsl(var(--primary));
-        box-shadow: 0 0 0 2.5px rgba(0, 0, 0, 0.12), 0 0 8px hsl(var(--primary) / 0.3);
+    html[data-sidebar-color='light'] .nav-sub.active {
+        background: hsl(var(--sidebar-primary) / 0.12) !important;
+        color: hsl(var(--sidebar-primary)) !important;
     }
-    /* active branch turns blue: the node, its connector, and the rail above it */
-    .nav-sub.active::after { background: hsl(var(--sidebar-primary)); }
+    html[data-sidebar-color='light'] .nav-sub.active .nav-node {
+        background: hsl(var(--sidebar-primary)) !important;
+        box-shadow: 0 0 0 2.5px rgba(0, 0, 0, 0.1), 0 0 10px hsl(var(--sidebar-primary) / 0.5) !important;
+    }
+    /* active branch turns accent color: the node, its connector, and the rail above it */
+    .nav-sub.active::after { background: hsl(var(--sidebar-primary)) !important; }
     .nav-sub::before {
         content: '';
         position: absolute;
@@ -730,7 +740,7 @@ header[data-navbar-color='custom_gradient'] {
     }
     .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before,
     .nav-sub.active::before {
-        background: hsl(var(--sidebar-primary) / 0.9);
+        background: hsl(var(--sidebar-primary) / 0.9) !important;
     }
     /* the active item ends the blue trail exactly at its node (dot) */
     .nav-sub.active::before {
