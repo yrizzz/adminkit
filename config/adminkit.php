@@ -170,7 +170,7 @@ return [
                     'icon'  => 'layout-grid',
                     'children' => [
                         ['label' => 'Calendar',  'href' => '#'],
-                        ['label' => 'Kanban',    'href' => '#'],
+                        ['label' => 'Kanban',    'route' => 'apps.kanban'],
                         ['label' => 'Chat',      'href' => '#'],
                         ['label' => 'Contacts',  'href' => '#'],
                         ['label' => 'File Manager', 'href' => '#'],

@@ -9,6 +9,7 @@ use App\Livewire\DashboardView;
 use App\Livewire\Forms;
 use App\Livewire\GenericPage;
 use App\Livewire\Icons;
+use App\Livewire\Kanban;
 use App\Livewire\Settings;
 use App\Livewire\Tables;
 use App\Livewire\UiElements;
@@ -52,6 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/charts', Charts::class)->name('charts');
     Route::get('/forms', Forms::class)->name('forms');
     Route::get('/settings', Settings::class)->name('settings');
+    Route::get('/apps/kanban', Kanban::class)->name('apps.kanban');
 
     Route::get('/page/{path}', GenericPage::class)->name('page');
 });
