@@ -19,7 +19,7 @@
         x-transition:leave="transition ease-in duration-100"
         x-transition:leave-start="opacity-100 scale-100"
         x-transition:leave-end="opacity-0 scale-95"
-        class="absolute z-50 mt-2 {{ $width }} {{ $align === 'end' ? 'end-0 origin-top-right' : 'start-0 origin-top-left' }} rounded-xl border border-border bg-popover p-1.5 text-popover-foreground shadow-lg shadow-black/5"
+        class="absolute z-50 mt-2 {{ $width }} max-w-[calc(100vw-1.5rem)] {{ $align === 'end' ? 'end-0 origin-top-right max-sm:fixed max-sm:start-3 max-sm:end-3 max-sm:top-16 max-sm:w-auto max-sm:origin-top' : 'start-0 origin-top-left' }} rounded-xl border border-border bg-popover p-1.5 text-popover-foreground shadow-2xl"
     >
         {{ $slot }}
     </div>

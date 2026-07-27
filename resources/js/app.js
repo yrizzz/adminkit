@@ -48,6 +48,10 @@ const registerUIStore = () => {
         compact: LS.get('ak_compact', false),
         sidebarColor: LS.get('ak_sb_color', 'dark'),
         navbarColor: LS.get('ak_nb_color', 'default'),
+        sidebarGradientFrom: LS.get('ak_sb_grad_from', '#1e1b4b'),
+        sidebarGradientTo: LS.get('ak_sb_grad_to', '#0f172a'),
+        navbarGradientFrom: LS.get('ak_nb_grad_from', '#1e1b4b'),
+        navbarGradientTo: LS.get('ak_nb_grad_to', '#0f172a'),
 
         // transient
         sidebarMobileOpen: false,
@@ -77,6 +81,11 @@ const registerUIStore = () => {
             html.classList.toggle('sidebar-collapsed', this.sidebarCollapsed);
             html.classList.toggle('is-compact', this.compact);
 
+            html.style.setProperty('--custom-sb-grad-from', this.sidebarGradientFrom);
+            html.style.setProperty('--custom-sb-grad-to', this.sidebarGradientTo);
+            html.style.setProperty('--custom-nb-grad-from', this.navbarGradientFrom);
+            html.style.setProperty('--custom-nb-grad-to', this.navbarGradientTo);
+
             const aside = document.querySelector('aside.main-sidebar');
             if (aside) aside.setAttribute('data-sidebar-color', this.sidebarColor);
             const header = document.querySelector('header');
@@ -93,6 +102,20 @@ const registerUIStore = () => {
         setCompact(v) { this.compact = v; LS.set('ak_compact', v); this.apply(); },
         setSidebarColor(v) { this.sidebarColor = v; LS.set('ak_sb_color', v); this.apply(); },
         setNavbarColor(v) { this.navbarColor = v; LS.set('ak_nb_color', v); this.apply(); },
+        setSidebarGradient(from, to) {
+            if (from) { this.sidebarGradientFrom = from; LS.set('ak_sb_grad_from', from); }
+            if (to) { this.sidebarGradientTo = to; LS.set('ak_sb_grad_to', to); }
+            this.sidebarColor = 'custom_gradient';
+            LS.set('ak_sb_color', 'custom_gradient');
+            this.apply();
+        },
+        setNavbarGradient(from, to) {
+            if (from) { this.navbarGradientFrom = from; LS.set('ak_nb_grad_from', from); }
+            if (to) { this.navbarGradientTo = to; LS.set('ak_nb_grad_to', to); }
+            this.navbarColor = 'custom_gradient';
+            LS.set('ak_nb_color', 'custom_gradient');
+            this.apply();
+        },
         toggleSidebar() { this.sidebarCollapsed = !this.sidebarCollapsed; LS.set('ak_sb_collapsed', this.sidebarCollapsed); this.apply(); },
         setNavbarFixed(v) { this.navbarFixed = v; LS.set('ak_navbar_fixed', v); },
         openMobileSidebar() { this.sidebarMobileOpen = true; },
@@ -178,6 +201,10 @@ document.addEventListener('livewire:navigating', () => {
         const ui = Alpine.store('ui');
         document.documentElement.dataset.sidebarColor = ui.sidebarColor;
         document.documentElement.dataset.navbarColor = ui.navbarColor;
+        document.documentElement.style.setProperty('--custom-sb-grad-from', ui.sidebarGradientFrom);
+        document.documentElement.style.setProperty('--custom-sb-grad-to', ui.sidebarGradientTo);
+        document.documentElement.style.setProperty('--custom-nb-grad-from', ui.navbarGradientFrom);
+        document.documentElement.style.setProperty('--custom-nb-grad-to', ui.navbarGradientTo);
     }
 });
 

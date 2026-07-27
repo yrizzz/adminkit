@@ -23,6 +23,10 @@
             d.dataset.layout = get('ak_layout', 'vertical');
             d.dataset.sidebarColor = get('ak_sb_color', 'dark');
             d.dataset.navbarColor = get('ak_nb_color', 'default');
+            d.style.setProperty('--custom-sb-grad-from', get('ak_sb_grad_from', '#1e1b4b'));
+            d.style.setProperty('--custom-sb-grad-to', get('ak_sb_grad_to', '#0f172a'));
+            d.style.setProperty('--custom-nb-grad-from', get('ak_nb_grad_from', '#1e1b4b'));
+            d.style.setProperty('--custom-nb-grad-to', get('ak_nb_grad_to', '#0f172a'));
             d.classList.toggle('sidebar-collapsed', get('ak_sb_collapsed', false));
             if (get('ak_compact', false)) d.classList.add('is-compact');
         } catch (e) {}

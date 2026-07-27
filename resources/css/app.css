@@ -237,6 +237,21 @@ html[data-sidebar-color='gradient3'] aside.main-sidebar .nav-link {
     color: #ffffff !important;
 }
 
+/* Sidebar Custom Gradient Picker */
+html[data-sidebar-color='custom_gradient'] aside.main-sidebar,
+aside.main-sidebar[data-sidebar-color='custom_gradient'] {
+    background: linear-gradient(180deg, var(--custom-sb-grad-from, #1e1b4b) 0%, var(--custom-sb-grad-to, #0f172a) 100%) !important;
+    color: #ffffff !important;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-muted: 0 0% 85%;
+    --sidebar-accent: 0 0% 100% / 0.15;
+}
+html[data-sidebar-color='custom_gradient'] aside.main-sidebar .sidebar-brand-text,
+html[data-sidebar-color='custom_gradient'] aside.main-sidebar .sidebar-usercard-text p,
+html[data-sidebar-color='custom_gradient'] aside.main-sidebar .nav-link {
+    color: #ffffff !important;
+}
+
 /* Sidebar divider & search border overrides */
 aside.main-sidebar .sidebar-search input {
     border-color: rgba(255, 255, 255, 0.15) !important;
@@ -373,9 +388,17 @@ header[data-navbar-color='image2'] {
     color: #ffffff !important;
 }
 
+/* Header Custom Gradient */
+html[data-navbar-color='custom_gradient'] header,
+header[data-navbar-color='custom_gradient'] {
+    background: linear-gradient(90deg, var(--custom-nb-grad-from, #1e1b4b) 0%, var(--custom-nb-grad-to, #0f172a) 100%) !important;
+    color: #ffffff !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
 /* High Contrast Text & Hover States for Colored/Dark/Gradient/Image Headers */
-:is(html[data-navbar-color='primary'], html[data-navbar-color='dark'], html[data-navbar-color='gradient'], html[data-navbar-color='gradient1'], html[data-navbar-color='gradient2'], html[data-navbar-color='gradient3'], html[data-navbar-color='image1'], html[data-navbar-color='image2']) header,
-:is(header[data-navbar-color='primary'], header[data-navbar-color='dark'], header[data-navbar-color='gradient'], header[data-navbar-color='gradient1'], header[data-navbar-color='gradient2'], header[data-navbar-color='gradient3'], header[data-navbar-color='image1'], header[data-navbar-color='image2']) {
+:is(html[data-navbar-color='primary'], html[data-navbar-color='dark'], html[data-navbar-color='gradient'], html[data-navbar-color='gradient1'], html[data-navbar-color='gradient2'], html[data-navbar-color='gradient3'], html[data-navbar-color='custom_gradient'], html[data-navbar-color='image1'], html[data-navbar-color='image2']) header,
+:is(header[data-navbar-color='primary'], header[data-navbar-color='dark'], header[data-navbar-color='gradient'], header[data-navbar-color='gradient1'], header[data-navbar-color='gradient2'], header[data-navbar-color='gradient3'], header[data-navbar-color='custom_gradient'], header[data-navbar-color='image1'], header[data-navbar-color='image2']) {
     color: #ffffff !important;
 }
 

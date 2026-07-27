@@ -86,6 +86,29 @@
                         </button>
                     @endforeach
                 </div>
+                {{-- Custom Sidebar Gradient Picker --}}
+                <div class="mt-2.5 rounded-xl border border-border bg-muted/20 p-2.5">
+                    <div class="flex items-center justify-between mb-1.5">
+                        <span class="text-[0.7rem] font-semibold text-muted-foreground uppercase tracking-wide">Custom Sidebar Gradient</span>
+                        <button type="button"
+                                @click="$store.ui.setSidebarGradient($store.ui.sidebarGradientFrom, $store.ui.sidebarGradientTo)"
+                                :class="$store.ui.sidebarColor === 'custom_gradient' ? 'text-primary font-bold' : 'text-muted-foreground'"
+                                class="text-[0.7rem] hover:underline">
+                            Apply
+                        </button>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <label class="flex flex-1 items-center gap-1.5 rounded-lg border border-border bg-background p-1 cursor-pointer">
+                            <input type="color" x-model="$store.ui.sidebarGradientFrom" @input="$store.ui.setSidebarGradient($store.ui.sidebarGradientFrom, $store.ui.sidebarGradientTo)" class="size-5 cursor-pointer rounded border-0 bg-transparent p-0">
+                            <span class="text-[0.65rem] font-mono uppercase text-muted-foreground truncate" x-text="$store.ui.sidebarGradientFrom"></span>
+                        </label>
+                        <i data-lucide="arrow-right" class="size-3 text-muted-foreground shrink-0"></i>
+                        <label class="flex flex-1 items-center gap-1.5 rounded-lg border border-border bg-background p-1 cursor-pointer">
+                            <input type="color" x-model="$store.ui.sidebarGradientTo" @input="$store.ui.setSidebarGradient($store.ui.sidebarGradientFrom, $store.ui.sidebarGradientTo)" class="size-5 cursor-pointer rounded border-0 bg-transparent p-0">
+                            <span class="text-[0.65rem] font-mono uppercase text-muted-foreground truncate" x-text="$store.ui.sidebarGradientTo"></span>
+                        </label>
+                    </div>
+                </div>
             </section>
 
             {{-- Header / Navbar Theme & Background Images --}}
@@ -141,6 +164,29 @@
                         <i data-lucide="image" class="size-3 shrink-0"></i>
                         <span>Img 2</span>
                     </button>
+                </div>
+                {{-- Custom Header Gradient Picker --}}
+                <div class="mt-2.5 rounded-xl border border-border bg-muted/20 p-2.5">
+                    <div class="flex items-center justify-between mb-1.5">
+                        <span class="text-[0.7rem] font-semibold text-muted-foreground uppercase tracking-wide">Custom Header Gradient</span>
+                        <button type="button"
+                                @click="$store.ui.setNavbarGradient($store.ui.navbarGradientFrom, $store.ui.navbarGradientTo)"
+                                :class="$store.ui.navbarColor === 'custom_gradient' ? 'text-primary font-bold' : 'text-muted-foreground'"
+                                class="text-[0.7rem] hover:underline">
+                            Apply
+                        </button>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <label class="flex flex-1 items-center gap-1.5 rounded-lg border border-border bg-background p-1 cursor-pointer">
+                            <input type="color" x-model="$store.ui.navbarGradientFrom" @input="$store.ui.setNavbarGradient($store.ui.navbarGradientFrom, $store.ui.navbarGradientTo)" class="size-5 cursor-pointer rounded border-0 bg-transparent p-0">
+                            <span class="text-[0.65rem] font-mono uppercase text-muted-foreground truncate" x-text="$store.ui.navbarGradientFrom"></span>
+                        </label>
+                        <i data-lucide="arrow-right" class="size-3 text-muted-foreground shrink-0"></i>
+                        <label class="flex flex-1 items-center gap-1.5 rounded-lg border border-border bg-background p-1 cursor-pointer">
+                            <input type="color" x-model="$store.ui.navbarGradientTo" @input="$store.ui.setNavbarGradient($store.ui.navbarGradientFrom, $store.ui.navbarGradientTo)" class="size-5 cursor-pointer rounded border-0 bg-transparent p-0">
+                            <span class="text-[0.65rem] font-mono uppercase text-muted-foreground truncate" x-text="$store.ui.navbarGradientTo"></span>
+                        </label>
+                    </div>
                 </div>
             </section>
 
