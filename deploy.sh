@@ -9,7 +9,7 @@
 # bringing it back up (even if a step fails).
 #
 # First-time setup on the VPS (do this ONCE before the first deploy):
-#   git clone https://github.com/rhpfullstack/adminpanel.git
+#   git clone https://github.com/yrizzz/adminkit.git
 #   cd adminpanel
 #   cp .env.example .env         # then edit DB creds, APP_URL, etc.
 #   composer install

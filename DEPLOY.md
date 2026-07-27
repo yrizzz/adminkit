@@ -16,7 +16,7 @@ maintenance mode while it works.
 ### First-time server setup (once)
 
 ```bash
-git clone https://github.com/rhpfullstack/adminpanel.git
+git clone https://github.com/yrizzz/adminkit.git
 cd adminpanel
 cp .env.example .env          # edit DB, APP_URL, APP_ENV=production, APP_DEBUG=false
 composer install
