@@ -1,12 +1,25 @@
 <div>
-    <x-page-header :title="$pageTitle" subtitle="Advanced Ui · dialogs, sizes, confirmations, sheets & close behaviors">
+    <x-page-header :title="$pageTitle" subtitle="Advanced Ui · dialogs, positions, sizes, confirmations, sheets & close behaviors">
         <x-slot:actions>
-            <x-ui.badge variant="success" dot>11 variants</x-ui.badge>
+            <x-ui.badge variant="success" dot>18 variants</x-ui.badge>
             <x-ui.button variant="outline" icon="arrow-left" class="[&>svg]:rtl-flip" :href="route('dashboard')">Dashboard</x-ui.button>
         </x-slot:actions>
     </x-page-header>
 
-    <x-demo-section title="Sizes" desc="From compact confirmations to wide content dialogs — every modal is centered, focus-trapped and closes on backdrop or Esc." />
+    <x-demo-section title="Positions & Placements" desc="Choose modal alignment — Top, Center, Bottom, Corners, or Full-Height Side Drawers using the position prop." />
+    <x-ui.card>
+        <div class="flex flex-wrap items-center gap-3">
+            <x-ui.button variant="outline" icon="arrow-up" x-on:click="$dispatch('open-modal', 'm-pos-top')">Top Center</x-ui.button>
+            <x-ui.button variant="outline" icon="arrow-up-right" x-on:click="$dispatch('open-modal', 'm-pos-top-right')">Top Right</x-ui.button>
+            <x-ui.button variant="outline" icon="crosshair" x-on:click="$dispatch('open-modal', 'm-pos-center')">Center (Default)</x-ui.button>
+            <x-ui.button variant="outline" icon="arrow-down" x-on:click="$dispatch('open-modal', 'm-pos-bottom')">Bottom Center</x-ui.button>
+            <x-ui.button variant="outline" icon="arrow-down-right" x-on:click="$dispatch('open-modal', 'm-pos-bottom-right')">Bottom Right</x-ui.button>
+            <x-ui.button variant="outline" icon="panel-left" x-on:click="$dispatch('open-modal', 'm-pos-drawer-left')">Drawer Left</x-ui.button>
+            <x-ui.button variant="outline" icon="panel-right" x-on:click="$dispatch('open-modal', 'm-pos-drawer-right')">Drawer Right</x-ui.button>
+        </div>
+    </x-ui.card>
+
+    <x-demo-section title="Sizes" desc="From compact confirmations to wide content dialogs — focus-trapped and closes on backdrop or Esc." />
     <x-ui.card>
         <div class="flex flex-wrap gap-3">
             <x-ui.button variant="outline" icon="minimize-2" x-on:click="$dispatch('open-modal', 'm-sm')">Small</x-ui.button>
@@ -36,6 +49,52 @@
             </button>
         @endforeach
     </div>
+
+    {{-- ===== Position Modals ===== --}}
+    <x-ui.modal name="m-pos-top" title="Top Center Modal" position="top" maxWidth="max-w-md">
+        <p class="text-sm text-muted-foreground">Aligned at the top center of the screen with a clean slide-down animation.</p>
+        <x-slot:footer><x-ui.button x-on:click="$dispatch('close-modal', 'm-pos-top')">Got it</x-ui.button></x-slot:footer>
+    </x-ui.modal>
+
+    <x-ui.modal name="m-pos-top-right" title="Top Right Modal" position="top-right" maxWidth="max-w-sm">
+        <p class="text-sm text-muted-foreground">Pinned to the top right corner. Great for notifications or quick actions.</p>
+        <x-slot:footer><x-ui.button x-on:click="$dispatch('close-modal', 'm-pos-top-right')">Close</x-ui.button></x-slot:footer>
+    </x-ui.modal>
+
+    <x-ui.modal name="m-pos-center" title="Center Modal" position="center" maxWidth="max-w-md">
+        <p class="text-sm text-muted-foreground">Standard centered modal dialog with smooth backdrop blur.</p>
+        <x-slot:footer><x-ui.button x-on:click="$dispatch('close-modal', 'm-pos-center')">Close</x-ui.button></x-slot:footer>
+    </x-ui.modal>
+
+    <x-ui.modal name="m-pos-bottom" title="Bottom Center Modal" position="bottom" maxWidth="max-w-md">
+        <p class="text-sm text-muted-foreground">Anchored at the bottom center of the screen.</p>
+        <x-slot:footer><x-ui.button x-on:click="$dispatch('close-modal', 'm-pos-bottom')">Done</x-ui.button></x-slot:footer>
+    </x-ui.modal>
+
+    <x-ui.modal name="m-pos-bottom-right" title="Bottom Right Modal" position="bottom-right" maxWidth="max-w-sm">
+        <p class="text-sm text-muted-foreground">Positioned at the bottom right corner of the viewport.</p>
+        <x-slot:footer><x-ui.button x-on:click="$dispatch('close-modal', 'm-pos-bottom-right')">Close</x-ui.button></x-slot:footer>
+    </x-ui.modal>
+
+    <x-ui.modal name="m-pos-drawer-left" title="Left Side Drawer" position="drawer-left" maxWidth="max-w-sm">
+        <div class="space-y-3">
+            <p class="text-sm text-muted-foreground">Full height drawer panel sliding smoothly from the left edge of the screen.</p>
+            <div class="rounded-xl border border-border bg-muted/40 p-3 text-xs">
+                Ideal for navigation menus, filter sidebars, or detail inspectors.
+            </div>
+        </div>
+        <x-slot:footer><x-ui.button variant="outline" class="w-full" x-on:click="$dispatch('close-modal', 'm-pos-drawer-left')">Close drawer</x-ui.button></x-slot:footer>
+    </x-ui.modal>
+
+    <x-ui.modal name="m-pos-drawer-right" title="Right Side Drawer" position="drawer-right" maxWidth="max-w-sm">
+        <div class="space-y-3">
+            <p class="text-sm text-muted-foreground">Full height drawer panel sliding smoothly from the right edge of the screen.</p>
+            <div class="rounded-xl border border-border bg-muted/40 p-3 text-xs">
+                Perfect for detail views, filter drawers, cart slide-overs, or settings panels.
+            </div>
+        </div>
+        <x-slot:footer><x-ui.button class="w-full" x-on:click="$dispatch('close-modal', 'm-pos-drawer-right')">Close drawer</x-ui.button></x-slot:footer>
+    </x-ui.modal>
 
     {{-- ===== Size modals ===== --}}
     <x-ui.modal name="m-sm" title="Small modal" maxWidth="max-w-sm">
