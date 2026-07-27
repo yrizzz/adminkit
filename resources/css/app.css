@@ -315,10 +315,17 @@ html[data-sidebar-color='image3'] aside.main-sidebar .nav-link {
    HEADER / NAVBAR COLOR & BACKGROUND IMAGE OVERRIDES
    ============================================================ */
 
-html[data-navbar-color='default'] header {
-    background-color: hsl(var(--background) / 0.8);
+header {
+    transition-property: transform, opacity;
 }
-html[data-navbar-color='light'] header {
+
+html[data-navbar-color='default'] header,
+header[data-navbar-color='default'] {
+    background-color: hsl(var(--background) / 0.85);
+}
+
+html[data-navbar-color='light'] header,
+header[data-navbar-color='light'] {
     background-color: #ffffff !important;
     background-image: none !important;
     color: #0f172a !important;
