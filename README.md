@@ -12,7 +12,12 @@ Admin panel starter kit berbasis Laravel 13 + Livewire 4 + Tailwind CSS v4 + Alp
 
 ## Cara Penggunaan
 
-1. Clone repository:
+1. Menggunakan Composer (Rekomendasi):
+   ```bash
+   composer create-project yrizzz/adminkit nama-project
+   ```
+
+2. Atau clone manual dari repository:
    ```bash
    git clone https://github.com/yrizzz/adminkit.git
    cd adminkit
