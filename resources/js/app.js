@@ -120,7 +120,9 @@ const registerUIStore = () => {
         navbarFixed: LS.get('ak_navbar_fixed', true),
         compact: LS.get('ak_compact', false),
         sidebarColor: LS.get('ak_sb_color', 'dark'),
+        sidebarStyle: LS.get('ak_sb_style', 'tree'),
         navbarColor: LS.get('ak_nb_color', 'default'),
+
         sidebarGradientFrom: LS.get('ak_sb_grad_from', '#1e1b4b'),
         sidebarGradientTo: LS.get('ak_sb_grad_to', '#0f172a'),
         navbarGradientFrom: LS.get('ak_nb_grad_from', '#1e1b4b'),
@@ -147,9 +149,26 @@ const registerUIStore = () => {
             html.classList.toggle('dark', this.isDark);
             html.setAttribute('dir', this.direction);
             html.dataset.accent = this.accent;
+            const accMap = {
+                blue: '221 83% 53%',
+                violet: '262 83% 58%',
+                green: '142 71% 45%',
+                rose: '347 77% 50%',
+                red: '347 77% 50%',
+                orange: '25 95% 53%',
+                amber: '38 92% 50%',
+                teal: '173 80% 40%'
+            };
+            if (accMap[this.accent]) {
+                html.style.setProperty('--primary', accMap[this.accent]);
+                html.style.setProperty('--ring', accMap[this.accent]);
+                html.style.setProperty('--sidebar-primary', accMap[this.accent]);
+            }
             html.dataset.radius = this.radius;
+
             html.dataset.layout = this.layout;
             html.dataset.sidebarColor = this.sidebarColor;
+            html.dataset.sidebarStyle = this.sidebarStyle;
             html.dataset.navbarColor = this.navbarColor;
             html.classList.toggle('sidebar-collapsed', this.sidebarCollapsed);
             html.classList.toggle('is-compact', this.compact);
@@ -167,6 +186,9 @@ const registerUIStore = () => {
             const header = document.querySelector('header');
             if (header) header.setAttribute('data-navbar-color', this.navbarColor);
         },
+
+        setSidebarStyle(v) { this.sidebarStyle = v; LS.set('ak_sb_style', v); this.apply(); },
+
 
         setTheme(v) { this.theme = v; LS.set('ak_theme', v); this.apply(); },
         toggleTheme(e) {

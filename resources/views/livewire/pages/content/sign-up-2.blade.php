@@ -52,9 +52,10 @@
             </div>
 
             <div class="grid grid-cols-2 gap-3">
-                <x-ui.button variant="outline" type="button" @click="window.toast('Social login is a demo', {variant:'info'})"><i data-lucide="chrome"></i> Google</x-ui.button>
-                <x-ui.button variant="outline" type="button" @click="window.toast('Social login is a demo', {variant:'info'})"><i data-lucide="github"></i> GitHub</x-ui.button>
+                <x-ui.button variant="outline" type="button" @click="window.toast('Social login is a demo', {variant:'info'})"><x-icons.google class="size-4" /> Google</x-ui.button>
+                <x-ui.button variant="outline" type="button" @click="window.toast('Social login is a demo', {variant:'info'})"><x-icons.github class="size-4" /> GitHub</x-ui.button>
             </div>
+
 
             <p class="mt-8 text-center text-sm text-muted-foreground">
                 Already have an account?

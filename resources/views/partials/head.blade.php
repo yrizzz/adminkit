@@ -26,11 +26,32 @@
             var dark  = theme === 'dark' || (theme === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
             d.classList.toggle('dark', dark);
             d.setAttribute('dir', get('ak_dir', 'ltr'));
-            d.dataset.accent       = get('ak_accent',    'blue');
+
+            var accent = get('ak_accent', 'blue');
+            d.dataset.accent = accent;
+
+            var accMap = {
+                blue: '221 83% 53%',
+                violet: '262 83% 58%',
+                green: '142 71% 45%',
+                rose: '347 77% 50%',
+                red: '347 77% 50%',
+                orange: '25 95% 53%',
+                amber: '38 92% 50%',
+                teal: '173 80% 40%'
+            };
+            if (accMap[accent]) {
+                d.style.setProperty('--primary', accMap[accent]);
+                d.style.setProperty('--ring', accMap[accent]);
+                d.style.setProperty('--sidebar-primary', accMap[accent]);
+            }
+
             d.dataset.radius       = get('ak_radius',    'lg');
             d.dataset.layout       = get('ak_layout',    'vertical');
             d.dataset.sidebarColor = get('ak_sb_color', 'dark');
+            d.dataset.sidebarStyle = get('ak_sb_style', 'tree');
             d.dataset.navbarColor  = get('ak_nb_color', 'default');
+
             d.style.setProperty('--custom-sb-grad-from', get('ak_sb_grad_from', '#1e1b4b'));
             d.style.setProperty('--custom-sb-grad-to',   get('ak_sb_grad_to',   '#0f172a'));
             d.style.setProperty('--custom-nb-grad-from', get('ak_nb_grad_from', '#1e1b4b'));
@@ -40,6 +61,7 @@
         } catch (e) {}
     })();
 </script>
+
 
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 @livewireStyles

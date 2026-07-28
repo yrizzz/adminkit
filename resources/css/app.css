@@ -901,6 +901,32 @@ header[data-navbar-color='custom_gradient'] {
         inset-block-end: 50%;
     }
 
+    /* ── Submenu Modes (Tree Line vs Clean Dot vs Pill Highlight) ── */
+
+    /* 1) Clean Dot Mode: Hide tree line rails & horizontal branch connectors */
+    html[data-sidebar-style='dots'] .nav-sublist::before,
+    html[data-sidebar-style='dots'] .nav-sub::after,
+    html[data-sidebar-style='dots'] .nav-sub::before {
+        display: none !important;
+    }
+
+    /* 2) Pill Mode: Hide tree lines & style active sub-item as a solid pill */
+    html[data-sidebar-style='pill'] .nav-sublist::before,
+    html[data-sidebar-style='pill'] .nav-sub::after,
+    html[data-sidebar-style='pill'] .nav-sub::before {
+        display: none !important;
+    }
+    html[data-sidebar-style='pill'] .nav-sub.active {
+        background: hsl(var(--sidebar-primary)) !important;
+        color: #ffffff !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
+    }
+    html[data-sidebar-style='pill'] .nav-sub.active .nav-node {
+        background: #ffffff !important;
+        box-shadow: none !important;
+    }
+
+
 
     /* Page-enter animation: fade + zoom "pop" from center (no directional slide) */
     .animate-in-up {

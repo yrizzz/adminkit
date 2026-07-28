@@ -111,6 +111,26 @@
                 </div>
             </section>
 
+            {{-- Submenu Mode (Tree Line vs Clean Dot vs Pill Highlight) --}}
+            <section>
+                <h3 class="mb-2.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Submenu Mode</h3>
+                <div class="grid grid-cols-3 gap-2">
+                    @foreach ([
+                        'tree' => ['lbl' => 'Tree Line', 'ico' => 'git-fork'],
+                        'dots' => ['lbl' => 'Clean Dot', 'ico' => 'disc'],
+                        'pill' => ['lbl' => 'Pill Mode', 'ico' => 'layout-list'],
+                    ] as $st => $cfg)
+                        <button type="button" @click="$store.ui.setSidebarStyle ? $store.ui.setSidebarStyle('{{ $st }}') : ($store.ui.sidebarStyle = '{{ $st }}', $store.ui.apply && $store.ui.apply())"
+                                :class="$store.ui.sidebarStyle === '{{ $st }}' ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
+                                class="flex flex-col items-center justify-center gap-1.5 rounded-xl border p-2.5 text-center text-xs transition-all">
+                            <i data-lucide="{{ $cfg['ico'] }}" class="size-4 shrink-0"></i>
+                            <span>{{ $cfg['lbl'] }}</span>
+                        </button>
+                    @endforeach
+                </div>
+            </section>
+
+
             {{-- Header / Navbar Theme & Background Images --}}
             <section>
                 <h3 class="mb-2.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Header / Navbar Style</h3>

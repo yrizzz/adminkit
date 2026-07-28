@@ -28,10 +28,10 @@
                     </div>
 
                     <div class="grid grid-cols-2 gap-3">
-                        @foreach ([['Google','chrome'],['GitHub','github']] as [$name,$ic])
-                            <button type="button" class="inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-input text-sm font-medium transition-colors hover:bg-accent"><i data-lucide="{{ $ic }}" class="size-4"></i>{{ $name }}</button>
-                        @endforeach
+                        <x-ui.button variant="outline" type="button" @click="window.toast('Social login is a demo', {variant:'info'})"><x-icons.google class="size-4" /> Google</x-ui.button>
+                        <x-ui.button variant="outline" type="button" @click="window.toast('Social login is a demo', {variant:'info'})"><x-icons.github class="size-4" /> GitHub</x-ui.button>
                     </div>
+
                     <div class="my-5 flex items-center gap-3"><div class="h-px flex-1 bg-border"></div><span class="text-xs text-muted-foreground">or sign up with email</span><div class="h-px flex-1 bg-border"></div></div>
 
                     <form @submit.prevent="window.toast('Account created — welcome aboard!', { variant: 'success' })" class="space-y-4">

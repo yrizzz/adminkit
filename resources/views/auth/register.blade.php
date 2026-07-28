@@ -37,8 +37,18 @@
         </x-ui.button>
     </form>
 
+    <div class="my-6 flex items-center gap-3 text-xs text-muted-foreground">
+        <span class="h-px flex-1 bg-border"></span>OR REGISTER WITH<span class="h-px flex-1 bg-border"></span>
+    </div>
+
+    <div class="grid grid-cols-2 gap-3">
+        <x-ui.button variant="outline" type="button" @click="window.toast('Social login is a demo', {variant:'info'})"><x-icons.google class="size-4" /> Google</x-ui.button>
+        <x-ui.button variant="outline" type="button" @click="window.toast('Social login is a demo', {variant:'info'})"><x-icons.github class="size-4" /> GitHub</x-ui.button>
+    </div>
+
     <p class="mt-8 text-center text-sm text-muted-foreground">
         Already have an account?
         <a href="{{ route('login') }}" wire:navigate class="font-semibold text-primary hover:underline">Sign in</a>
     </p>
 </div>
+
