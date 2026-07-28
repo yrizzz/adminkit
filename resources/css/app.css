@@ -803,7 +803,8 @@ header[data-navbar-color='custom_gradient'] {
         background: hsl(var(--sidebar-primary) / 0.18) !important;
         color: hsl(var(--primary)) !important;
     }
-    .nav-sub.active .nav-node {
+    .nav-sub.active .nav-node,
+    .nav-sub.parent-active .nav-node {
         width: 0.38rem;
         height: 0.38rem;
         background: hsl(var(--sidebar-primary)) !important;
@@ -822,6 +823,7 @@ header[data-navbar-color='custom_gradient'] {
     .nav-sub.parent-active::after {
         background: hsl(var(--sidebar-primary)) !important;
     }
+
     /* Colored sidebars (bg = primary color): use white so it's visible */
     html[data-sidebar-color='primary'] .nav-sub.active,
     html[data-sidebar-color^='gradient'] .nav-sub.active,
