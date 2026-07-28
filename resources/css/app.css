@@ -735,12 +735,13 @@ header[data-navbar-color='custom_gradient'] {
         content: '';
         position: absolute;
         inset-inline-start: 0.55rem;
-        inset-block-start: -0.75rem;
+        inset-block-start: -1.35rem;
         inset-block-end: 0.85rem;
         width: 2px;
         border-radius: 9999px;
         background: rgba(255, 255, 255, 0.2);
     }
+
     /* Highlight only the immediate sublist rail of a nested active parent (e.g. Ecommerce) */
     li:has(> .nav-sub.parent-active) > .nav-sublist::before {
         background: hsl(var(--sidebar-primary)) !important;
