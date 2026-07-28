@@ -16,6 +16,35 @@ Chart.defaults.scales.linear.grace = '8%';
    and last week on a line chart) aren't clipped by the canvas bounds. */
 Chart.defaults.layout.padding = { top: 6, right: 14, bottom: 0, left: 6 };
 
+/* ---------------------------------------------------------------
+ * Apply Chart.js global defaults based on current dark/light mode.
+ * Called on boot and whenever the theme changes.
+ * ------------------------------------------------------------- */
+const applyChartDefaults = () => {
+    const dark = document.documentElement.classList.contains('dark');
+    const gridColor   = dark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.07)';
+    const tickColor   = dark ? 'rgba(255,255,255,0.60)' : 'rgba(0,0,0,0.55)';
+    const borderColor = dark ? 'rgba(255,255,255,0.10)' : 'rgba(0,0,0,0.10)';
+
+    /* Scales */
+    Chart.defaults.scale.grid.color        = gridColor;
+    Chart.defaults.scale.grid.borderColor  = borderColor;
+    Chart.defaults.scale.ticks.color       = tickColor;
+
+    /* Plugins */
+    Chart.defaults.plugins.legend.labels.color = tickColor;
+    Chart.defaults.plugins.tooltip.backgroundColor = dark ? 'rgba(15,23,42,0.92)' : 'rgba(255,255,255,0.96)';
+    Chart.defaults.plugins.tooltip.titleColor      = dark ? 'rgba(255,255,255,0.90)' : 'rgba(0,0,0,0.85)';
+    Chart.defaults.plugins.tooltip.bodyColor       = dark ? 'rgba(255,255,255,0.65)' : 'rgba(0,0,0,0.60)';
+    Chart.defaults.plugins.tooltip.borderColor     = dark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.10)';
+    Chart.defaults.plugins.tooltip.borderWidth     = 1;
+    Chart.defaults.plugins.tooltip.padding         = 10;
+    Chart.defaults.plugins.tooltip.cornerRadius    = 10;
+    Chart.defaults.plugins.tooltip.boxPadding      = 4;
+};
+window.applyChartDefaults = applyChartDefaults;
+applyChartDefaults();
+
 const renderIcons = () => createIcons({ icons, attrs: { 'stroke-width': 2 } });
 window.renderIcons = renderIcons;
 
@@ -85,6 +114,9 @@ const registerUIStore = () => {
             html.style.setProperty('--custom-sb-grad-to', this.sidebarGradientTo);
             html.style.setProperty('--custom-nb-grad-from', this.navbarGradientFrom);
             html.style.setProperty('--custom-nb-grad-to', this.navbarGradientTo);
+
+            /* Keep Chart.js global defaults in sync with dark/light mode */
+            if (window.applyChartDefaults) window.applyChartDefaults();
 
             const aside = document.querySelector('aside.main-sidebar');
             if (aside) aside.setAttribute('data-sidebar-color', this.sidebarColor);
@@ -198,13 +230,14 @@ window.toast = (message, opts = {}) => {
  * Chart theming helper used by dashboard/chart pages.
  * ------------------------------------------------------------- */
 window.akChartTheme = () => {
-    const css = getComputedStyle(document.documentElement);
-    const hsl = (name) => `hsl(${css.getPropertyValue(name).trim()})`;
+    const css  = getComputedStyle(document.documentElement);
+    const hsl  = (name) => `hsl(${css.getPropertyValue(name).trim()})`;
     const dark = document.documentElement.classList.contains('dark');
     return {
-        primary: hsl('--primary'),
-        grid: dark ? 'rgba(255,255,255,.06)' : 'rgba(0,0,0,.06)',
-        text: dark ? 'rgba(255,255,255,.55)' : 'rgba(0,0,0,.5)',
+        primary : hsl('--primary'),
+        grid    : dark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.07)',
+        text    : dark ? 'rgba(255,255,255,0.60)' : 'rgba(0,0,0,0.55)',
+        border  : dark ? 'rgba(255,255,255,0.10)' : 'rgba(0,0,0,0.10)',
         c1: hsl('--chart-1'), c2: hsl('--chart-2'), c3: hsl('--chart-3'),
         c4: hsl('--chart-4'), c5: hsl('--chart-5'),
     };
