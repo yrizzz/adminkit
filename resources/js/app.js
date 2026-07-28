@@ -161,9 +161,10 @@ const registerUIStore = () => {
                 orange: '25 95% 53%',
                 amber: '38 92% 50%',
                 teal: '173 80% 40%',
+                midnight: '222 47% 11%',
                 black: '222 47% 11%'
             };
-            if (this.accent === 'black') {
+            if (this.accent === 'midnight' || this.accent === 'black') {
                 html.style.setProperty('--primary', '222 47% 11%');
                 html.style.setProperty('--primary-foreground', '0 0% 100%');
                 html.style.setProperty('--ring', '222 47% 11%');

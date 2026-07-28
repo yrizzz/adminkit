@@ -39,9 +39,10 @@
                 orange: '25 95% 53%',
                 amber: '38 92% 50%',
                 teal: '173 80% 40%',
+                midnight: '222 47% 11%',
                 black: '222 47% 11%'
             };
-            if (accent === 'black') {
+            if (accent === 'midnight' || accent === 'black') {
                 d.style.setProperty('--primary', '222 47% 11%');
                 d.style.setProperty('--primary-foreground', '0 0% 100%');
                 d.style.setProperty('--ring', '222 47% 11%');
