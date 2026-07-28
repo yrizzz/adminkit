@@ -1070,3 +1070,234 @@ nav.is-searching .nav-sublist {
         scroll-behavior: auto !important;
     }
 }
+
+/* Card Animation Keyframes */
+@keyframes ak-card-fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes ak-card-fade-down {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes ak-card-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes ak-card-zoom-in {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Card Animation Selectors */
+html[data-card-animation="fade-up"] .ak-card,
+html[data-card-animation="fade-down"] .ak-card,
+html[data-card-animation="fade-in"] .ak-card,
+html[data-card-animation="zoom-in"] .ak-card {
+    opacity: 0;
+}
+
+html[data-card-animation="fade-up"] .animate-cards .ak-card {
+    animation: ak-card-fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+html[data-card-animation="fade-down"] .animate-cards .ak-card {
+    animation: ak-card-fade-down 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+html[data-card-animation="fade-in"] .animate-cards .ak-card {
+    animation: ak-card-fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+html[data-card-animation="zoom-in"] .animate-cards .ak-card {
+    animation: ak-card-zoom-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Auto Component Skeleton Loading styles */
+.livewire-loading .ak-card {
+    position: relative;
+    pointer-events: none;
+    overflow: hidden;
+}
+.livewire-loading .ak-card > * {
+    opacity: 0.45;
+    filter: blur(1px);
+    transition: opacity 0.2s, filter 0.2s;
+}
+.livewire-loading .ak-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.12) 50%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: ak-skeleton-shimmer 1.5s infinite linear;
+}
+
+html:not(.dark) .livewire-loading .ak-card::after {
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(0, 0, 0, 0.05) 50%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+}
+
+@keyframes ak-skeleton-shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Dynamic Auto-Detect Page Skeleton CSS Converter */
+.ak-skeleton-active {
+    pointer-events: none !important;
+    user-select: none !important;
+}
+
+.ak-skeleton-active h1,
+.ak-skeleton-active h2,
+.ak-skeleton-active h3,
+.ak-skeleton-active h4,
+.ak-skeleton-active h5,
+.ak-skeleton-active h6,
+.ak-skeleton-active p,
+.ak-skeleton-active small,
+.ak-skeleton-active strong,
+.ak-skeleton-active em,
+.ak-skeleton-active label,
+.ak-skeleton-active th,
+.ak-skeleton-active td,
+.ak-skeleton-active a:not(:has(*)),
+.ak-skeleton-active span:not(:has(*)),
+.ak-skeleton-active svg,
+.ak-skeleton-active .lucide,
+.ak-skeleton-active button {
+    position: relative !important;
+    overflow: hidden !important;
+    color: transparent !important;
+    background-color: hsl(var(--muted)) !important;
+    background-image: none !important;
+    border-color: transparent !important;
+    border-radius: 0.25rem !important;
+    pointer-events: none !important;
+    user-select: none !important;
+    display: inline-block !important; /* Vital to support dimensions and overflow clipping on inline text nodes */
+}
+
+/* Rounded circular badges for icons */
+.ak-skeleton-active svg,
+.ak-skeleton-active .lucide {
+    border-radius: 50% !important;
+}
+.ak-skeleton-active svg *,
+.ak-skeleton-active .lucide * {
+    opacity: 0 !important;
+}
+
+/* Void elements (no pseudo-elements support) */
+.ak-skeleton-active img {
+    background-color: hsl(var(--muted)) !important;
+    opacity: 0.25 !important;
+    filter: blur(4px) !important;
+    pointer-events: none !important;
+}
+
+.ak-skeleton-active input,
+.ak-skeleton-active select,
+.ak-skeleton-active textarea {
+    background-color: hsl(var(--muted)) !important;
+    border-color: transparent !important;
+    color: transparent !important;
+    pointer-events: none !important;
+    display: inline-block !important;
+}
+
+.ak-skeleton-active canvas {
+    opacity: 0.1 !important;
+    filter: blur(3px) !important;
+    pointer-events: none !important;
+}
+
+/* Shimmer Sweep Animation on all non-void elements */
+.ak-skeleton-active h1::after,
+.ak-skeleton-active h2::after,
+.ak-skeleton-active h3::after,
+.ak-skeleton-active h4::after,
+.ak-skeleton-active h5::after,
+.ak-skeleton-active h6::after,
+.ak-skeleton-active p::after,
+.ak-skeleton-active small::after,
+.ak-skeleton-active strong::after,
+.ak-skeleton-active em::after,
+.ak-skeleton-active label::after,
+.ak-skeleton-active th::after,
+.ak-skeleton-active td::after,
+.ak-skeleton-active a:not(:has(*))::after,
+.ak-skeleton-active span:not(:has(*))::after,
+.ak-skeleton-active svg::after,
+.ak-skeleton-active .lucide::after,
+.ak-skeleton-active button::after {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    transform: translateX(-100%) !important;
+    background: linear-gradient(
+        90deg, 
+        transparent, 
+        hsl(var(--foreground) / 0.08), 
+        transparent
+    ) !important;
+    animation: ak-shimmer 1.5s infinite !important;
+}
+
+/* Fullscreen Page Loader Styling */
+#global-page-loader {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 99999 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    transition: opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+.dark #global-page-loader {
+    background-color: rgba(9, 15, 29, 0.85) !important;
+}
+
+#global-page-loader .loader-content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Layout width options */
+.main-content-container {
+    max-width: 1600px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+html[data-layout-fluid="true"] .main-content-container {
+    max-width: 100% !important;
+}
+
+.layout-width-transitioning .main-content-container {
+    transition: max-width 0.25s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}

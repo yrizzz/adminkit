@@ -122,6 +122,9 @@ const registerUIStore = () => {
         sidebarColor: LS.get('ak_sb_color', 'dark'),
         sidebarStyle: LS.get('ak_sb_style', 'tree'),
         navbarColor: LS.get('ak_nb_color', 'default'),
+        cardAnimation: LS.get('ak_card_animation', 'fade-up'),
+        skeletonLoading: LS.get('ak_skeleton_loading', false),
+        layoutFluid: LS.get('ak_layout_fluid', false),
 
         sidebarGradientFrom: LS.get('ak_sb_grad_from', '#1e1b4b'),
         sidebarGradientTo: LS.get('ak_sb_grad_to', '#0f172a'),
@@ -170,6 +173,9 @@ const registerUIStore = () => {
             html.dataset.sidebarColor = this.sidebarColor;
             html.dataset.sidebarStyle = this.sidebarStyle;
             html.dataset.navbarColor = this.navbarColor;
+            html.dataset.cardAnimation = this.cardAnimation;
+            html.dataset.skeletonLoading = this.skeletonLoading;
+            html.dataset.layoutFluid = this.layoutFluid;
             html.classList.toggle('sidebar-collapsed', this.sidebarCollapsed);
             html.classList.toggle('is-compact', this.compact);
 
@@ -198,11 +204,19 @@ const registerUIStore = () => {
             let x = window.innerWidth / 2;
             let y = window.innerHeight / 2;
             if (e) {
-                const btn = e.currentTarget || e.target;
+                const btn = (e.target && typeof e.target.closest === 'function')
+                    ? e.target.closest('button')
+                    : (e.currentTarget || e.target);
+
                 if (btn && typeof btn.getBoundingClientRect === 'function') {
                     const rect = btn.getBoundingClientRect();
-                    x = rect.left + rect.width / 2;
-                    y = rect.top + rect.height / 2;
+                    if (rect.width > 0 && rect.height > 0) {
+                        x = rect.left + rect.width / 2;
+                        y = rect.top + rect.height / 2;
+                    } else if (e.clientX !== undefined && e.clientX !== 0) {
+                        x = e.clientX;
+                        y = e.clientY;
+                    }
                 } else if (e.clientX !== undefined && e.clientX !== 0) {
                     x = e.clientX;
                     y = e.clientY;
@@ -313,6 +327,18 @@ const registerUIStore = () => {
         },
         toggleSidebar() { this.sidebarCollapsed = !this.sidebarCollapsed; LS.set('ak_sb_collapsed', this.sidebarCollapsed); this.apply(); },
         setNavbarFixed(v) { this.navbarFixed = v; LS.set('ak_navbar_fixed', v); },
+        setCardAnimation(v) { this.cardAnimation = v; LS.set('ak_card_animation', v); this.apply(); },
+        toggleSkeletonLoading() { this.skeletonLoading = !this.skeletonLoading; LS.set('ak_skeleton_loading', this.skeletonLoading); this.apply(); },
+        toggleLayoutFluid() {
+            const html = document.documentElement;
+            html.classList.add('layout-width-transitioning');
+            this.layoutFluid = !this.layoutFluid;
+            LS.set('ak_layout_fluid', this.layoutFluid);
+            this.apply();
+            setTimeout(() => {
+                html.classList.remove('layout-width-transitioning');
+            }, 300);
+        },
         openMobileSidebar() { this.sidebarMobileOpen = true; },
         closeMobileSidebar() { this.sidebarMobileOpen = false; },
     };
@@ -353,9 +379,22 @@ window.toast = (message, opts = {}) => {
  * Chart theming helper used by dashboard/chart pages.
  * ------------------------------------------------------------- */
 window.akChartTheme = () => {
+    let dark = document.documentElement.classList.contains('dark');
+    if (window.Alpine && Alpine.store('ui')) {
+        dark = Alpine.store('ui').isDark;
+    } else {
+        try {
+            const stored = localStorage.getItem('ak_theme');
+            if (stored) {
+                const theme = JSON.parse(stored);
+                dark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            }
+        } catch (e) {}
+    }
+    document.documentElement.classList.toggle('dark', dark);
+
     const css  = getComputedStyle(document.documentElement);
     const hsl  = (name) => `hsl(${css.getPropertyValue(name).trim()})`;
-    const dark = document.documentElement.classList.contains('dark');
     return {
         primary : hsl('--primary'),
         grid    : dark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.07)',
@@ -382,6 +421,18 @@ window.syncMenuActive = () => {
     match.classList.add('active');
 };
 
+const triggerCardAnimations = () => {
+    const mainContent = document.querySelector('main > div');
+    if (mainContent) {
+        const cards = mainContent.querySelectorAll('.ak-card');
+        cards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 45}ms`;
+        });
+        mainContent.offsetHeight;
+        mainContent.classList.add('animate-cards');
+    }
+};
+
 /* ---------------------------------------------------------------
  * Boot & Livewire Navigation hooks for zero-FOUC transitions
  * ------------------------------------------------------------- */
@@ -389,10 +440,12 @@ document.addEventListener('DOMContentLoaded', () => {
     registerUIStore();
     renderIcons();
     syncMenuActive();
+    triggerCardAnimations();
 });
 window.addEventListener('hashchange', () => syncMenuActive());
 
 document.addEventListener('livewire:navigating', () => {
+    window.lastNavigateStart = Date.now();
     if (window.Alpine && Alpine.store('ui')) {
         const ui = Alpine.store('ui');
         document.documentElement.dataset.sidebarColor = ui.sidebarColor;
@@ -401,15 +454,97 @@ document.addEventListener('livewire:navigating', () => {
         document.documentElement.style.setProperty('--custom-sb-grad-to', ui.sidebarGradientTo);
         document.documentElement.style.setProperty('--custom-nb-grad-from', ui.navbarGradientFrom);
         document.documentElement.style.setProperty('--custom-nb-grad-to', ui.navbarGradientTo);
+
+        // Inject fullscreen loader immediately on navigate start
+        if (ui.skeletonLoading) {
+            let loader = document.getElementById('global-page-loader');
+            if (!loader) {
+                loader = document.createElement('div');
+                loader.id = 'global-page-loader';
+                loader.style.opacity = '0';
+                loader.innerHTML = `
+                    <div class="loader-content">
+                        <div class="relative flex items-center justify-center">
+                            <div class="size-12 animate-spin rounded-full border-4 border-muted border-t-primary"></div>
+                        </div>
+                        <p class="mt-4 text-xs font-semibold tracking-wide text-muted-foreground uppercase animate-pulse text-center">Preparing Workspace...</p>
+                    </div>
+                `;
+                document.documentElement.appendChild(loader);
+                // Trigger a reflow
+                loader.offsetHeight;
+            }
+            loader.style.opacity = '1';
+            const content = loader.querySelector('.loader-content');
+            if (content) {
+                content.style.transform = 'scale(1)';
+                content.style.opacity = '1';
+            }
+        }
     }
 });
 
 document.addEventListener('livewire:navigated', () => {
     registerUIStore();
     if (window.Alpine && Alpine.store('ui')) {
-        Alpine.store('ui').apply();
-        Alpine.store('ui').closeMobileSidebar();
+        const ui = Alpine.store('ui');
+        ui.apply();
+        ui.closeMobileSidebar();
+
+        if (ui.skeletonLoading && window.lastNavigateStart) {
+            const elapsed = Date.now() - window.lastNavigateStart;
+            const minDelay = 750; // minimum loading show time in ms
+            const loader = document.getElementById('global-page-loader');
+
+            const hideLoader = () => {
+                if (loader) {
+                    const content = loader.querySelector('.loader-content');
+                    if (content) {
+                        content.style.transform = 'scale(0.92)';
+                        content.style.opacity = '0';
+                    }
+                    loader.style.opacity = '0';
+                    setTimeout(() => {
+                        loader.remove();
+                        triggerCardAnimations();
+                    }, 350);
+                } else {
+                    triggerCardAnimations();
+                }
+                window.lastNavigateStart = null;
+            };
+
+            if (elapsed < minDelay) {
+                setTimeout(hideLoader, minDelay - elapsed);
+            } else {
+                hideLoader();
+            }
+        } else {
+            triggerCardAnimations();
+        }
+    } else {
+        triggerCardAnimations();
     }
     renderIcons();
     syncMenuActive();
+});
+
+document.addEventListener('livewire:init', () => {
+    Livewire.hook('request', ({ component, succeed, fail, respond }) => {
+        const requestStart = Date.now();
+        if (window.Alpine && Alpine.store('ui') && Alpine.store('ui').skeletonLoading) {
+            if (component.el) component.el.classList.add('livewire-loading');
+        }
+        return ({ succeed, fail, respond }) => {
+            const elapsed = Date.now() - requestStart;
+            const minComponentDelay = 650; // minimum component loading state time in ms
+            if (elapsed < minComponentDelay) {
+                setTimeout(() => {
+                    if (component.el) component.el.classList.remove('livewire-loading');
+                }, minComponentDelay - elapsed);
+            } else {
+                if (component.el) component.el.classList.remove('livewire-loading');
+            }
+        }
+    });
 });

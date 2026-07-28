@@ -51,6 +51,9 @@
             d.dataset.sidebarColor = get('ak_sb_color', 'dark');
             d.dataset.sidebarStyle = get('ak_sb_style', 'tree');
             d.dataset.navbarColor  = get('ak_nb_color', 'default');
+            d.dataset.cardAnimation = get('ak_card_animation', 'fade-up');
+            d.dataset.skeletonLoading = get('ak_skeleton_loading', false);
+            d.dataset.layoutFluid = get('ak_layout_fluid', false);
 
             d.style.setProperty('--custom-sb-grad-from', get('ak_sb_grad_from', '#1e1b4b'));
             d.style.setProperty('--custom-sb-grad-to',   get('ak_sb_grad_to',   '#0f172a'));

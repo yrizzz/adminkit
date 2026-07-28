@@ -224,6 +224,23 @@
                 </div>
             </section>
 
+            {{-- Content Width --}}
+            <section>
+                <h3 class="mb-2.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Content Width</h3>
+                <div class="grid grid-cols-2 gap-2">
+                    <button type="button" @click="$store.ui.toggleLayoutFluid()"
+                            :class="!$store.ui.layoutFluid ? 'border-primary ring-2 ring-primary/30 text-primary' : 'border-border text-muted-foreground hover:border-primary/40'"
+                            class="rounded-xl border p-3 text-sm font-medium transition-all">
+                        Boxed
+                    </button>
+                    <button type="button" @click="$store.ui.toggleLayoutFluid()"
+                            :class="$store.ui.layoutFluid ? 'border-primary ring-2 ring-primary/30 text-primary' : 'border-border text-muted-foreground hover:border-primary/40'"
+                            class="rounded-xl border p-3 text-sm font-medium transition-all">
+                        Full Width
+                    </button>
+                </div>
+            </section>
+
             {{-- Direction --}}
             <section>
                 <h3 class="mb-2.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Direction</h3>
@@ -266,6 +283,27 @@
                 </div>
             </section>
 
+            {{-- Card Animation selector --}}
+            <section>
+                <h3 class="mb-2.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Card Animation</h3>
+                <div class="grid grid-cols-2 gap-2">
+                    @foreach ([
+                        'none' => ['lbl' => 'None', 'ico' => 'ban', 'span' => false],
+                        'fade-up' => ['lbl' => 'Fade Up', 'ico' => 'arrow-up', 'span' => false],
+                        'fade-down' => ['lbl' => 'Fade Down', 'ico' => 'arrow-down', 'span' => false],
+                        'fade-in' => ['lbl' => 'Fade In', 'ico' => 'eye', 'span' => false],
+                        'zoom-in' => ['lbl' => 'Zoom In', 'ico' => 'maximize-2', 'span' => true],
+                    ] as $style => $cfg)
+                        <button type="button" @click="$store.ui.setCardAnimation('{{ $style }}')"
+                                :class="$store.ui.cardAnimation === '{{ $style }}' ? 'border-primary ring-2 ring-primary/30 text-primary font-semibold' : 'border-border text-muted-foreground hover:border-primary/40'"
+                                class="flex items-center justify-center gap-1.5 rounded-xl border p-2.5 text-center text-xs transition-all {{ $cfg['span'] ? 'col-span-2' : '' }}">
+                            <i data-lucide="{{ $cfg['ico'] }}" class="size-3.5 shrink-0"></i>
+                            <span>{{ $cfg['lbl'] }}</span>
+                        </button>
+                    @endforeach
+                </div>
+            </section>
+
             {{-- Toggles --}}
             <section class="space-y-3">
                 <h3 class="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Options</h3>
@@ -285,6 +323,15 @@
                             class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors">
                         <span class="inline-block size-4 rounded-full bg-white shadow transition-transform"
                               :class="$store.ui.navbarFixed ? 'ltr:translate-x-6 rtl:-translate-x-6' : 'ltr:translate-x-1 rtl:-translate-x-1'"></span>
+                    </button>
+                </label>
+                <label class="flex cursor-pointer items-center justify-between">
+                    <span class="text-sm font-medium">Auto page loading</span>
+                    <button type="button" role="switch" @click="$store.ui.toggleSkeletonLoading()"
+                            :class="$store.ui.skeletonLoading ? 'bg-primary' : 'bg-muted'"
+                            class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors">
+                        <span class="inline-block size-4 rounded-full bg-white shadow transition-transform"
+                              :class="$store.ui.skeletonLoading ? 'ltr:translate-x-6 rtl:-translate-x-6' : 'ltr:translate-x-1 rtl:-translate-x-1'"></span>
                     </button>
                 </label>
             </section>

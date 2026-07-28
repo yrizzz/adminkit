@@ -2,10 +2,16 @@
     'title' => 'Authentication',
 ])
 
+@php
+    $theme   = $_COOKIE['ak_theme'] ?? 'system';
+    $dir     = $_COOKIE['ak_dir'] ?? 'ltr';
+    $isDark  = $theme === 'dark';
+@endphp
+
 {{-- Standalone, full-screen layout for the Authentication screens.
      No sidebar / navbar — each page paints the whole viewport itself. --}}
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth @if($isDark) dark @endif" dir="{{ $dir }}">
 <head>
     @include('partials.head', ['title' => $title])
 </head>

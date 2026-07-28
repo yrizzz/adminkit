@@ -2,10 +2,15 @@
     'title' => 'Welcome',
 ])
 
-@php($cfg = config('adminkit'))
+@php
+    $cfg = config('adminkit');
+    $theme   = $_COOKIE['ak_theme'] ?? 'system';
+    $dir     = $_COOKIE['ak_dir'] ?? 'ltr';
+    $isDark  = $theme === 'dark';
+@endphp
 
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth @if($isDark) dark @endif" dir="{{ $dir }}">
 <head>
     @include('partials.head', ['title' => $title])
 </head>

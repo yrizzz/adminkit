@@ -5,10 +5,17 @@
 @php
     $sbColor = $_COOKIE['ak_sb_color'] ?? 'dark';
     $nbColor = $_COOKIE['ak_nb_color'] ?? 'default';
+    $theme   = $_COOKIE['ak_theme'] ?? 'system';
+    $dir     = $_COOKIE['ak_dir'] ?? 'ltr';
+    $isDark  = $theme === 'dark';
 @endphp
 
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth" data-sidebar-color="{{ $sbColor }}" data-navbar-color="{{ $nbColor }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" 
+      class="scroll-smooth @if($isDark) dark @endif" 
+      dir="{{ $dir }}"
+      data-sidebar-color="{{ $sbColor }}" 
+      data-navbar-color="{{ $nbColor }}">
 <head>
     @include('partials.head', ['title' => $title])
 </head>
@@ -21,7 +28,7 @@
         @include('partials.topbar-horizontal')
 
         <main class="flex-1 p-4 sm:p-6">
-            <div class="mx-auto w-full max-w-[1600px]">
+            <div class="main-content-container w-full">
                 {{ $slot }}
             </div>
         </main>
