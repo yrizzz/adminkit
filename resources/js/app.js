@@ -45,6 +45,50 @@ const applyChartDefaults = () => {
 window.applyChartDefaults = applyChartDefaults;
 applyChartDefaults();
 
+/* ---------------------------------------------------------------
+ * Global Chart.js plugin: auto-apply dark/light theme colors to
+ * ALL chart instances so each individual chart doesn't have to
+ * hardcode them. Runs before every chart update.
+ * ------------------------------------------------------------- */
+Chart.register({
+    id: 'akTheme',
+    beforeUpdate(chart) {
+        const dark   = document.documentElement.classList.contains('dark');
+        const text   = dark ? 'rgba(255,255,255,0.60)' : 'rgba(0,0,0,0.55)';
+        const grid   = dark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.07)';
+        const border = dark ? 'rgba(255,255,255,0.10)' : 'rgba(0,0,0,0.10)';
+
+        /* ── Legend ── */
+        const legendLabels = chart.config.options?.plugins?.legend?.labels;
+        if (legendLabels) legendLabels.color = text;
+
+        /* ── Scales (x, y, r, etc.) ── */
+        const scales = chart.config.options?.scales ?? {};
+        for (const scale of Object.values(scales)) {
+            /* tick labels */
+            if (scale.ticks) scale.ticks.color = text;
+            /* grid lines */
+            if (scale.grid) {
+                if (scale.grid.display !== false) scale.grid.color = grid;
+                scale.grid.borderColor = border;
+            }
+            /* radar: spoke lines */
+            if (scale.angleLines) scale.angleLines.color = grid;
+            /* radar: outer labels */
+            if (scale.pointLabels) scale.pointLabels.color = text;
+        }
+
+        /* ── Tooltips ── */
+        const tp = chart.config.options?.plugins?.tooltip;
+        if (tp) {
+            tp.backgroundColor = dark ? 'rgba(15,23,42,0.92)' : 'rgba(255,255,255,0.96)';
+            tp.titleColor      = dark ? 'rgba(255,255,255,0.90)' : 'rgba(0,0,0,0.85)';
+            tp.bodyColor       = dark ? 'rgba(255,255,255,0.65)' : 'rgba(0,0,0,0.60)';
+            tp.borderColor     = dark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.10)';
+        }
+    },
+});
+
 const renderIcons = () => createIcons({ icons, attrs: { 'stroke-width': 2 } });
 window.renderIcons = renderIcons;
 
