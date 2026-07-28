@@ -954,6 +954,37 @@ header[data-navbar-color='custom_gradient'] {
         box-shadow: none !important;
     }
 
+    /* ── Black Accent Mode: Active lines, icons, nodes, text become crisp white ── */
+    html[data-accent='black'] .nav-link.active:not(.nav-sub)::before,
+    html[data-accent='black'] .nav-link.parent-active:not(.nav-sub)::before {
+        background: #ffffff !important;
+    }
+    html[data-accent='black'] .nav-link.active:not(.nav-sub) .nav-icon,
+    html[data-accent='black'] .nav-link.parent-active .nav-icon {
+        color: #ffffff !important;
+    }
+    html[data-accent='black'] .nav-link.active:not(.nav-sub),
+    html[data-accent='black'] .nav-link.parent-active {
+        color: #ffffff !important;
+    }
+    html[data-accent='black'] .nav-sub.active {
+        background: rgba(255, 255, 255, 0.15) !important;
+        color: #ffffff !important;
+    }
+    html[data-accent='black'] .nav-sub.active .nav-node,
+    html[data-accent='black'] .nav-sub.parent-active .nav-node {
+        background: #ffffff !important;
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35), 0 0 6px rgba(255, 255, 255, 0.6) !important;
+    }
+    html[data-accent='black'] .nav-sub.active::after,
+    html[data-accent='black'] .nav-sub.parent-active::after {
+        background: #ffffff !important;
+    }
+    html[data-accent='black'] .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before,
+    html[data-accent='black'] .nav-sub.active::before {
+        background: rgba(255, 255, 255, 0.9) !important;
+    }
+
 
 
 

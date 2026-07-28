@@ -163,10 +163,18 @@ const registerUIStore = () => {
                 teal: '173 80% 40%',
                 black: '222 47% 11%'
             };
-            if (accMap[this.accent]) {
+            if (this.accent === 'black') {
+                const p = this.isDark ? '0 0% 98%' : '222 47% 11%';
+                const pf = this.isDark ? '222 47% 11%' : '0 0% 100%';
+                html.style.setProperty('--primary', p);
+                html.style.setProperty('--primary-foreground', pf);
+                html.style.setProperty('--ring', p);
+                html.style.setProperty('--sidebar-primary', p);
+            } else if (accMap[this.accent]) {
                 html.style.setProperty('--primary', accMap[this.accent]);
                 html.style.setProperty('--ring', accMap[this.accent]);
                 html.style.setProperty('--sidebar-primary', accMap[this.accent]);
+                html.style.removeProperty('--primary-foreground');
             }
             html.dataset.radius = this.radius;
 

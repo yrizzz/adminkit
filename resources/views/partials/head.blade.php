@@ -41,7 +41,14 @@
                 teal: '173 80% 40%',
                 black: '222 47% 11%'
             };
-            if (accMap[accent]) {
+            if (accent === 'black') {
+                var p = dark ? '0 0% 98%' : '222 47% 11%';
+                var pf = dark ? '222 47% 11%' : '0 0% 100%';
+                d.style.setProperty('--primary', p);
+                d.style.setProperty('--primary-foreground', pf);
+                d.style.setProperty('--ring', p);
+                d.style.setProperty('--sidebar-primary', p);
+            } else if (accMap[accent]) {
                 d.style.setProperty('--primary', accMap[accent]);
                 d.style.setProperty('--ring', accMap[accent]);
                 d.style.setProperty('--sidebar-primary', accMap[accent]);
