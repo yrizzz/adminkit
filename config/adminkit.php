@@ -162,14 +162,15 @@ return [
                     'label' => 'Error',
                     'icon'  => 'circle-alert',
                     'children' => [
-                        ['label' => 'Error 400', 'href' => '#'],
-                        ['label' => 'Error 401', 'href' => '#'],
-                        ['label' => 'Error 403', 'href' => '#'],
-                        ['label' => 'Error 404', 'href' => '#'],
-                        ['label' => 'Error 500', 'href' => '#'],
-                        ['label' => 'Error 503', 'href' => '#'],
+                        ['label' => 'Error 400', 'route' => 'page', 'params' => ['path' => 'error-400']],
+                        ['label' => 'Error 401', 'route' => 'page', 'params' => ['path' => 'error-401']],
+                        ['label' => 'Error 403', 'route' => 'page', 'params' => ['path' => 'error-403']],
+                        ['label' => 'Error 404', 'route' => 'page', 'params' => ['path' => 'error-404']],
+                        ['label' => 'Error 500', 'route' => 'page', 'params' => ['path' => 'error-500']],
+                        ['label' => 'Error 503', 'route' => 'page', 'params' => ['path' => 'error-503']],
                     ],
                 ],
+
                 [
                     'label' => 'Apps',
                     'icon'  => 'layout-grid',

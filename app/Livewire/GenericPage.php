@@ -39,9 +39,19 @@ class GenericPage extends Component
 
         // Authentication and Error screens get their own standalone, full-screen
         // layout — no sidebar or navbar, the page paints the whole viewport itself.
-        if (in_array($section, ['Authentication', 'Error'], true)) {
+        $standalonePaths = [
+            'sign-in', 'sign-in-2', 'sign-up', 'sign-up-2',
+            'lock-screen', 'lock-screen-2', 'reset-password', 'reset-password-2',
+            'create-password', 'two-step-verification', 'coming-soon',
+            'under-maintenance', 'no-internet',
+        ];
+
+        if (in_array($section, ['Authentication', 'Error'], true)
+            || in_array($this->path, $standalonePaths, true)
+            || str_starts_with($this->path, 'error-')) {
             return $page->layout('components.layouts.auth', ['title' => $title]);
         }
+
 
         return $page->layout('components.layouts.app', [
             'title'       => $title,
