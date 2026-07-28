@@ -263,7 +263,7 @@
                     @foreach (['blue' => '#2563eb', 'violet' => '#7c3aed', 'green' => '#16a34a', 'rose' => '#e11d48', 'orange' => '#f97316', 'amber' => '#f59e0b', 'teal' => '#14b8a6', 'black' => '#0f172a'] as $name => $hex)
                         <button type="button" @click="$store.ui.setAccent('{{ $name }}')" title="{{ ucfirst($name) }}"
                                 class="grid size-7.5 place-items-center rounded-full ring-offset-2 ring-offset-card transition-all"
-                                :class="$store.ui.accent === '{{ $name }}' ? 'ring-2 ring-primary' : ''"
+                                :class="$store.ui.accent === '{{ $name }}' ? ('{{ $name }}' === 'black' ? 'ring-2 ring-white border border-white/50' : 'ring-2 ring-primary') : ('{{ $name }}' === 'black' ? 'border border-white/25' : '')"
                                 style="background: {{ $hex }}">
                             <i data-lucide="check" class="size-3.5 text-white" x-show="$store.ui.accent === '{{ $name }}'"></i>
                         </button>

@@ -954,7 +954,13 @@ header[data-navbar-color='custom_gradient'] {
         box-shadow: none !important;
     }
 
-    /* ── Black Accent Mode: Active lines, icons, nodes, text become crisp white ── */
+    /* ── Black Accent Mode: Active lines, icons, nodes, text & crisp white borders ── */
+    html[data-accent='black'] .nav-link.active:not(.nav-sub),
+    html[data-accent='black'] .nav-link.parent-active:not(.nav-sub) {
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        background: rgba(255, 255, 255, 0.12) !important;
+        color: #ffffff !important;
+    }
     html[data-accent='black'] .nav-link.active:not(.nav-sub)::before,
     html[data-accent='black'] .nav-link.parent-active:not(.nav-sub)::before {
         background: #ffffff !important;
@@ -963,11 +969,8 @@ header[data-navbar-color='custom_gradient'] {
     html[data-accent='black'] .nav-link.parent-active .nav-icon {
         color: #ffffff !important;
     }
-    html[data-accent='black'] .nav-link.active:not(.nav-sub),
-    html[data-accent='black'] .nav-link.parent-active {
-        color: #ffffff !important;
-    }
     html[data-accent='black'] .nav-sub.active {
+        border: 1px solid rgba(255, 255, 255, 0.25) !important;
         background: rgba(255, 255, 255, 0.15) !important;
         color: #ffffff !important;
     }
