@@ -630,22 +630,23 @@ header[data-navbar-color='custom_gradient'] {
 
     /* Sidebar nav link */
     .nav-link {
-        @apply relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground;
+        @apply relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-normal text-sidebar-foreground transition-colors;
     }
     .nav-link:hover {
         @apply bg-sidebar-accent/70 text-sidebar-accent-foreground;
     }
     .nav-link.is-open {
-        @apply text-sidebar-foreground;
+        @apply text-sidebar-foreground font-medium;
     }
     /* Top-level active item OR parent group with an active child (e.g. Dashboards) */
     .nav-link.active:not(.nav-sub),
     .nav-link.parent-active {
         background: hsl(var(--primary) / 0.15) !important;
         color: hsl(var(--primary)) !important;
-        font-weight: 600;
+        font-weight: 500;
         box-shadow: none;
     }
+
     .nav-link.active:not(.nav-sub) .nav-icon,
     .nav-link.parent-active .nav-icon {
         color: hsl(var(--primary)) !important;
@@ -818,8 +819,9 @@ header[data-navbar-color='custom_gradient'] {
     .nav-sub.parent-active {
         background: hsl(var(--sidebar-primary) / 0.12) !important;
         color: hsl(var(--primary)) !important;
-        font-weight: 600;
+        font-weight: 500;
     }
+
     .nav-sub.parent-active::after {
         background: hsl(var(--sidebar-primary)) !important;
     }
