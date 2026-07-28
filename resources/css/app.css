@@ -727,24 +727,48 @@ header[data-navbar-color='custom_gradient'] {
 
     /* ── Tree submenu ────────────────────────────────── */
     /* Each nested list indents, so the menu branches out like roots/a file tree. */
+    /* ── Tree submenu segmented vertical rail ───────────────── */
     .nav-sublist {
         @apply relative ms-[1.1rem] mt-1 space-y-0.5 ps-[1.4rem];
     }
-    /* the vertical branch rail (spine) for this level */
     .nav-sublist::before {
+        display: none;
+    }
+    .nav-sublist > li {
+        position: relative;
+    }
+
+    /* Vertical segment on each li in nav-sublist */
+    .nav-sublist > li::before {
         content: '';
         position: absolute;
-        inset-inline-start: 0.55rem;
-        inset-block-start: -0.4rem;
-        inset-block-end: 0.85rem;
+        inset-inline-start: -0.85rem;
+        top: -0.3rem;
+        bottom: -0.3rem;
         width: 2px;
         border-radius: 9999px;
         background: rgba(255, 255, 255, 0.18);
+        transition: background-color 0.15s ease;
+    }
+    .nav-sublist > li:first-child::before {
+        top: -0.6rem;
+    }
+    .nav-sublist > li:last-child::before {
+        bottom: 50%;
     }
 
-    /* Highlight only the immediate sublist rail of a nested active parent (e.g. Ecommerce) */
-    li:has(> .nav-sub.parent-active) > .nav-sublist::before {
-        background: hsl(var(--sidebar-primary) / 0.4) !important;
+    /* Segmented Active Trail: Blue from top down to active item */
+    .nav-sublist > li:has(~ li > .nav-link.active)::before,
+    .nav-sublist > li:has(> .nav-link.active)::before,
+    .nav-sublist > li:has(~ li > .nav-link.parent-active)::before,
+    .nav-sublist > li:has(> .nav-link.parent-active)::before {
+        background: hsl(var(--sidebar-primary)) !important;
+    }
+
+    /* Items after active get muted grey segment */
+    .nav-sublist > li:has(> .nav-link.active) ~ li::before,
+    .nav-sublist > li:has(> .nav-link.parent-active) ~ li::before {
+        background: rgba(255, 255, 255, 0.18) !important;
     }
 
     .nav-sub {
@@ -778,6 +802,7 @@ header[data-navbar-color='custom_gradient'] {
         background: rgba(255, 255, 255, 0.18);
         transition: background-color 0.15s ease;
     }
+
 
 
     html[data-sidebar-color='light'] .nav-sublist::before,
