@@ -954,7 +954,13 @@ header[data-navbar-color='custom_gradient'] {
         box-shadow: none !important;
     }
 
-    /* ── Black Accent Mode: Active lines, icons, nodes, text & crisp white borders ── */
+    /* ── Black Accent Mode: High-contrast text & crisp white borders in light/dark mode ── */
+    html.dark[data-accent='black'] .text-primary {
+        color: #f8fafc !important;
+    }
+    html.dark[data-accent='black'] .border-primary {
+        border-color: rgba(255, 255, 255, 0.4) !important;
+    }
     html[data-accent='black'] .nav-link.active:not(.nav-sub),
     html[data-accent='black'] .nav-link.parent-active:not(.nav-sub) {
         border: 1px solid rgba(255, 255, 255, 0.3) !important;
@@ -982,10 +988,6 @@ header[data-navbar-color='custom_gradient'] {
     html[data-accent='black'] .nav-sub.active::after,
     html[data-accent='black'] .nav-sub.parent-active::after {
         background: #ffffff !important;
-    }
-    html[data-accent='black'] header .animate-ping,
-    html[data-accent='black'] header .animate-ping + span {
-        background-color: #ffffff !important;
     }
 
 
