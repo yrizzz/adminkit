@@ -5,8 +5,33 @@
 <title>{{ ($title ?? 'Dashboard') . ' — ' . $cfg['name'] }}</title>
 <meta name="description" content="{{ $cfg['tagline'] }} — modern, themeable admin panel.">
 
-{{-- Inline style injected before external CSS to prevent FOUC on active nav item --}}
-<style id="ak-fouc"></style>
+@php
+/* ── Server-side FOUC fix: bake the correct active-nav colour into a <style>
+   tag using cookies so it's correct even on wire:navigate (Livewire SPA)
+   without waiting for any client-side JavaScript to run.               ── */
+$_accentMap = [
+    'blue'   => '221 83% 53%', 'violet' => '262 83% 58%', 'green'  => '142 71% 45%',
+    'rose'   => '347 77% 50%', 'orange' => '25 95% 53%',  'amber'  => '38 92% 50%',
+    'teal'   => '173 80% 40%',
+];
+$_ac  = $_COOKIE['ak_accent']   ?? 'blue';
+$_sb  = $_COOKIE['ak_sb_color'] ?? 'dark';
+$_p   = $_accentMap[$_ac]       ?? '221 83% 53%';
+$_isColored = ($_sb === 'primary' || str_starts_with($_sb, 'gradient') || str_starts_with($_sb, 'image') || $_sb === 'custom_gradient');
+$_isLight   = ($_sb === 'light');
+if ($_isColored) {
+    $_foucCss = ".nav-link.active:not(.nav-sub){background:rgba(255,255,255,.95)!important;color:hsl({$_p})!important}"
+              . ".nav-link.active:not(.nav-sub)::before{background:hsl({$_p})!important}";
+} elseif ($_isLight) {
+    $_foucCss = ".nav-link.active:not(.nav-sub){background:hsl({$_p})!important;color:#fff!important}"
+              . ".nav-link.active:not(.nav-sub)::before{background:hsl({$_p})!important}";
+} else {
+    $_foucCss = ".nav-link.active:not(.nav-sub){background:hsl({$_p}/.15)!important;color:hsl({$_p})!important}"
+              . ".nav-link.active:not(.nav-sub)::before{background:hsl({$_p})!important}";
+}
+@endphp
+{{-- Inline active-nav style: server-rendered so it's correct on hard reload AND wire:navigate --}}
+<style id="ak-fouc">{{ $_foucCss }}</style>
 
 {{-- Prevent theme flash: apply persisted preferences before first paint --}}
 <script>
@@ -33,32 +58,24 @@
             d.classList.toggle('sidebar-collapsed', get('ak_sb_collapsed', false));
             if (get('ak_compact', false)) d.classList.add('is-compact');
 
-            /* ── Inject inline active-nav colours so first paint is already correct ── */
+            /* Fallback: also update #ak-fouc via JS in case localStorage differs from cookie */
             var accentMap = {
-                blue:   '221 83% 53%', violet: '262 83% 58%', green:  '142 71% 45%',
-                rose:   '347 77% 50%', orange: '25 95% 53%',  amber:  '38 92% 50%',
-                teal:   '173 80% 40%',
+                blue:'221 83% 53%',violet:'262 83% 58%',green:'142 71% 45%',
+                rose:'347 77% 50%',orange:'25 95% 53%',amber:'38 92% 50%',teal:'173 80% 40%',
             };
-            var ac = get('ak_accent', 'blue');
-            var p  = accentMap[ac] || '221 83% 53%';
+            var ac = get('ak_accent', 'blue'), p = accentMap[ac] || '221 83% 53%';
             var sb = get('ak_sb_color', 'dark');
             var isColored = (sb === 'primary' || sb.indexOf('gradient') === 0 || sb.indexOf('image') === 0 || sb === 'custom_gradient');
-            var isLight   = sb === 'light';
-            var css;
-            if (isColored) {
-                css = '.nav-link.active:not(.nav-sub){background:rgba(255,255,255,.95)!important;color:hsl('+p+')!important}';
-                css += '.nav-link.active:not(.nav-sub)::before{background:hsl('+p+')!important}';
-            } else if (isLight) {
-                css = '.nav-link.active:not(.nav-sub){background:hsl('+p+')!important;color:#fff!important}';
-                css += '.nav-link.active:not(.nav-sub)::before{background:hsl('+p+')!important}';
-            } else {
-                /* dark sidebar — accent tint bg */
-                css = '.nav-link.active:not(.nav-sub){background:hsl('+p+'/0.15)!important;color:hsl('+p+')!important}';
-                css += '.nav-link.active:not(.nav-sub)::before{background:hsl('+p+')!important}';
-            }
-            document.getElementById('ak-fouc').textContent = css;
+            var isLight   = (sb === 'light');
+            var css = isColored
+                ? '.nav-link.active:not(.nav-sub){background:rgba(255,255,255,.95)!important;color:hsl('+p+')!important}.nav-link.active:not(.nav-sub)::before{background:hsl('+p+')!important}'
+                : isLight
+                ? '.nav-link.active:not(.nav-sub){background:hsl('+p+')!important;color:#fff!important}.nav-link.active:not(.nav-sub)::before{background:hsl('+p+')!important}'
+                : '.nav-link.active:not(.nav-sub){background:hsl('+p+'/.15)!important;color:hsl('+p+')!important}.nav-link.active:not(.nav-sub)::before{background:hsl('+p+')!important}';
+            var el = document.getElementById('ak-fouc');
+            if (el) el.textContent = css;
 
-            /* Suppress all transitions on first paint to avoid animated colour changes */
+            /* Suppress transitions on first paint */
             d.classList.add('no-transition');
             requestAnimationFrame(function () {
                 requestAnimationFrame(function () { d.classList.remove('no-transition'); });
