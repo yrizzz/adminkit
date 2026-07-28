@@ -312,8 +312,8 @@
                     <button type="button" role="switch" @click="$store.ui.toggleSidebar()"
                             :class="$store.ui.sidebarCollapsed ? 'bg-primary' : 'bg-muted'"
                             class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors">
-                        <span class="inline-block size-4 rounded-full bg-white shadow transition-transform"
-                              :class="$store.ui.sidebarCollapsed ? 'ltr:translate-x-6 rtl:-translate-x-6' : 'ltr:translate-x-1 rtl:-translate-x-1'"></span>
+                        <span class="inline-block size-4 rounded-full shadow transition-transform"
+                              :class="$store.ui.sidebarCollapsed ? 'ltr:translate-x-6 rtl:-translate-x-6 bg-primary-foreground' : 'ltr:translate-x-1 rtl:-translate-x-1 bg-white'"></span>
                     </button>
                 </label>
                 <label class="flex cursor-pointer items-center justify-between">
@@ -321,8 +321,8 @@
                     <button type="button" role="switch" @click="$store.ui.navbarFixed = !$store.ui.navbarFixed"
                             :class="$store.ui.navbarFixed ? 'bg-primary' : 'bg-muted'"
                             class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors">
-                        <span class="inline-block size-4 rounded-full bg-white shadow transition-transform"
-                              :class="$store.ui.navbarFixed ? 'ltr:translate-x-6 rtl:-translate-x-6' : 'ltr:translate-x-1 rtl:-translate-x-1'"></span>
+                        <span class="inline-block size-4 rounded-full shadow transition-transform"
+                              :class="$store.ui.navbarFixed ? 'ltr:translate-x-6 rtl:-translate-x-6 bg-primary-foreground' : 'ltr:translate-x-1 rtl:-translate-x-1 bg-white'"></span>
                     </button>
                 </label>
                 <label class="flex cursor-pointer items-center justify-between">
@@ -330,8 +330,8 @@
                     <button type="button" role="switch" @click="$store.ui.togglePageLoading()"
                             :class="$store.ui.pageLoading ? 'bg-primary' : 'bg-muted'"
                             class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors">
-                        <span class="inline-block size-4 rounded-full bg-white shadow transition-transform"
-                              :class="$store.ui.pageLoading ? 'ltr:translate-x-6 rtl:-translate-x-6' : 'ltr:translate-x-1 rtl:-translate-x-1'"></span>
+                        <span class="inline-block size-4 rounded-full shadow transition-transform"
+                              :class="$store.ui.pageLoading ? 'ltr:translate-x-6 rtl:-translate-x-6 bg-primary-foreground' : 'ltr:translate-x-1 rtl:-translate-x-1 bg-white'"></span>
                     </button>
                 </label>
             </section>

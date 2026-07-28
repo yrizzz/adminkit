@@ -78,7 +78,7 @@
                             <label class="flex cursor-pointer items-center justify-between rounded-lg px-2 py-3 hover:bg-accent/40" x-data="{ on: @js($on) }">
                                 <span class="text-sm font-medium">{{ $label }}</span>
                                 <button type="button" @click="on = !on" :class="on ? 'bg-primary' : 'bg-muted'" class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors">
-                                    <span class="inline-block size-4 rounded-full bg-white shadow transition-transform" :class="on ? 'ltr:translate-x-6 rtl:-translate-x-6' : 'ltr:translate-x-1 rtl:-translate-x-1'"></span>
+                                    <span class="inline-block size-4 rounded-full shadow transition-transform" :class="on ? 'ltr:translate-x-6 rtl:-translate-x-6 bg-primary-foreground' : 'ltr:translate-x-1 rtl:-translate-x-1 bg-white'"></span>
                                 </button>
                             </label>
                         @endforeach
