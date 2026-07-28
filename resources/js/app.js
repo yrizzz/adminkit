@@ -169,7 +169,43 @@ const registerUIStore = () => {
         },
 
         setTheme(v) { this.theme = v; LS.set('ak_theme', v); this.apply(); },
-        toggleTheme() { this.setTheme(this.isDark ? 'light' : 'dark'); },
+        toggleTheme(e) {
+            const isDarkNext = !this.isDark;
+            const nextTheme  = isDarkNext ? 'dark' : 'light';
+
+            if (!document.startViewTransition || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.documentElement.classList.add('theme-transitioning');
+                this.setTheme(nextTheme);
+                setTimeout(() => document.documentElement.classList.remove('theme-transitioning'), 350);
+                return;
+            }
+
+            const x = e?.clientX ?? window.innerWidth / 2;
+            const y = e?.clientY ?? window.innerHeight / 2;
+            const endRadius = Math.hypot(
+                Math.max(x, window.innerWidth - x),
+                Math.max(y, window.innerHeight - y)
+            );
+
+            const transition = document.startViewTransition(() => {
+                this.setTheme(nextTheme);
+            });
+
+            transition.ready.then(() => {
+                const clipPath = [
+                    `circle(0px at ${x}px ${y}px)`,
+                    `circle(${endRadius}px at ${x}px ${y}px)`
+                ];
+                document.documentElement.animate(
+                    { clipPath: isDarkNext ? clipPath : [...clipPath].reverse() },
+                    {
+                        duration: 450,
+                        easing: 'ease-in-out',
+                        pseudoElement: isDarkNext ? '::view-transition-new(root)' : '::view-transition-old(root)'
+                    }
+                );
+            });
+        },
         setDirection(v) { this.direction = v; LS.set('ak_dir', v); this.apply(); },
         toggleDirection() { this.setDirection(this.direction === 'rtl' ? 'ltr' : 'rtl'); },
         setLayout(v) { this.layout = v; LS.set('ak_layout', v); this.apply(); },

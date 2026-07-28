@@ -115,7 +115,7 @@
         </x-ui.dropdown>
 
         {{-- Theme toggle --}}
-        <button type="button" @click="$store.ui.toggleTheme()"
+        <button type="button" @click="$store.ui.toggleTheme($event)"
                 class="rounded-lg p-2 text-muted-foreground hover:bg-accent hover:text-foreground">
             <i data-lucide="sun" class="size-5" x-show="$store.ui.isDark" x-cloak></i>
             <i data-lucide="moon" class="size-5" x-show="!$store.ui.isDark"></i>

@@ -638,19 +638,20 @@ header[data-navbar-color='custom_gradient'] {
     .nav-link.is-open {
         @apply text-sidebar-foreground;
     }
+    /* Top-level active item OR parent group with an active child (e.g. Dashboards) */
+    .nav-link.active:not(.nav-sub),
     .nav-link.parent-active {
-        color: hsl(var(--sidebar-foreground));
-        background: transparent !important;
-        font-weight: 600;
-    }
-    /* Default dark sidebar: active top-level uses accent/primary color */
-    .nav-link.active:not(.nav-sub) {
         background: hsl(var(--primary) / 0.15) !important;
         color: hsl(var(--primary)) !important;
         font-weight: 600;
         box-shadow: none;
     }
-    .nav-link.active:not(.nav-sub)::before {
+    .nav-link.active:not(.nav-sub) .nav-icon,
+    .nav-link.parent-active .nav-icon {
+        color: hsl(var(--primary)) !important;
+    }
+    .nav-link.active:not(.nav-sub)::before,
+    .nav-link.parent-active::before {
         content: '';
         position: absolute;
         inset-y: 0.375rem;
@@ -659,31 +660,58 @@ header[data-navbar-color='custom_gradient'] {
         border-radius: 9999px;
         background: hsl(var(--primary)) !important;
     }
-    /* Colored sidebars: subtle overlay so it doesn't flash white */
+
+    /* Colored sidebars */
     html[data-sidebar-color='primary'] .nav-link.active:not(.nav-sub),
+    html[data-sidebar-color='primary'] .nav-link.parent-active,
     html[data-sidebar-color^='gradient'] .nav-link.active:not(.nav-sub),
+    html[data-sidebar-color^='gradient'] .nav-link.parent-active,
     html[data-sidebar-color^='image'] .nav-link.active:not(.nav-sub),
-    html[data-sidebar-color='custom_gradient'] .nav-link.active:not(.nav-sub) {
+    html[data-sidebar-color^='image'] .nav-link.parent-active,
+    html[data-sidebar-color='custom_gradient'] .nav-link.active:not(.nav-sub),
+    html[data-sidebar-color='custom_gradient'] .nav-link.parent-active {
         background: rgba(255, 255, 255, 0.18) !important;
         color: #ffffff !important;
         font-weight: 600;
         box-shadow: none;
     }
+    html[data-sidebar-color='primary'] .nav-link.active:not(.nav-sub) .nav-icon,
+    html[data-sidebar-color='primary'] .nav-link.parent-active .nav-icon,
+    html[data-sidebar-color^='gradient'] .nav-link.active:not(.nav-sub) .nav-icon,
+    html[data-sidebar-color^='gradient'] .nav-link.parent-active .nav-icon,
+    html[data-sidebar-color^='image'] .nav-link.active:not(.nav-sub) .nav-icon,
+    html[data-sidebar-color^='image'] .nav-link.parent-active .nav-icon,
+    html[data-sidebar-color='custom_gradient'] .nav-link.active:not(.nav-sub) .nav-icon,
+    html[data-sidebar-color='custom_gradient'] .nav-link.parent-active .nav-icon {
+        color: #ffffff !important;
+    }
     html[data-sidebar-color='primary'] .nav-link.active:not(.nav-sub)::before,
+    html[data-sidebar-color='primary'] .nav-link.parent-active::before,
     html[data-sidebar-color^='gradient'] .nav-link.active:not(.nav-sub)::before,
+    html[data-sidebar-color^='gradient'] .nav-link.parent-active::before,
     html[data-sidebar-color^='image'] .nav-link.active:not(.nav-sub)::before,
-    html[data-sidebar-color='custom_gradient'] .nav-link.active:not(.nav-sub)::before {
+    html[data-sidebar-color^='image'] .nav-link.parent-active::before,
+    html[data-sidebar-color='custom_gradient'] .nav-link.active:not(.nav-sub)::before,
+    html[data-sidebar-color='custom_gradient'] .nav-link.parent-active::before {
         background: #ffffff !important;
     }
-    /* Light sidebar: primary color bg + white text */
-    html[data-sidebar-color='light'] .nav-link.active:not(.nav-sub) {
+
+    /* Light sidebar */
+    html[data-sidebar-color='light'] .nav-link.active:not(.nav-sub),
+    html[data-sidebar-color='light'] .nav-link.parent-active {
         background: hsl(var(--primary)) !important;
         color: #ffffff !important;
         box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     }
-    html[data-sidebar-color='light'] .nav-link.active:not(.nav-sub)::before {
+    html[data-sidebar-color='light'] .nav-link.active:not(.nav-sub) .nav-icon,
+    html[data-sidebar-color='light'] .nav-link.parent-active .nav-icon {
+        color: #ffffff !important;
+    }
+    html[data-sidebar-color='light'] .nav-link.active:not(.nav-sub)::before,
+    html[data-sidebar-color='light'] .nav-link.parent-active::before {
         background: hsl(var(--sidebar-primary)) !important;
     }
+
     .nav-group-label {
         @apply px-3 pb-1.5 pt-4 text-[0.68rem] font-semibold uppercase tracking-wider;
         color: rgba(255, 255, 255, 0.65) !important;
@@ -905,6 +933,36 @@ nav.is-searching .nav-sublist {
     height: auto !important;
     overflow: visible !important;
 }
+
+/* ---------------------------------------------------------------
+ * Modern Circular Ripple Theme Transition (View Transitions API)
+ * ------------------------------------------------------------- */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+    z-index: 1;
+}
+::view-transition-new(root) {
+    z-index: 9999;
+}
+.dark::view-transition-old(root) {
+    z-index: 9999;
+}
+.dark::view-transition-new(root) {
+    z-index: 1;
+}
+
+/* Fallback smooth theme transition class for older browsers */
+.theme-transitioning,
+.theme-transitioning *,
+.theme-transitioning *::before,
+.theme-transitioning *::after {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease !important;
+}
+
 
 @keyframes ak-page-in {
     from {
