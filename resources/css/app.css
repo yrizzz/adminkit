@@ -737,7 +737,7 @@ header[data-navbar-color='custom_gradient'] {
     .nav-sublist::before {
         content: '';
         position: absolute;
-        inset-inline-start: 0.55rem;
+        inset-inline-start: 0.53rem;
         inset-block-start: 0.1rem;
         inset-block-end: 0.85rem;
         width: 2px;
@@ -774,8 +774,8 @@ header[data-navbar-color='custom_gradient'] {
         content: '';
         position: absolute;
         top: 50%;
-        inset-inline-start: calc(0.55rem - 1.4rem);
-        width: 1.15rem;
+        inset-inline-start: calc(0.53rem - 1.4rem);
+        width: 1.17rem;
         height: 2px;
         transform: translateY(-50%);
         border-radius: 9999px;
@@ -830,7 +830,7 @@ header[data-navbar-color='custom_gradient'] {
     .nav-sub::before {
         content: '';
         position: absolute;
-        inset-inline-start: calc(0.55rem - 1.4rem);
+        inset-inline-start: calc(0.53rem - 1.4rem);
         inset-block-start: -0.5rem;
         inset-block-end: -0.5rem;
         width: 2px;
