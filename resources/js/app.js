@@ -212,24 +212,36 @@ const registerUIStore = () => {
             // ── Mobile: clean top-to-bottom wipe ──────────────────────────
             const isMobile = window.matchMedia('(pointer: coarse)').matches;
             if (isMobile) {
-                if (!isDarkNext) document.documentElement.classList.add('theme-shrink');
-                else document.documentElement.classList.remove('theme-shrink');
-
                 const mobileTransition = document.startViewTransition(() => {
                     this.setTheme(nextTheme);
                 });
                 mobileTransition.ready.then(() => {
-                    const wipe = isDarkNext
-                        ? ['inset(0 0 100% 0)', 'inset(0 0 0% 0)']   // reveal top→bottom
-                        : ['inset(0% 0 0 0)', 'inset(100% 0 0 0)'];  // hide top→bottom
+                    // New theme: fade in + subtle scale up
                     document.documentElement.animate(
-                        { clipPath: wipe },
+                        [
+                            { opacity: 0, transform: 'scale(0.97)' },
+                            { opacity: 1, transform: 'scale(1)' }
+                        ],
                         {
-                            duration: 450,
-                            easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
-                            pseudoElement: isDarkNext ? '::view-transition-new(root)' : '::view-transition-old(root)'
+                            duration: 550,
+                            easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+                            pseudoElement: '::view-transition-new(root)',
+                            fill: 'both'
                         }
-                    ).onfinish = () => document.documentElement.classList.remove('theme-shrink');
+                    );
+                    // Old theme: fade out + subtle scale down
+                    document.documentElement.animate(
+                        [
+                            { opacity: 1, transform: 'scale(1)' },
+                            { opacity: 0, transform: 'scale(1.03)' }
+                        ],
+                        {
+                            duration: 400,
+                            easing: 'cubic-bezier(0.4, 0, 1, 1)',
+                            pseudoElement: '::view-transition-old(root)',
+                            fill: 'both'
+                        }
+                    );
                 });
                 return;
             }

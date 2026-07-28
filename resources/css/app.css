@@ -1020,12 +1020,13 @@ nav.is-searching .nav-sublist {
 }
 
 /* ---------------------------------------------------------------
- * Day / Night Circular Shrink & Expand View Transition
+ * Day / Night View Transition
  * ------------------------------------------------------------- */
 ::view-transition-old(root),
 ::view-transition-new(root) {
     animation: none;
     mix-blend-mode: normal;
+    transform-origin: center center;
 }
 ::view-transition-old(root) {
     z-index: 1;
@@ -1033,6 +1034,8 @@ nav.is-searching .nav-sublist {
 ::view-transition-new(root) {
     z-index: 9999;
 }
+
+/* Desktop circle ripple — shrink direction (dark→light) */
 .theme-shrink::view-transition-old(root) {
     z-index: 9999;
 }
