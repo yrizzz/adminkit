@@ -46,7 +46,7 @@
     <div class="flex flex-1 items-center justify-end gap-1">
         {{-- Command palette trigger --}}
         <button type="button" @click="$store.ui.commandOpen = true"
-                class="me-1 hidden items-center gap-2 rounded-lg border border-border bg-muted/40 py-1.5 pe-2 ps-3 text-sm text-muted-foreground transition-colors hover:bg-muted md:flex">
+                class="me-1 hidden items-center gap-2 rounded-lg border border-border bg-muted/40 py-1.5 pe-2 ps-3 text-sm text-muted-foreground hover:bg-muted md:flex">
             <i data-lucide="search" class="size-4"></i>
             <span>Search…</span>
             <kbd class="rounded border border-border bg-background px-1.5 py-0.5 text-[0.65rem] font-semibold">⌘K</kbd>

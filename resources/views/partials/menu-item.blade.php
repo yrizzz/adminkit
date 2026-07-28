@@ -14,7 +14,7 @@
         'hot'     => 'bg-orange-500/15 text-orange-400',
     ];
     $tone = $badge ? ($badgeTones[$badge['variant'] ?? 'neutral'] ?? $badgeTones['neutral']) : '';
-    $linkClass = 'nav-link '.($isSub ? 'nav-sub ' : '').($active ? 'active' : '');
+    $linkClass = 'nav-link '.($isSub ? 'nav-sub ' : '').($active && ! $hasChildren ? 'active' : '').($active && $hasChildren ? ' parent-active' : '');
 @endphp
 
 @if ($hasChildren)

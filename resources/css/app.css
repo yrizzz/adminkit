@@ -638,6 +638,11 @@ header[data-navbar-color='custom_gradient'] {
     .nav-link.is-open {
         @apply text-sidebar-foreground;
     }
+    .nav-link.parent-active {
+        color: hsl(var(--sidebar-foreground));
+        background: transparent !important;
+        font-weight: 600;
+    }
     /* Default dark sidebar: active top-level uses accent/primary color */
     .nav-link.active:not(.nav-sub) {
         background: hsl(var(--primary) / 0.15) !important;
