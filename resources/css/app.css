@@ -630,8 +630,10 @@ header[data-navbar-color='custom_gradient'] {
 
     /* Sidebar nav link */
     .nav-link {
-        @apply relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-normal text-sidebar-foreground transition-colors;
+        @apply relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-normal text-sidebar-foreground;
+        transition: background-color 0.12s ease, opacity 0.12s ease;
     }
+
     .nav-link:hover {
         @apply bg-sidebar-accent/70 text-sidebar-accent-foreground;
     }
@@ -903,6 +905,13 @@ header[data-navbar-color='custom_gradient'] {
 
     /* ── Submenu Modes (Tree Line vs Clean Dot vs Pill Highlight) ── */
 
+    /* Non-tree modes (dots / pill): Shift list left so text has breathing room and doesn't squish right */
+    html[data-sidebar-style='dots'] .nav-sublist,
+    html[data-sidebar-style='pill'] .nav-sublist {
+        margin-inline-start: 0.2rem !important;
+        padding-inline-start: 0.75rem !important;
+    }
+
     /* 1) Clean Dot Mode: Hide tree line rails & horizontal branch connectors */
     html[data-sidebar-style='dots'] .nav-sublist::before,
     html[data-sidebar-style='dots'] .nav-sub::after,
@@ -925,6 +934,7 @@ header[data-navbar-color='custom_gradient'] {
         background: #ffffff !important;
         box-shadow: none !important;
     }
+
 
 
 
