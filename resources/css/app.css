@@ -730,19 +730,27 @@ header[data-navbar-color='custom_gradient'] {
 
     /* ── Tree submenu ────────────────────────────────── */
     /* Each nested list indents, so the menu branches out like roots/a file tree. */
+    /* ── Tree submenu ────────────────────────────────── */
+    /* Each nested list indents, so the menu branches out like roots/a file tree. */
     .nav-sublist {
         @apply relative ms-[1.1rem] mt-1 space-y-0.5 ps-[1.4rem];
     }
-    /* the vertical branch rail (spine) for this level */
+    /* the single continuous vertical branch rail (spine) for this level */
     .nav-sublist::before {
         content: '';
         position: absolute;
         inset-inline-start: 0.55rem;
-        inset-block-start: -0.4rem;
+        inset-block-start: 0.1rem;
         inset-block-end: 0.85rem;
         width: 2px;
         border-radius: 9999px;
-        background: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.25);
+    }
+    html[data-sidebar-color='light'] .nav-sublist::before {
+        background: hsl(var(--sidebar-foreground) / 0.18);
+    }
+    html[data-accent='black'] .nav-sublist::before {
+        background: rgba(255, 255, 255, 0.4) !important;
     }
 
 
@@ -770,14 +778,13 @@ header[data-navbar-color='custom_gradient'] {
         position: absolute;
         top: 50%;
         inset-inline-start: calc(0.55rem - 1.4rem);
-        width: 1.2rem;
+        width: 1.15rem;
         height: 2px;
         transform: translateY(-50%);
         border-radius: 9999px;
         background: rgba(255, 255, 255, 0.3);
         transition: none;
     }
-    html[data-sidebar-color='light'] .nav-sublist::before,
     html[data-sidebar-color='light'] .nav-sub::after {
         background: hsl(var(--sidebar-foreground) / 0.18);
     }
@@ -802,7 +809,8 @@ header[data-navbar-color='custom_gradient'] {
     html[data-sidebar-color='light'] .nav-sub:hover .nav-node { background: hsl(var(--sidebar-foreground)); }
     .nav-sub:hover::after { background: rgba(255, 255, 255, 0.6); }
     html[data-sidebar-color='light'] .nav-sub:hover::after { background: hsl(var(--sidebar-foreground) / 0.5); }
-    /* Default dark sidebar: active sub-item uses accent/primary color */
+    
+    /* Active sub-item styling */
     .nav-sub.active {
         background: hsl(var(--sidebar-primary) / 0.18) !important;
         color: hsl(var(--primary)) !important;
@@ -816,16 +824,16 @@ header[data-navbar-color='custom_gradient'] {
         transform: scale(1.15);
     }
 
-    .nav-sub.active::after { background: hsl(var(--sidebar-primary)) !important; }
+    .nav-sub.active::after,
+    .nav-sub.parent-active::after { 
+        background: hsl(var(--sidebar-primary)) !important; 
+    }
+
     /* Nested parent item (e.g. Ecommerce inside Pages) when a sub-child is active */
     .nav-sub.parent-active {
         background: hsl(var(--sidebar-primary) / 0.12) !important;
         color: hsl(var(--primary)) !important;
         font-weight: 500;
-    }
-
-    .nav-sub.parent-active::after {
-        background: hsl(var(--sidebar-primary)) !important;
     }
 
     /* Colored sidebars (bg = primary color / gradient / image / custom_gradient): use white text & white accents for contrast */
@@ -872,55 +880,6 @@ header[data-navbar-color='custom_gradient'] {
         box-shadow: 0 0 0 2.5px rgba(0, 0, 0, 0.1), 0 0 10px hsl(var(--sidebar-primary) / 0.5) !important;
     }
     html[data-sidebar-color='light'] .nav-sub.active::after { background: hsl(var(--sidebar-primary)) !important; }
-    .nav-sub::before {
-        content: '';
-        position: absolute;
-        inset-inline-start: calc(0.55rem - 1.4rem);
-        inset-block: -0.75rem;
-        width: 2px;
-        border-radius: 9999px;
-        background: transparent;
-        transition: none;
-    }
-
-    /* Default dark sidebar: active trail/connector uses accent/primary color */
-    .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before,
-    .nav-sublist > li:has(~ li .nav-sub.parent-active) > .nav-sub::before,
-    .nav-sub.active::before,
-    .nav-sub.parent-active::before {
-        background: hsl(var(--sidebar-primary)) !important;
-    }
-    /* Colored sidebars: active trail uses white */
-    html[data-sidebar-color='primary'] .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before,
-    html[data-sidebar-color='primary'] .nav-sublist > li:has(~ li .nav-sub.parent-active) > .nav-sub::before,
-    html[data-sidebar-color='primary'] .nav-sub.active::before,
-    html[data-sidebar-color='primary'] .nav-sub.parent-active::before,
-    html[data-sidebar-color^='gradient'] .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before,
-    html[data-sidebar-color^='gradient'] .nav-sublist > li:has(~ li .nav-sub.parent-active) > .nav-sub::before,
-    html[data-sidebar-color^='gradient'] .nav-sub.active::before,
-    html[data-sidebar-color^='gradient'] .nav-sub.parent-active::before,
-    html[data-sidebar-color^='image'] .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before,
-    html[data-sidebar-color^='image'] .nav-sublist > li:has(~ li .nav-sub.parent-active) > .nav-sub::before,
-    html[data-sidebar-color^='image'] .nav-sub.active::before,
-    html[data-sidebar-color^='image'] .nav-sub.parent-active::before,
-    html[data-sidebar-color='custom_gradient'] .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before,
-    html[data-sidebar-color='custom_gradient'] .nav-sublist > li:has(~ li .nav-sub.parent-active) > .nav-sub::before,
-    html[data-sidebar-color='custom_gradient'] .nav-sub.active::before,
-    html[data-sidebar-color='custom_gradient'] .nav-sub.parent-active::before {
-        background: rgba(255, 255, 255, 0.9) !important;
-    }
-    html[data-sidebar-color='light'] .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before,
-    html[data-sidebar-color='light'] .nav-sublist > li:has(~ li .nav-sub.parent-active) > .nav-sub::before,
-    html[data-sidebar-color='light'] .nav-sub.active::before,
-    html[data-sidebar-color='light'] .nav-sub.parent-active::before {
-        background: hsl(var(--sidebar-primary)) !important;
-    }
-    /* the active item or parent-active item ends the trail seamlessly overlapping with its horizontal branch line */
-    .nav-sub.active::before,
-    .nav-sub.parent-active::before {
-        inset-block-start: -0.75rem;
-        inset-block-end: calc(50% - 1px);
-    }
 
     /* ── Submenu Modes (Tree Line vs Clean Dot vs Pill Highlight) ── */
 
@@ -933,15 +892,13 @@ header[data-navbar-color='custom_gradient'] {
 
     /* 1) Clean Dot Mode: Hide tree line rails & horizontal branch connectors */
     html[data-sidebar-style='dots'] .nav-sublist::before,
-    html[data-sidebar-style='dots'] .nav-sub::after,
-    html[data-sidebar-style='dots'] .nav-sub::before {
+    html[data-sidebar-style='dots'] .nav-sub::after {
         display: none !important;
     }
 
     /* 2) Pill Mode: Hide tree lines & style active sub-item as a solid pill */
     html[data-sidebar-style='pill'] .nav-sublist::before,
-    html[data-sidebar-style='pill'] .nav-sub::after,
-    html[data-sidebar-style='pill'] .nav-sub::before {
+    html[data-sidebar-style='pill'] .nav-sub::after {
         display: none !important;
     }
     html[data-sidebar-style='pill'] .nav-sub.active {
@@ -965,14 +922,35 @@ header[data-navbar-color='custom_gradient'] {
     /* ALL sidebar active lines, indicators, tree lines, branch lines & nodes MUST be PURE SOLID WHITE */
     html[data-accent='black'] aside .nav-link.active:not(.nav-sub)::before,
     html[data-accent='black'] aside .nav-link.parent-active:not(.nav-sub)::before,
-    html[data-accent='black'] aside .nav-sub.active::before,
-    html[data-accent='black'] aside .nav-sub.parent-active::before,
     html[data-accent='black'] aside .nav-sub.active::after,
-    html[data-accent='black'] aside .nav-sub.parent-active::after,
-    html[data-accent='black'] aside .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before,
-    html[data-accent='black'] aside .nav-sublist > li:has(~ li .nav-sub.parent-active) > .nav-sub::before {
+    html[data-accent='black'] aside .nav-sub.parent-active::after {
         background: #ffffff !important;
         opacity: 1 !important;
+    }
+
+    html[data-accent='black'] aside .nav-link.active:not(.nav-sub) .nav-icon,
+    html[data-accent='black'] aside .nav-link.parent-active .nav-icon,
+    html[data-accent='black'] aside .nav-link.active:not(.nav-sub),
+    html[data-accent='black'] aside .nav-link.parent-active {
+        color: #ffffff !important;
+    }
+
+    html[data-accent='black'] aside .nav-link.active:not(.nav-sub),
+    html[data-accent='black'] aside .nav-link.parent-active:not(.nav-sub) {
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        background: rgba(255, 255, 255, 0.12) !important;
+    }
+
+    html[data-accent='black'] aside .nav-sub.active {
+        border: 1px solid rgba(255, 255, 255, 0.25) !important;
+        background: rgba(255, 255, 255, 0.15) !important;
+        color: #ffffff !important;
+    }
+
+    html[data-accent='black'] aside .nav-sub.active .nav-node,
+    html[data-accent='black'] aside .nav-sub.parent-active .nav-node {
+        background: #ffffff !important;
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4), 0 0 8px rgba(255, 255, 255, 0.8) !important;
     }
 
     html[data-accent='black'] aside .nav-link.active:not(.nav-sub) .nav-icon,
