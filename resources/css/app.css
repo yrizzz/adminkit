@@ -639,9 +639,19 @@ header[data-navbar-color='custom_gradient'] {
     .nav-link.is-open {
         @apply text-white;
     }
-    /* Top-level active: soft block + accent pill */
+    /* Top-level active: white pill so it pops on any colored sidebar */
     .nav-link.active:not(.nav-sub) {
-        background: hsl(var(--sidebar-primary) / 0.2) !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        color: hsl(var(--primary)) !important;
+        font-weight: 600;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    html[data-sidebar-color='light'] .nav-link.active:not(.nav-sub) {
+        background: hsl(var(--primary)) !important;
+        color: #ffffff !important;
+    }
+    html[data-sidebar-color='dark'] .nav-link.active:not(.nav-sub) {
+        background: rgba(255, 255, 255, 0.12) !important;
         color: #ffffff !important;
     }
     .nav-link.active:not(.nav-sub)::before {
@@ -651,10 +661,22 @@ header[data-navbar-color='custom_gradient'] {
         start: 0;
         width: 0.25rem;
         border-radius: 9999px;
+        background: hsl(var(--primary)) !important;
+    }
+    html[data-sidebar-color='light'] .nav-link.active:not(.nav-sub)::before,
+    html[data-sidebar-color='dark'] .nav-link.active:not(.nav-sub)::before {
         background: hsl(var(--sidebar-primary)) !important;
     }
     .nav-group-label {
-        @apply px-3 pb-1.5 pt-4 text-[0.68rem] font-semibold uppercase tracking-wider text-sidebar-muted;
+        @apply px-3 pb-1.5 pt-4 text-[0.68rem] font-semibold uppercase tracking-wider;
+        color: rgba(255, 255, 255, 0.65) !important;
+        letter-spacing: 0.08em;
+    }
+    html[data-sidebar-color='light'] .nav-group-label {
+        color: hsl(215.4 16.3% 46.9%) !important;
+    }
+    html[data-sidebar-color='dark'] .nav-group-label {
+        color: rgba(255, 255, 255, 0.5) !important;
     }
 
     /* ── Tree submenu ────────────────────────────────── */
@@ -678,6 +700,13 @@ header[data-navbar-color='custom_gradient'] {
         gap: 0.55rem;
         display: flex;
         align-items: center;
+    }
+    /* Sub-items that are collapsible (have a chevron inside) — keep chevron small and muted */
+    .nav-sub .nav-chevron {
+        width: 0.75rem;
+        height: 0.75rem;
+        flex-shrink: 0;
+        opacity: 0.6;
     }
     /* horizontal branch reaching out from the rail to each node (the ├ / └) */
     .nav-sub::after {

@@ -29,7 +29,7 @@
             @if ($badge)
                 <span class="nav-badge rounded-md px-1.5 py-0.5 text-[0.65rem] font-bold leading-none {{ $tone }}">{{ $badge['text'] }}</span>
             @endif
-            <i data-lucide="chevron-down" class="nav-chevron size-4 shrink-0 text-sidebar-muted transition-transform duration-200" :class="{ 'rotate-180': open }"></i>
+            <i data-lucide="chevron-down" class="{{ $isSub ? 'nav-chevron size-3' : 'nav-chevron size-4' }} shrink-0 text-sidebar-muted transition-transform duration-200" :class="{ 'rotate-180': open }"></i>
         </button>
 
         <ul x-show="open" x-collapse x-cloak class="nav-sublist">
