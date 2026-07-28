@@ -730,12 +730,10 @@ header[data-navbar-color='custom_gradient'] {
 
     /* ── Tree submenu ────────────────────────────────── */
     /* Each nested list indents, so the menu branches out like roots/a file tree. */
-    /* ── Tree submenu ────────────────────────────────── */
-    /* Each nested list indents, so the menu branches out like roots/a file tree. */
     .nav-sublist {
         @apply relative ms-[1.1rem] mt-1 space-y-0.5 ps-[1.4rem];
     }
-    /* the single continuous vertical branch rail (spine) for this level */
+    /* the base vertical branch rail (spine) for this level */
     .nav-sublist::before {
         content: '';
         position: absolute;
@@ -744,15 +742,14 @@ header[data-navbar-color='custom_gradient'] {
         inset-block-end: 0.85rem;
         width: 2px;
         border-radius: 9999px;
-        background: rgba(255, 255, 255, 0.25);
+        background: rgba(255, 255, 255, 0.2);
     }
     html[data-sidebar-color='light'] .nav-sublist::before {
         background: hsl(var(--sidebar-foreground) / 0.18);
     }
     html[data-accent='black'] .nav-sublist::before {
-        background: rgba(255, 255, 255, 0.4) !important;
+        background: rgba(255, 255, 255, 0.3) !important;
     }
-
 
     .nav-sub {
         position: relative;
@@ -782,7 +779,7 @@ header[data-navbar-color='custom_gradient'] {
         height: 2px;
         transform: translateY(-50%);
         border-radius: 9999px;
-        background: rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.25);
         transition: none;
     }
     html[data-sidebar-color='light'] .nav-sub::after {
@@ -827,6 +824,31 @@ header[data-navbar-color='custom_gradient'] {
     .nav-sub.active::after,
     .nav-sub.parent-active::after { 
         background: hsl(var(--sidebar-primary)) !important; 
+    }
+
+    /* Active Trail Vertical Connector Line: from top of tree down to the active item's horizontal branch */
+    .nav-sub::before {
+        content: '';
+        position: absolute;
+        inset-inline-start: calc(0.55rem - 1.4rem);
+        inset-block-start: -0.5rem;
+        inset-block-end: -0.5rem;
+        width: 2px;
+        border-radius: 9999px;
+        background: transparent;
+        transition: none;
+    }
+
+    .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before,
+    .nav-sublist > li:has(~ li .nav-sub.parent-active) > .nav-sub::before {
+        background: hsl(var(--sidebar-primary)) !important;
+    }
+
+    .nav-sub.active::before,
+    .nav-sub.parent-active::before {
+        background: hsl(var(--sidebar-primary)) !important;
+        inset-block-start: -0.5rem;
+        inset-block-end: calc(50% - 1px);
     }
 
     /* Nested parent item (e.g. Ecommerce inside Pages) when a sub-child is active */
@@ -892,13 +914,15 @@ header[data-navbar-color='custom_gradient'] {
 
     /* 1) Clean Dot Mode: Hide tree line rails & horizontal branch connectors */
     html[data-sidebar-style='dots'] .nav-sublist::before,
-    html[data-sidebar-style='dots'] .nav-sub::after {
+    html[data-sidebar-style='dots'] .nav-sub::after,
+    html[data-sidebar-style='dots'] .nav-sub::before {
         display: none !important;
     }
 
     /* 2) Pill Mode: Hide tree lines & style active sub-item as a solid pill */
     html[data-sidebar-style='pill'] .nav-sublist::before,
-    html[data-sidebar-style='pill'] .nav-sub::after {
+    html[data-sidebar-style='pill'] .nav-sub::after,
+    html[data-sidebar-style='pill'] .nav-sub::before {
         display: none !important;
     }
     html[data-sidebar-style='pill'] .nav-sub.active {
@@ -923,7 +947,11 @@ header[data-navbar-color='custom_gradient'] {
     html[data-accent='black'] aside .nav-link.active:not(.nav-sub)::before,
     html[data-accent='black'] aside .nav-link.parent-active:not(.nav-sub)::before,
     html[data-accent='black'] aside .nav-sub.active::after,
-    html[data-accent='black'] aside .nav-sub.parent-active::after {
+    html[data-accent='black'] aside .nav-sub.parent-active::after,
+    html[data-accent='black'] aside .nav-sub.active::before,
+    html[data-accent='black'] aside .nav-sub.parent-active::before,
+    html[data-accent='black'] aside .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before,
+    html[data-accent='black'] aside .nav-sublist > li:has(~ li .nav-sub.parent-active) > .nav-sub::before {
         background: #ffffff !important;
         opacity: 1 !important;
     }
