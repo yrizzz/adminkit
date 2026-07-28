@@ -156,14 +156,11 @@
             <x-ui.dropdown-item icon="credit-card" href="#">Billing</x-ui.dropdown-item>
             <x-ui.dropdown-item icon="life-buoy" href="#">Support</x-ui.dropdown-item>
             <div class="my-1 border-t border-border"></div>
-            @auth
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <x-ui.dropdown-item icon="log-out" variant="destructive" type="submit">Sign out</x-ui.dropdown-item>
-                </form>
-            @else
-                <x-ui.dropdown-item icon="log-in" :href="route('login')">Sign in</x-ui.dropdown-item>
-            @endauth
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <x-ui.dropdown-item icon="log-out" variant="destructive" type="submit">Sign out</x-ui.dropdown-item>
+            </form>
+
         </x-ui.dropdown>
     </div>
 </header>

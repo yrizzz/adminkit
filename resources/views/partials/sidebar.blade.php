@@ -68,13 +68,21 @@
 
     {{-- User card --}}
     <div class="mt-auto border-t border-sidebar-border p-3">
-        <a href="{{ route('settings') }}" wire:navigate class="sidebar-usercard flex items-center gap-3 rounded-xl p-2 transition-colors hover:bg-sidebar-accent">
-            <x-ui.avatar :name="auth()->user()?->name ?? 'Guest User'" size="sm" status="online" />
-            <div class="sidebar-usercard-text min-w-0 flex-1">
-                <p class="truncate text-sm font-semibold text-sidebar-foreground">{{ auth()->user()?->name ?? 'Guest User' }}</p>
-                <p class="truncate text-xs text-sidebar-muted">{{ auth()->user()?->email ?? 'guest@adminkit.test' }}</p>
-            </div>
-            <i data-lucide="settings" class="sidebar-usercard-text size-4 text-sidebar-muted"></i>
-        </a>
+        <div class="flex items-center gap-1">
+            <a href="{{ route('settings') }}" wire:navigate class="sidebar-usercard flex flex-1 items-center gap-3 rounded-xl p-2 transition-colors hover:bg-sidebar-accent">
+                <x-ui.avatar :name="auth()->user()?->name ?? 'Guest User'" size="sm" status="online" />
+                <div class="sidebar-usercard-text min-w-0 flex-1">
+                    <p class="truncate text-sm font-semibold text-sidebar-foreground">{{ auth()->user()?->name ?? 'Guest User' }}</p>
+                    <p class="truncate text-xs text-sidebar-muted">{{ auth()->user()?->email ?? 'guest@adminkit.test' }}</p>
+                </div>
+            </a>
+            <form method="POST" action="{{ route('logout') }}" class="inline">
+                @csrf
+                <button type="submit" title="Sign out" class="sidebar-usercard-text rounded-lg p-2 text-sidebar-muted hover:bg-sidebar-accent hover:text-destructive">
+                    <i data-lucide="log-out" class="size-4"></i>
+                </button>
+            </form>
+        </div>
     </div>
 </aside>
+

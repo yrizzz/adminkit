@@ -651,7 +651,7 @@ header[data-navbar-color='custom_gradient'] {
         color: hsl(var(--primary)) !important;
     }
     .nav-link.active:not(.nav-sub)::before,
-    .nav-link.parent-active::before {
+    .nav-link.parent-active:not(.nav-sub)::before {
         content: '';
         position: absolute;
         inset-y: 0.375rem;
@@ -686,13 +686,13 @@ header[data-navbar-color='custom_gradient'] {
         color: #ffffff !important;
     }
     html[data-sidebar-color='primary'] .nav-link.active:not(.nav-sub)::before,
-    html[data-sidebar-color='primary'] .nav-link.parent-active::before,
+    html[data-sidebar-color='primary'] .nav-link.parent-active:not(.nav-sub)::before,
     html[data-sidebar-color^='gradient'] .nav-link.active:not(.nav-sub)::before,
-    html[data-sidebar-color^='gradient'] .nav-link.parent-active::before,
+    html[data-sidebar-color^='gradient'] .nav-link.parent-active:not(.nav-sub)::before,
     html[data-sidebar-color^='image'] .nav-link.active:not(.nav-sub)::before,
-    html[data-sidebar-color^='image'] .nav-link.parent-active::before,
+    html[data-sidebar-color^='image'] .nav-link.parent-active:not(.nav-sub)::before,
     html[data-sidebar-color='custom_gradient'] .nav-link.active:not(.nav-sub)::before,
-    html[data-sidebar-color='custom_gradient'] .nav-link.parent-active::before {
+    html[data-sidebar-color='custom_gradient'] .nav-link.parent-active:not(.nav-sub)::before {
         background: #ffffff !important;
     }
 
@@ -708,7 +708,7 @@ header[data-navbar-color='custom_gradient'] {
         color: #ffffff !important;
     }
     html[data-sidebar-color='light'] .nav-link.active:not(.nav-sub)::before,
-    html[data-sidebar-color='light'] .nav-link.parent-active::before {
+    html[data-sidebar-color='light'] .nav-link.parent-active:not(.nav-sub)::before {
         background: hsl(var(--sidebar-primary)) !important;
     }
 
@@ -808,6 +808,15 @@ header[data-navbar-color='custom_gradient'] {
         transform: scale(1.24);
     }
     .nav-sub.active::after { background: hsl(var(--sidebar-primary)) !important; }
+    /* Nested parent item (e.g. Ecommerce inside Pages) when a sub-child is active */
+    .nav-sub.parent-active {
+        background: hsl(var(--sidebar-primary) / 0.12) !important;
+        color: hsl(var(--primary)) !important;
+        font-weight: 600;
+    }
+    .nav-sub.parent-active::after {
+        background: hsl(var(--sidebar-primary)) !important;
+    }
     /* Colored sidebars (bg = primary color): use white so it's visible */
     html[data-sidebar-color='primary'] .nav-sub.active,
     html[data-sidebar-color^='gradient'] .nav-sub.active,
