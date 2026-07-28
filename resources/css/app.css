@@ -734,17 +734,17 @@ header[data-navbar-color='custom_gradient'] {
     .nav-sublist::before {
         content: '';
         position: absolute;
-        inset-inline-start: 0.3rem;
-        inset-block-start: -1.15rem;
+        inset-inline-start: 0.55rem;
+        inset-block-start: -0.4rem;
         inset-block-end: 0.85rem;
         width: 2px;
         border-radius: 9999px;
-        background: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.18);
     }
 
     /* Highlight only the immediate sublist rail of a nested active parent (e.g. Ecommerce) */
     li:has(> .nav-sub.parent-active) > .nav-sublist::before {
-        background: hsl(var(--sidebar-primary)) !important;
+        background: hsl(var(--sidebar-primary) / 0.4) !important;
     }
 
     .nav-sub {
@@ -770,14 +770,15 @@ header[data-navbar-color='custom_gradient'] {
         content: '';
         position: absolute;
         top: 50%;
-        inset-inline-start: -1.1rem;
-        width: 1.1rem;
+        inset-inline-start: -0.85rem;
+        width: 0.85rem;
         height: 2px;
         transform: translateY(-50%);
         border-radius: 9999px;
-        background: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.18);
         transition: background-color 0.15s ease;
     }
+
 
     html[data-sidebar-color='light'] .nav-sublist::before,
     html[data-sidebar-color='light'] .nav-sub::after {
