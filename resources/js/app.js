@@ -205,15 +205,13 @@ const registerUIStore = () => {
             let x = window.innerWidth / 2;
             let y = window.innerHeight / 2;
 
-            // Priority 1: global touchstart tracker (real mobile Chrome)
-            // Real mobile synthesized click events have no changedTouches
-            // and clientX/Y = 0, so we use coordinates saved at touchstart.
-            if (window._lastTouchX !== null && window._lastTouchY !== null) {
-                x = window._lastTouchX;
-                y = window._lastTouchY;
-                // Clear after use so mouse clicks don't accidentally use stale touch coords
-                window._lastTouchX = null;
-                window._lastTouchY = null;
+            // Priority 1: pointerdown tracker (works on real mobile Chrome AND desktop)
+            // pointerdown always has valid clientX/Y unlike synthesized click events on mobile
+            if (window._lastPointerX !== null && window._lastPointerY !== null) {
+                x = window._lastPointerX;
+                y = window._lastPointerY;
+                window._lastPointerX = null;
+                window._lastPointerY = null;
             } else if (e) {
                 // Priority 2: direct touch on the event (devtools mobile sim)
                 const touch = e.changedTouches && e.changedTouches[0];
@@ -450,17 +448,17 @@ const triggerCardAnimations = () => {
 };
 
 /* ---------------------------------------------------------------
- * Global touch coordinate tracker
- * On real mobile Chrome, @click receives a synthesized event with
- * no changedTouches and unreliable clientX/Y = 0. We capture the
- * real finger position at touchstart so toggleTheme can use it.
+ * Global pointer coordinate tracker
+ * pointerdown always fires with valid clientX/Y on BOTH touch and
+ * mouse — even on real mobile Chrome where synthesized @click
+ * events have clientX/Y = 0. This is more reliable than touchstart.
  * ------------------------------------------------------------- */
-window._lastTouchX = null;
-window._lastTouchY = null;
-document.addEventListener('touchstart', (e) => {
-    if (e.changedTouches && e.changedTouches[0]) {
-        window._lastTouchX = e.changedTouches[0].clientX;
-        window._lastTouchY = e.changedTouches[0].clientY;
+window._lastPointerX = null;
+window._lastPointerY = null;
+document.addEventListener('pointerdown', (e) => {
+    if (e.clientX !== 0 || e.clientY !== 0) {
+        window._lastPointerX = e.clientX;
+        window._lastPointerY = e.clientY;
     }
 }, { passive: true });
 
