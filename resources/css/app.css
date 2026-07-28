@@ -15,14 +15,6 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Suppress all transitions during initial load (added by head anti-FOUC script) */
-.no-transition *,
-.no-transition *::before,
-.no-transition *::after {
-    transition: none !important;
-    animation: none !important;
-}
-
 :root {
     /* radius scale (PRD: sm6 md8 lg12 xl16 2xl20) driven by --radius */
     --radius: 0.65rem;
@@ -663,22 +655,21 @@ header[data-navbar-color='custom_gradient'] {
         border-radius: 9999px;
         background: hsl(var(--primary)) !important;
     }
-    /* Colored sidebars: white pill so it pops on colored bg */
+    /* Colored sidebars: subtle overlay so it doesn't flash white */
     html[data-sidebar-color='primary'] .nav-link.active:not(.nav-sub),
     html[data-sidebar-color^='gradient'] .nav-link.active:not(.nav-sub),
     html[data-sidebar-color^='image'] .nav-link.active:not(.nav-sub),
-    html[data-sidebar-color='custom_gradient'] .nav-link.active:not(.nav-sub),
-    html[data-sidebar-color='transparent'] .nav-link.active:not(.nav-sub) {
-        background: rgba(255, 255, 255, 0.95) !important;
-        color: hsl(var(--primary)) !important;
+    html[data-sidebar-color='custom_gradient'] .nav-link.active:not(.nav-sub) {
+        background: rgba(255, 255, 255, 0.18) !important;
+        color: #ffffff !important;
         font-weight: 600;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        box-shadow: none;
     }
     html[data-sidebar-color='primary'] .nav-link.active:not(.nav-sub)::before,
     html[data-sidebar-color^='gradient'] .nav-link.active:not(.nav-sub)::before,
     html[data-sidebar-color^='image'] .nav-link.active:not(.nav-sub)::before,
     html[data-sidebar-color='custom_gradient'] .nav-link.active:not(.nav-sub)::before {
-        background: hsl(var(--primary)) !important;
+        background: #ffffff !important;
     }
     /* Light sidebar: primary color bg + white text */
     html[data-sidebar-color='light'] .nav-link.active:not(.nav-sub) {

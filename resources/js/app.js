@@ -314,8 +314,6 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('hashchange', () => syncMenuActive());
 
 document.addEventListener('livewire:navigating', () => {
-    /* Suppress transitions so the nav active state doesn't flash during page swap */
-    document.documentElement.classList.add('no-transition');
     if (window.Alpine && Alpine.store('ui')) {
         const ui = Alpine.store('ui');
         document.documentElement.dataset.sidebarColor = ui.sidebarColor;
@@ -335,10 +333,4 @@ document.addEventListener('livewire:navigated', () => {
     }
     renderIcons();
     syncMenuActive();
-    /* Re-enable transitions after the DOM has settled */
-    requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-            document.documentElement.classList.remove('no-transition');
-        });
-    });
 });
