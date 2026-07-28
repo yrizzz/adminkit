@@ -173,6 +173,20 @@ const registerUIStore = () => {
             const isDarkNext = !this.isDark;
             const nextTheme  = isDarkNext ? 'dark' : 'light';
 
+            let x = window.innerWidth / 2;
+            let y = window.innerHeight / 2;
+            if (e) {
+                const btn = e.currentTarget || e.target;
+                if (btn && typeof btn.getBoundingClientRect === 'function') {
+                    const rect = btn.getBoundingClientRect();
+                    x = rect.left + rect.width / 2;
+                    y = rect.top + rect.height / 2;
+                } else if (e.clientX !== undefined && e.clientX !== 0) {
+                    x = e.clientX;
+                    y = e.clientY;
+                }
+            }
+
             if (!document.startViewTransition || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
                 document.documentElement.classList.add('theme-transitioning');
                 this.setTheme(nextTheme);
@@ -180,12 +194,16 @@ const registerUIStore = () => {
                 return;
             }
 
-            const x = e?.clientX ?? window.innerWidth / 2;
-            const y = e?.clientY ?? window.innerHeight / 2;
             const endRadius = Math.hypot(
                 Math.max(x, window.innerWidth - x),
                 Math.max(y, window.innerHeight - y)
             );
+
+            if (!isDarkNext) {
+                document.documentElement.classList.add('theme-shrink');
+            } else {
+                document.documentElement.classList.remove('theme-shrink');
+            }
 
             const transition = document.startViewTransition(() => {
                 this.setTheme(nextTheme);
@@ -196,14 +214,17 @@ const registerUIStore = () => {
                     `circle(0px at ${x}px ${y}px)`,
                     `circle(${endRadius}px at ${x}px ${y}px)`
                 ];
-                document.documentElement.animate(
+                const anim = document.documentElement.animate(
                     { clipPath: isDarkNext ? clipPath : [...clipPath].reverse() },
                     {
-                        duration: 450,
-                        easing: 'ease-in-out',
+                        duration: 500,
+                        easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
                         pseudoElement: isDarkNext ? '::view-transition-new(root)' : '::view-transition-old(root)'
                     }
                 );
+                anim.onfinish = () => {
+                    document.documentElement.classList.remove('theme-shrink');
+                };
             });
         },
         setDirection(v) { this.direction = v; LS.set('ak_dir', v); this.apply(); },

@@ -935,7 +935,7 @@ nav.is-searching .nav-sublist {
 }
 
 /* ---------------------------------------------------------------
- * Modern Circular Ripple Theme Transition (View Transitions API)
+ * Day / Night Circular Shrink & Expand View Transition
  * ------------------------------------------------------------- */
 ::view-transition-old(root),
 ::view-transition-new(root) {
@@ -948,12 +948,13 @@ nav.is-searching .nav-sublist {
 ::view-transition-new(root) {
     z-index: 9999;
 }
-.dark::view-transition-old(root) {
+.theme-shrink::view-transition-old(root) {
     z-index: 9999;
 }
-.dark::view-transition-new(root) {
+.theme-shrink::view-transition-new(root) {
     z-index: 1;
 }
+
 
 /* Fallback smooth theme transition class for older browsers */
 .theme-transitioning,

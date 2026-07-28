@@ -116,9 +116,13 @@
 
         {{-- Theme toggle --}}
         <button type="button" @click="$store.ui.toggleTheme($event)"
-                class="rounded-lg p-2 text-muted-foreground hover:bg-accent hover:text-foreground">
-            <i data-lucide="sun" class="size-5" x-show="$store.ui.isDark" x-cloak></i>
-            <i data-lucide="moon" class="size-5" x-show="!$store.ui.isDark"></i>
+                title="Toggle Dark / Light mode"
+                class="group relative rounded-lg p-2 text-muted-foreground transition-transform duration-300 active:scale-90 hover:bg-accent hover:text-foreground">
+            <span class="grid size-5 place-items-center transition-transform duration-500 ease-out"
+                  :class="$store.ui.isDark ? 'rotate-[360deg]' : 'rotate-0'">
+                <i data-lucide="sun" class="size-5 text-amber-400 transition-all duration-300" x-show="$store.ui.isDark" x-cloak></i>
+                <i data-lucide="moon" class="size-5 text-slate-600 transition-all duration-300 dark:text-indigo-300" x-show="!$store.ui.isDark"></i>
+            </span>
         </button>
 
         {{-- Customizer --}}
