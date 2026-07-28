@@ -205,17 +205,27 @@ const registerUIStore = () => {
             let x = window.innerWidth / 2;
             let y = window.innerHeight / 2;
 
-            if (e) {
-                // Support touch events (mobile Chrome)
+            // Priority 1: global touchstart tracker (real mobile Chrome)
+            // Real mobile synthesized click events have no changedTouches
+            // and clientX/Y = 0, so we use coordinates saved at touchstart.
+            if (window._lastTouchX !== null && window._lastTouchY !== null) {
+                x = window._lastTouchX;
+                y = window._lastTouchY;
+                // Clear after use so mouse clicks don't accidentally use stale touch coords
+                window._lastTouchX = null;
+                window._lastTouchY = null;
+            } else if (e) {
+                // Priority 2: direct touch on the event (devtools mobile sim)
                 const touch = e.changedTouches && e.changedTouches[0];
-                if (touch) {
+                if (touch && (touch.clientX !== 0 || touch.clientY !== 0)) {
                     x = touch.clientX;
                     y = touch.clientY;
+                // Priority 3: mouse click clientX/Y (desktop)
                 } else if (e.clientX !== undefined && e.clientX !== 0) {
                     x = e.clientX;
                     y = e.clientY;
                 } else {
-                    // Fallback: use button element center
+                    // Priority 4: button element center (fallback)
                     const btn = (e.target && typeof e.target.closest === 'function')
                         ? e.target.closest('button')
                         : (e.currentTarget || e.target);
@@ -438,6 +448,21 @@ const triggerCardAnimations = () => {
         mainContent.classList.add('animate-cards');
     }
 };
+
+/* ---------------------------------------------------------------
+ * Global touch coordinate tracker
+ * On real mobile Chrome, @click receives a synthesized event with
+ * no changedTouches and unreliable clientX/Y = 0. We capture the
+ * real finger position at touchstart so toggleTheme can use it.
+ * ------------------------------------------------------------- */
+window._lastTouchX = null;
+window._lastTouchY = null;
+document.addEventListener('touchstart', (e) => {
+    if (e.changedTouches && e.changedTouches[0]) {
+        window._lastTouchX = e.changedTouches[0].clientX;
+        window._lastTouchY = e.changedTouches[0].clientY;
+    }
+}, { passive: true });
 
 /* ---------------------------------------------------------------
  * Boot & Livewire Navigation hooks for zero-FOUC transitions
