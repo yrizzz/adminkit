@@ -774,8 +774,8 @@ header[data-navbar-color='custom_gradient'] {
         content: '';
         position: absolute;
         top: 50%;
-        inset-inline-start: -0.85rem;
-        width: 1.15rem;
+        inset-inline-start: -0.87rem;
+        width: 1.17rem;
         height: 2px;
         transform: translateY(-50%);
         border-radius: 9999px;
@@ -830,7 +830,7 @@ header[data-navbar-color='custom_gradient'] {
     .nav-sub::before {
         content: '';
         position: absolute;
-        inset-inline-start: -0.85rem;
+        inset-inline-start: -0.87rem;
         inset-block-start: -0.5rem;
         inset-block-end: -0.5rem;
         width: 2px;
@@ -842,6 +842,14 @@ header[data-navbar-color='custom_gradient'] {
     .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before,
     .nav-sublist > li:has(~ li .nav-sub.parent-active) > .nav-sub::before {
         background: hsl(var(--sidebar-primary)) !important;
+    }
+
+    /* Lower top start of the active trail for the first item in the list so it doesn't overlap the parent button above */
+    .nav-sublist > li:first-child:has(~ li .nav-sub.active) > .nav-sub::before,
+    .nav-sublist > li:first-child:has(~ li .nav-sub.parent-active) > .nav-sub::before,
+    .nav-sublist > li:first-child > .nav-sub.active::before,
+    .nav-sublist > li:first-child > .nav-sub.parent-active::before {
+        inset-block-start: 0.15rem !important;
     }
 
     .nav-sub.active::before,
