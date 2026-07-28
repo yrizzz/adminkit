@@ -659,7 +659,8 @@ header[data-navbar-color='custom_gradient'] {
     html[data-sidebar-color='primary'] .nav-link.active:not(.nav-sub),
     html[data-sidebar-color^='gradient'] .nav-link.active:not(.nav-sub),
     html[data-sidebar-color^='image'] .nav-link.active:not(.nav-sub),
-    html[data-sidebar-color='custom_gradient'] .nav-link.active:not(.nav-sub) {
+    html[data-sidebar-color='custom_gradient'] .nav-link.active:not(.nav-sub),
+    html[data-sidebar-color='transparent'] .nav-link.active:not(.nav-sub) {
         background: rgba(255, 255, 255, 0.95) !important;
         color: hsl(var(--primary)) !important;
         font-weight: 600;
@@ -766,7 +767,7 @@ header[data-navbar-color='custom_gradient'] {
     /* Default dark sidebar: active sub-item uses accent/primary color */
     .nav-sub.active {
         background: hsl(var(--sidebar-primary) / 0.18) !important;
-        color: #ffffff !important;
+        color: hsl(var(--primary)) !important;
     }
     .nav-sub.active .nav-node {
         width: 0.5rem;
