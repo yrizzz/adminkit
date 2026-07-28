@@ -259,13 +259,13 @@
             {{-- Accent color --}}
             <section>
                 <h3 class="mb-2.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Accent color</h3>
-                <div class="flex flex-wrap gap-2.5">
+                <div class="flex items-center justify-between gap-1.5">
                     @foreach (['blue' => '#2563eb', 'violet' => '#7c3aed', 'green' => '#16a34a', 'rose' => '#e11d48', 'orange' => '#f97316', 'amber' => '#f59e0b', 'teal' => '#14b8a6', 'black' => '#0f172a'] as $name => $hex)
                         <button type="button" @click="$store.ui.setAccent('{{ $name }}')" title="{{ ucfirst($name) }}"
-                                class="grid size-9 place-items-center rounded-full ring-offset-2 ring-offset-card transition-all"
+                                class="grid size-7.5 place-items-center rounded-full ring-offset-2 ring-offset-card transition-all"
                                 :class="$store.ui.accent === '{{ $name }}' ? 'ring-2 ring-primary' : ''"
                                 style="background: {{ $hex }}">
-                            <i data-lucide="check" class="size-4 text-white" x-show="$store.ui.accent === '{{ $name }}'"></i>
+                            <i data-lucide="check" class="size-3.5 text-white" x-show="$store.ui.accent === '{{ $name }}'"></i>
                         </button>
                     @endforeach
                 </div>
