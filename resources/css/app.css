@@ -631,8 +631,9 @@ header[data-navbar-color='custom_gradient'] {
     /* Sidebar nav link */
     .nav-link {
         @apply relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-normal text-sidebar-foreground;
-        transition: background-color 0.12s ease, opacity 0.12s ease;
+        transition: none;
     }
+
 
     .nav-link:hover {
         @apply bg-sidebar-accent/70 text-sidebar-accent-foreground;
@@ -774,7 +775,7 @@ header[data-navbar-color='custom_gradient'] {
         transform: translateY(-50%);
         border-radius: 9999px;
         background: rgba(255, 255, 255, 0.3);
-        transition: background-color 0.15s ease;
+        transition: none;
     }
     html[data-sidebar-color='light'] .nav-sublist::before,
     html[data-sidebar-color='light'] .nav-sub::after {
@@ -788,11 +789,12 @@ header[data-navbar-color='custom_gradient'] {
         flex: none;
         border-radius: 9999px;
         background: rgba(255, 255, 255, 0.5);
-        transition: all 0.15s ease;
+        transition: none;
         display: grid;
         place-items: center;
         box-sizing: border-box;
     }
+
     html[data-sidebar-color='light'] .nav-node {
         background: hsl(var(--sidebar-muted));
     }
@@ -878,8 +880,9 @@ header[data-navbar-color='custom_gradient'] {
         width: 2px;
         border-radius: 9999px;
         background: transparent;
-        transition: background-color 0.15s ease;
+        transition: none;
     }
+
     /* Default dark sidebar: active trail/connector uses accent/primary color */
     .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before,
     .nav-sublist > li:has(~ li .nav-sub.parent-active) > .nav-sub::before,
