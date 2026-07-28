@@ -983,9 +983,9 @@ header[data-navbar-color='custom_gradient'] {
     html[data-accent='black'] .nav-sub.parent-active::after {
         background: #ffffff !important;
     }
-    html[data-accent='black'] .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before,
-    html[data-accent='black'] .nav-sub.active::before {
-        background: rgba(255, 255, 255, 0.9) !important;
+    html[data-accent='black'] header .animate-ping,
+    html[data-accent='black'] header .animate-ping + span {
+        background-color: #ffffff !important;
     }
 
 

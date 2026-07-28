@@ -83,8 +83,8 @@
                 <button type="button" class="relative rounded-lg p-2 text-muted-foreground hover:bg-accent hover:text-foreground">
                     <i data-lucide="bell" class="size-5"></i>
                     <span class="absolute end-1.5 top-1.5 flex size-2">
-                        <span class="absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-75"></span>
-                        <span class="relative inline-flex size-2 rounded-full bg-primary"></span>
+                        <span class="absolute inline-flex size-full animate-ping rounded-full bg-primary-foreground opacity-75"></span>
+                        <span class="relative inline-flex size-2 rounded-full bg-primary-foreground"></span>
                     </span>
                 </button>
             </x-slot:trigger>
