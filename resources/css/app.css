@@ -691,7 +691,7 @@ header[data-navbar-color='custom_gradient'] {
         inset-inline-start: 0.55rem;
         inset-block-start: -0.4rem;
         inset-block-end: 0.9rem;   /* stops around the last node so the branch ends in an └ */
-        width: 2px;
+        width: 3px;
         border-radius: 9999px;
         background: hsl(var(--sidebar-foreground) / 0.18);
     }
@@ -715,7 +715,7 @@ header[data-navbar-color='custom_gradient'] {
         top: 50%;
         inset-inline-start: -0.85rem;
         width: 1.1rem;
-        height: 2px;
+        height: 3px;
         transform: translateY(-50%);
         border-radius: 9999px;
         background: rgba(255, 255, 255, 0.35);
@@ -779,7 +779,7 @@ header[data-navbar-color='custom_gradient'] {
     }
     .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before,
     .nav-sub.active::before {
-        background: rgba(255, 255, 255, 0.8) !important;
+        background: rgba(255, 255, 255, 0.9) !important;
     }
     html[data-sidebar-color='light'] .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before,
     html[data-sidebar-color='light'] .nav-sub.active::before {
