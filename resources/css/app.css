@@ -738,13 +738,13 @@ header[data-navbar-color='custom_gradient'] {
         position: relative;
     }
 
-    /* Vertical segment on each li in nav-sublist */
+    /* Vertical segment on each li in nav-sublist (constrained to item height) */
     .nav-sublist > li::before {
         content: '';
         position: absolute;
         inset-inline-start: -0.85rem;
         top: -0.3rem;
-        bottom: -0.3rem;
+        height: 2.5rem;
         width: 2px;
         border-radius: 9999px;
         background: rgba(255, 255, 255, 0.18);
@@ -752,10 +752,12 @@ header[data-navbar-color='custom_gradient'] {
     }
     .nav-sublist > li:first-child::before {
         top: -0.6rem;
+        height: 2.8rem;
     }
     .nav-sublist > li:last-child::before {
-        bottom: 50%;
+        height: 1.5rem;
     }
+
 
     /* Segmented Active Trail: Blue from top down to active item */
     .nav-sublist > li:has(~ li > .nav-link.active)::before,
