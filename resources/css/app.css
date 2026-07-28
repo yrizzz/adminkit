@@ -875,7 +875,7 @@ header[data-navbar-color='custom_gradient'] {
     .nav-sub::before {
         content: '';
         position: absolute;
-        inset-inline-start: -0.88rem;
+        inset-inline-start: -0.85rem;
         inset-block: -0.4rem;
         width: 2px;
         border-radius: 9999px;
@@ -915,11 +915,11 @@ header[data-navbar-color='custom_gradient'] {
     html[data-sidebar-color='light'] .nav-sub.parent-active::before {
         background: hsl(var(--sidebar-primary)) !important;
     }
-    /* the active item or parent-active item ends the trail exactly at its node/branch line (50%) */
+    /* the active item or parent-active item ends the trail seamlessly overlapping with its horizontal branch line */
     .nav-sub.active::before,
     .nav-sub.parent-active::before {
         inset-block-start: -0.4rem;
-        inset-block-end: 50%;
+        inset-block-end: calc(50% - 1px);
     }
 
     /* ── Submenu Modes (Tree Line vs Clean Dot vs Pill Highlight) ── */
