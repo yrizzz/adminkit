@@ -727,50 +727,24 @@ header[data-navbar-color='custom_gradient'] {
 
     /* ── Tree submenu ────────────────────────────────── */
     /* Each nested list indents, so the menu branches out like roots/a file tree. */
-    /* ── Tree submenu segmented vertical rail ───────────────── */
+    /* ── Tree Submenu System ────────────────────────────────── */
     .nav-sublist {
         @apply relative ms-[1.1rem] mt-1 space-y-0.5 ps-[1.4rem];
     }
-    .nav-sublist::before {
-        display: none;
-    }
-    .nav-sublist > li {
-        position: relative;
-    }
 
-    /* Vertical segment on each li in nav-sublist (constrained to item height) */
-    .nav-sublist > li::before {
+    /* Continuous vertical rail for each sublist level */
+    .nav-sublist::before {
         content: '';
         position: absolute;
-        inset-inline-start: -0.85rem;
-        top: -0.3rem;
-        height: 2.5rem;
+        inset-inline-start: 0.55rem;
+        top: -0.35rem;
+        bottom: 0.85rem;
         width: 2px;
         border-radius: 9999px;
         background: rgba(255, 255, 255, 0.18);
-        transition: background-color 0.15s ease;
     }
-    .nav-sublist > li:first-child::before {
-        top: -0.6rem;
-        height: 2.8rem;
-    }
-    .nav-sublist > li:last-child::before {
-        height: 1.5rem;
-    }
-
-
-    /* Segmented Active Trail: Blue from top down to active item */
-    .nav-sublist > li:has(~ li > .nav-link.active)::before,
-    .nav-sublist > li:has(> .nav-link.active)::before,
-    .nav-sublist > li:has(~ li > .nav-link.parent-active)::before,
-    .nav-sublist > li:has(> .nav-link.parent-active)::before {
-        background: hsl(var(--sidebar-primary)) !important;
-    }
-
-    /* Items after active get muted grey segment */
-    .nav-sublist > li:has(> .nav-link.active) ~ li::before,
-    .nav-sublist > li:has(> .nav-link.parent-active) ~ li::before {
-        background: rgba(255, 255, 255, 0.18) !important;
+    html[data-sidebar-color='light'] .nav-sublist::before {
+        background: hsl(var(--sidebar-foreground) / 0.18);
     }
 
     .nav-sub {
@@ -779,7 +753,8 @@ header[data-navbar-color='custom_gradient'] {
         display: flex;
         align-items: center;
     }
-    /* Sub-items that are collapsible (have a chevron inside) — keep chevron small but visible */
+
+    /* Collapsible chevron */
     .nav-sub .nav-chevron {
         width: 0.75rem;
         height: 0.75rem;
@@ -791,7 +766,8 @@ header[data-navbar-color='custom_gradient'] {
         color: hsl(var(--sidebar-muted)) !important;
         opacity: 1;
     }
-    /* horizontal branch reaching out from the rail to each node (the ├ / └) */
+
+    /* Horizontal branch reaching out from the rail to each node (the ├ / └) */
     .nav-sub::after {
         content: '';
         position: absolute;
@@ -804,8 +780,56 @@ header[data-navbar-color='custom_gradient'] {
         background: rgba(255, 255, 255, 0.18);
         transition: background-color 0.15s ease;
     }
+    html[data-sidebar-color='light'] .nav-sub::after {
+        background: hsl(var(--sidebar-foreground) / 0.18);
+    }
 
+    /* Node dot */
+    .nav-node {
+        position: relative;
+        z-index: 1;
+        width: 0.5rem;
+        height: 0.5rem;
+        flex: none;
+        border-radius: 9999px;
+        background: rgba(255, 255, 255, 0.4);
+        transition: all 0.15s ease;
+        display: grid;
+        place-items: center;
+        box-sizing: border-box;
+    }
+    html[data-sidebar-color='light'] .nav-node {
+        background: hsl(var(--sidebar-muted));
+    }
+    .nav-sub:hover .nav-node { background: rgba(255, 255, 255, 0.9); }
+    html[data-sidebar-color='light'] .nav-sub:hover .nav-node { background: hsl(var(--sidebar-foreground)); }
 
+    /* Active Sub-item (e.g. Checkout) */
+    .nav-sub.active {
+        background: hsl(var(--sidebar-primary) / 0.18) !important;
+        color: hsl(var(--primary)) !important;
+        font-weight: 500;
+    }
+    .nav-sub.active .nav-node {
+        width: 0.375rem;
+        height: 0.375rem;
+        background: hsl(var(--sidebar-primary)) !important;
+        box-shadow: 0 0 0 2px hsl(var(--sidebar-primary) / 0.35), 0 0 6px hsl(var(--sidebar-primary) / 0.6) !important;
+        transform: scale(1.15);
+    }
+    .nav-sub.active::after {
+        background: hsl(var(--sidebar-primary)) !important;
+    }
+
+    /* Nested Active Parent (e.g. Ecommerce inside Pages) */
+    .nav-sub.parent-active {
+        background: hsl(var(--sidebar-primary) / 0.12) !important;
+        color: hsl(var(--primary)) !important;
+        font-weight: 500;
+    }
+    .nav-sub.parent-active::after {
+        background: hsl(var(--sidebar-primary)) !important;
+    }
 
     html[data-sidebar-color='light'] .nav-sublist::before,
     html[data-sidebar-color='light'] .nav-sub::after {
@@ -814,16 +838,17 @@ header[data-navbar-color='custom_gradient'] {
     .nav-node {
         position: relative;
         z-index: 1;
-        width: 0.5rem;
-        height: 0.5rem;
+        width: 0.3rem;
+        height: 0.3rem;
         flex: none;
         border-radius: 9999px;
-        background: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.45);
         transition: all 0.15s ease;
         display: grid;
         place-items: center;
         box-sizing: border-box;
     }
+
     html[data-sidebar-color='light'] .nav-node {
         background: hsl(var(--sidebar-muted));
     }
