@@ -29,6 +29,11 @@
             d.style.setProperty('--custom-nb-grad-to', get('ak_nb_grad_to', '#0f172a'));
             d.classList.toggle('sidebar-collapsed', get('ak_sb_collapsed', false));
             if (get('ak_compact', false)) d.classList.add('is-compact');
+            /* Suppress all transitions on first paint to avoid color flash */
+            d.classList.add('no-transition');
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () { d.classList.remove('no-transition'); });
+            });
         } catch (e) {}
     })();
 </script>

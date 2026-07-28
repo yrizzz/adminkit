@@ -15,6 +15,14 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Suppress all transitions during initial load (added by head anti-FOUC script) */
+.no-transition *,
+.no-transition *::before,
+.no-transition *::after {
+    transition: none !important;
+    animation: none !important;
+}
+
 :root {
     /* radius scale (PRD: sm6 md8 lg12 xl16 2xl20) driven by --radius */
     --radius: 0.65rem;
