@@ -690,10 +690,10 @@ header[data-navbar-color='custom_gradient'] {
         position: absolute;
         inset-inline-start: 0.55rem;
         inset-block-start: -0.4rem;
-        inset-block-end: 0.9rem;   /* stops around the last node so the branch ends in an └ */
+        inset-block-end: 0.9rem;
         width: 3px;
         border-radius: 9999px;
-        background: hsl(var(--sidebar-foreground) / 0.18);
+        background: rgba(255, 255, 255, 0.3);
     }
     .nav-sub {
         position: relative;
@@ -701,12 +701,17 @@ header[data-navbar-color='custom_gradient'] {
         display: flex;
         align-items: center;
     }
-    /* Sub-items that are collapsible (have a chevron inside) — keep chevron small and muted */
+    /* Sub-items that are collapsible (have a chevron inside) — keep chevron small but visible */
     .nav-sub .nav-chevron {
         width: 0.75rem;
         height: 0.75rem;
         flex-shrink: 0;
-        opacity: 0.6;
+        opacity: 0.7;
+        color: rgba(255, 255, 255, 0.8) !important;
+    }
+    html[data-sidebar-color='light'] .nav-sub .nav-chevron {
+        color: hsl(var(--sidebar-muted)) !important;
+        opacity: 1;
     }
     /* horizontal branch reaching out from the rail to each node (the ├ / └) */
     .nav-sub::after {
@@ -718,9 +723,10 @@ header[data-navbar-color='custom_gradient'] {
         height: 3px;
         transform: translateY(-50%);
         border-radius: 9999px;
-        background: rgba(255, 255, 255, 0.35);
+        background: rgba(255, 255, 255, 0.3);
         transition: background-color 0.15s ease;
     }
+    html[data-sidebar-color='light'] .nav-sublist::before,
     html[data-sidebar-color='light'] .nav-sub::after {
         background: hsl(var(--sidebar-foreground) / 0.18);
     }
