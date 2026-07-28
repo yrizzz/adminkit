@@ -630,14 +630,13 @@ header[data-navbar-color='custom_gradient'] {
 
     /* Sidebar nav link */
     .nav-link {
-        @apply relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground transition-colors duration-150;
+        @apply relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground;
     }
     .nav-link:hover {
         @apply bg-sidebar-accent/70 text-sidebar-accent-foreground;
     }
-    .nav-link.active,
     .nav-link.is-open {
-        @apply text-white;
+        @apply text-sidebar-foreground;
     }
     /* Default dark sidebar: active top-level uses accent/primary color */
     .nav-link.active:not(.nav-sub) {

@@ -9,7 +9,7 @@
 ])
 
 @php
-    $base = 'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all ak-ring disabled:pointer-events-none disabled:opacity-50 [&>svg]:size-4 [&>svg]:shrink-0';
+    $base = 'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-transform ak-ring disabled:pointer-events-none disabled:opacity-50 [&>svg]:size-4 [&>svg]:shrink-0';
 
     $variants = [
         'default'     => 'bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 active:scale-[.98]',
