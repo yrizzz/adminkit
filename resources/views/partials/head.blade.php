@@ -4,33 +4,34 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <title>{{ ($title ?? 'Dashboard') . ' — ' . $cfg['name'] }}</title>
 <meta name="description" content="{{ $cfg['tagline'] }} — modern, themeable admin panel.">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
 @php
-/* ── Server-side FOUC fix: bake the correct active-nav colour into a <style>
-   tag using cookies so it's correct even on wire:navigate (Livewire SPA)
-   without waiting for any client-side JavaScript to run.               ── */
-$_accentMap = [
-    'blue'   => '221 83% 53%', 'violet' => '262 83% 58%', 'green'  => '142 71% 45%',
-    'rose'   => '347 77% 50%', 'orange' => '25 95% 53%',  'amber'  => '38 92% 50%',
-    'teal'   => '173 80% 40%',
-];
-$_ac  = $_COOKIE['ak_accent']   ?? 'blue';
-$_sb  = $_COOKIE['ak_sb_color'] ?? 'dark';
-$_p   = $_accentMap[$_ac]       ?? '221 83% 53%';
-$_isColored = ($_sb === 'primary' || str_starts_with($_sb, 'gradient') || str_starts_with($_sb, 'image') || $_sb === 'custom_gradient');
-$_isLight   = ($_sb === 'light');
-if ($_isColored) {
-    $_foucCss = ".nav-link.active:not(.nav-sub){background:rgba(255,255,255,.95)!important;color:hsl({$_p})!important}"
-              . ".nav-link.active:not(.nav-sub)::before{background:hsl({$_p})!important}";
-} elseif ($_isLight) {
-    $_foucCss = ".nav-link.active:not(.nav-sub){background:hsl({$_p})!important;color:#fff!important}"
-              . ".nav-link.active:not(.nav-sub)::before{background:hsl({$_p})!important}";
-} else {
-    $_foucCss = ".nav-link.active:not(.nav-sub){background:hsl({$_p}/.15)!important;color:hsl({$_p})!important}"
-              . ".nav-link.active:not(.nav-sub)::before{background:hsl({$_p})!important}";
-}
+    $_accentMap = ['blue'=>'221 83% 53%','violet'=>'262 83% 58%','green'=>'142 71% 45%','rose'=>'347 77% 50%','orange'=>'25 95% 53%','amber'=>'38 92% 50%','teal'=>'173 80% 40%'];
+    $_ac  = $_COOKIE['ak_accent']   ?? 'blue';
+    $_sb  = $_COOKIE['ak_sb_color'] ?? 'dark';
+    $_p   = $_accentMap[$_ac] ?? '221 83% 53%';
+    $_isColored = ($_sb === 'primary' || str_starts_with($_sb, 'gradient') || str_starts_with($_sb, 'image') || $_sb === 'custom_gradient');
+    $_isLight   = ($_sb === 'light');
+    if ($_isColored) {
+        $_activeBg   = 'rgba(255,255,255,.95)';
+        $_activeText = 'hsl(' . $_p . ')';
+        $_barBg      = 'hsl(' . $_p . ')';
+    } elseif ($_isLight) {
+        $_activeBg   = 'hsl(' . $_p . ')';
+        $_activeText = '#fff';
+        $_barBg      = 'hsl(' . $_p . ')';
+    } else {
+        $_activeBg   = 'hsl(' . $_p . '/.15)';
+        $_activeText = 'hsl(' . $_p . ')';
+        $_barBg      = 'hsl(' . $_p . ')';
+    }
+    $_foucCss = '.nav-link.active:not(.nav-sub){background:' . $_activeBg . '!important;color:' . $_activeText . '!important}'
+              . '.nav-link.active:not(.nav-sub)::before{background:' . $_barBg . '!important}';
 @endphp
-{{-- Inline active-nav style: server-rendered so it's correct on hard reload AND wire:navigate --}}
 <style id="ak-fouc">{{ $_foucCss }}</style>
 
 {{-- Prevent theme flash: apply persisted preferences before first paint --}}
