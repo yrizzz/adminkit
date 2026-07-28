@@ -42,12 +42,10 @@
                 black: '222 47% 11%'
             };
             if (accent === 'black') {
-                var p = dark ? '0 0% 98%' : '222 47% 11%';
-                var pf = dark ? '222 47% 11%' : '0 0% 100%';
-                d.style.setProperty('--primary', p);
-                d.style.setProperty('--primary-foreground', pf);
-                d.style.setProperty('--ring', p);
-                d.style.setProperty('--sidebar-primary', p);
+                d.style.setProperty('--primary', '222 47% 11%');
+                d.style.setProperty('--primary-foreground', '0 0% 100%');
+                d.style.setProperty('--ring', '222 47% 11%');
+                d.style.setProperty('--sidebar-primary', '222 47% 11%');
             } else if (accMap[accent]) {
                 d.style.setProperty('--primary', accMap[accent]);
                 d.style.setProperty('--ring', accMap[accent]);
