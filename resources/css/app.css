@@ -998,11 +998,22 @@ header[data-navbar-color='custom_gradient'] {
         padding-inline: 0.5rem;
     }
     aside.is-rail .nav-group-label {
-        text-align: center;
+        position: relative;
         overflow: hidden;
-        height: 0.75rem;
-        padding-top: 0.75rem;
+        height: 0px;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
         color: transparent;
+        font-size: 0;
+    }
+    aside.is-rail .nav-group-label::after {
+        content: '';
+        display: block;
+        height: 1px;
+        width: 60%;
+        margin: 0 auto;
+        background-color: currentColor;
+        opacity: 0.2;
     }
     aside.is-rail .sidebar-brand {
         justify-content: center;
