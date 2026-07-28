@@ -769,8 +769,8 @@ header[data-navbar-color='custom_gradient'] {
         content: '';
         position: absolute;
         top: 50%;
-        inset-inline-start: -0.85rem;
-        width: 1.1rem;
+        inset-inline-start: calc(0.55rem - 1.4rem);
+        width: 1.2rem;
         height: 2px;
         transform: translateY(-50%);
         border-radius: 9999px;
@@ -875,8 +875,8 @@ header[data-navbar-color='custom_gradient'] {
     .nav-sub::before {
         content: '';
         position: absolute;
-        inset-inline-start: -0.85rem;
-        inset-block: -0.4rem;
+        inset-inline-start: calc(0.55rem - 1.4rem);
+        inset-block: -0.75rem;
         width: 2px;
         border-radius: 9999px;
         background: transparent;
@@ -918,7 +918,7 @@ header[data-navbar-color='custom_gradient'] {
     /* the active item or parent-active item ends the trail seamlessly overlapping with its horizontal branch line */
     .nav-sub.active::before,
     .nav-sub.parent-active::before {
-        inset-block-start: -0.4rem;
+        inset-block-start: -0.75rem;
         inset-block-end: calc(50% - 1px);
     }
 
