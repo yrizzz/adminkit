@@ -965,12 +965,12 @@ header[data-navbar-color='custom_gradient'] {
 
     html[data-accent='black'] aside .nav-link.active:not(.nav-sub),
     html[data-accent='black'] aside .nav-link.parent-active:not(.nav-sub) {
-        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3) !important;
         background: rgba(255, 255, 255, 0.12) !important;
     }
 
     html[data-accent='black'] aside .nav-sub.active {
-        border: 1px solid rgba(255, 255, 255, 0.25) !important;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25) !important;
         background: rgba(255, 255, 255, 0.15) !important;
         color: #ffffff !important;
     }
@@ -979,19 +979,6 @@ header[data-navbar-color='custom_gradient'] {
     html[data-accent='black'] aside .nav-sub.parent-active .nav-node {
         background: #ffffff !important;
         box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4), 0 0 8px rgba(255, 255, 255, 0.8) !important;
-    }
-
-    html[data-accent='black'] aside .nav-link.active:not(.nav-sub) .nav-icon,
-    html[data-accent='black'] aside .nav-link.parent-active .nav-icon,
-    html[data-accent='black'] aside .nav-link.active:not(.nav-sub),
-    html[data-accent='black'] aside .nav-link.parent-active {
-        color: #ffffff !important;
-    }
-
-    html[data-accent='black'] aside .nav-link.active:not(.nav-sub),
-    html[data-accent='black'] aside .nav-link.parent-active:not(.nav-sub) {
-        border: 1px solid rgba(255, 255, 255, 0.3) !important;
-        background: rgba(255, 255, 255, 0.12) !important;
     }
 
     html[data-accent='black'] aside .nav-sub.active {
