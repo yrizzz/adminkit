@@ -327,11 +327,11 @@
                 </label>
                 <label class="flex cursor-pointer items-center justify-between">
                     <span class="text-sm font-medium">Auto page loading</span>
-                    <button type="button" role="switch" @click="$store.ui.toggleSkeletonLoading()"
-                            :class="$store.ui.skeletonLoading ? 'bg-primary' : 'bg-muted'"
+                    <button type="button" role="switch" @click="$store.ui.togglePageLoading()"
+                            :class="$store.ui.pageLoading ? 'bg-primary' : 'bg-muted'"
                             class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors">
                         <span class="inline-block size-4 rounded-full bg-white shadow transition-transform"
-                              :class="$store.ui.skeletonLoading ? 'ltr:translate-x-6 rtl:-translate-x-6' : 'ltr:translate-x-1 rtl:-translate-x-1'"></span>
+                              :class="$store.ui.pageLoading ? 'ltr:translate-x-6 rtl:-translate-x-6' : 'ltr:translate-x-1 rtl:-translate-x-1'"></span>
                     </button>
                 </label>
             </section>

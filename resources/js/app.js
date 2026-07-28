@@ -123,7 +123,7 @@ const registerUIStore = () => {
         sidebarStyle: LS.get('ak_sb_style', 'tree'),
         navbarColor: LS.get('ak_nb_color', 'default'),
         cardAnimation: LS.get('ak_card_animation', 'fade-up'),
-        skeletonLoading: LS.get('ak_skeleton_loading', false),
+        pageLoading: LS.get('ak_page_loading', false),
         layoutFluid: LS.get('ak_layout_fluid', false),
 
         sidebarGradientFrom: LS.get('ak_sb_grad_from', '#1e1b4b'),
@@ -174,7 +174,7 @@ const registerUIStore = () => {
             html.dataset.sidebarStyle = this.sidebarStyle;
             html.dataset.navbarColor = this.navbarColor;
             html.dataset.cardAnimation = this.cardAnimation;
-            html.dataset.skeletonLoading = this.skeletonLoading;
+            html.dataset.pageLoading = this.pageLoading;
             html.dataset.layoutFluid = this.layoutFluid;
             html.classList.toggle('sidebar-collapsed', this.sidebarCollapsed);
             html.classList.toggle('is-compact', this.compact);
@@ -201,25 +201,31 @@ const registerUIStore = () => {
             const isDarkNext = !this.isDark;
             const nextTheme  = isDarkNext ? 'dark' : 'light';
 
+            // Default to center of screen
             let x = window.innerWidth / 2;
             let y = window.innerHeight / 2;
-            if (e) {
-                const btn = (e.target && typeof e.target.closest === 'function')
-                    ? e.target.closest('button')
-                    : (e.currentTarget || e.target);
 
-                if (btn && typeof btn.getBoundingClientRect === 'function') {
-                    const rect = btn.getBoundingClientRect();
-                    if (rect.width > 0 && rect.height > 0) {
-                        x = rect.left + rect.width / 2;
-                        y = rect.top + rect.height / 2;
-                    } else if (e.clientX !== undefined && e.clientX !== 0) {
-                        x = e.clientX;
-                        y = e.clientY;
-                    }
+            if (e) {
+                // Support touch events (mobile Chrome)
+                const touch = e.changedTouches && e.changedTouches[0];
+                if (touch) {
+                    x = touch.clientX;
+                    y = touch.clientY;
                 } else if (e.clientX !== undefined && e.clientX !== 0) {
                     x = e.clientX;
                     y = e.clientY;
+                } else {
+                    // Fallback: use button element center
+                    const btn = (e.target && typeof e.target.closest === 'function')
+                        ? e.target.closest('button')
+                        : (e.currentTarget || e.target);
+                    if (btn && typeof btn.getBoundingClientRect === 'function') {
+                        const rect = btn.getBoundingClientRect();
+                        if (rect.width > 0 && rect.height > 0) {
+                            x = rect.left + rect.width / 2;
+                            y = rect.top + rect.height / 2;
+                        }
+                    }
                 }
             }
 
@@ -328,7 +334,7 @@ const registerUIStore = () => {
         toggleSidebar() { this.sidebarCollapsed = !this.sidebarCollapsed; LS.set('ak_sb_collapsed', this.sidebarCollapsed); this.apply(); },
         setNavbarFixed(v) { this.navbarFixed = v; LS.set('ak_navbar_fixed', v); },
         setCardAnimation(v) { this.cardAnimation = v; LS.set('ak_card_animation', v); this.apply(); },
-        toggleSkeletonLoading() { this.skeletonLoading = !this.skeletonLoading; LS.set('ak_skeleton_loading', this.skeletonLoading); this.apply(); },
+        togglePageLoading() { this.pageLoading = !this.pageLoading; LS.set('ak_page_loading', this.pageLoading); this.apply(); },
         toggleLayoutFluid() {
             const html = document.documentElement;
             html.classList.add('layout-width-transitioning');
@@ -456,7 +462,7 @@ document.addEventListener('livewire:navigating', () => {
         document.documentElement.style.setProperty('--custom-nb-grad-to', ui.navbarGradientTo);
 
         // Inject fullscreen loader immediately on navigate start
-        if (ui.skeletonLoading) {
+        if (ui.pageLoading) {
             let loader = document.getElementById('global-page-loader');
             if (!loader) {
                 loader = document.createElement('div');
@@ -491,7 +497,7 @@ document.addEventListener('livewire:navigated', () => {
         ui.apply();
         ui.closeMobileSidebar();
 
-        if (ui.skeletonLoading && window.lastNavigateStart) {
+        if (ui.pageLoading && window.lastNavigateStart) {
             const elapsed = Date.now() - window.lastNavigateStart;
             const minDelay = 750; // minimum loading show time in ms
             const loader = document.getElementById('global-page-loader');
@@ -532,7 +538,7 @@ document.addEventListener('livewire:navigated', () => {
 document.addEventListener('livewire:init', () => {
     Livewire.hook('request', ({ component, succeed, fail, respond }) => {
         const requestStart = Date.now();
-        if (window.Alpine && Alpine.store('ui') && Alpine.store('ui').skeletonLoading) {
+        if (window.Alpine && Alpine.store('ui') && Alpine.store('ui').pageLoading) {
             if (component.el) component.el.classList.add('livewire-loading');
         }
         return ({ succeed, fail, respond }) => {
