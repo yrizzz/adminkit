@@ -107,7 +107,9 @@
                     { label: 'Revenue', data: [12,19,15,25,22,30,28,35,32,40,38,48], borderColor: t.primary, backgroundColor: g, fill: true, tension: .4, borderWidth: 2.5, pointRadius: 0, pointHoverRadius: 5 },
                     { label: 'Expenses', data: [8,11,9,14,12,16,15,18,17,20,19,24], borderColor: t.c3, backgroundColor: 'transparent', borderDash: [5,5], fill: false, tension: .4, borderWidth: 2, pointRadius: 0 },
                 ]},
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: t.text, usePointStyle: true, boxWidth: 8 } } },
+                options: { responsive: true, maintainAspectRatio: false,
+                    layout: { padding: { top: 8 } },
+                    plugins: { legend: { labels: { color: t.text, usePointStyle: true, boxWidth: 8, padding: 20 } } },
                     scales: { x: { grid: { display: false }, ticks: { color: t.text } }, y: { grid: { color: t.grid }, ticks: { color: t.text, callback: v => '$' + v + 'k' } } } },
             });
         }

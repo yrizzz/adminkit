@@ -38,7 +38,8 @@
                 red: '347 77% 50%',
                 orange: '25 95% 53%',
                 amber: '38 92% 50%',
-                teal: '173 80% 40%'
+                teal: '173 80% 40%',
+                black: '222 47% 11%'
             };
             if (accMap[accent]) {
                 d.style.setProperty('--primary', accMap[accent]);
