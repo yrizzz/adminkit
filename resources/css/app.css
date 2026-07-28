@@ -718,8 +718,11 @@ header[data-navbar-color='custom_gradient'] {
         height: 2px;
         transform: translateY(-50%);
         border-radius: 9999px;
-        background: hsl(var(--sidebar-foreground) / 0.18);
+        background: rgba(255, 255, 255, 0.35);
         transition: background-color 0.15s ease;
+    }
+    html[data-sidebar-color='light'] .nav-sub::after {
+        background: hsl(var(--sidebar-foreground) / 0.18);
     }
     .nav-node {
         position: relative;
@@ -728,25 +731,33 @@ header[data-navbar-color='custom_gradient'] {
         height: 0.5rem;
         flex: none;
         border-radius: 9999px;
-        background: hsl(var(--sidebar-muted));
+        background: rgba(255, 255, 255, 0.5);
         transition: all 0.15s ease;
         display: grid;
         place-items: center;
         box-sizing: border-box;
     }
-    .nav-sub:hover .nav-node { background: hsl(var(--sidebar-foreground)); }
-    .nav-sub:hover::after { background: hsl(var(--sidebar-foreground) / 0.5); }
+    html[data-sidebar-color='light'] .nav-node {
+        background: hsl(var(--sidebar-muted));
+    }
+    .nav-sub:hover .nav-node { background: rgba(255, 255, 255, 0.9); }
+    html[data-sidebar-color='light'] .nav-sub:hover .nav-node { background: hsl(var(--sidebar-foreground)); }
+    .nav-sub:hover::after { background: rgba(255, 255, 255, 0.6); }
+    html[data-sidebar-color='light'] .nav-sub:hover::after { background: hsl(var(--sidebar-foreground) / 0.5); }
     .nav-sub.active {
-        background: hsl(var(--sidebar-primary) / 0.22) !important;
+        background: rgba(255, 255, 255, 0.15) !important;
         color: #ffffff !important;
     }
     .nav-sub.active .nav-node {
         width: 0.5rem;
         height: 0.5rem;
-        background: hsl(var(--sidebar-primary)) !important;
-        box-shadow: 0 0 0 2.5px hsl(var(--sidebar-primary) / 0.35), 0 0 10px hsl(var(--sidebar-primary) / 0.7) !important;
+        background: #ffffff !important;
+        box-shadow: 0 0 0 2.5px rgba(255, 255, 255, 0.3), 0 0 8px rgba(255, 255, 255, 0.5) !important;
         transform: scale(1.24);
     }
+    /* active connector turns white on colored sidebars */
+    .nav-sub.active::after { background: rgba(255, 255, 255, 0.9) !important; }
+    /* Light sidebar active state: keep primary color */
     html[data-sidebar-color='light'] .nav-sub.active {
         background: hsl(var(--sidebar-primary) / 0.12) !important;
         color: hsl(var(--sidebar-primary)) !important;
@@ -755,8 +766,7 @@ header[data-navbar-color='custom_gradient'] {
         background: hsl(var(--sidebar-primary)) !important;
         box-shadow: 0 0 0 2.5px rgba(0, 0, 0, 0.1), 0 0 10px hsl(var(--sidebar-primary) / 0.5) !important;
     }
-    /* active branch turns accent color: the node, its connector, and the rail above it */
-    .nav-sub.active::after { background: hsl(var(--sidebar-primary)) !important; }
+    html[data-sidebar-color='light'] .nav-sub.active::after { background: hsl(var(--sidebar-primary)) !important; }
     .nav-sub::before {
         content: '';
         position: absolute;
@@ -769,9 +779,13 @@ header[data-navbar-color='custom_gradient'] {
     }
     .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before,
     .nav-sub.active::before {
+        background: rgba(255, 255, 255, 0.8) !important;
+    }
+    html[data-sidebar-color='light'] .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before,
+    html[data-sidebar-color='light'] .nav-sub.active::before {
         background: hsl(var(--sidebar-primary) / 0.9) !important;
     }
-    /* the active item ends the blue trail exactly at its node (dot) */
+    /* the active item ends the trail exactly at its node (dot) */
     .nav-sub.active::before {
         inset-block-start: -0.4rem;
         inset-block-end: 50%;
