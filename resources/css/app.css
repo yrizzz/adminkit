@@ -954,40 +954,50 @@ header[data-navbar-color='custom_gradient'] {
         box-shadow: none !important;
     }
 
-    /* ── Black Accent Mode: High-contrast text & crisp white borders in light/dark mode ── */
+    /* ── Black Accent Mode: High-contrast text & crisp white active lines in sidebar ── */
     html.dark[data-accent='black'] .text-primary {
         color: #f8fafc !important;
     }
     html.dark[data-accent='black'] .border-primary {
         border-color: rgba(255, 255, 255, 0.4) !important;
     }
-    html[data-accent='black'] .nav-link.active:not(.nav-sub),
-    html[data-accent='black'] .nav-link.parent-active:not(.nav-sub) {
+
+    /* ALL sidebar active lines, indicators, tree lines, branch lines & nodes MUST be PURE SOLID WHITE */
+    html[data-accent='black'] aside .nav-link.active:not(.nav-sub)::before,
+    html[data-accent='black'] aside .nav-link.parent-active:not(.nav-sub)::before,
+    html[data-accent='black'] aside .nav-sub.active::before,
+    html[data-accent='black'] aside .nav-sub.parent-active::before,
+    html[data-accent='black'] aside .nav-sub.active::after,
+    html[data-accent='black'] aside .nav-sub.parent-active::after,
+    html[data-accent='black'] aside .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before,
+    html[data-accent='black'] aside .nav-sublist > li:has(~ li .nav-sub.parent-active) > .nav-sub::before {
+        background: #ffffff !important;
+        opacity: 1 !important;
+    }
+
+    html[data-accent='black'] aside .nav-link.active:not(.nav-sub) .nav-icon,
+    html[data-accent='black'] aside .nav-link.parent-active .nav-icon,
+    html[data-accent='black'] aside .nav-link.active:not(.nav-sub),
+    html[data-accent='black'] aside .nav-link.parent-active {
+        color: #ffffff !important;
+    }
+
+    html[data-accent='black'] aside .nav-link.active:not(.nav-sub),
+    html[data-accent='black'] aside .nav-link.parent-active:not(.nav-sub) {
         border: 1px solid rgba(255, 255, 255, 0.3) !important;
         background: rgba(255, 255, 255, 0.12) !important;
-        color: #ffffff !important;
     }
-    html[data-accent='black'] .nav-link.active:not(.nav-sub)::before,
-    html[data-accent='black'] .nav-link.parent-active:not(.nav-sub)::before {
-        background: #ffffff !important;
-    }
-    html[data-accent='black'] .nav-link.active:not(.nav-sub) .nav-icon,
-    html[data-accent='black'] .nav-link.parent-active .nav-icon {
-        color: #ffffff !important;
-    }
-    html[data-accent='black'] .nav-sub.active {
+
+    html[data-accent='black'] aside .nav-sub.active {
         border: 1px solid rgba(255, 255, 255, 0.25) !important;
         background: rgba(255, 255, 255, 0.15) !important;
         color: #ffffff !important;
     }
-    html[data-accent='black'] .nav-sub.active .nav-node,
-    html[data-accent='black'] .nav-sub.parent-active .nav-node {
+
+    html[data-accent='black'] aside .nav-sub.active .nav-node,
+    html[data-accent='black'] aside .nav-sub.parent-active .nav-node {
         background: #ffffff !important;
-        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35), 0 0 6px rgba(255, 255, 255, 0.6) !important;
-    }
-    html[data-accent='black'] .nav-sub.active::after,
-    html[data-accent='black'] .nav-sub.parent-active::after {
-        background: #ffffff !important;
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4), 0 0 8px rgba(255, 255, 255, 0.8) !important;
     }
 
 
