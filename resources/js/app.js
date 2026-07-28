@@ -201,42 +201,7 @@ const registerUIStore = () => {
             const isDarkNext = !this.isDark;
             const nextTheme  = isDarkNext ? 'dark' : 'light';
 
-            // Default to center of screen
-            let x = window.innerWidth / 2;
-            let y = window.innerHeight / 2;
-
-            // Priority 1: pointerdown tracker (works on real mobile Chrome AND desktop)
-            // pointerdown always has valid clientX/Y unlike synthesized click events on mobile
-            if (window._lastPointerX !== null && window._lastPointerY !== null) {
-                x = window._lastPointerX;
-                y = window._lastPointerY;
-                window._lastPointerX = null;
-                window._lastPointerY = null;
-            } else if (e) {
-                // Priority 2: direct touch on the event (devtools mobile sim)
-                const touch = e.changedTouches && e.changedTouches[0];
-                if (touch && (touch.clientX !== 0 || touch.clientY !== 0)) {
-                    x = touch.clientX;
-                    y = touch.clientY;
-                // Priority 3: mouse click clientX/Y (desktop)
-                } else if (e.clientX !== undefined && e.clientX !== 0) {
-                    x = e.clientX;
-                    y = e.clientY;
-                } else {
-                    // Priority 4: button element center (fallback)
-                    const btn = (e.target && typeof e.target.closest === 'function')
-                        ? e.target.closest('button')
-                        : (e.currentTarget || e.target);
-                    if (btn && typeof btn.getBoundingClientRect === 'function') {
-                        const rect = btn.getBoundingClientRect();
-                        if (rect.width > 0 && rect.height > 0) {
-                            x = rect.left + rect.width / 2;
-                            y = rect.top + rect.height / 2;
-                        }
-                    }
-                }
-            }
-
+            // No View Transition support or reduced motion — simple swap
             if (!document.startViewTransition || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
                 document.documentElement.classList.add('theme-transitioning');
                 this.setTheme(nextTheme);
@@ -244,16 +209,62 @@ const registerUIStore = () => {
                 return;
             }
 
+            // ── Mobile: clean top-to-bottom wipe ──────────────────────────
+            const isMobile = window.matchMedia('(pointer: coarse)').matches;
+            if (isMobile) {
+                if (!isDarkNext) document.documentElement.classList.add('theme-shrink');
+                else document.documentElement.classList.remove('theme-shrink');
+
+                const mobileTransition = document.startViewTransition(() => {
+                    this.setTheme(nextTheme);
+                });
+                mobileTransition.ready.then(() => {
+                    const wipe = isDarkNext
+                        ? ['inset(0 0 100% 0)', 'inset(0 0 0% 0)']   // reveal top→bottom
+                        : ['inset(0% 0 0 0)', 'inset(100% 0 0 0)'];  // hide top→bottom
+                    document.documentElement.animate(
+                        { clipPath: wipe },
+                        {
+                            duration: 450,
+                            easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+                            pseudoElement: isDarkNext ? '::view-transition-new(root)' : '::view-transition-old(root)'
+                        }
+                    ).onfinish = () => document.documentElement.classList.remove('theme-shrink');
+                });
+                return;
+            }
+
+            // ── Desktop: circle ripple from click position ─────────────────
+            let x = window.innerWidth / 2;
+            let y = window.innerHeight / 2;
+
+            if (window._lastPointerX !== null && window._lastPointerY !== null) {
+                x = window._lastPointerX;
+                y = window._lastPointerY;
+                window._lastPointerX = null;
+                window._lastPointerY = null;
+            } else if (e && e.clientX !== undefined && e.clientX !== 0) {
+                x = e.clientX;
+                y = e.clientY;
+            } else if (e) {
+                const btn = (e.target && typeof e.target.closest === 'function')
+                    ? e.target.closest('button') : (e.currentTarget || e.target);
+                if (btn && typeof btn.getBoundingClientRect === 'function') {
+                    const rect = btn.getBoundingClientRect();
+                    if (rect.width > 0 && rect.height > 0) {
+                        x = rect.left + rect.width / 2;
+                        y = rect.top + rect.height / 2;
+                    }
+                }
+            }
+
             const endRadius = Math.hypot(
                 Math.max(x, window.innerWidth - x),
                 Math.max(y, window.innerHeight - y)
             );
 
-            if (!isDarkNext) {
-                document.documentElement.classList.add('theme-shrink');
-            } else {
-                document.documentElement.classList.remove('theme-shrink');
-            }
+            if (!isDarkNext) document.documentElement.classList.add('theme-shrink');
+            else document.documentElement.classList.remove('theme-shrink');
 
             const transition = document.startViewTransition(() => {
                 this.setTheme(nextTheme);
@@ -264,17 +275,14 @@ const registerUIStore = () => {
                     `circle(0px at ${x}px ${y}px)`,
                     `circle(${endRadius}px at ${x}px ${y}px)`
                 ];
-                const anim = document.documentElement.animate(
+                document.documentElement.animate(
                     { clipPath: isDarkNext ? clipPath : [...clipPath].reverse() },
                     {
                         duration: 500,
                         easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
                         pseudoElement: isDarkNext ? '::view-transition-new(root)' : '::view-transition-old(root)'
                     }
-                );
-                anim.onfinish = () => {
-                    document.documentElement.classList.remove('theme-shrink');
-                };
+                ).onfinish = () => document.documentElement.classList.remove('theme-shrink');
             });
         },
         setDirection(v) { this.direction = v; LS.set('ak_dir', v); this.apply(); },
