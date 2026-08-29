@@ -358,7 +358,7 @@
                             <input type="number" x-model="amount" class="w-full rounded-lg border border-border bg-background py-2 pl-7 pr-3 text-xs font-semibold text-foreground focus:outline-none focus:ring-2 focus:ring-primary" placeholder="0.00">
                         </div>
                     </div>
-                    <x-ui.button @click="send()" size="sm" variant="primary" class="w-full" icon="send">Send Wire Transfer</x-ui.button>
+                    <x-ui.button @click="send()" size="lg" variant="primary" class="w-full font-semibold" icon="send">Send Wire Transfer</x-ui.button>
                 </div>
             </x-ui.card>
         </div>
