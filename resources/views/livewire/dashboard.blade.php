@@ -341,10 +341,10 @@
 
             {{-- Quick Wire Transfer Widget --}}
             <x-ui.card title="Quick Express Transfer" subtitle="Instant internal team payout" x-data="{ recipient: 'Alex Rivera (Lead Architect)', amount: '250', send() { window.toast('Sent $' + this.amount + ' to ' + this.recipient + '!', {variant:'success'}); } }">
-                <div class="space-y-3">
+                <div class="space-y-4">
                     <div>
-                        <label class="text-xs font-semibold text-muted-foreground">Recipient</label>
-                        <select x-model="recipient" class="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+                        <label class="text-sm font-semibold text-foreground/80">Recipient</label>
+                        <select x-model="recipient" class="mt-1.5 h-10 w-full rounded-lg border border-border bg-background px-3.5 py-2 text-sm font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-primary">
                             <option>Alex Rivera (Lead Architect)</option>
                             <option>Sofia Martinez (UI/UX Designer)</option>
                             <option>Omar Haddad (DevOps Engineer)</option>
@@ -352,10 +352,10 @@
                         </select>
                     </div>
                     <div>
-                        <label class="text-xs font-semibold text-muted-foreground">Amount (USD)</label>
-                        <div class="relative mt-1">
-                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-xs text-muted-foreground">$</span>
-                            <input type="number" x-model="amount" class="w-full rounded-lg border border-border bg-background py-2 pl-7 pr-3 text-xs font-semibold text-foreground focus:outline-none focus:ring-2 focus:ring-primary" placeholder="0.00">
+                        <label class="text-sm font-semibold text-foreground/80">Amount (USD)</label>
+                        <div class="relative mt-1.5">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-sm text-muted-foreground">$</span>
+                            <input type="number" x-model="amount" class="h-10 w-full rounded-lg border border-border bg-background py-2 pl-8 pr-3.5 text-sm font-semibold text-foreground focus:outline-none focus:ring-2 focus:ring-primary" placeholder="0.00">
                         </div>
                     </div>
                     <x-ui.button @click="send()" size="lg" variant="primary" class="w-full font-semibold" icon="send">Send Wire Transfer</x-ui.button>
