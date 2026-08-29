@@ -159,10 +159,10 @@
                             <span class="rounded bg-white/20 px-1.5 py-0.5 text-xs font-mono">3.2k</span>
                         </a>
 
-                        <a href="#showcase"
+                        <a href="{{ route('dashboard') }}" wire:navigate
                            class="h-12 w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-xl border border-slate-700/90 bg-slate-800/80 px-6 text-sm sm:text-base font-semibold text-slate-200 hover:bg-slate-700/90 hover:text-white hover:border-blue-500/50 transition-all backdrop-blur shadow-md shrink-0">
                             <x-ui.icon name="layout-dashboard" class="size-4 text-blue-400" />
-                            <span>Explore Interactive Demos</span>
+                            <span>Dashboard</span>
                         </a>
                     </div>
 
@@ -831,10 +831,10 @@
                         <span class="ms-1 rounded bg-blue-100 px-1.5 py-0.5 text-xs text-blue-800 font-mono">3.2k</span>
                     </a>
 
-                    <a href="#showcase"
+                    <a href="{{ route('dashboard') }}" wire:navigate
                        class="h-12 w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-xl border border-white/40 bg-white/10 px-6 text-sm font-semibold text-white hover:bg-white/20 transition-all backdrop-blur shrink-0">
                         <x-ui.icon name="layout-dashboard" class="size-4 text-white" />
-                        <span>Explore Interactive Demos</span>
+                        <span>Dashboard</span>
                     </a>
                 </div>
             </div>
