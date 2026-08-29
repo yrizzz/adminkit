@@ -910,7 +910,7 @@
             </div>
 
             {{-- Bottom Footer Bar --}}
-            <div class="relative pt-8 text-center border-t border-slate-800/30 overflow-hidden">
+            <div class="relative pt-8 text-center border-t border-slate-800/80 overflow-hidden">
                 <p class="text-xs sm:text-sm text-slate-400 font-medium">
                     &copy; {{ date('Y') }} AdminKit. Built with <span class="text-red-500">❤️</span> for Laravel Developers.
                 </p>
