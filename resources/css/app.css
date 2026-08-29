@@ -859,34 +859,21 @@ header[data-navbar-color='custom_gradient'] {
 
     /* Active sub-item styling */
     .nav-sub.active {
-        background: rgba(59, 130, 246, 0.18) !important;
-        color: #60a5fa !important;
-    }
-    html:not(.dark) .nav-sub.active {
-        background: rgba(37, 99, 235, 0.12) !important;
-        color: #2563eb !important;
+        background: hsl(var(--primary) / 0.15) !important;
+        color: hsl(var(--primary)) !important;
     }
     .nav-sub.active .nav-node,
     .nav-sub.parent-active .nav-node {
         width: 0.38rem;
         height: 0.38rem;
-        background: #3b82f6 !important;
-        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.35), 0 0 6px rgba(59, 130, 246, 0.6) !important;
+        background: hsl(var(--primary)) !important;
+        box-shadow: 0 0 0 2px hsl(var(--primary) / 0.35), 0 0 6px hsl(var(--primary) / 0.6) !important;
         transform: scale(1.15);
-    }
-    html:not(.dark) .nav-sub.active .nav-node,
-    html:not(.dark) .nav-sub.parent-active .nav-node {
-        background: #2563eb !important;
-        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25), 0 0 6px rgba(37, 99, 235, 0.5) !important;
     }
 
     .nav-sub.active::after,
     .nav-sub.parent-active::after { 
-        background: #3b82f6 !important; 
-    }
-    html:not(.dark) .nav-sub.active::after,
-    html:not(.dark) .nav-sub.parent-active::after { 
-        background: #2563eb !important; 
+        background: hsl(var(--primary)) !important; 
     }
 
     /* Active Trail Vertical Connector Line: from top of tree down to the active item's horizontal branch */
@@ -904,11 +891,7 @@ header[data-navbar-color='custom_gradient'] {
 
     .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before,
     .nav-sublist > li:has(~ li .nav-sub.parent-active) > .nav-sub::before {
-        background: #3b82f6 !important;
-    }
-    html:not(.dark) .nav-sublist > li:has(~ li .nav-sub.active) > .nav-sub::before,
-    html:not(.dark) .nav-sublist > li:has(~ li .nav-sub.parent-active) > .nav-sub::before {
-        background: #2563eb !important;
+        background: hsl(var(--primary)) !important;
     }
 
     /* Lower top start of the active trail for the first item in the list so it doesn't overlap the parent button above */
@@ -921,13 +904,9 @@ header[data-navbar-color='custom_gradient'] {
 
     .nav-sub.active::before,
     .nav-sub.parent-active::before {
-        background: #3b82f6 !important;
+        background: hsl(var(--primary)) !important;
         inset-block-start: -0.5rem;
         inset-block-end: calc(50% - 1px);
-    }
-    html:not(.dark) .nav-sub.active::before,
-    html:not(.dark) .nav-sub.parent-active::before {
-        background: #2563eb !important;
     }
 
     /* Nested parent item (e.g. Ecommerce inside Pages) when a sub-child is active */
