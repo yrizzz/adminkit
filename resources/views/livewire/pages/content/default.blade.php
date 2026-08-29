@@ -13,7 +13,7 @@
                 @php
                     $events = [
                         ['user-plus','New member joined','Aisha Rahman accepted the invite to the workspace.','2 minutes ago','text-info bg-info/10'],
-                        ['git-commit-horizontal','Deployed v1.4.2','Release pushed to production by the CI pipeline.','1 hour ago','text-primary bg-primary/10'],
+                        ['git-commit-horizontal','Deployed v1.2.0','Release pushed to production by the CI pipeline.','1 hour ago','text-primary bg-primary/10'],
                         ['check-check','Order completed','Order #4821 was fulfilled and shipped.','3 hours ago','text-success bg-success/10'],
                         ['message-square','New comment','“Great work on the dashboard!” on Q3 report.','5 hours ago','text-[hsl(var(--warning))] bg-warning/10'],
                         ['upload','Assets uploaded','12 new brand assets added to the library.','Yesterday','text-muted-foreground bg-muted'],

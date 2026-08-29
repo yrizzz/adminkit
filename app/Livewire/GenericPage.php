@@ -40,6 +40,8 @@ class GenericPage extends Component
         // Authentication and Error screens get their own standalone, full-screen
         // layout — no sidebar or navbar, the page paints the whole viewport itself.
         $standalonePaths = [
+            'landing',
+            'docs',
             'sign-in', 'sign-in-2', 'sign-up', 'sign-up-2',
             'lock-screen', 'lock-screen-2', 'reset-password', 'reset-password-2',
             'create-password', 'two-step-verification', 'coming-soon',

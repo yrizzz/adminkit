@@ -37,13 +37,15 @@ Route::post('/logout', function (Request $request) {
     return redirect()->route('login');
 })->middleware('auth')->name('logout');
 
+Route::get('/', GenericPage::class)->defaults('path', 'landing')->name('landing');
+
 /*
 |--------------------------------------------------------------------------
 | Authenticated application — full-page Livewire components
 |--------------------------------------------------------------------------
 */
 Route::middleware('auth')->group(function () {
-    Route::get('/', Dashboard::class)->name('dashboard');
+    Route::get('/dashboard', Dashboard::class)->name('dashboard');
     Route::get('/dashboards/{name}', DashboardView::class)->name('dashboard.show');
 
     Route::get('/ui/elements', UiElements::class)->name('ui.elements');
@@ -54,6 +56,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/forms', Forms::class)->name('forms');
     Route::get('/settings', Settings::class)->name('settings');
     Route::get('/apps/kanban', Kanban::class)->name('apps.kanban');
-
-    Route::get('/page/{path}', GenericPage::class)->name('page');
 });
+
+Route::get('/docs', GenericPage::class)->defaults('path', 'docs')->name('docs');
+Route::get('/page/{path}', GenericPage::class)->name('page');
+

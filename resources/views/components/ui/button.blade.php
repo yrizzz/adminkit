@@ -13,6 +13,7 @@
 
     $variants = [
         'default'     => 'bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 active:scale-[.98]',
+        'primary'     => 'bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 active:scale-[.98]',
         'secondary'   => 'bg-secondary text-secondary-foreground hover:bg-secondary/70 active:scale-[.98]',
         'outline'     => 'border border-input bg-transparent hover:bg-accent hover:text-accent-foreground active:scale-[.98]',
         'ghost'       => 'hover:bg-accent hover:text-accent-foreground',
@@ -41,10 +42,10 @@
     @if ($loading)
         <span class="size-4 animate-spin rounded-full border-2 border-current border-e-transparent"></span>
     @elseif ($icon)
-        <i data-lucide="{{ $icon }}"></i>
+        <x-ui.icon :name="$icon" />
     @endif
     {{ $slot }}
     @if ($iconEnd)
-        <i data-lucide="{{ $iconEnd }}"></i>
+        <x-ui.icon :name="$iconEnd" />
     @endif
 </{{ $tag }}>

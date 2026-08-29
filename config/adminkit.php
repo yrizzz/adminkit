@@ -47,6 +47,12 @@ return [
                         ['label' => 'Timeline',  'route' => 'dashboard.show', 'params' => 'timeline'],
                     ],
                 ],
+                [
+                    'label' => 'Documentation',
+                    'icon'  => 'book-open',
+                    'route' => 'page',
+                    'params' => ['path' => 'docs'],
+                ],
             ],
         ],
 

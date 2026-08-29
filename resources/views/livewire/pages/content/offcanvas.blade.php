@@ -19,7 +19,7 @@
         <div x-show="side !== null" x-cloak class="fixed inset-0 z-[100]" @keydown.escape.window="side = null">
             <div x-show="side !== null" x-transition:enter="ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
                  x-transition:leave="ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-                 class="absolute inset-0 bg-background/70 backdrop-blur-sm" @click="side = null"></div>
+                 class="absolute inset-0 bg-black/60 backdrop-blur-md" @click="side = null"></div>
 
             {{-- Left: Filters --}}
             <div x-show="side === 'left'" x-trap="side === 'left'"

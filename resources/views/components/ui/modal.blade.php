@@ -75,7 +75,7 @@ $leaveClass = $leaveTransitions[$position] ?? $leaveTransitions['center'];
                 x-show="open"
                 x-transition:enter="ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
                 x-transition:leave="ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-                class="absolute inset-0 bg-background/70 backdrop-blur-sm" @click="open = false; $dispatch('close-modal', '{{ $name }}')"
+                class="absolute inset-0 bg-black/60 backdrop-blur-md" @click="open = false; $dispatch('close-modal', '{{ $name }}')"
             ></div>
 
             <div

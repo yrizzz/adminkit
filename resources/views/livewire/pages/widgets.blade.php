@@ -123,7 +123,7 @@
 
         <x-ui.card title="Activity feed">
             <ul class="space-y-1">
-                @foreach ([['user-plus','Yrizzz added a user','2m','text-info bg-info/10'],['check-check','Order #4821 completed','18m','text-success bg-success/10'],['git-commit-horizontal','Deployed v1.4.2','1h','text-primary bg-primary/10'],['message-square','New comment','3h','text-[hsl(var(--warning))] bg-warning/10']] as [$ic,$t,$a,$tone])
+                @foreach ([['user-plus','Yrizzz added a user','2m','text-info bg-info/10'],['check-check','Order #4821 completed','18m','text-success bg-success/10'],['git-commit-horizontal','Deployed v1.2.0','1h','text-primary bg-primary/10'],['message-square','New comment','3h','text-[hsl(var(--warning))] bg-warning/10']] as [$ic,$t,$a,$tone])
                     <li class="flex items-center gap-3 rounded-lg px-2 py-2 hover:bg-accent/40">
                         <span class="grid size-9 shrink-0 place-items-center rounded-lg {{ $tone }}"><i data-lucide="{{ $ic }}" class="size-4"></i></span>
                         <div class="min-w-0 flex-1"><p class="truncate text-sm font-medium">{{ $t }}</p></div>

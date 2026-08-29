@@ -1,11 +1,19 @@
 @props([
     'align' => 'end',   // start | end
     'width' => 'w-56',
+    'label' => null,
+    'icon'  => null,
 ])
 
 <div x-data="{ open: false }" class="relative" @keydown.escape.window="open = false">
     <div @click="open = ! open" class="cursor-pointer">
-        {{ $trigger }}
+        @if (isset($trigger))
+            {{ $trigger }}
+        @else
+            <x-ui.button variant="outline" size="sm" :icon="$icon ?? 'chevron-down'" iconEnd>
+                {{ $label ?? 'Options' }}
+            </x-ui.button>
+        @endif
     </div>
 
     <div

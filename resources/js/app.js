@@ -1,4 +1,5 @@
-import { createIcons, icons } from 'lucide';
+import { createIcons } from 'lucide';
+import * as lucideIcons from 'lucide';
 import Chart from 'chart.js/auto';
 
 /* ---------------------------------------------------------------
@@ -89,7 +90,18 @@ Chart.register({
     },
 });
 
-const renderIcons = () => createIcons({ icons, attrs: { 'stroke-width': 2 } });
+let isRenderingIcons = false;
+const renderIcons = () => {
+    if (isRenderingIcons) return;
+    isRenderingIcons = true;
+    try {
+        createIcons({ icons: lucideIcons, attrs: { 'stroke-width': 2 } });
+    } catch (e) {
+        console.warn('[Lucide] Error rendering icons:', e);
+    } finally {
+        setTimeout(() => { isRenderingIcons = false; }, 50);
+    }
+};
 window.renderIcons = renderIcons;
 
 /* Tiny localStorage + Cookie sync helper (mirrors the anti-FOUC keys in <head> & server Blade) */
@@ -152,8 +164,9 @@ const registerUIStore = () => {
             html.classList.toggle('dark', this.isDark);
             html.setAttribute('dir', this.direction);
             html.dataset.accent = this.accent;
+            const blueToken = '221 83% 53%';
             const accMap = {
-                blue: '221 83% 53%',
+                blue: blueToken,
                 violet: '262 83% 58%',
                 green: '142 71% 45%',
                 rose: '347 77% 50%',
@@ -170,9 +183,10 @@ const registerUIStore = () => {
                 html.style.setProperty('--ring', '222 47% 11%');
                 html.style.setProperty('--sidebar-primary', '222 47% 11%');
             } else if (accMap[this.accent]) {
-                html.style.setProperty('--primary', accMap[this.accent]);
-                html.style.setProperty('--ring', accMap[this.accent]);
-                html.style.setProperty('--sidebar-primary', accMap[this.accent]);
+                const colorVal = accMap[this.accent];
+                html.style.setProperty('--primary', colorVal);
+                html.style.setProperty('--ring', colorVal);
+                html.style.setProperty('--sidebar-primary', colorVal);
                 html.style.removeProperty('--primary-foreground');
             }
             html.dataset.radius = this.radius;
@@ -490,6 +504,23 @@ document.addEventListener('pointerdown', (e) => {
     }
 }, { passive: true });
 
+const initAos = () => {
+    if (typeof IntersectionObserver === 'undefined') return;
+    const aosElements = document.querySelectorAll('[data-aos]');
+    if (!aosElements.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('aos-animate');
+            }
+        });
+    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+
+    aosElements.forEach(el => observer.observe(el));
+};
+window.initAos = initAos;
+
 /* ---------------------------------------------------------------
  * Boot & Livewire Navigation hooks for zero-FOUC transitions
  * ------------------------------------------------------------- */
@@ -498,6 +529,27 @@ document.addEventListener('DOMContentLoaded', () => {
     renderIcons();
     syncMenuActive();
     triggerCardAnimations();
+    initAos();
+
+    if (typeof MutationObserver !== 'undefined') {
+        const observer = new MutationObserver((mutations) => {
+            if (isRenderingIcons) return;
+            let hasLucide = false;
+            for (const m of mutations) {
+                for (const node of m.addedNodes) {
+                    if (node.nodeType === 1) {
+                        if (node.hasAttribute?.('data-lucide') || node.querySelector?.('[data-lucide]')) {
+                            hasLucide = true;
+                            break;
+                        }
+                    }
+                }
+                if (hasLucide) break;
+            }
+            if (hasLucide) renderIcons();
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+    }
 });
 window.addEventListener('hashchange', () => syncMenuActive());
 
@@ -584,6 +636,7 @@ document.addEventListener('livewire:navigated', () => {
     }
     renderIcons();
     syncMenuActive();
+    initAos();
 });
 
 document.addEventListener('livewire:init', () => {
