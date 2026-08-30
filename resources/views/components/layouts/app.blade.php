@@ -15,11 +15,11 @@
             @include('partials.navbar', ['breadcrumbs' => $breadcrumbs, 'title' => $title])
             @include('partials.topbar-horizontal')
 
-            <main class="flex-1 py-4 sm:py-6 flex flex-col justify-between gap-8">
+            <main class="flex-1 py-4 sm:py-6 flex flex-col justify-between gap-4">
                 <div class="main-content-container w-full flex-grow px-4 sm:px-6">
                     {{ $slot }}
                 </div>
-                @include('partials.footer', ['class' => 'mt-8 rounded-b-[2.25rem]'])
+                @include('partials.footer', ['class' => 'mt-4 rounded-b-[2.25rem]'])
             </main>
         </div>
     </div>
