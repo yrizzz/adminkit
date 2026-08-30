@@ -481,6 +481,69 @@ header[data-navbar-color='custom_gradient'] {
     color: #ffffff !important;
 }
 
+/* ── Horizontal secondary topbar: mirror navbar-color overrides ── */
+:is(
+    div[data-navbar-color='primary'],
+    div[data-navbar-color='dark'],
+    div[data-navbar-color='gradient'],
+    div[data-navbar-color='gradient1'],
+    div[data-navbar-color='gradient2'],
+    div[data-navbar-color='gradient3'],
+    div[data-navbar-color='custom_gradient'],
+    div[data-navbar-color='image1'],
+    div[data-navbar-color='image2']
+) {
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #ffffff !important;
+}
+
+:is(
+    div[data-navbar-color='primary'],
+    div[data-navbar-color='dark'],
+    div[data-navbar-color='gradient'],
+    div[data-navbar-color='gradient1'],
+    div[data-navbar-color='gradient2'],
+    div[data-navbar-color='gradient3'],
+    div[data-navbar-color='image1'],
+    div[data-navbar-color='image2']
+) nav a,
+:is(
+    div[data-navbar-color='primary'],
+    div[data-navbar-color='dark'],
+    div[data-navbar-color='gradient'],
+    div[data-navbar-color='gradient1'],
+    div[data-navbar-color='gradient2'],
+    div[data-navbar-color='gradient3'],
+    div[data-navbar-color='image1'],
+    div[data-navbar-color='image2']
+) nav button {
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+
+:is(
+    div[data-navbar-color='primary'],
+    div[data-navbar-color='dark'],
+    div[data-navbar-color='gradient'],
+    div[data-navbar-color='gradient1'],
+    div[data-navbar-color='gradient2'],
+    div[data-navbar-color='gradient3'],
+    div[data-navbar-color='image1'],
+    div[data-navbar-color='image2']
+) nav a:hover,
+:is(
+    div[data-navbar-color='primary'],
+    div[data-navbar-color='dark'],
+    div[data-navbar-color='gradient'],
+    div[data-navbar-color='gradient1'],
+    div[data-navbar-color='gradient2'],
+    div[data-navbar-color='gradient3'],
+    div[data-navbar-color='image1'],
+    div[data-navbar-color='image2']
+) nav button:hover {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+}
+
 @theme inline {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
