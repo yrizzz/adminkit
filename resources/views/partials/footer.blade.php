@@ -1,7 +1,7 @@
 @php($cfg = config('adminkit'))
 @php($ms = defined('LARAVEL_START') ? round((microtime(true) - LARAVEL_START) * 1000) : null)
 
-<footer class="{{ $class ?? '' }} mt-auto border-t border-border/60 bg-card/60 backdrop-blur-md py-2.5 sm:py-3">
+<footer class="{{ $class ?? '' }} mt-auto min-h-14 border-t border-border/60 bg-card/60 backdrop-blur-md flex items-center py-3">
     <div class="main-content-container flex flex-col items-center justify-between gap-3 px-4 sm:px-6 sm:flex-row">
         <p class="text-xs text-muted-foreground sm:text-sm">
             © {{ date('Y') }} <span class="font-semibold text-foreground">{{ $cfg['name'] }}</span> ·

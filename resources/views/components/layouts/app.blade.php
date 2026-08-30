@@ -15,7 +15,7 @@
             @include('partials.navbar', ['breadcrumbs' => $breadcrumbs, 'title' => $title])
             @include('partials.topbar-horizontal')
 
-            <main class="flex-1 py-4 sm:py-6 flex flex-col justify-between gap-4">
+            <main class="flex-1 pt-4 sm:pt-6 pb-0 flex flex-col justify-between gap-4">
                 <div class="main-content-container w-full flex-grow px-4 sm:px-6">
                     {{ $slot }}
                 </div>
