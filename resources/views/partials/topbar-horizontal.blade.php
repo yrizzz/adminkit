@@ -5,9 +5,19 @@
 @endphp
 
 <div x-show="$store.ui.layout === 'horizontal'" x-cloak
-     data-navbar-color="{{ $_COOKIE['ak_nb_color'] ?? 'default' }}"
-     :data-navbar-color="$store.ui.navbarColor"
-     class="hnav-topbar sticky top-16 z-20 hidden border-b border-border backdrop-blur-lg lg:block">
+     class="hnav-topbar sticky top-16 z-20 hidden border-b backdrop-blur-lg lg:block"
+     :style="(() => {
+         const c = $store.ui.navbarColor;
+         const dark = $store.ui.isDark;
+         if (c === 'primary')    return 'background-color:hsl(var(--primary));border-color:rgba(255,255,255,0.12);color:#fff;';
+         if (c === 'dark')       return 'background-color:#070B14;border-color:rgba(255,255,255,0.12);color:#fff;';
+         if (c === 'gradient' || c === 'gradient1') return 'background:linear-gradient(90deg,#1e1b4b 0%,#0f172a 100%);border-color:rgba(255,255,255,0.1);color:#fff;';
+         if (c === 'gradient2')  return 'background:linear-gradient(90deg,#0d9488 0%,#064e3b 100%);border-color:rgba(255,255,255,0.1);color:#fff;';
+         if (c === 'gradient3')  return 'background:linear-gradient(90deg,#e11d48 0%,#4c0519 100%);border-color:rgba(255,255,255,0.1);color:#fff;';
+         if (c === 'glass')      return 'background-color:rgba(255,255,255,0.1);backdrop-filter:blur(16px);border-color:rgba(255,255,255,0.15);color:' + (dark ? '#fff' : '#0f172a') + ';';
+         if (dark)               return 'background-color:#0D1527;border-color:rgba(255,255,255,0.1);color:#fff;';
+         return 'background-color:rgba(255,255,255,0.88);border-color:rgba(0,0,0,0.08);color:#0f172a;';
+     })()">
     <div
         x-data="{
             canS: false, canE: false,
@@ -62,10 +72,16 @@
                          @mouseenter="show()" @mouseleave="hide()"
                          @hnav-close.window="open = false; clearTimeout(timer)">
                         <button type="button" x-ref="btn" @click="toggle()"
-                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-accent {{ $active ? 'bg-accent text-primary' : 'text-foreground' }}">
+                                :class="{{ $active ? 'true' : 'false' }} ? 'bg-white/15' : 'hover:bg-white/10'"
+                                :style="
+                                    $store.ui.navbarColor !== 'default' && $store.ui.navbarColor !== '' && !($store.ui.isDark && $store.ui.navbarColor === 'default')
+                                        ? 'color:inherit;'
+                                        : '{{ $active ? 'color:hsl(var(--primary))' : 'color:hsl(var(--foreground))' }}'
+                                "
+                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors">
                             <i data-lucide="{{ $item['icon'] ?? 'dot' }}" class="size-4"></i>
                             {{ $item['label'] }}
-                            <i data-lucide="chevron-down" class="size-3.5 text-muted-foreground"></i>
+                            <i data-lucide="chevron-down" class="size-3.5 opacity-60"></i>
                         </button>
                         <template x-teleport="body">
                             <div x-show="open" x-cloak
@@ -83,7 +99,13 @@
                     </div>
                 @else
                     <a href="{{ Menu::href($item) }}" wire:navigate
-                       class="flex shrink-0 items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-accent {{ $active ? 'bg-accent text-primary' : 'text-foreground' }}">
+                       :class="{{ $active ? 'true' : 'false' }} ? 'bg-white/15' : 'hover:bg-white/10'"
+                       :style="
+                           $store.ui.navbarColor !== 'default' && $store.ui.navbarColor !== '' && !($store.ui.isDark && $store.ui.navbarColor === 'default')
+                               ? 'color:inherit;'
+                               : '{{ $active ? 'color:hsl(var(--primary))' : 'color:hsl(var(--foreground))' }}'
+                       "
+                       class="flex shrink-0 items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors">
                         <i data-lucide="{{ $item['icon'] ?? 'dot' }}" class="size-4"></i>
                         {{ $item['label'] }}
                     </a>
