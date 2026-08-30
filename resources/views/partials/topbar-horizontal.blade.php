@@ -7,7 +7,7 @@
 <div x-show="$store.ui.layout === 'horizontal'" x-cloak
      data-navbar-color="{{ $_COOKIE['ak_nb_color'] ?? 'default' }}"
      :data-navbar-color="$store.ui.navbarColor"
-     class="hnav-topbar sticky top-16 z-20 hidden border-b border-border bg-background/80 backdrop-blur-lg lg:block">
+     class="hnav-topbar sticky top-16 z-20 hidden border-b border-border backdrop-blur-lg lg:block">
     <div
         x-data="{
             canS: false, canE: false,

@@ -365,6 +365,7 @@ html:not(.dark) .hnav-topbar[data-navbar-color='default'],
 html:not(.dark) .hnav-topbar:not([data-navbar-color]),
 html:not(.dark) .hnav-topbar[data-navbar-color=''] {
     background-color: rgba(255, 255, 255, 0.88) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
 }
 
 footer {
