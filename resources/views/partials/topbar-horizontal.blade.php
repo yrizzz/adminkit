@@ -35,7 +35,7 @@
         <div class="pointer-events-none absolute inset-y-0 start-0 z-10 flex items-center ps-1.5 transition-opacity"
              :class="canS ? 'opacity-100' : 'opacity-0'">
             <button type="button" @click="nudge('start')" :disabled="! canS" aria-label="Scroll menu backward"
-                    class="pointer-events-auto grid size-7 place-items-center rounded-full bg-background text-muted-foreground transition-transform hover:scale-105 active:scale-95">
+                    class="pointer-events-auto grid size-7 place-items-center rounded-full border border-border/80 bg-background/95 text-foreground shadow-sm backdrop-blur-md transition-all hover:scale-105 hover:border-primary/40 hover:bg-accent active:scale-95 dark:border-slate-700/80 dark:bg-slate-800/90 dark:text-slate-200 dark:hover:bg-slate-700 dark:hover:text-white">
                 <i data-lucide="chevron-left" class="rtl-flip size-3.5"></i>
             </button>
         </div>
@@ -95,7 +95,7 @@
         <div class="pointer-events-none absolute inset-y-0 end-0 z-10 flex items-center justify-end pe-1.5 transition-opacity"
              :class="canE ? 'opacity-100' : 'opacity-0'">
             <button type="button" @click="nudge('end')" :disabled="! canE" aria-label="Scroll menu forward"
-                    class="pointer-events-auto grid size-7 place-items-center rounded-full bg-background text-muted-foreground transition-transform hover:scale-105 active:scale-95">
+                    class="pointer-events-auto grid size-7 place-items-center rounded-full border border-border/80 bg-background/95 text-foreground shadow-sm backdrop-blur-md transition-all hover:scale-105 hover:border-primary/40 hover:bg-accent active:scale-95 dark:border-slate-700/80 dark:bg-slate-800/90 dark:text-slate-200 dark:hover:bg-slate-700 dark:hover:text-white">
                 <i data-lucide="chevron-right" class="rtl-flip size-3.5"></i>
             </button>
         </div>
