@@ -1120,118 +1120,39 @@ window.toast('Message content here', {
         </main>
 
         {{-- Right Floating Sticky Table of Contents --}}
-        <aside class="hidden xl:block w-72 shrink-0 sticky top-[73px] h-[calc(100vh-73px)] overflow-y-auto pt-4 pb-8 space-y-5">
+        <aside class="hidden xl:block w-56 shrink-0 sticky top-[73px] h-[calc(100vh-73px)] pt-4 pb-6">
+            <div class="rounded-2xl border border-slate-200 dark:border-slate-800/80 bg-white dark:bg-slate-900/80 shadow-lg overflow-hidden divide-y divide-slate-100 dark:divide-slate-800/80">
 
-            {{-- On This Page --}}
-            <div class="rounded-2xl border border-slate-200 dark:border-slate-800/80 bg-white dark:bg-slate-900/80 p-5 space-y-4 shadow-lg">
-                <h4 class="font-black text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 flex items-center gap-2">
-                    <i data-lucide="list" class="size-3.5 text-blue-500 dark:text-blue-400"></i> Page Navigation
-                </h4>
-                <ul class="space-y-1.5 text-xs font-medium">
-                    <li>
-                        <a href="#" x-on:click.prevent="window.scrollTo({top:0, behavior:'smooth'})"
-                           class="flex items-center gap-2 px-3 py-2 rounded-lg bg-blue-50 dark:bg-blue-600/15 text-blue-600 dark:text-blue-400 font-bold border border-blue-200 dark:border-blue-500/30 transition-all">
-                            <i data-lucide="file-text" class="size-3.5 shrink-0"></i>
-                            <span>Document Summary</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" x-on:click.prevent="window.scrollTo({top:250, behavior:'smooth'})"
-                           class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all">
-                            <i data-lucide="play-circle" class="size-3.5 shrink-0"></i>
-                            <span>Live Playground</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" x-on:click.prevent="window.scrollTo({top:500, behavior:'smooth'})"
-                           class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all">
-                            <i data-lucide="table-2" class="size-3.5 shrink-0"></i>
-                            <span>API &amp; Props Table</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" x-on:click.prevent="window.scrollTo({top:750, behavior:'smooth'})"
-                           class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all">
-                            <i data-lucide="code-2" class="size-3.5 shrink-0"></i>
-                            <span>Code Snippet</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            {{-- Quick Links --}}
-            <div class="rounded-2xl border border-slate-200 dark:border-slate-800/80 bg-white dark:bg-slate-900/80 p-5 space-y-4 shadow-lg">
-                <h4 class="font-black text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 flex items-center gap-2">
-                    <i data-lucide="zap" class="size-3.5 text-blue-500 dark:text-blue-400"></i> Quick Jump
-                </h4>
-                <div class="space-y-1.5">
-                    @php
-                        $quickLinks = [
-                            ['tab' => 'introduction', 'label' => 'Architecture Overview', 'icon' => 'layout-dashboard'],
-                            ['tab' => 'installation',  'label' => 'Installation Guide',    'icon' => 'terminal'],
-                            ['tab' => 'theming',       'label' => 'HSL & Dark Mode',       'icon' => 'palette'],
-                            ['tab' => 'routing',       'label' => 'Tree Navigation',        'icon' => 'git-branch'],
-                            ['tab' => 'button',        'label' => 'Button Component',       'icon' => 'mouse-pointer-2'],
-                            ['tab' => 'modal',         'label' => 'Modal Dialog',           'icon' => 'maximize-2'],
-                            ['tab' => 'toast',         'label' => 'Toast Engine',           'icon' => 'bell'],
-                        ];
-                    @endphp
-                    @foreach($quickLinks as $ql)
-                    <button type="button"
-                            x-on:click="docTab = '{{ $ql['tab'] }}'; window.scrollTo({top:0,behavior:'smooth'})"
-                            :class="docTab === '{{ $ql['tab'] }}' ? 'bg-blue-50 dark:bg-blue-600/15 text-blue-600 dark:text-blue-400 font-bold border-blue-200 dark:border-blue-500/30' : 'text-slate-600 dark:text-slate-400 border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white'"
-                            class="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs border transition-all text-start">
-                        <i data-lucide="{{ $ql['icon'] }}" class="size-3.5 shrink-0"></i>
-                        <span>{{ $ql['label'] }}</span>
-                    </button>
-                    @endforeach
+                {{-- Page Nav --}}
+                <div class="p-4 space-y-0.5">
+                    <p class="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-2">On This Page</p>
+                    <a href="#" x-on:click.prevent="window.scrollTo({top:0,behavior:'smooth'})" class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-600/15">
+                        <i data-lucide="file-text" class="size-3 shrink-0"></i> Document Summary
+                    </a>
+                    <a href="#" x-on:click.prevent="window.scrollTo({top:280,behavior:'smooth'})" class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
+                        <i data-lucide="play-circle" class="size-3 shrink-0"></i> Live Playground
+                    </a>
+                    <a href="#" x-on:click.prevent="window.scrollTo({top:560,behavior:'smooth'})" class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
+                        <i data-lucide="table-2" class="size-3 shrink-0"></i> API &amp; Props Table
+                    </a>
+                    <a href="#" x-on:click.prevent="window.scrollTo({top:820,behavior:'smooth'})" class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
+                        <i data-lucide="code-2" class="size-3 shrink-0"></i> Code Snippet
+                    </a>
                 </div>
-            </div>
 
-            {{-- Version Badge --}}
-            <div class="rounded-2xl border border-slate-200 dark:border-slate-800/80 bg-white dark:bg-slate-900/80 p-5 space-y-3 shadow-lg">
-                <div class="flex items-center justify-between">
-                    <span class="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">AdminKit</span>
-                    <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-blue-600/15 text-blue-600 dark:text-blue-400 border border-blue-500/30">v1.2.0</span>
+                {{-- GitHub --}}
+                <div class="p-4 space-y-2">
+                    <div class="flex items-center gap-2 text-xs font-bold text-slate-900 dark:text-white">
+                        <x-ui.icon name="github" class="size-3.5 text-slate-600 dark:text-slate-300" /> GitHub
+                    </div>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">Contribute or report issues on GitHub.</p>
+                    <a href="https://github.com/yrizzz/adminkit/issues" target="_blank"
+                       class="block text-center w-full py-1.5 rounded-lg text-[11px] font-bold bg-blue-600 hover:bg-blue-500 text-white transition-colors">
+                        Open Issue &rarr;
+                    </a>
                 </div>
-                <div class="space-y-2 text-[11px] text-slate-600 dark:text-slate-400">
-                    <div class="flex items-center gap-2">
-                        <span class="size-1.5 rounded-full bg-emerald-500 shrink-0"></span>
-                        <span>Laravel 13 + Livewire 4</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <span class="size-1.5 rounded-full bg-blue-500 shrink-0"></span>
-                        <span>Tailwind CSS v4</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <span class="size-1.5 rounded-full bg-violet-500 shrink-0"></span>
-                        <span>Alpine.js 3 + Vite 6</span>
-                    </div>
-                </div>
-            </div>
 
-            {{-- GitHub Card --}}
-            <div class="rounded-2xl border border-slate-200 dark:border-slate-800/80 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-5 space-y-3 shadow-xl relative overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-violet-600/10 pointer-events-none"></div>
-                <div class="relative space-y-3">
-                    <div class="flex items-center gap-2">
-                        <x-ui.icon name="github" class="size-5 text-white" />
-                        <span class="font-black text-sm text-white">GitHub Repository</span>
-                    </div>
-                    <p class="text-xs text-slate-300 leading-relaxed">Want to contribute components, report bugs, or suggest features? We welcome all contributions!</p>
-                    <div class="flex items-center gap-2 pt-1">
-                        <a href="https://github.com/yrizzz/adminkit" target="_blank"
-                           class="flex-1 text-center px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-bold transition-all">
-                            ⭐ Star Repo
-                        </a>
-                        <a href="https://github.com/yrizzz/adminkit/issues" target="_blank"
-                           class="flex-1 text-center px-3 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all shadow-lg shadow-blue-600/30">
-                            Open Issue
-                        </a>
-                    </div>
-                </div>
             </div>
-
         </aside>
 
     </div>
