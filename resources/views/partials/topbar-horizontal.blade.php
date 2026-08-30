@@ -44,7 +44,6 @@
              class="no-scrollbar flex flex-1 flex-nowrap items-center gap-0.5 overflow-x-auto scroll-smooth py-1.5">
             @foreach ($items as $item)
                 @php($active = Menu::active($item))
-                @php($firstClass = $loop->first ? '-ms-2.5' : '')
                 @if (Menu::hasChildren($item))
                     <div x-data="{
                             open: false, x: 0, y: 0, timer: null,
@@ -63,7 +62,7 @@
                          @mouseenter="show()" @mouseleave="hide()"
                          @hnav-close.window="open = false; clearTimeout(timer)">
                         <button type="button" x-ref="btn" @click="toggle()"
-                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 {{ $active ? 'bg-white/10' : '' }} {{ $firstClass }}">
+                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 {{ $active ? 'bg-white/10' : '' }}">
                             <i data-lucide="{{ $item['icon'] ?? 'dot' }}" class="size-4"></i>
                             {{ $item['label'] }}
                             <i data-lucide="chevron-down" class="size-3.5 opacity-60"></i>
@@ -84,7 +83,7 @@
                     </div>
                 @else
                     <a href="{{ Menu::href($item) }}" wire:navigate
-                       class="flex shrink-0 items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 {{ $active ? 'bg-white/10' : '' }} {{ $firstClass }}">
+                       class="flex shrink-0 items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 {{ $active ? 'bg-white/10' : '' }}">
                         <i data-lucide="{{ $item['icon'] ?? 'dot' }}" class="size-4"></i>
                         {{ $item['label'] }}
                     </a>
