@@ -32,7 +32,7 @@
         class="relative flex items-center"
     >
         {{-- Scroll toward start --}}
-        <div class="pointer-events-none absolute inset-y-0 start-0 z-10 flex items-center bg-gradient-to-r from-background via-background/70 to-transparent ps-1.5 pe-8 transition-opacity"
+        <div class="pointer-events-none absolute inset-y-0 start-0 z-10 flex items-center ps-1.5 transition-opacity"
              :class="canS ? 'opacity-100' : 'opacity-0'">
             <button type="button" @click="nudge('start')" :disabled="! canS" aria-label="Scroll menu backward"
                     class="pointer-events-auto grid size-8 place-items-center rounded-lg bg-background text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
@@ -92,7 +92,7 @@
         </nav>
 
         {{-- Scroll toward end --}}
-        <div class="pointer-events-none absolute inset-y-0 end-0 z-10 flex items-center justify-end bg-gradient-to-l from-background via-background/70 to-transparent ps-8 pe-1.5 transition-opacity"
+        <div class="pointer-events-none absolute inset-y-0 end-0 z-10 flex items-center justify-end pe-1.5 transition-opacity"
              :class="canE ? 'opacity-100' : 'opacity-0'">
             <button type="button" @click="nudge('end')" :disabled="! canE" aria-label="Scroll menu forward"
                     class="pointer-events-auto grid size-8 place-items-center rounded-lg bg-background text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
