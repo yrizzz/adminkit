@@ -61,6 +61,7 @@
             d.dataset.cardAnimation = get('ak_card_animation', 'fade-up');
             d.dataset.pageLoading  = get('ak_page_loading', false);
             d.dataset.layoutFluid = get('ak_layout_fluid', false);
+            d.dataset.curvedLayout = get('ak_curved_layout', true);
 
             d.style.setProperty('--custom-sb-grad-from', get('ak_sb_grad_from', '#1e1b4b'));
             d.style.setProperty('--custom-sb-grad-to',   get('ak_sb_grad_to',   '#0f172a'));

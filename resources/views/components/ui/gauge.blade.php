@@ -28,16 +28,26 @@
     $offset = $c * (1 - $val / 100);
 @endphp
 
-<div {{ $attributes->class('flex flex-col items-center') }}>
+<div {{ $attributes->class('flex flex-col items-center') }} x-data="{ currentVal: {{ $val }}, r: {{ $r }}, c: {{ $c }} }" x-init="
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.attributeName === 'value') {
+                currentVal = parseFloat($el.getAttribute('value')) || 0;
+            }
+        });
+    });
+    observer.observe($el, { attributes: true });
+    currentVal = parseFloat($el.getAttribute('value')) || {{ $val }};
+">
     <div class="relative" style="width: {{ $size }}px; height: {{ $size }}px">
         <svg width="{{ $size }}" height="{{ $size }}" viewBox="0 0 {{ $size }} {{ $size }}" class="-rotate-90">
             <circle cx="{{ $size / 2 }}" cy="{{ $size / 2 }}" r="{{ $r }}" fill="none" stroke="hsl(var(--muted))" stroke-width="{{ $stroke }}" />
             <circle cx="{{ $size / 2 }}" cy="{{ $size / 2 }}" r="{{ $r }}" fill="none" stroke="{{ $toneColor }}" stroke-width="{{ $stroke }}"
-                    stroke-linecap="round" stroke-dasharray="{{ $c }}" stroke-dashoffset="{{ $offset }}"
+                    stroke-linecap="round" stroke-dasharray="{{ $c }}" :stroke-dashoffset="c * (1 - Math.max(0, Math.min(100, currentVal)) / 100)"
                     style="transition: stroke-dashoffset .6s cubic-bezier(.22,1,.36,1)" />
         </svg>
         <div class="absolute inset-0 flex flex-col items-center justify-center">
-            <span class="font-bold leading-none" style="font-size: {{ max(11, round($size * 0.22)) }}px">{{ $display ?? $val . '%' }}</span>
+            <span class="font-bold leading-none" style="font-size: {{ max(11, round($size * 0.22)) }}px" x-text="Math.round(currentVal) + '%'">{{ $display ?? $val . '%' }}</span>
             @if ($sub)<span class="mt-1 text-[0.7rem] text-muted-foreground">{{ $sub }}</span>@endif
         </div>
     </div>

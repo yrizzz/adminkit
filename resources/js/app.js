@@ -59,6 +59,67 @@ Chart.register({
         const grid   = dark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.07)';
         const border = dark ? 'rgba(255,255,255,0.10)' : 'rgba(0,0,0,0.10)';
 
+        // Dynamic color binding for datasets (so lines/bars/gradients update on theme/accent toggle)
+        if (!chart._colorBindings) {
+            chart._colorBindings = [];
+            const css = getComputedStyle(document.documentElement);
+            const getHSL = (name) => `hsl(${css.getPropertyValue(name).trim()})`;
+            const vars = ['--primary', '--chart-1', '--chart-2', '--chart-3', '--chart-4', '--chart-5'];
+            const varValues = {};
+            vars.forEach(v => {
+                varValues[v] = getHSL(v);
+            });
+            chart.data.datasets.forEach((dataset, i) => {
+                const binding = {};
+                if (typeof dataset.borderColor === 'string') {
+                    const match = vars.find(v => varValues[v] === dataset.borderColor);
+                    if (match) binding.borderColorVar = match;
+                }
+                if (typeof dataset.backgroundColor === 'string') {
+                    const match = vars.find(v => varValues[v] === dataset.backgroundColor);
+                    if (match) binding.backgroundColorVar = match;
+                } else if (Array.isArray(dataset.backgroundColor)) {
+                    binding.backgroundColorVars = dataset.backgroundColor.map(color => {
+                        return vars.find(v => varValues[v] === color) || null;
+                    });
+                }
+                if (dataset.backgroundColor && typeof dataset.backgroundColor === 'object') {
+                    if (chart.canvas && chart.canvas.id === 'chartRevenue') {
+                        binding.isRevenueGradient = true;
+                    }
+                }
+                chart._colorBindings[i] = binding;
+            });
+        }
+
+        if (chart._colorBindings) {
+            const css = getComputedStyle(document.documentElement);
+            const getHSL = (name) => `hsl(${css.getPropertyValue(name).trim()})`;
+            chart.data.datasets.forEach((dataset, i) => {
+                const binding = chart._colorBindings[i];
+                if (!binding) return;
+                if (binding.borderColorVar) {
+                    dataset.borderColor = getHSL(binding.borderColorVar);
+                }
+                if (binding.backgroundColorVar) {
+                    dataset.backgroundColor = getHSL(binding.backgroundColorVar);
+                }
+                if (binding.backgroundColorVars) {
+                    dataset.backgroundColor = binding.backgroundColorVars.map((v, index) => {
+                        return v ? getHSL(v) : dataset.backgroundColor[index];
+                    });
+                }
+                if (binding.isRevenueGradient && chart.canvas) {
+                    const ctx = chart.canvas.getContext('2d');
+                    const primary = getHSL('--primary');
+                    const g = ctx.createLinearGradient(0, 0, 0, 288);
+                    g.addColorStop(0, primary.replace(')', ' / .35)').replace('hsl', 'hsla'));
+                    g.addColorStop(1, primary.replace(')', ' / 0)').replace('hsl', 'hsla'));
+                    dataset.backgroundColor = g;
+                }
+            });
+        }
+
         /* ── Legend ── */
         const legendLabels = chart.config.options?.plugins?.legend?.labels;
         if (legendLabels) legendLabels.color = text;
@@ -137,6 +198,7 @@ const registerUIStore = () => {
         cardAnimation: LS.get('ak_card_animation', 'fade-up'),
         pageLoading: LS.get('ak_page_loading', false),
         layoutFluid: LS.get('ak_layout_fluid', false),
+        curvedLayout: LS.get('ak_curved_layout', true),
 
         sidebarGradientFrom: LS.get('ak_sb_grad_from', '#1e1b4b'),
         sidebarGradientTo: LS.get('ak_sb_grad_to', '#0f172a'),
@@ -198,6 +260,7 @@ const registerUIStore = () => {
             html.dataset.cardAnimation = this.cardAnimation;
             html.dataset.pageLoading = this.pageLoading;
             html.dataset.layoutFluid = this.layoutFluid;
+            html.dataset.curvedLayout = this.curvedLayout;
             html.classList.toggle('sidebar-collapsed', this.sidebarCollapsed);
             html.classList.toggle('is-compact', this.compact);
 
@@ -208,6 +271,17 @@ const registerUIStore = () => {
 
             /* Keep Chart.js global defaults in sync with dark/light mode */
             if (window.applyChartDefaults) window.applyChartDefaults();
+
+            /* Force update all active Chart.js instances so they redraw with correct theme colors */
+            if (window.Chart && window.Chart.instances) {
+                Object.values(window.Chart.instances).forEach(chart => {
+                    try {
+                        chart.update();
+                    } catch (e) {
+                        console.warn('[Chart.js] Failed to update chart instance:', e);
+                    }
+                });
+            }
 
             const aside = document.querySelector('aside.main-sidebar');
             if (aside) aside.setAttribute('data-sidebar-color', this.sidebarColor);
@@ -325,6 +399,7 @@ const registerUIStore = () => {
         setAccent(v) { this.accent = v; LS.set('ak_accent', v); this.apply(); },
         setRadius(v) { this.radius = v; LS.set('ak_radius', v); this.apply(); },
         setCompact(v) { this.compact = v; LS.set('ak_compact', v); this.apply(); },
+        toggleCurvedLayout() { this.curvedLayout = !this.curvedLayout; LS.set('ak_curved_layout', this.curvedLayout); this.apply(); },
         setSidebarColor(v) {
             this.sidebarColor = v;
             LS.set('ak_sb_color', v);
@@ -401,13 +476,14 @@ const registerUIStore = () => {
 
     try {
         if (window.Alpine.store('ui')) {
-            Object.assign(window.Alpine.store('ui'), storeObj);
             window.Alpine.store('ui').apply();
         } else {
             window.Alpine.store('ui', storeObj);
         }
     } catch (e) {
-        window.Alpine.store('ui', storeObj);
+        if (!window.Alpine.store('ui')) {
+            window.Alpine.store('ui', storeObj);
+        }
     }
 };
 

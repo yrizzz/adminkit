@@ -334,6 +334,18 @@
                               :class="$store.ui.pageLoading ? 'ltr:translate-x-6 rtl:-translate-x-6 bg-primary-foreground' : 'ltr:translate-x-1 rtl:-translate-x-1 bg-white'"></span>
                     </button>
                 </label>
+                <label class="flex cursor-pointer items-center justify-between">
+                    <span class="flex items-center gap-1.5 text-sm font-medium">
+                        <i data-lucide="square-dashed-bottom-code" class="size-4 text-primary"></i>
+                        <span>Curved content border</span>
+                    </span>
+                    <button type="button" role="switch" @click="$store.ui.toggleCurvedLayout()"
+                            :class="$store.ui.curvedLayout ? 'bg-primary' : 'bg-muted'"
+                            class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors">
+                        <span class="inline-block size-4 rounded-full shadow transition-transform"
+                              :class="$store.ui.curvedLayout ? 'ltr:translate-x-6 rtl:-translate-x-6 bg-primary-foreground' : 'ltr:translate-x-1 rtl:-translate-x-1 bg-white'"></span>
+                    </button>
+                </label>
             </section>
         </div>
 

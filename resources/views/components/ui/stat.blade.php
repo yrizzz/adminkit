@@ -17,13 +17,29 @@
     ];
 @endphp
 
-<div {{ $attributes->class('ak-card p-5') }}>
+<div {{ $attributes->class('ak-card p-5') }} x-data="{ localTone: '{{ $tone }}' }" x-init="
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.attributeName === 'tone') {
+                localTone = $el.getAttribute('tone');
+            }
+        });
+    });
+    observer.observe($el, { attributes: true });
+    localTone = $el.getAttribute('tone') || '{{ $tone }}';
+">
     <div class="flex items-start justify-between gap-3">
         <div class="min-w-0">
             <p class="truncate text-sm font-medium text-muted-foreground">{{ $label }}</p>
             <p class="mt-2 text-2xl font-bold tracking-tight sm:text-[1.7rem]">{{ $value }}</p>
         </div>
-        <div class="grid size-11 shrink-0 place-items-center rounded-xl {{ $tones[$tone] ?? $tones['primary'] }}">
+        <div :class="{
+            'bg-primary/10 text-primary': localTone === 'primary',
+            'bg-success/12 text-success': localTone === 'success',
+            'bg-warning/15 text-[hsl(var(--warning))]': localTone === 'warning',
+            'bg-info/12 text-info': localTone === 'info',
+            'bg-destructive/12 text-destructive': localTone === 'destructive'
+        }" class="grid size-11 shrink-0 place-items-center rounded-xl {{ $tones[$tone] ?? $tones['primary'] }}">
             <i data-lucide="{{ $icon }}" class="size-5"></i>
         </div>
     </div>
