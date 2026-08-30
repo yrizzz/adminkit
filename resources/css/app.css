@@ -347,6 +347,11 @@ header[data-navbar-color='dark']:not(.landing-header) {
     -webkit-backdrop-filter: blur(12px) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
 }
+html.dark .hnav-topbar,
+.hnav-topbar[data-navbar-color='dark'] {
+    background-color: #0D1527 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
 
 html:not(.dark) header:not(.landing-header),
 html:not(.dark)[data-navbar-color='default'] header:not(.landing-header) {
@@ -355,6 +360,11 @@ html:not(.dark)[data-navbar-color='default'] header:not(.landing-header) {
     backdrop-filter: blur(12px) !important;
     -webkit-backdrop-filter: blur(12px) !important;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+html:not(.dark) .hnav-topbar[data-navbar-color='default'],
+html:not(.dark) .hnav-topbar:not([data-navbar-color]),
+html:not(.dark) .hnav-topbar[data-navbar-color=''] {
+    background-color: rgba(255, 255, 255, 0.88) !important;
 }
 
 footer {
@@ -371,6 +381,10 @@ header[data-navbar-color='primary'] {
     background-image: none !important;
     color: #ffffff !important;
     border-bottom: 1px solid transparent !important;
+}
+.hnav-topbar[data-navbar-color='primary'] {
+    background-color: hsl(var(--primary)) !important;
+    border-bottom-color: transparent !important;
 }
 
 html[data-navbar-color='transparent'] header,
@@ -407,12 +421,19 @@ header[data-navbar-color='gradient1'] {
     color: #ffffff !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
+.hnav-topbar[data-navbar-color='gradient'],
+.hnav-topbar[data-navbar-color='gradient1'] {
+    background: linear-gradient(90deg, #1e1b4b 0%, #0f172a 100%) !important;
+}
 
 html[data-navbar-color='gradient2'] header,
 header[data-navbar-color='gradient2'] {
     background: linear-gradient(90deg, #0d9488 0%, #064e3b 100%) !important;
     color: #ffffff !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+.hnav-topbar[data-navbar-color='gradient2'] {
+    background: linear-gradient(90deg, #0d9488 0%, #064e3b 100%) !important;
 }
 
 html[data-navbar-color='gradient3'] header,
@@ -421,6 +442,9 @@ header[data-navbar-color='gradient3'] {
     color: #ffffff !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
+.hnav-topbar[data-navbar-color='gradient3'] {
+    background: linear-gradient(90deg, #e11d48 0%, #4c0519 100%) !important;
+}
 
 /* Header Custom Gradient */
 html[data-navbar-color='custom_gradient'] header,
@@ -428,6 +452,9 @@ header[data-navbar-color='custom_gradient'] {
     background: linear-gradient(90deg, var(--custom-nb-grad-from, #1e1b4b) 0%, var(--custom-nb-grad-to, #0f172a) 100%) !important;
     color: #ffffff !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+.hnav-topbar[data-navbar-color='custom_gradient'] {
+    background: linear-gradient(90deg, var(--custom-nb-grad-from, #1e1b4b) 0%, var(--custom-nb-grad-to, #0f172a) 100%) !important;
 }
 
 /* High Contrast Text & Hover States for Colored/Dark/Gradient/Image Headers */
@@ -483,62 +510,62 @@ header[data-navbar-color='custom_gradient'] {
 
 /* ── Horizontal secondary topbar: mirror navbar-color overrides ── */
 :is(
-    div[data-navbar-color='primary'],
-    div[data-navbar-color='dark'],
-    div[data-navbar-color='gradient'],
-    div[data-navbar-color='gradient1'],
-    div[data-navbar-color='gradient2'],
-    div[data-navbar-color='gradient3'],
-    div[data-navbar-color='custom_gradient'],
-    div[data-navbar-color='image1'],
-    div[data-navbar-color='image2']
+    .hnav-topbar[data-navbar-color='primary'],
+    .hnav-topbar[data-navbar-color='dark'],
+    .hnav-topbar[data-navbar-color='gradient'],
+    .hnav-topbar[data-navbar-color='gradient1'],
+    .hnav-topbar[data-navbar-color='gradient2'],
+    .hnav-topbar[data-navbar-color='gradient3'],
+    .hnav-topbar[data-navbar-color='custom_gradient'],
+    .hnav-topbar[data-navbar-color='image1'],
+    .hnav-topbar[data-navbar-color='image2']
 ) {
     border-color: rgba(255, 255, 255, 0.12) !important;
     color: #ffffff !important;
 }
 
 :is(
-    div[data-navbar-color='primary'],
-    div[data-navbar-color='dark'],
-    div[data-navbar-color='gradient'],
-    div[data-navbar-color='gradient1'],
-    div[data-navbar-color='gradient2'],
-    div[data-navbar-color='gradient3'],
-    div[data-navbar-color='image1'],
-    div[data-navbar-color='image2']
+    .hnav-topbar[data-navbar-color='primary'],
+    .hnav-topbar[data-navbar-color='dark'],
+    .hnav-topbar[data-navbar-color='gradient'],
+    .hnav-topbar[data-navbar-color='gradient1'],
+    .hnav-topbar[data-navbar-color='gradient2'],
+    .hnav-topbar[data-navbar-color='gradient3'],
+    .hnav-topbar[data-navbar-color='image1'],
+    .hnav-topbar[data-navbar-color='image2']
 ) nav a,
 :is(
-    div[data-navbar-color='primary'],
-    div[data-navbar-color='dark'],
-    div[data-navbar-color='gradient'],
-    div[data-navbar-color='gradient1'],
-    div[data-navbar-color='gradient2'],
-    div[data-navbar-color='gradient3'],
-    div[data-navbar-color='image1'],
-    div[data-navbar-color='image2']
+    .hnav-topbar[data-navbar-color='primary'],
+    .hnav-topbar[data-navbar-color='dark'],
+    .hnav-topbar[data-navbar-color='gradient'],
+    .hnav-topbar[data-navbar-color='gradient1'],
+    .hnav-topbar[data-navbar-color='gradient2'],
+    .hnav-topbar[data-navbar-color='gradient3'],
+    .hnav-topbar[data-navbar-color='image1'],
+    .hnav-topbar[data-navbar-color='image2']
 ) nav button {
     color: rgba(255, 255, 255, 0.85) !important;
 }
 
 :is(
-    div[data-navbar-color='primary'],
-    div[data-navbar-color='dark'],
-    div[data-navbar-color='gradient'],
-    div[data-navbar-color='gradient1'],
-    div[data-navbar-color='gradient2'],
-    div[data-navbar-color='gradient3'],
-    div[data-navbar-color='image1'],
-    div[data-navbar-color='image2']
+    .hnav-topbar[data-navbar-color='primary'],
+    .hnav-topbar[data-navbar-color='dark'],
+    .hnav-topbar[data-navbar-color='gradient'],
+    .hnav-topbar[data-navbar-color='gradient1'],
+    .hnav-topbar[data-navbar-color='gradient2'],
+    .hnav-topbar[data-navbar-color='gradient3'],
+    .hnav-topbar[data-navbar-color='image1'],
+    .hnav-topbar[data-navbar-color='image2']
 ) nav a:hover,
 :is(
-    div[data-navbar-color='primary'],
-    div[data-navbar-color='dark'],
-    div[data-navbar-color='gradient'],
-    div[data-navbar-color='gradient1'],
-    div[data-navbar-color='gradient2'],
-    div[data-navbar-color='gradient3'],
-    div[data-navbar-color='image1'],
-    div[data-navbar-color='image2']
+    .hnav-topbar[data-navbar-color='primary'],
+    .hnav-topbar[data-navbar-color='dark'],
+    .hnav-topbar[data-navbar-color='gradient'],
+    .hnav-topbar[data-navbar-color='gradient1'],
+    .hnav-topbar[data-navbar-color='gradient2'],
+    .hnav-topbar[data-navbar-color='gradient3'],
+    .hnav-topbar[data-navbar-color='image1'],
+    .hnav-topbar[data-navbar-color='image2']
 ) nav button:hover {
     background-color: rgba(255, 255, 255, 0.15) !important;
     color: #ffffff !important;
