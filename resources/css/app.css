@@ -353,8 +353,8 @@ html.dark .hnav-topbar,
     border-color: rgba(255, 255, 255, 0.1) !important;
 }
 
-html:not(.dark) header:not(.landing-header),
-html:not(.dark)[data-navbar-color='default'] header:not(.landing-header) {
+:where(html:not(.dark)) header:not(.landing-header),
+:where(html:not(.dark)[data-navbar-color='default']) header:not(.landing-header) {
     background-color: rgba(255, 255, 255, 0.88) !important;
     color: #0f172a !important;
     backdrop-filter: blur(12px) !important;
