@@ -4,7 +4,7 @@
 <header
     data-navbar-color="{{ $_COOKIE['ak_nb_color'] ?? 'default' }}"
     :data-navbar-color="$store.ui.navbarColor"
-    class="sticky top-0 z-30 flex h-16 items-center gap-2 border-b border-border px-4 backdrop-blur-lg"
+    class="sticky top-0 z-30 flex h-16 items-center gap-2 border-b border-border backdrop-blur-lg"
     :class="$store.ui.navbarFixed ? 'sticky top-0' : ''"
 >
     <div class="main-content-container flex h-full items-center gap-2 px-4 sm:px-6">

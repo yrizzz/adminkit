@@ -41,7 +41,7 @@
         </div>
 
         <nav x-ref="track" @scroll="upd(); $dispatch('hnav-close')"
-             class="no-scrollbar flex flex-1 flex-nowrap items-center gap-0.5 overflow-x-auto scroll-smooth px-5 py-1.5">
+             class="no-scrollbar flex flex-1 flex-nowrap items-center gap-0.5 overflow-x-auto scroll-smooth py-1.5">
             @foreach ($items as $item)
                 @php($active = Menu::active($item))
                 @if (Menu::hasChildren($item))
