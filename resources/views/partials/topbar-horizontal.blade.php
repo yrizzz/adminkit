@@ -29,7 +29,7 @@
         x-effect="$store.ui.layout; $nextTick(() => upd())"
         @resize.window="upd()"
         x-on:livewire:navigated.window="$nextTick(() => upd())"
-        class="relative flex items-center"
+        class="main-content-container relative flex items-center px-4 sm:px-6"
     >
         {{-- Scroll toward start --}}
         <div class="pointer-events-none absolute inset-y-0 start-0 z-10 flex items-center ps-1.5 transition-opacity"
