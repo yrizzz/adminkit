@@ -2693,7 +2693,7 @@
                 
                 <div class="px-6 py-5 flex-1 min-h-0 overflow-y-auto"><div class="space-y-4">
             <div class="space-y-1.5">
-            <label for="in_Ua1Hx" class="block text-sm font-medium text-foreground">Full name</label>
+            <label for="in_cwfxW" class="block text-sm font-medium text-foreground">Full name</label>
     
     <div class="relative">
                     <span class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground">
@@ -2701,7 +2701,7 @@
             </span>
         
         <input
-            id="in_Ua1Hx"
+            id="in_cwfxW"
                         type="text"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ps-9 border-input" placeholder="Jane Cooper"
         />
@@ -2709,7 +2709,7 @@
 
     </div>
             <div class="space-y-1.5">
-            <label for="in_PmWy1" class="block text-sm font-medium text-foreground">Email</label>
+            <label for="in_02i8R" class="block text-sm font-medium text-foreground">Email</label>
     
     <div class="relative">
                     <span class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground">
@@ -2717,7 +2717,7 @@
             </span>
         
         <input
-            id="in_PmWy1"
+            id="in_02i8R"
                         type="email"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ps-9 border-input" placeholder="jane@example.com"
         />
@@ -2726,7 +2726,7 @@
     </div>
             <div class="grid grid-cols-2 gap-3">
                 <div class="space-y-1.5">
-            <label for="in_VPEHJ" class="block text-sm font-medium text-foreground">Role</label>
+            <label for="in_sEFmM" class="block text-sm font-medium text-foreground">Role</label>
     
     <div class="relative">
                     <span class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground">
@@ -2734,7 +2734,7 @@
             </span>
         
         <input
-            id="in_VPEHJ"
+            id="in_sEFmM"
                         type="text"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ps-9 border-input" placeholder="Editor"
         />
@@ -2742,7 +2742,7 @@
 
     </div>
                 <div class="space-y-1.5">
-            <label for="in_0tcaB" class="block text-sm font-medium text-foreground">Department</label>
+            <label for="in_iixm7" class="block text-sm font-medium text-foreground">Department</label>
     
     <div class="relative">
                     <span class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground">
@@ -2750,7 +2750,7 @@
             </span>
         
         <input
-            id="in_0tcaB"
+            id="in_iixm7"
                         type="text"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ps-9 border-input" placeholder="Design"
         />
@@ -2820,9 +2820,11 @@
            x-transition:leave="transition ease-in duration-200"
            x-transition:leave-start="translate-x-0"
            x-transition:leave-end="ltr:translate-x-full rtl:-translate-x-full"
-           class="customizer-drawer fixed inset-y-0 end-0 z-[95] flex w-[24rem] max-w-[92vw] flex-col bg-card text-card-foreground shadow-2xl">
+           class="customizer-drawer fixed end-0 z-[95] flex w-[24rem] max-w-[92vw] flex-col bg-card text-card-foreground shadow-2xl transition-all duration-200"
+           :class="$store.ui.curvedLayout ? 'rounded-s-[2.25rem] border-s border-t border-b border-border/80 my-0 sm:my-3 me-0 sm:me-3 inset-y-0 sm:h-[calc(100vh-1.5rem)]' : 'inset-y-0 h-full rounded-none'">
 
-        <div class="flex items-center justify-between border-b border-border px-5 py-4">
+        <div class="flex items-center justify-between border-b border-border px-5 py-4"
+             :class="$store.ui.curvedLayout ? 'rounded-ts-[2.25rem]' : ''">
             <div class="flex items-center gap-2">
                 <i data-lucide="palette" class="size-5 text-primary"></i>
                 <div>

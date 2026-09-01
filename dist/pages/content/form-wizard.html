@@ -2563,7 +2563,7 @@
             <div x-show="step === 1" class="space-y-4">
                 <h3 class="text-lg font-semibold">Create your account</h3>
                 <div class="space-y-1.5">
-            <label for="in_TrKMi" class="block text-sm font-medium text-foreground">Email</label>
+            <label for="in_SNtel" class="block text-sm font-medium text-foreground">Email</label>
     
     <div class="relative">
                     <span class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground">
@@ -2571,7 +2571,7 @@
             </span>
         
         <input
-            id="in_TrKMi"
+            id="in_SNtel"
                         type="email"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ps-9 border-input" placeholder="you@company.com"
         />
@@ -2579,7 +2579,7 @@
 
     </div>
                 <div class="space-y-1.5">
-            <label for="in_WUd30" class="block text-sm font-medium text-foreground">Password</label>
+            <label for="in_y279K" class="block text-sm font-medium text-foreground">Password</label>
     
     <div class="relative">
                     <span class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground">
@@ -2587,7 +2587,7 @@
             </span>
         
         <input
-            id="in_WUd30"
+            id="in_y279K"
                         type="password"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ps-9 border-input" placeholder="••••••••"
         />
@@ -2599,12 +2599,12 @@
             <div x-show="step === 2" x-cloak class="space-y-4">
                 <h3 class="text-lg font-semibold">Tell us about you</h3>
                 <div class="grid grid-cols-2 gap-3"><div class="space-y-1.5">
-            <label for="in_GJgJU" class="block text-sm font-medium text-foreground">First name</label>
+            <label for="in_fsIbl" class="block text-sm font-medium text-foreground">First name</label>
     
     <div class="relative">
         
         <input
-            id="in_GJgJU"
+            id="in_fsIbl"
                         type="text"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 border-input" placeholder="Yrizzz"
         />
@@ -2612,12 +2612,12 @@
 
     </div>
 <div class="space-y-1.5">
-            <label for="in_EUBhx" class="block text-sm font-medium text-foreground">Last name</label>
+            <label for="in_J3tsx" class="block text-sm font-medium text-foreground">Last name</label>
     
     <div class="relative">
         
         <input
-            id="in_EUBhx"
+            id="in_J3tsx"
                         type="text"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 border-input" placeholder="Admin"
         />
@@ -2731,9 +2731,11 @@
            x-transition:leave="transition ease-in duration-200"
            x-transition:leave-start="translate-x-0"
            x-transition:leave-end="ltr:translate-x-full rtl:-translate-x-full"
-           class="customizer-drawer fixed inset-y-0 end-0 z-[95] flex w-[24rem] max-w-[92vw] flex-col bg-card text-card-foreground shadow-2xl">
+           class="customizer-drawer fixed end-0 z-[95] flex w-[24rem] max-w-[92vw] flex-col bg-card text-card-foreground shadow-2xl transition-all duration-200"
+           :class="$store.ui.curvedLayout ? 'rounded-s-[2.25rem] border-s border-t border-b border-border/80 my-0 sm:my-3 me-0 sm:me-3 inset-y-0 sm:h-[calc(100vh-1.5rem)]' : 'inset-y-0 h-full rounded-none'">
 
-        <div class="flex items-center justify-between border-b border-border px-5 py-4">
+        <div class="flex items-center justify-between border-b border-border px-5 py-4"
+             :class="$store.ui.curvedLayout ? 'rounded-ts-[2.25rem]' : ''">
             <div class="flex items-center gap-2">
                 <i data-lucide="palette" class="size-5 text-primary"></i>
                 <div>

@@ -2958,9 +2958,11 @@
            x-transition:leave="transition ease-in duration-200"
            x-transition:leave-start="translate-x-0"
            x-transition:leave-end="ltr:translate-x-full rtl:-translate-x-full"
-           class="customizer-drawer fixed inset-y-0 end-0 z-[95] flex w-[24rem] max-w-[92vw] flex-col bg-card text-card-foreground shadow-2xl">
+           class="customizer-drawer fixed end-0 z-[95] flex w-[24rem] max-w-[92vw] flex-col bg-card text-card-foreground shadow-2xl transition-all duration-200"
+           :class="$store.ui.curvedLayout ? 'rounded-s-[2.25rem] border-s border-t border-b border-border/80 my-0 sm:my-3 me-0 sm:me-3 inset-y-0 sm:h-[calc(100vh-1.5rem)]' : 'inset-y-0 h-full rounded-none'">
 
-        <div class="flex items-center justify-between border-b border-border px-5 py-4">
+        <div class="flex items-center justify-between border-b border-border px-5 py-4"
+             :class="$store.ui.curvedLayout ? 'rounded-ts-[2.25rem]' : ''">
             <div class="flex items-center gap-2">
                 <i data-lucide="palette" class="size-5 text-primary"></i>
                 <div>
