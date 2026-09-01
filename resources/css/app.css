@@ -1639,7 +1639,7 @@ html[data-layout-fluid="true"] .main-content-container {
         overflow: hidden !important;
     }
 
-    /* Dynamic Sidebar Backdrop */
+    /* Dynamic Sidebar Backdrop for Curved Layout */
     html[data-app-layout='true'][data-sidebar-color='dark'][data-curved-layout='true'][data-layout='vertical'] {
         background-color: #0f172a !important;
     }
@@ -1658,8 +1658,31 @@ html[data-layout-fluid="true"] .main-content-container {
     html[data-app-layout='true'][data-sidebar-color='transparent'][data-curved-layout='true'][data-layout='vertical'] {
         background-color: #0f172a !important;
     }
-    html[data-app-layout='true'][data-sidebar-color^='gradient'][data-curved-layout='true'][data-layout='vertical'] {
-        background-color: var(--custom-sb-grad-from, #1e1b4b) !important;
+    html[data-app-layout='true'][data-sidebar-color='gradient'][data-curved-layout='true'][data-layout='vertical'],
+    html[data-app-layout='true'][data-sidebar-color='gradient1'][data-curved-layout='true'][data-layout='vertical'] {
+        background: linear-gradient(180deg, #1e1b4b 0%, #0f172a 100%) !important;
+        background-attachment: fixed !important;
+    }
+    html[data-app-layout='true'][data-sidebar-color='gradient2'][data-curved-layout='true'][data-layout='vertical'] {
+        background: linear-gradient(180deg, #0d9488 0%, #064e3b 100%) !important;
+        background-attachment: fixed !important;
+    }
+    html[data-app-layout='true'][data-sidebar-color='gradient3'][data-curved-layout='true'][data-layout='vertical'] {
+        background: linear-gradient(180deg, #e11d48 0%, #4c0519 100%) !important;
+        background-attachment: fixed !important;
+    }
+    html[data-app-layout='true'][data-sidebar-color='custom_gradient'][data-curved-layout='true'][data-layout='vertical'] {
+        background: linear-gradient(180deg, var(--custom-sb-grad-from, #1e1b4b) 0%, var(--custom-sb-grad-to, #0f172a) 100%) !important;
+        background-attachment: fixed !important;
+    }
+    html[data-app-layout='true'][data-sidebar-color='image1'][data-curved-layout='true'][data-layout='vertical'] {
+        background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%) !important;
+    }
+    html[data-app-layout='true'][data-sidebar-color='image2'][data-curved-layout='true'][data-layout='vertical'] {
+        background: linear-gradient(180deg, #0284c7 0%, #0f172a 100%) !important;
+    }
+    html[data-app-layout='true'][data-sidebar-color='image3'][data-curved-layout='true'][data-layout='vertical'] {
+        background: linear-gradient(180deg, #4c0519 0%, #0f172a 100%) !important;
     }
 
     html[data-app-layout='true'][data-curved-layout='true'][data-layout='vertical'] body {
