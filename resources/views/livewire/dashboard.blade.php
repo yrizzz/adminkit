@@ -17,13 +17,13 @@
     </x-page-header>
 
     {{-- Top 6 Stat Cards Grid --}}
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6">
         <x-ui.stat label="Total Revenue" value="$128,450" icon="dollar-sign" tone="primary" trend="+18.4%" :trend-up="true" />
         <x-ui.stat label="Monthly MRR" value="$42,120" icon="credit-card" tone="info" trend="+12.1%" :trend-up="true" />
         <x-ui.stat label="Active Paying" value="12,840" icon="users" tone="success" trend="+8.7%" :trend-up="true" />
         <x-ui.stat label="Conversion" value="4.82%" icon="trending-up" tone="warning" trend="+1.4%" :trend-up="true" />
         <x-ui.stat label="Avg Order Value" value="$348.50" icon="shopping-bag" tone="primary" trend="+3.2%" :trend-up="true" />
-        <x-ui.stat label="System Health" value="99.99%" icon="activity" tone="success" trend="24ms latency" :trend-up="true" />
+        <x-ui.stat label="System Health" value="99.99%" icon="activity" tone="success" trend="24ms" :trend-up="true">latency</x-ui.stat>
     </div>
 
     {{-- Live Cluster Telemetry Bar --}}
