@@ -64,10 +64,12 @@ foreach (File::files($distDir . '/assets') as $file) {
     }
 }
 
-// Copy public icons & favicons if exist
-foreach (['favicon.ico', 'favicon.svg', 'favicon-32.png', 'favicon-16.png', 'apple-touch-icon.png'] as $fav) {
-    if (File::exists(__DIR__ . '/../public/' . $fav)) {
-        File::copy(__DIR__ . '/../public/' . $fav, $distDir . '/' . $fav);
+// Fix absolute font & asset URLs inside generated CSS files so they use relative paths (./filename)
+foreach (File::files($distDir . '/assets') as $file) {
+    if (str_ends_with($file->getFilename(), '.css')) {
+        $cssContent = File::get($file->getPathname());
+        $cssContent = preg_replace('/url\(([\'"]?)\/build\/assets\//i', 'url($1./', $cssContent);
+        File::put($file->getPathname(), $cssContent);
     }
 }
 
@@ -132,11 +134,15 @@ function processHtmlContent($html, $targetRelativePath, $cssFile, $jsFile, $font
         $headAssets .= '<script src="' . $prefix . 'assets/' . $jsFile . '"></script>' . "\n";
     }
     
-    // Clean up Vite development tags & injection
+    // Clean up Vite development & production build injection tags
     $html = preg_replace('/<script type="module" src="http:\/\/localhost:[0-9]+\/@vite\/client"><\/script>/i', '', $html);
     $html = preg_replace('/<script type="module" src="[^"]+resources\/js\/app\.js"><\/script>/i', '', $html);
     $html = preg_replace('/<link rel="stylesheet" href="[^"]+resources\/css\/app\.css">/i', '', $html);
-    
+    $html = preg_replace('/<link rel="modulepreload"[^>]*>/i', '', $html);
+    $html = preg_replace('/<link rel="stylesheet" href="[^"]*\/build\/assets\/[^"]*">/i', '', $html);
+    $html = preg_replace('/<script [^>]*src="[^"]*\/build\/assets\/[^"]*"><\/script>/i', '', $html);
+    $html = preg_replace('/(href|src)=["\']\/favicon/i', '$1="' . $prefix . 'favicon', $html);
+
     // Inject generated CSS and JS assets before </head>
     $html = str_replace('</head>', $headAssets . '</head>', $html);
     

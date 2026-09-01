@@ -4,7 +4,7 @@
 <header
     data-navbar-color="{{ $_COOKIE['ak_nb_color'] ?? 'default' }}"
     :data-navbar-color="$store.ui.navbarColor"
-    class="sticky top-0 z-30 flex h-16 items-center gap-2 border-b border-border backdrop-blur-lg"
+    class="sticky top-0 z-30 flex h-14 items-center gap-2 border-b border-border backdrop-blur-lg"
     :class="$store.ui.navbarFixed ? 'sticky top-0' : ''"
 >
     <div class="main-content-container flex h-full items-center gap-2 px-4 sm:px-6">
@@ -32,10 +32,10 @@
         {{-- Breadcrumb --}}
         <nav aria-label="Breadcrumb" class="hidden min-w-0 items-center gap-1.5 text-sm sm:flex">
             <a href="{{ route('dashboard') }}" wire:navigate class="flex items-center text-muted-foreground hover:text-foreground">
-                <i data-lucide="house" class="size-4"></i>
+                <i data-lucide="house" class="size-3.5"></i>
             </a>
             @foreach ($crumbs as $c)
-                <i data-lucide="chevron-right" class="rtl-flip size-4 text-muted-foreground/50"></i>
+                <i data-lucide="chevron-right" class="rtl-flip size-3.5 text-muted-foreground/50"></i>
                 @if (! $loop->last && ! empty($c['href']))
                     <a href="{{ $c['href'] }}" wire:navigate class="truncate text-muted-foreground hover:text-foreground">{{ $c['label'] }}</a>
                 @else
