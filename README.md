@@ -27,11 +27,29 @@ AdminKit provides a fast, elegant, and fully themeable admin foundation built na
 
 ## ✨ Features
 
+- 🌐 **Static HTML Ready**: Includes complete pre-compiled static HTML export in the `dist/` folder for standalone frontend deployment without PHP/Laravel backend.
 - 🔐 **Authentication System**: Pre-wired Login, Register, and Password Reset screens with seeded demo user.
 - 🧩 **UI Component Library**: Modular Blade components (`resources/views/components/ui/*`) including Button, Badge, Card, Input, Modal, Alert, Stat Box, Toaster, and Lucide Icons.
 - 📊 **Pre-built Dashboards & Charts**: Interactive Chart.js analytics widgets, stat summary cards, and activity feeds.
 - 📋 **Data Tables & Forms**: Client-side sorting, searching, selection filters, multi-step form wizard, and custom inputs.
 - ⚙️ **Theme Customizer Drawer**: Real-time interactive drawer to preview layout, direction, accent color, and radius adjustments.
+
+---
+
+## 🌐 Static HTML Export (`dist/` Folder)
+
+AdminKit comes with full **Static HTML Export** support! All 129+ pages, dashboards, apps, and UI elements are generated as clean, self-contained HTML files in the `dist/` directory with relative asset paths. You can deploy the `dist/` folder directly to any static web host or CDN (GitHub Pages, Vercel, Netlify, Cloudflare Pages, Apache, Nginx) without needing PHP or MySQL.
+
+### Exporting Static HTML
+
+To build production assets and generate/update the `dist/` static HTML folder:
+
+```bash
+npm run build
+php scripts/export-html.php
+```
+
+You can then open `dist/index.html` directly in your browser or serve the `dist/` directory with any static HTTP server.
 
 ---
 
