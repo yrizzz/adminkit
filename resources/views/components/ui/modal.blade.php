@@ -61,6 +61,12 @@ $isDrawer = in_array($position, ['drawer-left', 'drawer-right']);
 $wrapperClass = $wrapperPositions[$position] ?? $wrapperPositions['center'];
 $enterClass = $enterTransitions[$position] ?? $enterTransitions['center'];
 $leaveClass = $leaveTransitions[$position] ?? $leaveTransitions['center'];
+
+$drawerClasses = [
+    'drawer-left'  => 'h-full h-screen rounded-none border-y-0 border-l-0 shadow-2xl',
+    'drawer-right' => 'h-full h-screen rounded-none border-y-0 border-r-0 shadow-2xl',
+];
+$drawerExtra = $drawerClasses[$position] ?? 'h-full rounded-none border-y-0 shadow-2xl';
 @endphp
 
 <div
@@ -83,7 +89,7 @@ $leaveClass = $leaveTransitions[$position] ?? $leaveTransitions['center'];
                 x-trap.noscroll="open"
                 x-transition:enter="ease-out duration-200" x-transition:enter-start="{{ $enterClass }}" x-transition:enter-end="opacity-100 translate-y-0 translate-x-0 scale-100"
                 x-transition:leave="ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0 translate-x-0 scale-100" x-transition:leave-end="{{ $leaveClass }}"
-                class="relative w-full {{ $isDrawer ? 'h-full rounded-none border-y-0' : 'rounded-2xl shadow-2xl ' . $maxHeight }} {{ $maxWidth }} overflow-hidden border border-border bg-card text-card-foreground flex flex-col"
+                class="relative w-full {{ $isDrawer ? $drawerExtra : 'rounded-2xl shadow-2xl ' . $maxHeight }} {{ $maxWidth }} overflow-hidden border border-border bg-card text-card-foreground flex flex-col"
             >
                 @if ($title || isset($header) || $showClose)
                     <div class="flex items-center justify-between gap-4 border-b border-border bg-card px-6 py-4 shrink-0 z-10">

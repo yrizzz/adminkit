@@ -73,9 +73,9 @@
 </script>
 
 
-<link rel="preload" as="style" href="/build/assets/app-CH8a9uIH.css" /><link rel="modulepreload" as="script" href="/build/assets/app-BGswzwgY.js" /><link rel="stylesheet" href="/build/assets/app-CH8a9uIH.css" data-navigate-track="reload" /><script type="module" src="/build/assets/app-BGswzwgY.js" data-navigate-track="reload"></script>
+<link rel="preload" as="style" href="/build/assets/app-CLkzl4zo.css" /><link rel="modulepreload" as="script" href="/build/assets/app-BGswzwgY.js" /><link rel="stylesheet" href="/build/assets/app-CLkzl4zo.css" data-navigate-track="reload" /><script type="module" src="/build/assets/app-BGswzwgY.js" data-navigate-track="reload"></script>
 <link rel="stylesheet" href="../assets/fonts-C9MNnjVw.css">
-<link rel="stylesheet" href="../assets/app-CH8a9uIH.css">
+<link rel="stylesheet" href="../assets/app-CLkzl4zo.css">
 <script src="../assets/app-BGswzwgY.js"></script>
 </head>
 <body x-data class="min-h-screen bg-background font-sans text-foreground antialiased relative">
@@ -2693,7 +2693,7 @@
                 
                 <div class="px-6 py-5 flex-1 min-h-0 overflow-y-auto"><div class="space-y-4">
             <div class="space-y-1.5">
-            <label for="in_jYnIp" class="block text-sm font-medium text-foreground">Full name</label>
+            <label for="in_a5lLd" class="block text-sm font-medium text-foreground">Full name</label>
     
     <div class="relative">
                     <span class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground">
@@ -2701,7 +2701,7 @@
             </span>
         
         <input
-            id="in_jYnIp"
+            id="in_a5lLd"
                         type="text"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ps-9 border-input" placeholder="Jane Cooper"
         />
@@ -2709,7 +2709,7 @@
 
     </div>
             <div class="space-y-1.5">
-            <label for="in_VophK" class="block text-sm font-medium text-foreground">Email</label>
+            <label for="in_gETdZ" class="block text-sm font-medium text-foreground">Email</label>
     
     <div class="relative">
                     <span class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground">
@@ -2717,7 +2717,7 @@
             </span>
         
         <input
-            id="in_VophK"
+            id="in_gETdZ"
                         type="email"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ps-9 border-input" placeholder="jane@example.com"
         />
@@ -2726,7 +2726,7 @@
     </div>
             <div class="grid grid-cols-2 gap-3">
                 <div class="space-y-1.5">
-            <label for="in_mym1N" class="block text-sm font-medium text-foreground">Role</label>
+            <label for="in_LM7pv" class="block text-sm font-medium text-foreground">Role</label>
     
     <div class="relative">
                     <span class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground">
@@ -2734,7 +2734,7 @@
             </span>
         
         <input
-            id="in_mym1N"
+            id="in_LM7pv"
                         type="text"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ps-9 border-input" placeholder="Editor"
         />
@@ -2742,7 +2742,7 @@
 
     </div>
                 <div class="space-y-1.5">
-            <label for="in_gdk1R" class="block text-sm font-medium text-foreground">Department</label>
+            <label for="in_hP9gQ" class="block text-sm font-medium text-foreground">Department</label>
     
     <div class="relative">
                     <span class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground">
@@ -2750,7 +2750,7 @@
             </span>
         
         <input
-            id="in_gdk1R"
+            id="in_hP9gQ"
                         type="text"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ps-9 border-input" placeholder="Design"
         />
@@ -2813,13 +2813,15 @@
          @click="$store.ui.customizerOpen = false"
          class="fixed inset-0 z-[90] bg-black/40"></div>
 
-    <aside :class="{
-               'is-open': $store.ui.customizerOpen,
-               'pointer-events-none': !$store.ui.customizerOpen,
-               'rounded-s-[2.25rem] border-s border-t border-b border-border/80 sm:my-3 sm:me-3 sm:h-[calc(100vh-1.5rem)]': $store.ui.curvedLayout,
-               'h-full rounded-none': !$store.ui.curvedLayout
-           }"
-           class="customizer-drawer fixed inset-y-0 z-[95] flex w-[24rem] max-w-[92vw] flex-col bg-card text-card-foreground shadow-2xl">
+    <aside x-show="$store.ui.customizerOpen"
+           x-transition:enter="transition ease-out duration-300 transform"
+           x-transition:enter-start="translate-x-full opacity-0"
+           x-transition:enter-end="translate-x-0 opacity-100"
+           x-transition:leave="transition ease-in duration-200 transform"
+           x-transition:leave-start="translate-x-0 opacity-100"
+           x-transition:leave-end="translate-x-full opacity-0"
+           class="customizer-drawer fixed inset-y-0 end-0 z-[95] flex w-[24rem] max-w-[92vw] flex-col bg-card text-card-foreground shadow-2xl"
+           :class="$store.ui.curvedLayout ? 'rounded-s-[2.25rem] border-s border-t border-b border-border/80 sm:my-3 sm:me-3 sm:h-[calc(100vh-1.5rem)]' : 'h-full rounded-none'">
 
         <div class="flex items-center justify-between border-b border-border px-5 py-4"
              :class="$store.ui.curvedLayout ? 'rounded-ts-[2.25rem]' : ''">
