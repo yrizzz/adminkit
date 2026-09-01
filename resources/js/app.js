@@ -1,11 +1,16 @@
 import { createIcons } from 'lucide';
 import * as lucideIcons from 'lucide';
 import Chart from 'chart.js/auto';
+import Alpine from 'alpinejs';
+import collapse from '@alpinejs/collapse';
+import focus from '@alpinejs/focus';
+import persist from '@alpinejs/persist';
 
-/* ---------------------------------------------------------------
- * Third-party globals. Alpine is provided by Livewire (bundled),
- * so we don't import/start it here — we register onto it instead.
- * ------------------------------------------------------------- */
+window.Alpine = Alpine;
+Alpine.plugin(collapse);
+Alpine.plugin(focus);
+Alpine.plugin(persist);
+
 window.Chart = Chart;
 
 /* Give every value (linear) axis a little headroom so lines/bars never touch
@@ -151,12 +156,19 @@ Chart.register({
     },
 });
 
+const lucideIconsMap = {};
+Object.keys(lucideIcons).forEach((key) => {
+    lucideIconsMap[key] = lucideIcons[key];
+    const kebab = key.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+    lucideIconsMap[kebab] = lucideIcons[key];
+});
+
 let isRenderingIcons = false;
 const renderIcons = () => {
     if (isRenderingIcons) return;
     isRenderingIcons = true;
     try {
-        createIcons({ icons: lucideIcons, attrs: { 'stroke-width': 2 } });
+        createIcons({ icons: lucideIconsMap, attrs: { 'stroke-width': 2 } });
     } catch (e) {
         console.warn('[Lucide] Error rendering icons:', e);
     } finally {
@@ -490,6 +502,9 @@ const registerUIStore = () => {
 document.addEventListener('alpine:init', registerUIStore);
 if (window.Alpine) {
     registerUIStore();
+    if (!window.Alpine.started) {
+        window.Alpine.start();
+    }
 }
 
 /* ---------------------------------------------------------------

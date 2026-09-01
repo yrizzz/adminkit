@@ -73,10 +73,10 @@
 </script>
 
 
-<link rel="preload" as="style" href="http://localhost/build/assets/app-DIDWEz1b.css" /><link rel="modulepreload" as="script" href="http://localhost/build/assets/app-BYaQNc4N.js" /><link rel="stylesheet" href="http://localhost/build/assets/app-DIDWEz1b.css" data-navigate-track="reload" /><script type="module" src="http://localhost/build/assets/app-BYaQNc4N.js" data-navigate-track="reload"></script>
+<link rel="preload" as="style" href="http://localhost/build/assets/app-DOEHXkZG.css" /><link rel="modulepreload" as="script" href="http://localhost/build/assets/app-BYfOX5-S.js" /><link rel="stylesheet" href="http://localhost/build/assets/app-DOEHXkZG.css" data-navigate-track="reload" /><script type="module" src="http://localhost/build/assets/app-BYfOX5-S.js" data-navigate-track="reload"></script>
 <link rel="stylesheet" href="../../assets/fonts-C9MNnjVw.css">
-<link rel="stylesheet" href="../../assets/app-DIDWEz1b.css">
-<script defer src="../../assets/app-BYaQNc4N.js"></script>
+<link rel="stylesheet" href="../../assets/app-DOEHXkZG.css">
+<script src="../../assets/app-BYfOX5-S.js"></script>
 </head>
 <body x-data class="min-h-screen bg-background font-sans text-foreground antialiased relative">
     <div x-show="$store.ui.sidebarMobileOpen" x-cloak x-transition.opacity
@@ -2579,7 +2579,7 @@
 
     </div>
     </div>
-        <script>{
+    <script>document.addEventListener('DOMContentLoaded', function() { {
         const t = window.akChartTheme();
         const L = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
         const grid = { x:{grid:{display:false},ticks:{color:t.text}}, y:{grid:{color:t.grid},ticks:{color:t.text}} };
@@ -2588,8 +2588,7 @@
         new Chart(br2,{type:'bar',data:{labels:L,datasets:[{label:'This week',data:[12,19,13,25,22,30,28],backgroundColor:t.c1,borderRadius:6,maxBarThickness:14},{label:'Last week',data:[8,14,10,18,15,22,20],backgroundColor:t.grid,borderRadius:6,maxBarThickness:14}]},options:base});
         new Chart(br3,{type:'bar',data:{labels:['New','Contacted','Proposal','Negotiation','Won'],datasets:[{label:'Value ($k)',data:[96,74,120,88,186],backgroundColor:[t.c1,t.c2,t.c3,t.c4,t.c5],borderRadius:6,maxBarThickness:26}]},options:{...base,indexAxis:'y',plugins:{legend:{display:false}}}});
         new Chart(br4,{type:'bar',data:{labels:L,datasets:[{label:'Desktop',data:[12,19,13,25,22,30,28],backgroundColor:t.c1,borderRadius:{topLeft:0,topRight:0},maxBarThickness:26},{label:'Mobile',data:[8,12,9,15,13,18,16],backgroundColor:t.c2,borderRadius:6,maxBarThickness:26}]},options:{...base,scales:{x:{...grid.x,stacked:true},y:{...grid.y,stacked:true}}}});
-    }</script>
-    </div>
+    } });</script></div>
 
                 </div>
                 <footer class="mt-4 rounded-b-[2.25rem] mt-auto min-h-14 border-t border-border/60 bg-card/60 backdrop-blur-md flex items-center py-3">
@@ -3326,5 +3325,5 @@
     </div>
 
     
-    </body>
+    <script>document.addEventListener("DOMContentLoaded", function() { if (window.renderIcons) window.renderIcons(); });</script></body>
 </html>

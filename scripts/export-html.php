@@ -19,7 +19,7 @@ Blade::directive('script', function () {
     return '<?php ob_start(); ?>';
 });
 Blade::directive('endscript', function () {
-    return '<?php $__scriptContent = ob_get_clean(); echo $__scriptContent; ?>';
+    return '<?php $__scriptContent = ob_get_clean(); $__rawScript = preg_replace("/^\s*<script[^>]*>|<\/script>\s*$/i", "", $__scriptContent); echo "<script>document.addEventListener(\'DOMContentLoaded\', function() { " . $__rawScript . " });</script>"; ?>';
 });
 
 // Authenticate dummy user for Blade views expecting auth()->user()
@@ -82,7 +82,7 @@ function getDepthPrefix($targetPath) {
 function processHtmlContent($html, $targetRelativePath, $cssFile, $jsFile, $fontsCssFile) {
     $prefix = getDepthPrefix($targetRelativePath);
     
-    // Replace Vite asset injection with static CSS/JS references
+    // Replace Vite asset injection with static CSS/JS references in head (no defer for instant JS boot)
     $headAssets = '';
     if ($fontsCssFile) {
         $headAssets .= '<link rel="stylesheet" href="' . $prefix . 'assets/' . $fontsCssFile . '">' . "\n";
@@ -91,7 +91,7 @@ function processHtmlContent($html, $targetRelativePath, $cssFile, $jsFile, $font
         $headAssets .= '<link rel="stylesheet" href="' . $prefix . 'assets/' . $cssFile . '">' . "\n";
     }
     if ($jsFile) {
-        $headAssets .= '<script defer src="' . $prefix . 'assets/' . $jsFile . '"></script>' . "\n";
+        $headAssets .= '<script src="' . $prefix . 'assets/' . $jsFile . '"></script>' . "\n";
     }
     
     // Clean up Vite development tags & injection
@@ -144,6 +144,10 @@ function processHtmlContent($html, $targetRelativePath, $cssFile, $jsFile, $font
     }
 
     $html = preg_replace('/<meta name="csrf-token" content="[^"]*">/', '<meta name="csrf-token" content="static-html-token">', $html);
+
+    // Inject icon rendering trigger at bottom of body
+    $iconInit = '<script>document.addEventListener("DOMContentLoaded", function() { if (window.renderIcons) window.renderIcons(); });</script>';
+    $html = str_replace('</body>', $iconInit . '</body>', $html);
 
     return $html;
 }
