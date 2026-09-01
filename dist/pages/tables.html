@@ -73,9 +73,9 @@
 </script>
 
 
-<link rel="preload" as="style" href="/build/assets/app-CLkzl4zo.css" /><link rel="modulepreload" as="script" href="/build/assets/app-BGswzwgY.js" /><link rel="stylesheet" href="/build/assets/app-CLkzl4zo.css" data-navigate-track="reload" /><script type="module" src="/build/assets/app-BGswzwgY.js" data-navigate-track="reload"></script>
+<link rel="preload" as="style" href="/build/assets/app-l0T_cJzY.css" /><link rel="modulepreload" as="script" href="/build/assets/app-BGswzwgY.js" /><link rel="stylesheet" href="/build/assets/app-l0T_cJzY.css" data-navigate-track="reload" /><script type="module" src="/build/assets/app-BGswzwgY.js" data-navigate-track="reload"></script>
 <link rel="stylesheet" href="../assets/fonts-C9MNnjVw.css">
-<link rel="stylesheet" href="../assets/app-CLkzl4zo.css">
+<link rel="stylesheet" href="../assets/app-l0T_cJzY.css">
 <script src="../assets/app-BGswzwgY.js"></script>
 </head>
 <body x-data class="min-h-screen bg-background font-sans text-foreground antialiased relative">
@@ -2667,7 +2667,7 @@
     x-on:keydown.escape.window="open = false; $dispatch('close-modal', 'add-user')"
 >
     <template x-teleport="body">
-        <div x-show="open" x-cloak class="fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div x-show="open" x-cloak class="fixed inset-0 z-[100] flex items-center justify-center p-4 modal-drawer-portal">
             <div
                 x-show="open"
                 x-transition:enter="ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
@@ -2693,7 +2693,7 @@
                 
                 <div class="px-6 py-5 flex-1 min-h-0 overflow-y-auto"><div class="space-y-4">
             <div class="space-y-1.5">
-            <label for="in_a5lLd" class="block text-sm font-medium text-foreground">Full name</label>
+            <label for="in_L3tdo" class="block text-sm font-medium text-foreground">Full name</label>
     
     <div class="relative">
                     <span class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground">
@@ -2701,7 +2701,7 @@
             </span>
         
         <input
-            id="in_a5lLd"
+            id="in_L3tdo"
                         type="text"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ps-9 border-input" placeholder="Jane Cooper"
         />
@@ -2709,7 +2709,7 @@
 
     </div>
             <div class="space-y-1.5">
-            <label for="in_gETdZ" class="block text-sm font-medium text-foreground">Email</label>
+            <label for="in_Ik33Z" class="block text-sm font-medium text-foreground">Email</label>
     
     <div class="relative">
                     <span class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground">
@@ -2717,7 +2717,7 @@
             </span>
         
         <input
-            id="in_gETdZ"
+            id="in_Ik33Z"
                         type="email"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ps-9 border-input" placeholder="jane@example.com"
         />
@@ -2726,7 +2726,7 @@
     </div>
             <div class="grid grid-cols-2 gap-3">
                 <div class="space-y-1.5">
-            <label for="in_LM7pv" class="block text-sm font-medium text-foreground">Role</label>
+            <label for="in_hbWki" class="block text-sm font-medium text-foreground">Role</label>
     
     <div class="relative">
                     <span class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground">
@@ -2734,7 +2734,7 @@
             </span>
         
         <input
-            id="in_LM7pv"
+            id="in_hbWki"
                         type="text"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ps-9 border-input" placeholder="Editor"
         />
@@ -2742,7 +2742,7 @@
 
     </div>
                 <div class="space-y-1.5">
-            <label for="in_hP9gQ" class="block text-sm font-medium text-foreground">Department</label>
+            <label for="in_8RZcd" class="block text-sm font-medium text-foreground">Department</label>
     
     <div class="relative">
                     <span class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground">
@@ -2750,7 +2750,7 @@
             </span>
         
         <input
-            id="in_hP9gQ"
+            id="in_8RZcd"
                         type="text"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ps-9 border-input" placeholder="Design"
         />

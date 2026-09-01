@@ -63,10 +63,15 @@ $enterClass = $enterTransitions[$position] ?? $enterTransitions['center'];
 $leaveClass = $leaveTransitions[$position] ?? $leaveTransitions['center'];
 
 $drawerClasses = [
-    'drawer-left'  => 'h-full h-screen rounded-none border-y-0 border-l-0 shadow-2xl',
-    'drawer-right' => 'h-full h-screen rounded-none border-y-0 border-r-0 shadow-2xl',
+    'drawer-left'  => 'modal-drawer-left-panel h-full h-screen rounded-none border-y-0 border-l-0 shadow-2xl',
+    'drawer-right' => 'modal-drawer-right-panel h-full h-screen rounded-none border-y-0 border-r-0 shadow-2xl',
+];
+$drawerWrapperClasses = [
+    'drawer-left'  => 'modal-drawer-portal modal-drawer-left-wrapper',
+    'drawer-right' => 'modal-drawer-portal modal-drawer-right-wrapper',
 ];
 $drawerExtra = $drawerClasses[$position] ?? 'h-full rounded-none border-y-0 shadow-2xl';
+$extraWrapper = $drawerWrapperClasses[$position] ?? 'modal-drawer-portal';
 @endphp
 
 <div
@@ -76,7 +81,7 @@ $drawerExtra = $drawerClasses[$position] ?? 'h-full rounded-none border-y-0 shad
     x-on:keydown.escape.window="open = false; $dispatch('close-modal', '{{ $name }}')"
 >
     <template x-teleport="body">
-        <div x-show="open" x-cloak class="fixed inset-0 z-[100] flex {{ $wrapperClass }}">
+        <div x-show="open" x-cloak class="fixed inset-0 z-[100] flex {{ $wrapperClass }} {{ $extraWrapper }}">
             <div
                 x-show="open"
                 x-transition:enter="ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"

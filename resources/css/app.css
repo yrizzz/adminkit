@@ -155,6 +155,50 @@ aside.customizer-drawer {
     color: hsl(var(--card-foreground)) !important;
 }
 
+/* Modal Drawer Portal Full Viewport Breakout */
+.modal-drawer-portal {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    margin: 0 !important;
+    z-index: 99990 !important;
+}
+
+.modal-drawer-left-panel {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+    border-left: 0 !important;
+    z-index: 99999 !important;
+}
+
+.modal-drawer-right-panel {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+    border-right: 0 !important;
+    z-index: 99999 !important;
+}
+
 html.dark aside.main-sidebar,
 html[data-sidebar-color='dark'] aside.main-sidebar {
     background-color: #070B14 !important;
