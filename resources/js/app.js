@@ -6,12 +6,17 @@ import collapse from '@alpinejs/collapse';
 import focus from '@alpinejs/focus';
 import persist from '@alpinejs/persist';
 
-window.Alpine = Alpine;
+window.Chart = Chart;
+
+// Attach plugins to Alpine
 Alpine.plugin(collapse);
 Alpine.plugin(focus);
 Alpine.plugin(persist);
 
-window.Chart = Chart;
+// In static HTML mode (no Livewire), assign Alpine to window.Alpine
+if (typeof window.Livewire === 'undefined' && typeof window.Alpine === 'undefined') {
+    window.Alpine = Alpine;
+}
 
 /* Give every value (linear) axis a little headroom so lines/bars never touch
    the plot edge. Applies globally to all line/bar/area charts; pie/doughnut
@@ -502,10 +507,20 @@ const registerUIStore = () => {
 document.addEventListener('alpine:init', registerUIStore);
 if (window.Alpine) {
     registerUIStore();
-    if (!window.Alpine.started) {
-        window.Alpine.start();
-    }
 }
+
+// In static HTML mode ONLY (no Livewire), start Alpine automatically on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof window.Livewire === 'undefined') {
+        if (typeof window.Alpine === 'undefined') {
+            window.Alpine = Alpine;
+        }
+        registerUIStore();
+        if (window.Alpine && !window.Alpine.started) {
+            window.Alpine.start();
+        }
+    }
+});
 
 /* ---------------------------------------------------------------
  * Toast helper — window.toast('msg', { variant, title })

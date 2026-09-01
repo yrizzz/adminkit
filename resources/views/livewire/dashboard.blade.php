@@ -366,33 +366,43 @@
 
     @script
     <script>
-        const t = window.akChartTheme();
-        const rev = document.getElementById('chartRevenue');
-        if (rev) {
-            const ctx = rev.getContext('2d');
-            const g = ctx.createLinearGradient(0, 0, 0, 288);
-            g.addColorStop(0, t.primary.replace(')', ' / .35)').replace('hsl', 'hsla'));
-            g.addColorStop(1, t.primary.replace(')', ' / 0)').replace('hsl', 'hsla'));
-            new Chart(rev, {
-                type: 'line',
-                data: { labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'], datasets: [
-                    { label: 'Revenue', data: [24,32,28,45,40,58,52,68,62,84,78,96], borderColor: t.primary, backgroundColor: g, fill: true, tension: .4, borderWidth: 2.5, pointRadius: 0, pointHoverRadius: 5 },
-                    { label: 'Profit', data: [14,20,18,28,25,38,34,46,42,58,52,68], borderColor: t.c2, backgroundColor: 'transparent', tension: .4, borderWidth: 2, pointRadius: 0 },
-                    { label: 'Expenses', data: [10,12,10,17,15,20,18,22,20,26,26,28], borderColor: t.c3, backgroundColor: 'transparent', borderDash: [5,5], fill: false, tension: .4, borderWidth: 1.5, pointRadius: 0 }
-                ]},
-                options: { responsive: true, maintainAspectRatio: false,
-                    layout: { padding: { top: 8 } },
-                    plugins: { legend: { labels: { color: t.text, usePointStyle: true, boxWidth: 8, padding: 20 } } },
-                    scales: { x: { grid: { display: false }, ticks: { color: t.text } }, y: { grid: { color: t.grid }, ticks: { color: t.text, callback: v => '$' + v + 'k' } } } },
-            });
-        }
-        const traf = document.getElementById('chartTraffic');
-        if (traf) {
-            new Chart(traf, { type: 'doughnut',
-                data: { labels: ['Organic Search','Direct Visit','Referrals','Social Ads'], datasets: [{ data: [42,28,18,12], backgroundColor: [t.c1,t.c2,t.c3,t.c4], borderWidth: 0, hoverOffset: 6 }] },
-                options: { responsive: true, maintainAspectRatio: false, cutout: '68%', plugins: { legend: { display: false } } },
-            });
-        }
+        const renderDashboardCharts = () => {
+            const t = typeof window.akChartTheme === 'function' ? window.akChartTheme() : {};
+            const rev = document.getElementById('chartRevenue');
+            if (rev && window.Chart) {
+                const oldRev = Chart.getChart(rev);
+                if (oldRev) oldRev.destroy();
+
+                const ctx = rev.getContext('2d');
+                const g = ctx.createLinearGradient(0, 0, 0, 288);
+                g.addColorStop(0, (t.primary || '#3b82f6').replace(')', ' / .35)').replace('hsl', 'hsla'));
+                g.addColorStop(1, (t.primary || '#3b82f6').replace(')', ' / 0)').replace('hsl', 'hsla'));
+                new Chart(rev, {
+                    type: 'line',
+                    data: { labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'], datasets: [
+                        { label: 'Revenue', data: [24,32,28,45,40,58,52,68,62,84,78,96], borderColor: t.primary, backgroundColor: g, fill: true, tension: .4, borderWidth: 2.5, pointRadius: 0, pointHoverRadius: 5 },
+                        { label: 'Profit', data: [14,20,18,28,25,38,34,46,42,58,52,68], borderColor: t.c2, backgroundColor: 'transparent', tension: .4, borderWidth: 2, pointRadius: 0 },
+                        { label: 'Expenses', data: [10,12,10,17,15,20,18,22,20,26,26,28], borderColor: t.c3, backgroundColor: 'transparent', borderDash: [5,5], fill: false, tension: .4, borderWidth: 1.5, pointRadius: 0 }
+                    ]},
+                    options: { responsive: true, maintainAspectRatio: false,
+                        layout: { padding: { top: 8 } },
+                        plugins: { legend: { labels: { color: t.text, usePointStyle: true, boxWidth: 8, padding: 20 } } },
+                        scales: { x: { grid: { display: false }, ticks: { color: t.text } }, y: { grid: { color: t.grid }, ticks: { color: t.text, callback: v => '$' + v + 'k' } } } },
+                });
+            }
+            const traf = document.getElementById('chartTraffic');
+            if (traf && window.Chart) {
+                const oldTraf = Chart.getChart(traf);
+                if (oldTraf) oldTraf.destroy();
+
+                new Chart(traf, { type: 'doughnut',
+                    data: { labels: ['Organic Search','Direct Visit','Referrals','Social Ads'], datasets: [{ data: [42,28,18,12], backgroundColor: [t.c1,t.c2,t.c3,t.c4], borderWidth: 0, hoverOffset: 6 }] },
+                    options: { responsive: true, maintainAspectRatio: false, cutout: '68%', plugins: { legend: { display: false } } },
+                });
+            }
+        };
+
+        renderDashboardCharts();
     </script>
     @endscript
 </div>
