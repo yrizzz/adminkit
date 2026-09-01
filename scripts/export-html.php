@@ -243,6 +243,12 @@ foreach ($contentFiles as $file) {
         $targetFile = 'pages/content/' . $name . '.html';
         $processed = processHtmlContent($html, $targetFile, $cssFile, $jsFile, $fontsCssFile);
         File::put($distDir . '/' . $targetFile, $processed);
+        if ($name === 'landing') {
+            File::put($distDir . '/landing.html', processHtmlContent($html, 'landing.html', $cssFile, $jsFile, $fontsCssFile));
+        }
+        if ($name === 'docs') {
+            File::put($distDir . '/docs.html', processHtmlContent($html, 'docs.html', $cssFile, $jsFile, $fontsCssFile));
+        }
         $renderedCount++;
     } catch (\Throwable $e) {
         echo "Warning: Error rendering content page {$name}: " . $e->getMessage() . "\n";
