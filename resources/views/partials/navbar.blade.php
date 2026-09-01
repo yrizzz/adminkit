@@ -32,7 +32,7 @@
         {{-- Breadcrumb --}}
         <nav aria-label="Breadcrumb" class="hidden min-w-0 items-center gap-1.5 text-sm sm:flex">
             <a href="{{ route('dashboard') }}" wire:navigate class="flex items-center text-muted-foreground hover:text-foreground">
-                <i data-lucide="house" class="size-3.5"></i>
+                <i data-lucide="house" class="size-5"></i>
             </a>
             @foreach ($crumbs as $c)
                 <i data-lucide="chevron-right" class="rtl-flip size-3.5 text-muted-foreground/50"></i>
