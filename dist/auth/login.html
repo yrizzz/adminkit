@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth " dir="ltr">
+<head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf-token" content="static-html-token">
+<title>Sign In — AdminKit</title>
+<meta name="description" content="Laravel Admin Kit — modern, themeable admin panel.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+
+<script>
+    (function () {
+        try {
+            var d = document.documentElement;
+            var get = function (k, def) {
+                try { var v = localStorage.getItem(k); return v === null ? def : JSON.parse(v); }
+                catch (e) { return def; }
+            };
+            var theme = get('ak_theme', 'system');
+            var dark  = theme === 'dark' || (theme === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+            d.classList.toggle('dark', dark);
+            d.setAttribute('dir', get('ak_dir', 'ltr'));
+
+            var accent = get('ak_accent', 'blue');
+            d.dataset.accent = accent;
+
+            var accMap = {
+                blue: '221 83% 53%',
+                violet: '262 83% 58%',
+                green: '142 71% 45%',
+                rose: '347 77% 50%',
+                red: '347 77% 50%',
+                orange: '25 95% 53%',
+                amber: '38 92% 50%',
+                teal: '173 80% 40%',
+                midnight: '222 47% 11%',
+                black: '222 47% 11%'
+            };
+            if (accent === 'midnight' || accent === 'black') {
+                d.style.setProperty('--primary', '222 47% 11%');
+                d.style.setProperty('--primary-foreground', '0 0% 100%');
+                d.style.setProperty('--ring', '222 47% 11%');
+                d.style.setProperty('--sidebar-primary', '222 47% 11%');
+            } else if (accMap[accent]) {
+                d.style.setProperty('--primary', accMap[accent]);
+                d.style.setProperty('--ring', accMap[accent]);
+                d.style.setProperty('--sidebar-primary', accMap[accent]);
+            }
+
+            d.dataset.radius       = get('ak_radius',    'lg');
+            d.dataset.layout       = get('ak_layout',    'vertical');
+            d.dataset.sidebarColor = get('ak_sb_color', 'dark');
+            d.dataset.sidebarStyle = get('ak_sb_style', 'tree');
+            d.dataset.navbarColor  = get('ak_nb_color', 'default');
+            d.dataset.cardAnimation = get('ak_card_animation', 'fade-up');
+            d.dataset.pageLoading  = get('ak_page_loading', false);
+            d.dataset.layoutFluid = get('ak_layout_fluid', false);
+            d.dataset.curvedLayout = get('ak_curved_layout', true);
+
+            d.style.setProperty('--custom-sb-grad-from', get('ak_sb_grad_from', '#1e1b4b'));
+            d.style.setProperty('--custom-sb-grad-to',   get('ak_sb_grad_to',   '#0f172a'));
+            d.style.setProperty('--custom-nb-grad-from', get('ak_nb_grad_from', '#1e1b4b'));
+            d.style.setProperty('--custom-nb-grad-to',   get('ak_nb_grad_to',   '#0f172a'));
+            d.classList.toggle('sidebar-collapsed', get('ak_sb_collapsed', false));
+            if (get('ak_compact', false)) d.classList.add('is-compact');
+        } catch (e) {}
+    })();
+</script>
+
+
+<link rel="preload" as="style" href="http://localhost/build/assets/app-DIDWEz1b.css" /><link rel="modulepreload" as="script" href="http://localhost/build/assets/app-BYaQNc4N.js" /><link rel="stylesheet" href="http://localhost/build/assets/app-DIDWEz1b.css" data-navigate-track="reload" /><script type="module" src="http://localhost/build/assets/app-BYaQNc4N.js" data-navigate-track="reload"></script>
+<link rel="stylesheet" href="../assets/fonts-C9MNnjVw.css">
+<link rel="stylesheet" href="../assets/app-DIDWEz1b.css">
+<script defer src="../assets/app-BYaQNc4N.js"></script>
+</head>
+<body x-data class="min-h-screen bg-background font-sans text-foreground antialiased">
+    <div class="grid min-h-screen lg:grid-cols-2">
+        
+        <div class="relative hidden overflow-hidden bg-sidebar text-white lg:flex lg:flex-col lg:justify-between p-12">
+            <div class="pointer-events-none absolute inset-0 opacity-90"
+                 style="background:
+                    radial-gradient(60rem 60rem at 110% -10%, hsl(var(--primary)/0.45), transparent 60%),
+                    radial-gradient(40rem 40rem at -10% 110%, hsl(var(--sidebar-primary)/0.35), transparent 60%);"></div>
+            <div class="pointer-events-none absolute inset-0"
+                 style="background-image: linear-gradient(hsl(0 0% 100% / .04) 1px, transparent 1px), linear-gradient(90deg, hsl(0 0% 100% / .04) 1px, transparent 1px); background-size: 42px 42px;"></div>
+
+            <div class="relative z-10 flex items-center gap-3">
+                <span class="grid size-11 place-items-center rounded-2xl bg-white/10 backdrop-blur-sm">
+                    <i data-lucide="gem" class="size-6"></i>
+                </span>
+                <span class="text-xl font-bold tracking-tight">AdminKit</span>
+            </div>
+
+            <div class="relative z-10 max-w-md">
+                <h2 class="text-4xl font-bold leading-tight">Build beautiful admin apps, faster.</h2>
+                <p class="mt-4 text-white/70">A modern, themeable Laravel + Livewire admin panel — shadcn-inspired components, RTL/LTR, dark mode, and horizontal or vertical layouts out of the box.</p>
+                <ul class="mt-8 space-y-3">
+                                            <li class="flex items-center gap-3 text-sm text-white/85">
+                            <span class="grid size-6 place-items-center rounded-full bg-white/10"><i data-lucide="check" class="size-3.5"></i></span>40+ shadcn-inspired components
+                        </li>
+                                            <li class="flex items-center gap-3 text-sm text-white/85">
+                            <span class="grid size-6 place-items-center rounded-full bg-white/10"><i data-lucide="check" class="size-3.5"></i></span>Light / dark / system themes
+                        </li>
+                                            <li class="flex items-center gap-3 text-sm text-white/85">
+                            <span class="grid size-6 place-items-center rounded-full bg-white/10"><i data-lucide="check" class="size-3.5"></i></span>RTL &amp; LTR ready
+                        </li>
+                                            <li class="flex items-center gap-3 text-sm text-white/85">
+                            <span class="grid size-6 place-items-center rounded-full bg-white/10"><i data-lucide="check" class="size-3.5"></i></span>Vertical &amp; horizontal layouts
+                        </li>
+                                    </ul>
+            </div>
+
+            <div class="relative z-10 text-sm text-white/50">© 2026 AdminKit — v1.2.0</div>
+        </div>
+
+        
+        <div class="relative flex flex-col items-center justify-center p-6 sm:p-10">
+            <div class="absolute end-4 top-4 flex items-center gap-1">
+                <button type="button" @click="$store.ui.toggleDirection()" title="Toggle RTL/LTR"
+                        class="rounded-lg p-2 text-muted-foreground hover:bg-accent hover:text-foreground">
+                    <i data-lucide="languages" class="size-5"></i>
+                </button>
+                <button type="button" @click="$store.ui.toggleTheme()" title="Toggle theme"
+                        class="rounded-lg p-2 text-muted-foreground hover:bg-accent hover:text-foreground">
+                    <i data-lucide="sun" class="size-5" x-show="$store.ui.isDark" x-cloak></i>
+                    <i data-lucide="moon" class="size-5" x-show="!$store.ui.isDark"></i>
+                </button>
+            </div>
+
+            <div class="w-full max-w-sm">
+                <a href="../index.html" class="mb-8 flex items-center justify-center gap-2.5 lg:hidden">
+                    <span class="grid size-10 place-items-center rounded-xl bg-gradient-to-br from-primary to-sidebar-primary text-white"><i data-lucide="gem" class="size-5"></i></span>
+                    <span class="text-lg font-bold">AdminKit</span>
+                </a>
+                <div>
+
+        <div class="grid min-h-screen lg:grid-cols-2">
+            <div class="relative hidden overflow-hidden bg-sidebar p-10 text-white lg:flex lg:flex-col lg:justify-between">
+    <div class="pointer-events-none absolute inset-0 opacity-90"
+         style="background:
+            radial-gradient(60rem 60rem at 110% -10%, hsl(var(--primary)/0.45), transparent 60%),
+            radial-gradient(40rem 40rem at -10% 110%, hsl(var(--sidebar-primary)/0.35), transparent 60%);"></div>
+    <div class="pointer-events-none absolute inset-0"
+         style="background-image: linear-gradient(hsl(0 0% 100% / .04) 1px, transparent 1px), linear-gradient(90deg, hsl(0 0% 100% / .04) 1px, transparent 1px); background-size: 42px 42px;"></div>
+
+    <div class="relative z-10 flex items-center gap-3">
+        <span class="grid size-11 place-items-center rounded-2xl bg-white/10 backdrop-blur-sm"><i data-lucide="gem" class="size-6"></i></span>
+        <span class="text-xl font-bold tracking-tight">AdminKit</span>
+    </div>
+
+    <div class="relative z-10 max-w-sm">
+        <h2 class="text-3xl font-bold leading-tight">Welcome back to AdminKit.</h2>
+        <p class="mt-3 text-white/70">Sign in to pick up right where you left off — your dashboards, orders and reports are waiting.</p>
+        <ul class="mt-7 space-y-3">
+                            <li class="flex items-center gap-3 text-sm text-white/85">
+                    <span class="grid size-6 shrink-0 place-items-center rounded-full bg-white/10"><i data-lucide="check" class="size-3.5"></i></span>40+ ready-made components
+                </li>
+                            <li class="flex items-center gap-3 text-sm text-white/85">
+                    <span class="grid size-6 shrink-0 place-items-center rounded-full bg-white/10"><i data-lucide="check" class="size-3.5"></i></span>Light / dark / system themes
+                </li>
+                            <li class="flex items-center gap-3 text-sm text-white/85">
+                    <span class="grid size-6 shrink-0 place-items-center rounded-full bg-white/10"><i data-lucide="check" class="size-3.5"></i></span>RTL &amp; LTR ready
+                </li>
+                    </ul>
+    </div>
+
+    <div class="relative z-10 text-sm text-white/50">© 2026 AdminKit — v1.2.0</div>
+</div>
+
+            
+            <div class="flex items-center justify-center p-6 sm:p-10">
+                <div x-data="{ show: false }" class="w-full max-w-sm">
+                    <div class="mb-8 text-center lg:text-start">
+                        <h1 class="text-2xl font-bold tracking-tight">Welcome back 👋</h1>
+                        <p class="mt-1.5 text-sm text-muted-foreground">Sign in to your account to continue.</p>
+                    </div>
+
+                    
+                    <div class="grid grid-cols-2 gap-3">
+                        <button
+     type="button"     class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-transform ak-ring disabled:pointer-events-none disabled:opacity-50 [&amp;&gt;svg]:size-4 [&amp;&gt;svg]:shrink-0 border border-input bg-transparent hover:bg-accent hover:text-accent-foreground active:scale-[.98] h-10 px-4 py-2" @click="window.toast('Social login is a demo', {variant:'info'})"
+>
+        <svg class="size-4 shrink-0 size-4" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+    <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.15C3.26 21.3 7.31 24 12 24z"/>
+    <path fill="#FBBC05" d="M5.28 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.39l3.99-3.15z"/>
+    <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.61l3.99 3.15c.95-2.85 3.6-4.96 6.72-4.96z"/>
+</svg>
+ Google
+    </button>
+                        <button
+     type="button"     class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-transform ak-ring disabled:pointer-events-none disabled:opacity-50 [&amp;&gt;svg]:size-4 [&amp;&gt;svg]:shrink-0 border border-input bg-transparent hover:bg-accent hover:text-accent-foreground active:scale-[.98] h-10 px-4 py-2" @click="window.toast('Social login is a demo', {variant:'info'})"
+>
+        <svg class="size-4 shrink-0 size-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+</svg>
+ GitHub
+    </button>
+                    </div>
+
+                    <div class="my-5 flex items-center gap-3"><div class="h-px flex-1 bg-border"></div><span class="text-xs text-muted-foreground">or continue with email</span><div class="h-px flex-1 bg-border"></div></div>
+
+                    <form @submit.prevent="window.toast('Signed in successfully', { variant: 'success' })" class="space-y-4">
+                        <div class="space-y-1.5">
+            <label for="in_0NhAy" class="block text-sm font-medium text-foreground">Email address</label>
+    
+    <div class="relative">
+                    <span class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground">
+                <i data-lucide="mail" class="size-4"></i>
+            </span>
+        
+        <input
+            id="in_0NhAy"
+                        type="email"
+            class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ps-9 border-input" placeholder="you@example.com" value="admin@adminkit.test"
+        />
+    </div>
+
+    </div>
+
+                        <div class="space-y-1.5">
+                            <div class="flex items-center justify-between">
+                                <label class="text-sm font-medium">Password</label>
+                                <a href="http://localhost/page/reset-password" wire:navigate class="text-xs font-medium text-primary hover:underline">Forgot password?</a>
+                            </div>
+                            <div class="relative">
+                                <i data-lucide="lock" class="pointer-events-none absolute inset-y-0 start-0 my-auto ms-3 size-4 text-muted-foreground"></i>
+                                <input :type="show ? 'text' : 'password'" value="password" placeholder="••••••••"
+                                       class="h-10 w-full rounded-lg border border-input bg-background ps-9 pe-10 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                                <button type="button" @click="show = ! show" class="absolute inset-y-0 end-0 grid w-10 place-items-center text-muted-foreground hover:text-foreground">
+                                    <i data-lucide="eye" class="size-4" x-show="! show"></i>
+                                    <i data-lucide="eye-off" class="size-4" x-show="show" x-cloak></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <label class="flex cursor-pointer items-center gap-2 text-sm"><input type="checkbox" class="size-4 rounded border-input text-primary focus:ring-primary">Remember me</label>
+                        </div>
+
+                        <button
+     type="submit"     class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-transform ak-ring disabled:pointer-events-none disabled:opacity-50 [&amp;&gt;svg]:size-4 [&amp;&gt;svg]:shrink-0 bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 active:scale-[.98] h-11 rounded-lg px-6 text-[0.95rem] w-full"
+>
+            <i data-lucide="log-in" class="size-4 shrink-0 inline-block"></i>
+        Sign in
+    </button>
+                    </form>
+
+                    <p class="mt-8 text-center text-sm text-muted-foreground">
+                        Don't have an account?
+                        <a href="http://localhost/page/sign-up" wire:navigate class="font-semibold text-primary hover:underline">Create one</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+</div>
+
+            </div>
+        </div>
+    </div>
+
+    <div
+    x-data="{
+        toasts: [],
+        add(detail) {
+            const id = Date.now() + Math.random();
+            const pos = detail.position || 'bottom-end';
+            this.toasts.push({ id, position: pos, ...detail });
+            const d = detail.duration ?? 4200;
+            if (d > 0) setTimeout(() => this.remove(id), d);
+        },
+        remove(id) { this.toasts = this.toasts.filter(t => t.id !== id); },
+        at(pos) { return this.toasts.filter(t => t.position === pos); },
+        style(v) {
+            return {
+                success: 'border-success/30 text-success',
+                warning: 'border-warning/40 text-[hsl(var(--warning))]',
+                destructive: 'border-destructive/30 text-destructive',
+                info: 'border-info/30 text-info',
+                default: 'border-border text-foreground',
+            }[v] || 'border-border text-foreground';
+        },
+        icon(v) {
+            return { success:'circle-check-big', warning:'triangle-alert', destructive:'circle-alert', info:'info', default:'bell' }[v] || 'bell';
+        },
+    }"
+    @toast.window="add($event.detail); $nextTick(() => window.renderIcons && window.renderIcons())"
+>
+    
+            <div class="pointer-events-none fixed top-4 start-4 items-start z-[200] flex w-[calc(100%-2rem)] max-w-sm flex-col gap-2.5 ">
+            <template x-for="t in at('top-start')" :key="t.id">
+                <div
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 -translate-y-2"
+                    x-transition:enter-end="opacity-100 translate-y-0"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100"
+                    x-transition:leave-end="opacity-0 -translate-y-2"
+                    class="pointer-events-auto flex w-full items-start gap-3 rounded-xl border bg-card p-4 text-card-foreground shadow-lg"
+                    :class="style(t.variant)"
+                >
+                    <i :data-lucide="icon(t.variant)" class="mt-0.5 size-5 shrink-0"></i>
+                    <div class="min-w-0 flex-1">
+                        <p x-show="t.title" class="font-semibold" x-text="t.title"></p>
+                        <p class="text-sm text-muted-foreground" x-text="t.message"></p>
+                    </div>
+                    <button type="button" @click="remove(t.id)" class="text-muted-foreground hover:text-foreground">
+                        <i data-lucide="x" class="size-4"></i>
+                    </button>
+                </div>
+            </template>
+        </div>
+            <div class="pointer-events-none fixed top-4 start-1/2 -translate-x-1/2 items-center rtl:translate-x-1/2 z-[200] flex w-[calc(100%-2rem)] max-w-sm flex-col gap-2.5 ">
+            <template x-for="t in at('top-center')" :key="t.id">
+                <div
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 -translate-y-2"
+                    x-transition:enter-end="opacity-100 translate-y-0"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100"
+                    x-transition:leave-end="opacity-0 -translate-y-2"
+                    class="pointer-events-auto flex w-full items-start gap-3 rounded-xl border bg-card p-4 text-card-foreground shadow-lg"
+                    :class="style(t.variant)"
+                >
+                    <i :data-lucide="icon(t.variant)" class="mt-0.5 size-5 shrink-0"></i>
+                    <div class="min-w-0 flex-1">
+                        <p x-show="t.title" class="font-semibold" x-text="t.title"></p>
+                        <p class="text-sm text-muted-foreground" x-text="t.message"></p>
+                    </div>
+                    <button type="button" @click="remove(t.id)" class="text-muted-foreground hover:text-foreground">
+                        <i data-lucide="x" class="size-4"></i>
+                    </button>
+                </div>
+            </template>
+        </div>
+            <div class="pointer-events-none fixed top-4 end-4 items-end z-[200] flex w-[calc(100%-2rem)] max-w-sm flex-col gap-2.5 ">
+            <template x-for="t in at('top-end')" :key="t.id">
+                <div
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 -translate-y-2"
+                    x-transition:enter-end="opacity-100 translate-y-0"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100"
+                    x-transition:leave-end="opacity-0 -translate-y-2"
+                    class="pointer-events-auto flex w-full items-start gap-3 rounded-xl border bg-card p-4 text-card-foreground shadow-lg"
+                    :class="style(t.variant)"
+                >
+                    <i :data-lucide="icon(t.variant)" class="mt-0.5 size-5 shrink-0"></i>
+                    <div class="min-w-0 flex-1">
+                        <p x-show="t.title" class="font-semibold" x-text="t.title"></p>
+                        <p class="text-sm text-muted-foreground" x-text="t.message"></p>
+                    </div>
+                    <button type="button" @click="remove(t.id)" class="text-muted-foreground hover:text-foreground">
+                        <i data-lucide="x" class="size-4"></i>
+                    </button>
+                </div>
+            </template>
+        </div>
+            <div class="pointer-events-none fixed bottom-4 start-4 items-start z-[200] flex w-[calc(100%-2rem)] max-w-sm flex-col gap-2.5 flex-col-reverse">
+            <template x-for="t in at('bottom-start')" :key="t.id">
+                <div
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 translate-y-2"
+                    x-transition:enter-end="opacity-100 translate-y-0"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100"
+                    x-transition:leave-end="opacity-0 translate-y-2"
+                    class="pointer-events-auto flex w-full items-start gap-3 rounded-xl border bg-card p-4 text-card-foreground shadow-lg"
+                    :class="style(t.variant)"
+                >
+                    <i :data-lucide="icon(t.variant)" class="mt-0.5 size-5 shrink-0"></i>
+                    <div class="min-w-0 flex-1">
+                        <p x-show="t.title" class="font-semibold" x-text="t.title"></p>
+                        <p class="text-sm text-muted-foreground" x-text="t.message"></p>
+                    </div>
+                    <button type="button" @click="remove(t.id)" class="text-muted-foreground hover:text-foreground">
+                        <i data-lucide="x" class="size-4"></i>
+                    </button>
+                </div>
+            </template>
+        </div>
+            <div class="pointer-events-none fixed bottom-4 start-1/2 -translate-x-1/2 items-center rtl:translate-x-1/2 z-[200] flex w-[calc(100%-2rem)] max-w-sm flex-col gap-2.5 flex-col-reverse">
+            <template x-for="t in at('bottom-center')" :key="t.id">
+                <div
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 translate-y-2"
+                    x-transition:enter-end="opacity-100 translate-y-0"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100"
+                    x-transition:leave-end="opacity-0 translate-y-2"
+                    class="pointer-events-auto flex w-full items-start gap-3 rounded-xl border bg-card p-4 text-card-foreground shadow-lg"
+                    :class="style(t.variant)"
+                >
+                    <i :data-lucide="icon(t.variant)" class="mt-0.5 size-5 shrink-0"></i>
+                    <div class="min-w-0 flex-1">
+                        <p x-show="t.title" class="font-semibold" x-text="t.title"></p>
+                        <p class="text-sm text-muted-foreground" x-text="t.message"></p>
+                    </div>
+                    <button type="button" @click="remove(t.id)" class="text-muted-foreground hover:text-foreground">
+                        <i data-lucide="x" class="size-4"></i>
+                    </button>
+                </div>
+            </template>
+        </div>
+            <div class="pointer-events-none fixed bottom-4 end-4 items-end z-[200] flex w-[calc(100%-2rem)] max-w-sm flex-col gap-2.5 flex-col-reverse">
+            <template x-for="t in at('bottom-end')" :key="t.id">
+                <div
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 translate-y-2"
+                    x-transition:enter-end="opacity-100 translate-y-0"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100"
+                    x-transition:leave-end="opacity-0 translate-y-2"
+                    class="pointer-events-auto flex w-full items-start gap-3 rounded-xl border bg-card p-4 text-card-foreground shadow-lg"
+                    :class="style(t.variant)"
+                >
+                    <i :data-lucide="icon(t.variant)" class="mt-0.5 size-5 shrink-0"></i>
+                    <div class="min-w-0 flex-1">
+                        <p x-show="t.title" class="font-semibold" x-text="t.title"></p>
+                        <p class="text-sm text-muted-foreground" x-text="t.message"></p>
+                    </div>
+                    <button type="button" @click="remove(t.id)" class="text-muted-foreground hover:text-foreground">
+                        <i data-lucide="x" class="size-4"></i>
+                    </button>
+                </div>
+            </template>
+        </div>
+    </div>
+    
+    </body>
+</html>
