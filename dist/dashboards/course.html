@@ -73,9 +73,9 @@
 </script>
 
 
-<link rel="preload" as="style" href="/build/assets/app-BBpeZVxN.css" /><link rel="modulepreload" as="script" href="/build/assets/app-BGswzwgY.js" /><link rel="stylesheet" href="/build/assets/app-BBpeZVxN.css" data-navigate-track="reload" /><script type="module" src="/build/assets/app-BGswzwgY.js" data-navigate-track="reload"></script>
+<link rel="preload" as="style" href="/build/assets/app-B1A5sDkm.css" /><link rel="modulepreload" as="script" href="/build/assets/app-BGswzwgY.js" /><link rel="stylesheet" href="/build/assets/app-B1A5sDkm.css" data-navigate-track="reload" /><script type="module" src="/build/assets/app-BGswzwgY.js" data-navigate-track="reload"></script>
 <link rel="stylesheet" href="../assets/fonts-C9MNnjVw.css">
-<link rel="stylesheet" href="../assets/app-BBpeZVxN.css">
+<link rel="stylesheet" href="../assets/app-B1A5sDkm.css">
 <script src="../assets/app-BGswzwgY.js"></script>
 </head>
 <body x-data class="min-h-screen bg-background font-sans text-foreground antialiased relative">
@@ -2952,15 +2952,13 @@
          @click="$store.ui.customizerOpen = false"
          class="fixed inset-0 z-[90] bg-black/40"></div>
 
-    <aside x-show="$store.ui.customizerOpen"
-           x-transition:enter="transition ease-out duration-300"
-           x-transition:enter-start="ltr:translate-x-full rtl:-translate-x-full"
-           x-transition:enter-end="translate-x-0"
-           x-transition:leave="transition ease-in duration-200"
-           x-transition:leave-start="translate-x-0"
-           x-transition:leave-end="ltr:translate-x-full rtl:-translate-x-full"
-           class="customizer-drawer fixed end-0 z-[95] flex w-[24rem] max-w-[92vw] flex-col bg-card text-card-foreground shadow-2xl transition-all duration-200"
-           :class="$store.ui.curvedLayout ? 'rounded-s-[2.25rem] border-s border-t border-b border-border/80 my-0 sm:my-3 me-0 sm:me-3 inset-y-0 sm:h-[calc(100vh-1.5rem)]' : 'inset-y-0 h-full rounded-none'">
+    <aside :class="{
+               'is-open': $store.ui.customizerOpen,
+               'pointer-events-none': !$store.ui.customizerOpen,
+               'rounded-s-[2.25rem] border-s border-t border-b border-border/80 sm:my-3 sm:me-3 sm:h-[calc(100vh-1.5rem)]': $store.ui.curvedLayout,
+               'h-full rounded-none': !$store.ui.curvedLayout
+           }"
+           class="customizer-drawer fixed inset-y-0 z-[95] flex w-[24rem] max-w-[92vw] flex-col bg-card text-card-foreground shadow-2xl">
 
         <div class="flex items-center justify-between border-b border-border px-5 py-4"
              :class="$store.ui.curvedLayout ? 'rounded-ts-[2.25rem]' : ''">

@@ -153,6 +153,15 @@ aside.customizer-drawer {
     background-color: hsl(var(--card)) !important;
     background-image: none !important;
     color: hsl(var(--card-foreground)) !important;
+    right: 0 !important;
+    left: auto !important;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    opacity: 0;
+}
+aside.customizer-drawer.is-open {
+    transform: translateX(0) !important;
+    opacity: 1;
 }
 
 html.dark aside.main-sidebar,

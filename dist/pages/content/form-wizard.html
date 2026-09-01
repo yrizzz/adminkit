@@ -73,9 +73,9 @@
 </script>
 
 
-<link rel="preload" as="style" href="/build/assets/app-BBpeZVxN.css" /><link rel="modulepreload" as="script" href="/build/assets/app-BGswzwgY.js" /><link rel="stylesheet" href="/build/assets/app-BBpeZVxN.css" data-navigate-track="reload" /><script type="module" src="/build/assets/app-BGswzwgY.js" data-navigate-track="reload"></script>
+<link rel="preload" as="style" href="/build/assets/app-B1A5sDkm.css" /><link rel="modulepreload" as="script" href="/build/assets/app-BGswzwgY.js" /><link rel="stylesheet" href="/build/assets/app-B1A5sDkm.css" data-navigate-track="reload" /><script type="module" src="/build/assets/app-BGswzwgY.js" data-navigate-track="reload"></script>
 <link rel="stylesheet" href="../../assets/fonts-C9MNnjVw.css">
-<link rel="stylesheet" href="../../assets/app-BBpeZVxN.css">
+<link rel="stylesheet" href="../../assets/app-B1A5sDkm.css">
 <script src="../../assets/app-BGswzwgY.js"></script>
 </head>
 <body x-data class="min-h-screen bg-background font-sans text-foreground antialiased relative">
@@ -2563,7 +2563,7 @@
             <div x-show="step === 1" class="space-y-4">
                 <h3 class="text-lg font-semibold">Create your account</h3>
                 <div class="space-y-1.5">
-            <label for="in_OGHB2" class="block text-sm font-medium text-foreground">Email</label>
+            <label for="in_OgN0j" class="block text-sm font-medium text-foreground">Email</label>
     
     <div class="relative">
                     <span class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground">
@@ -2571,7 +2571,7 @@
             </span>
         
         <input
-            id="in_OGHB2"
+            id="in_OgN0j"
                         type="email"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ps-9 border-input" placeholder="you@company.com"
         />
@@ -2579,7 +2579,7 @@
 
     </div>
                 <div class="space-y-1.5">
-            <label for="in_G3jBn" class="block text-sm font-medium text-foreground">Password</label>
+            <label for="in_kVeI2" class="block text-sm font-medium text-foreground">Password</label>
     
     <div class="relative">
                     <span class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground">
@@ -2587,7 +2587,7 @@
             </span>
         
         <input
-            id="in_G3jBn"
+            id="in_kVeI2"
                         type="password"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ps-9 border-input" placeholder="••••••••"
         />
@@ -2599,12 +2599,12 @@
             <div x-show="step === 2" x-cloak class="space-y-4">
                 <h3 class="text-lg font-semibold">Tell us about you</h3>
                 <div class="grid grid-cols-2 gap-3"><div class="space-y-1.5">
-            <label for="in_Ehewo" class="block text-sm font-medium text-foreground">First name</label>
+            <label for="in_fUG2k" class="block text-sm font-medium text-foreground">First name</label>
     
     <div class="relative">
         
         <input
-            id="in_Ehewo"
+            id="in_fUG2k"
                         type="text"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 border-input" placeholder="Yrizzz"
         />
@@ -2612,12 +2612,12 @@
 
     </div>
 <div class="space-y-1.5">
-            <label for="in_niV8U" class="block text-sm font-medium text-foreground">Last name</label>
+            <label for="in_VWJ38" class="block text-sm font-medium text-foreground">Last name</label>
     
     <div class="relative">
         
         <input
-            id="in_niV8U"
+            id="in_VWJ38"
                         type="text"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 border-input" placeholder="Admin"
         />
@@ -2724,15 +2724,13 @@
          @click="$store.ui.customizerOpen = false"
          class="fixed inset-0 z-[90] bg-black/40"></div>
 
-    <aside x-show="$store.ui.customizerOpen"
-           x-transition:enter="transition ease-out duration-300"
-           x-transition:enter-start="ltr:translate-x-full rtl:-translate-x-full"
-           x-transition:enter-end="translate-x-0"
-           x-transition:leave="transition ease-in duration-200"
-           x-transition:leave-start="translate-x-0"
-           x-transition:leave-end="ltr:translate-x-full rtl:-translate-x-full"
-           class="customizer-drawer fixed end-0 z-[95] flex w-[24rem] max-w-[92vw] flex-col bg-card text-card-foreground shadow-2xl transition-all duration-200"
-           :class="$store.ui.curvedLayout ? 'rounded-s-[2.25rem] border-s border-t border-b border-border/80 my-0 sm:my-3 me-0 sm:me-3 inset-y-0 sm:h-[calc(100vh-1.5rem)]' : 'inset-y-0 h-full rounded-none'">
+    <aside :class="{
+               'is-open': $store.ui.customizerOpen,
+               'pointer-events-none': !$store.ui.customizerOpen,
+               'rounded-s-[2.25rem] border-s border-t border-b border-border/80 sm:my-3 sm:me-3 sm:h-[calc(100vh-1.5rem)]': $store.ui.curvedLayout,
+               'h-full rounded-none': !$store.ui.curvedLayout
+           }"
+           class="customizer-drawer fixed inset-y-0 z-[95] flex w-[24rem] max-w-[92vw] flex-col bg-card text-card-foreground shadow-2xl">
 
         <div class="flex items-center justify-between border-b border-border px-5 py-4"
              :class="$store.ui.curvedLayout ? 'rounded-ts-[2.25rem]' : ''">
