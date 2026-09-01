@@ -73,9 +73,9 @@
 </script>
 
 
-<link rel="preload" as="style" href="/build/assets/app-NH4ER_IH.css" /><link rel="stylesheet" href="/build/assets/app-NH4ER_IH.css" data-navigate-track="reload" /><script type="module" src="/build/assets/app-BGswzwgY.js" data-navigate-track="reload"></script>
+<link rel="preload" as="style" href="/build/assets/app-DVVrz2RL.css" /><link rel="stylesheet" href="/build/assets/app-DVVrz2RL.css" data-navigate-track="reload" /><script type="module" src="/build/assets/app-BGswzwgY.js" data-navigate-track="reload"></script>
 <link rel="stylesheet" href="../../assets/fonts-C9MNnjVw.css">
-<link rel="stylesheet" href="../../assets/app-NH4ER_IH.css">
+<link rel="stylesheet" href="../../assets/app-DVVrz2RL.css">
 <script src="../../assets/app-BGswzwgY.js"></script>
 </head>
 <body x-data class="min-h-screen bg-background font-sans text-foreground antialiased relative">
@@ -2550,12 +2550,12 @@
     <div class="p-5">
         <div class="space-y-4">
                 <div class="space-y-1.5">
-            <label for="in_Q51Pu" class="block text-sm font-medium text-foreground">Full name</label>
+            <label for="in_su9j1" class="block text-sm font-medium text-foreground">Full name</label>
     
     <div class="relative">
         
         <input
-            id="in_Q51Pu"
+            id="in_su9j1"
                         type="text"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 border-input" placeholder="Yrizzz"
         />
@@ -2563,7 +2563,7 @@
 
     </div>
                 <div class="space-y-1.5">
-            <label for="in_C4qe4" class="block text-sm font-medium text-foreground">Email</label>
+            <label for="in_WYzy4" class="block text-sm font-medium text-foreground">Email</label>
     
     <div class="relative">
                     <span class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground">
@@ -2571,7 +2571,7 @@
             </span>
         
         <input
-            id="in_C4qe4"
+            id="in_WYzy4"
                         type="email"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ps-9 border-input" placeholder="you@company.com"
         />
@@ -3427,7 +3427,7 @@
 
         <div class="border-t border-border p-4">
             <button type="button"
-                    @click="localStorage.clear(); location.reload()"
+                    @click="localStorage.clear(); document.cookie.split(';').forEach(c => { const name = c.split('=')[0].trim(); if(name.startsWith('ak_')) document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;'; }); location.reload()"
                     class="flex w-full items-center justify-center gap-2 rounded-lg border border-border py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
                 <i data-lucide="rotate-ccw" class="size-4"></i>Reset to defaults
             </button>

@@ -1131,36 +1131,45 @@ header[data-navbar-color='custom_gradient'] {
         display: none !important;
     }
 
-    /* 2) Pill Mode: Hide tree lines & style active sub-item as a solid pill */
+    /* 2) Pill Mode: Hide tree lines & style active leaf sub-item as a clean subtle pill */
     html[data-sidebar-style='pill'] .nav-sublist::before,
     html[data-sidebar-style='pill'] .nav-sub::after,
     html[data-sidebar-style='pill'] .nav-sub::before {
         display: none !important;
     }
-    html[data-sidebar-style='pill'] .nav-sub.active {
-        background: hsl(var(--sidebar-primary)) !important;
-        color: #ffffff !important;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
-    }
-    html[data-sidebar-style='pill'] .nav-sub.active .nav-node {
-        background: #ffffff !important;
-        box-shadow: none !important;
-    }
-    /* Pill Mode for colored sidebars (outside light and dark): solid white pill for high contrast */
-    html[data-sidebar-style='pill'][data-sidebar-color='primary'] .nav-sub.active,
-    html[data-sidebar-style='pill'][data-sidebar-color^='gradient'] .nav-sub.active,
-    html[data-sidebar-style='pill'][data-sidebar-color^='image'] .nav-sub.active,
-    html[data-sidebar-style='pill'][data-sidebar-color='custom_gradient'] .nav-sub.active {
-        background: #ffffff !important;
+    html[data-sidebar-style='pill'] .nav-sub.parent-active {
+        background: transparent !important;
         color: hsl(var(--primary)) !important;
         font-weight: 600;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18) !important;
+        box-shadow: none !important;
     }
-    html[data-sidebar-style='pill'][data-sidebar-color='primary'] .nav-sub.active .nav-node,
-    html[data-sidebar-style='pill'][data-sidebar-color^='gradient'] .nav-sub.active .nav-node,
-    html[data-sidebar-style='pill'][data-sidebar-color^='image'] .nav-sub.active .nav-node,
-    html[data-sidebar-style='pill'][data-sidebar-color='custom_gradient'] .nav-sub.active .nav-node {
+    html[data-sidebar-style='pill'] .nav-sub.active:not(.parent-active) {
+        background: hsl(var(--primary) / 0.15) !important;
+        color: hsl(var(--primary)) !important;
+        font-weight: 600;
+        box-shadow: none !important;
+    }
+    html[data-sidebar-style='pill'] .nav-sub.active:not(.parent-active) .nav-node {
         background: hsl(var(--primary)) !important;
+        box-shadow: none !important;
+    }
+    /* Pill Mode for colored sidebars: solid subtle pill for leaf active item */
+    html[data-sidebar-style='pill'][data-sidebar-color='primary'] .nav-sub.parent-active,
+    html[data-sidebar-style='pill'][data-sidebar-color^='gradient'] .nav-sub.parent-active,
+    html[data-sidebar-style='pill'][data-sidebar-color^='image'] .nav-sub.parent-active,
+    html[data-sidebar-style='pill'][data-sidebar-color='custom_gradient'] .nav-sub.parent-active {
+        background: transparent !important;
+        color: #ffffff !important;
+        font-weight: 600;
+        box-shadow: none !important;
+    }
+    html[data-sidebar-style='pill'][data-sidebar-color='primary'] .nav-sub.active:not(.parent-active),
+    html[data-sidebar-style='pill'][data-sidebar-color^='gradient'] .nav-sub.active:not(.parent-active),
+    html[data-sidebar-style='pill'][data-sidebar-color^='image'] .nav-sub.active:not(.parent-active),
+    html[data-sidebar-style='pill'][data-sidebar-color='custom_gradient'] .nav-sub.active:not(.parent-active) {
+        background: rgba(255, 255, 255, 0.18) !important;
+        color: #ffffff !important;
+        font-weight: 600;
         box-shadow: none !important;
     }
 

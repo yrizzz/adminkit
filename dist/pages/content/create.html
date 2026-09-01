@@ -73,9 +73,9 @@
 </script>
 
 
-<link rel="preload" as="style" href="/build/assets/app-NH4ER_IH.css" /><link rel="stylesheet" href="/build/assets/app-NH4ER_IH.css" data-navigate-track="reload" /><script type="module" src="/build/assets/app-BGswzwgY.js" data-navigate-track="reload"></script>
+<link rel="preload" as="style" href="/build/assets/app-DVVrz2RL.css" /><link rel="stylesheet" href="/build/assets/app-DVVrz2RL.css" data-navigate-track="reload" /><script type="module" src="/build/assets/app-BGswzwgY.js" data-navigate-track="reload"></script>
 <link rel="stylesheet" href="../../assets/fonts-C9MNnjVw.css">
-<link rel="stylesheet" href="../../assets/app-NH4ER_IH.css">
+<link rel="stylesheet" href="../../assets/app-DVVrz2RL.css">
 <script src="../../assets/app-BGswzwgY.js"></script>
 </head>
 <body x-data class="min-h-screen bg-background font-sans text-foreground antialiased relative">
@@ -2553,7 +2553,7 @@
     <div class="relative">
         
         <input
-            id="in_I9BJs"
+            id="in_jvxTz"
                         type="text"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 border-input" value="AdminKit Inc."
         />
@@ -2565,7 +2565,7 @@
     <div class="relative">
         
         <input
-            id="in_ugSbQ"
+            id="in_xdas6"
                         type="text"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 border-input" value="hello@adminkit.test"
         />
@@ -2581,7 +2581,7 @@
     <div class="relative">
         
         <input
-            id="in_Bg7lo"
+            id="in_VbwAW"
                         type="text"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 border-input" placeholder="Client name"
         />
@@ -2593,7 +2593,7 @@
     <div class="relative">
         
         <input
-            id="in_Rjo2c"
+            id="in_1oHT6"
                         type="text"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 border-input" placeholder="client@email.com"
         />
@@ -2607,12 +2607,12 @@
         
         <div class="grid grid-cols-2 gap-4 py-5 sm:grid-cols-3">
             <div class="space-y-1.5">
-            <label for="in_Qh9nt" class="block text-sm font-medium text-foreground">Invoice #</label>
+            <label for="in_0kTQZ" class="block text-sm font-medium text-foreground">Invoice #</label>
     
     <div class="relative">
         
         <input
-            id="in_Qh9nt"
+            id="in_0kTQZ"
                         type="text"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 border-input" value="INV-0149"
         />
@@ -2620,12 +2620,12 @@
 
     </div>
             <div class="space-y-1.5">
-            <label for="in_oheHH" class="block text-sm font-medium text-foreground">Issue date</label>
+            <label for="in_J2XcQ" class="block text-sm font-medium text-foreground">Issue date</label>
     
     <div class="relative">
         
         <input
-            id="in_oheHH"
+            id="in_J2XcQ"
                         type="date"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 border-input"
         />
@@ -2633,12 +2633,12 @@
 
     </div>
             <div class="space-y-1.5">
-            <label for="in_veeMh" class="block text-sm font-medium text-foreground">Due date</label>
+            <label for="in_ZiR3B" class="block text-sm font-medium text-foreground">Due date</label>
     
     <div class="relative">
         
         <input
-            id="in_veeMh"
+            id="in_ZiR3B"
                         type="date"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 border-input"
         />
@@ -3199,7 +3199,7 @@
 
         <div class="border-t border-border p-4">
             <button type="button"
-                    @click="localStorage.clear(); location.reload()"
+                    @click="localStorage.clear(); document.cookie.split(';').forEach(c => { const name = c.split('=')[0].trim(); if(name.startsWith('ak_')) document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;'; }); location.reload()"
                     class="flex w-full items-center justify-center gap-2 rounded-lg border border-border py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
                 <i data-lucide="rotate-ccw" class="size-4"></i>Reset to defaults
             </button>

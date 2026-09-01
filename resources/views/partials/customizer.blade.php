@@ -353,7 +353,7 @@
 
         <div class="border-t border-border p-4">
             <button type="button"
-                    @click="localStorage.clear(); location.reload()"
+                    @click="localStorage.clear(); document.cookie.split(';').forEach(c => { const name = c.split('=')[0].trim(); if(name.startsWith('ak_')) document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;'; }); location.reload()"
                     class="flex w-full items-center justify-center gap-2 rounded-lg border border-border py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
                 <i data-lucide="rotate-ccw" class="size-4"></i>Reset to defaults
             </button>
