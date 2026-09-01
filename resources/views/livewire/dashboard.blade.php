@@ -239,7 +239,7 @@
                 {{-- Global Node Status & Latency --}}
                 <x-ui.card title="Infrastructure Health" subtitle="Real-time node telemetry & latency">
                     <x-slot:actions>
-                        <span class="inline-flex items-center gap-1.5 rounded-full bg-success/15 px-2.5 py-0.5 text-xs font-semibold text-success">
+                        <span class="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-success/15 px-2.5 py-1 text-xs font-semibold text-success whitespace-nowrap">
                             <span class="size-2 rounded-full bg-success animate-pulse"></span>
                             99.98% Operational
                         </span>

@@ -7,13 +7,13 @@
 
 <div {{ $attributes->class(['ak-card', 'transition-all duration-200 hover:shadow-md hover:-translate-y-0.5' => $hover]) }}>
     @if ($title || isset($header) || $subtitle || isset($actions))
-        <div class="flex items-start justify-between gap-4 border-b border-border px-5 py-4">
-            <div class="min-w-0">
+        <div class="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2.5 sm:gap-3 border-b border-border px-4.5 sm:px-5 py-3.5">
+            <div class="min-w-0 flex-1">
                 @if ($title)
-                    <h3 class="font-semibold leading-none tracking-tight">{{ $title }}</h3>
+                    <h3 class="font-semibold leading-tight tracking-tight text-foreground text-sm sm:text-base">{{ $title }}</h3>
                 @endif
                 @if ($subtitle)
-                    <p class="mt-1.5 text-sm text-muted-foreground">{{ $subtitle }}</p>
+                    <p class="mt-0.5 text-xs text-muted-foreground">{{ $subtitle }}</p>
                 @endif
                 {{ $header ?? '' }}
             </div>
