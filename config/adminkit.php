@@ -235,12 +235,12 @@ return [
                     'label' => 'Nested Menu',
                     'icon'  => 'menu',
                     'children' => [
-                        ['label' => 'Level 1.1', 'route' => 'dashboard'],
+                        ['label' => 'Level 1.1', 'route' => 'page', 'params' => ['path' => 'level-1-1']],
                         ['label' => 'Level 1.2', 'children' => [
-                            ['label' => 'Level 2.1', 'route' => 'dashboard'],
+                            ['label' => 'Level 2.1', 'route' => 'page', 'params' => ['path' => 'level-2-1']],
                             ['label' => 'Level 2.2', 'children' => [
-                                ['label' => 'Level 3.1', 'route' => 'dashboard'],
-                                ['label' => 'Level 3.2', 'route' => 'dashboard'],
+                                ['label' => 'Level 3.1', 'route' => 'page', 'params' => ['path' => 'level-3-1']],
+                                ['label' => 'Level 3.2', 'route' => 'page', 'params' => ['path' => 'level-3-2']],
                             ]],
                         ]],
                     ],
