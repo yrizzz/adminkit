@@ -7,7 +7,7 @@
 <div x-show="$store.ui.layout === 'horizontal'" x-cloak
      data-navbar-color="{{ $_COOKIE['ak_nb_color'] ?? 'default' }}"
      :data-navbar-color="$store.ui.navbarColor"
-     class="hnav-topbar sticky top-16 z-20 hidden border-b backdrop-blur-lg lg:block">
+     class="hnav-topbar sticky top-14 z-20 hidden border-b border-border/80 bg-background/95 backdrop-blur-lg lg:block">
     <div
         x-data="{
             canS: false, canE: false,
@@ -41,7 +41,7 @@
         </div>
 
         <nav x-ref="track" @scroll="upd(); $dispatch('hnav-close')"
-             class="no-scrollbar flex flex-1 flex-nowrap items-center gap-0.5 overflow-x-auto scroll-smooth py-1.5">
+             class="no-scrollbar flex flex-1 flex-nowrap items-center gap-1 overflow-x-auto scroll-smooth py-1.5">
             @foreach ($items as $item)
                 @php($active = Menu::active($item))
                 @if (Menu::hasChildren($item))
@@ -62,7 +62,7 @@
                          @mouseenter="show()" @mouseleave="hide()"
                          @hnav-close.window="open = false; clearTimeout(timer)">
                         <button type="button" x-ref="btn" @click="toggle()"
-                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 {{ $active ? 'bg-white/10' : '' }}">
+                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition-all hover:bg-accent hover:text-accent-foreground {{ $active ? 'bg-primary/15 text-primary font-semibold' : 'text-muted-foreground hover:text-foreground' }}">
                             <i data-lucide="{{ $item['icon'] ?? 'dot' }}" class="size-4"></i>
                             {{ $item['label'] }}
                             <i data-lucide="chevron-down" class="size-3.5 opacity-60"></i>
@@ -83,7 +83,7 @@
                     </div>
                 @else
                     <a href="{{ Menu::href($item) }}" wire:navigate
-                       class="flex shrink-0 items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 {{ $active ? 'bg-white/10' : '' }}">
+                       class="flex shrink-0 items-center gap-2 whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition-all hover:bg-accent hover:text-accent-foreground {{ $active ? 'bg-primary/15 text-primary font-semibold' : 'text-muted-foreground hover:text-foreground' }}">
                         <i data-lucide="{{ $item['icon'] ?? 'dot' }}" class="size-4"></i>
                         {{ $item['label'] }}
                     </a>

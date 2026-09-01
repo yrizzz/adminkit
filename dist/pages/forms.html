@@ -73,9 +73,9 @@
 </script>
 
 
-<link rel="preload" as="style" href="/build/assets/app-Djx_lZKL.css" /><link rel="stylesheet" href="/build/assets/app-Djx_lZKL.css" data-navigate-track="reload" /><script type="module" src="/build/assets/app-BGswzwgY.js" data-navigate-track="reload"></script>
+<link rel="preload" as="style" href="/build/assets/app-GMERQSXw.css" /><link rel="stylesheet" href="/build/assets/app-GMERQSXw.css" data-navigate-track="reload" /><script type="module" src="/build/assets/app-BGswzwgY.js" data-navigate-track="reload"></script>
 <link rel="stylesheet" href="../assets/fonts-C9MNnjVw.css">
-<link rel="stylesheet" href="../assets/app-Djx_lZKL.css">
+<link rel="stylesheet" href="../assets/app-GMERQSXw.css">
 <script src="../assets/app-BGswzwgY.js"></script>
 </head>
 <body x-data class="min-h-screen bg-background font-sans text-foreground antialiased relative">
@@ -1398,7 +1398,7 @@
             <div x-show="$store.ui.layout === 'horizontal'" x-cloak
      data-navbar-color="default"
      :data-navbar-color="$store.ui.navbarColor"
-     class="hnav-topbar sticky top-16 z-20 hidden border-b backdrop-blur-lg lg:block">
+     class="hnav-topbar sticky top-14 z-20 hidden border-b border-border/80 bg-background/95 backdrop-blur-lg lg:block">
     <div
         x-data="{
             canS: false, canE: false,
@@ -1432,7 +1432,7 @@
         </div>
 
         <nav x-ref="track" @scroll="upd(); $dispatch('hnav-close')"
-             class="no-scrollbar flex flex-1 flex-nowrap items-center gap-0.5 overflow-x-auto scroll-smooth py-1.5">
+             class="no-scrollbar flex flex-1 flex-nowrap items-center gap-1 overflow-x-auto scroll-smooth py-1.5">
                                                                 <div x-data="{
                             open: false, x: 0, y: 0, timer: null,
                             place() {
@@ -1450,7 +1450,7 @@
                          @mouseenter="show()" @mouseleave="hide()"
                          @hnav-close.window="open = false; clearTimeout(timer)">
                         <button type="button" x-ref="btn" @click="toggle()"
-                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 ">
+                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition-all hover:bg-accent hover:text-accent-foreground text-muted-foreground hover:text-foreground">
                             <i data-lucide="monitor" class="size-4"></i>
                             Dashboards
                             <i data-lucide="chevron-down" class="size-3.5 opacity-60"></i>
@@ -1532,7 +1532,7 @@
                         </template>
                     </div>
                                                                                 <a href="../pages/content/docs.html" wire:navigate
-                       class="flex shrink-0 items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 ">
+                       class="flex shrink-0 items-center gap-2 whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition-all hover:bg-accent hover:text-accent-foreground text-muted-foreground hover:text-foreground">
                         <i data-lucide="book-open" class="size-4"></i>
                         Documentation
                     </a>
@@ -1553,7 +1553,7 @@
                          @mouseenter="show()" @mouseleave="hide()"
                          @hnav-close.window="open = false; clearTimeout(timer)">
                         <button type="button" x-ref="btn" @click="toggle()"
-                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 ">
+                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition-all hover:bg-accent hover:text-accent-foreground text-muted-foreground hover:text-foreground">
                             <i data-lucide="box" class="size-4"></i>
                             Advanced Ui
                             <i data-lucide="chevron-down" class="size-3.5 opacity-60"></i>
@@ -1636,7 +1636,7 @@
                          @mouseenter="show()" @mouseleave="hide()"
                          @hnav-close.window="open = false; clearTimeout(timer)">
                         <button type="button" x-ref="btn" @click="toggle()"
-                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 ">
+                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition-all hover:bg-accent hover:text-accent-foreground text-muted-foreground hover:text-foreground">
                             <i data-lucide="file-text" class="size-4"></i>
                             Pages
                             <i data-lucide="chevron-down" class="size-3.5 opacity-60"></i>
@@ -1819,7 +1819,7 @@
                          @mouseenter="show()" @mouseleave="hide()"
                          @hnav-close.window="open = false; clearTimeout(timer)">
                         <button type="button" x-ref="btn" @click="toggle()"
-                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 ">
+                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition-all hover:bg-accent hover:text-accent-foreground text-muted-foreground hover:text-foreground">
                             <i data-lucide="wallet" class="size-4"></i>
                             Utilities
                             <i data-lucide="chevron-down" class="size-3.5 opacity-60"></i>
@@ -1902,7 +1902,7 @@
                          @mouseenter="show()" @mouseleave="hide()"
                          @hnav-close.window="open = false; clearTimeout(timer)">
                         <button type="button" x-ref="btn" @click="toggle()"
-                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 ">
+                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition-all hover:bg-accent hover:text-accent-foreground text-muted-foreground hover:text-foreground">
                             <i data-lucide="lock" class="size-4"></i>
                             Authentication
                             <i data-lucide="chevron-down" class="size-3.5 opacity-60"></i>
@@ -2000,7 +2000,7 @@
                          @mouseenter="show()" @mouseleave="hide()"
                          @hnav-close.window="open = false; clearTimeout(timer)">
                         <button type="button" x-ref="btn" @click="toggle()"
-                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 ">
+                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition-all hover:bg-accent hover:text-accent-foreground text-muted-foreground hover:text-foreground">
                             <i data-lucide="circle-alert" class="size-4"></i>
                             Error
                             <i data-lucide="chevron-down" class="size-3.5 opacity-60"></i>
@@ -2063,7 +2063,7 @@
                          @mouseenter="show()" @mouseleave="hide()"
                          @hnav-close.window="open = false; clearTimeout(timer)">
                         <button type="button" x-ref="btn" @click="toggle()"
-                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 ">
+                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition-all hover:bg-accent hover:text-accent-foreground text-muted-foreground hover:text-foreground">
                             <i data-lucide="layout-grid" class="size-4"></i>
                             Apps
                             <i data-lucide="chevron-down" class="size-3.5 opacity-60"></i>
@@ -2105,12 +2105,12 @@
                         </template>
                     </div>
                                                                                 <a href="../pages/icons.html" wire:navigate
-                       class="flex shrink-0 items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 ">
+                       class="flex shrink-0 items-center gap-2 whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition-all hover:bg-accent hover:text-accent-foreground text-muted-foreground hover:text-foreground">
                         <i data-lucide="smile" class="size-4"></i>
                         Icons
                     </a>
                                                                                 <a href="../pages/widgets.html" wire:navigate
-                       class="flex shrink-0 items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 ">
+                       class="flex shrink-0 items-center gap-2 whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition-all hover:bg-accent hover:text-accent-foreground text-muted-foreground hover:text-foreground">
                         <i data-lucide="component" class="size-4"></i>
                         Widgets
                     </a>
@@ -2131,7 +2131,7 @@
                          @mouseenter="show()" @mouseleave="hide()"
                          @hnav-close.window="open = false; clearTimeout(timer)">
                         <button type="button" x-ref="btn" @click="toggle()"
-                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 ">
+                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition-all hover:bg-accent hover:text-accent-foreground text-muted-foreground hover:text-foreground">
                             <i data-lucide="underline" class="size-4"></i>
                             Ui Elements
                             <i data-lucide="chevron-down" class="size-3.5 opacity-60"></i>
@@ -2254,7 +2254,7 @@
                          @mouseenter="show()" @mouseleave="hide()"
                          @hnav-close.window="open = false; clearTimeout(timer)">
                         <button type="button" x-ref="btn" @click="toggle()"
-                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 ">
+                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition-all hover:bg-accent hover:text-accent-foreground text-muted-foreground hover:text-foreground">
                             <i data-lucide="menu" class="size-4"></i>
                             Nested Menu
                             <i data-lucide="chevron-down" class="size-3.5 opacity-60"></i>
@@ -2309,7 +2309,7 @@
                          @mouseenter="show()" @mouseleave="hide()"
                          @hnav-close.window="open = false; clearTimeout(timer)">
                         <button type="button" x-ref="btn" @click="toggle()"
-                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 ">
+                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition-all hover:bg-accent hover:text-accent-foreground text-muted-foreground hover:text-foreground">
                             <i data-lucide="map-pin" class="size-4"></i>
                             Maps
                             <i data-lucide="chevron-down" class="size-3.5 opacity-60"></i>
@@ -2352,7 +2352,7 @@
                          @mouseenter="show()" @mouseleave="hide()"
                          @hnav-close.window="open = false; clearTimeout(timer)">
                         <button type="button" x-ref="btn" @click="toggle()"
-                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 ">
+                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition-all hover:bg-accent hover:text-accent-foreground text-muted-foreground hover:text-foreground">
                             <i data-lucide="bar-chart-3" class="size-4"></i>
                             Charts
                             <i data-lucide="chevron-down" class="size-3.5 opacity-60"></i>
@@ -2410,7 +2410,7 @@
                          @mouseenter="show()" @mouseleave="hide()"
                          @hnav-close.window="open = false; clearTimeout(timer)">
                         <button type="button" x-ref="btn" @click="toggle()"
-                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 ">
+                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition-all hover:bg-accent hover:text-accent-foreground text-muted-foreground hover:text-foreground">
                             <i data-lucide="clipboard-list" class="size-4"></i>
                             Forms
                             <i data-lucide="chevron-down" class="size-3.5 opacity-60"></i>
@@ -2463,7 +2463,7 @@
                          @mouseenter="show()" @mouseleave="hide()"
                          @hnav-close.window="open = false; clearTimeout(timer)">
                         <button type="button" x-ref="btn" @click="toggle()"
-                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 ">
+                                class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition-all hover:bg-accent hover:text-accent-foreground text-muted-foreground hover:text-foreground">
                             <i data-lucide="table" class="size-4"></i>
                             Tables
                             <i data-lucide="chevron-down" class="size-3.5 opacity-60"></i>
@@ -2549,7 +2549,7 @@
 
             <div x-show="step === 1" class="space-y-4">
                 <div class="space-y-1.5">
-            <label for="in_g9HjI" class="block text-sm font-medium text-foreground">Project name</label>
+            <label for="in_zkrvJ" class="block text-sm font-medium text-foreground">Project name</label>
     
     <div class="relative">
                     <span class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground">
@@ -2557,7 +2557,7 @@
             </span>
         
         <input
-            id="in_g9HjI"
+            id="in_zkrvJ"
                         type="text"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ps-9 border-input" placeholder="Acme Redesign"
         />
@@ -2571,7 +2571,7 @@
             </div>
             <div x-show="step === 2" x-cloak class="space-y-4">
                 <div class="space-y-1.5">
-            <label for="in_2Yjfo" class="block text-sm font-medium text-foreground">Team lead</label>
+            <label for="in_WWZ52" class="block text-sm font-medium text-foreground">Team lead</label>
     
     <div class="relative">
                     <span class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground">
@@ -2579,7 +2579,7 @@
             </span>
         
         <input
-            id="in_2Yjfo"
+            id="in_WWZ52"
                         type="text"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ps-9 border-input" placeholder="Aisha Rahman"
         />
@@ -2587,7 +2587,7 @@
 
     </div>
                 <div class="space-y-1.5">
-            <label for="in_83SME" class="block text-sm font-medium text-foreground">Members (comma separated)</label>
+            <label for="in_E0pEt" class="block text-sm font-medium text-foreground">Members (comma separated)</label>
     
     <div class="relative">
                     <span class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground">
@@ -2595,7 +2595,7 @@
             </span>
         
         <input
-            id="in_83SME"
+            id="in_E0pEt"
                         type="text"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ps-9 border-input" placeholder="David, Sofia, Omar"
         />
@@ -2653,12 +2653,12 @@
     <div class="p-5">
         <div class="space-y-4">
                 <div class="space-y-1.5">
-            <label for="in_LGpWA" class="block text-sm font-medium text-foreground">Text</label>
+            <label for="in_S6Wkn" class="block text-sm font-medium text-foreground">Text</label>
     
     <div class="relative">
         
         <input
-            id="in_LGpWA"
+            id="in_S6Wkn"
                         type="text"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 border-input" placeholder="John Doe"
         />
@@ -2666,7 +2666,7 @@
 
     </div>
                 <div class="space-y-1.5">
-            <label for="in_v6xT7" class="block text-sm font-medium text-foreground">Email</label>
+            <label for="in_P4KJJ" class="block text-sm font-medium text-foreground">Email</label>
     
     <div class="relative">
                     <span class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground">
@@ -2674,7 +2674,7 @@
             </span>
         
         <input
-            id="in_v6xT7"
+            id="in_P4KJJ"
                         type="email"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ps-9 border-input" placeholder="john@example.com"
         />
@@ -2682,12 +2682,12 @@
 
     </div>
                 <div class="space-y-1.5">
-            <label for="in_OX931" class="block text-sm font-medium text-foreground">Date</label>
+            <label for="in_kxP0k" class="block text-sm font-medium text-foreground">Date</label>
     
     <div class="relative">
         
         <input
-            id="in_OX931"
+            id="in_kxP0k"
                         type="date"
             class="flex h-10 w-full rounded-lg border bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 border-input"
         />
