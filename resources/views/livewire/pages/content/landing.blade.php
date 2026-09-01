@@ -1,725 +1,933 @@
-<div x-data="{
-    activeTab: 'composer',
-    copied: false,
-    copiedSnippet: null,
-    activeFaq: null,
-    mobileMenuOpen: false,
-    scrolled: false,
-    init() {
-        this.scrolled = (window.scrollY || window.pageYOffset) > 20;
-    },
-    copyCommand(text, id) {
-        navigator.clipboard.writeText(text).catch(() => {});
-        this.copiedSnippet = id;
-        setTimeout(() => this.copiedSnippet = null, 2000);
-    }
-}"
-x-on:scroll.window.passive="scrolled = ((window.scrollY || window.pageYOffset) > 20)"
-class="min-h-screen bg-slate-50 dark:bg-[#05080F] text-slate-900 dark:text-white antialiased selection:bg-blue-600/30 selection:text-blue-400 relative overflow-x-clip font-sans">
+<div x-data="{ 
+        activeDemo: 'sales',
+        activeTab: 'composer',
+        copied: false,
+        activeFaq: null,
+        mobileMenuOpen: false,
+        scrolled: false,
+        init() {
+            this.scrolled = (window.scrollY || window.pageYOffset) > 20;
+        },
+        copyCommand(text) {
+            navigator.clipboard.writeText(text);
+            this.copied = true;
+            setTimeout(() => this.copied = false, 2000);
+        }
+     }" 
+     x-on:scroll.window.passive="scrolled = ((window.scrollY || window.pageYOffset) > 20)"
+     class="min-h-screen bg-slate-50 dark:bg-[#070B14] text-slate-900 dark:text-white antialiased selection:bg-blue-600/30 selection:text-blue-400 relative overflow-x-clip font-sans">
 
-    {{-- Ambient Spotlights Background --}}
-    <div class="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-        <div class="absolute -top-56 left-1/2 -translate-x-1/3 w-[900px] h-[600px] bg-blue-600/12 dark:bg-blue-600/18 rounded-full blur-[160px]"></div>
-        <div class="absolute top-1/3 -right-60 w-[700px] h-[700px] bg-indigo-600/8 dark:bg-indigo-600/12 rounded-full blur-[180px]"></div>
-        <div class="absolute bottom-0 -left-40 w-[700px] h-[600px] bg-cyan-600/6 dark:bg-cyan-600/10 rounded-full blur-[160px]"></div>
-        <div class="absolute top-2/3 left-1/2 w-[500px] h-[500px] bg-blue-700/6 dark:bg-blue-700/10 rounded-full blur-[140px]"></div>
+    {{-- Smooth Organic Ambient Spotlights (No Grid Pattern) --}}
+    <div class="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-40 dark:opacity-100">
+        <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-blue-600/15 rounded-full blur-[140px]"></div>
+        <div class="absolute top-1/3 -right-40 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[160px]"></div>
+        <div class="absolute bottom-10 -left-40 w-[600px] h-[600px] bg-blue-700/10 rounded-full blur-[160px]"></div>
     </div>
 
-    {{-- Sticky Navbar --}}
-    <header
-        :class="scrolled || mobileMenuOpen
-            ? 'bg-white/90 dark:bg-[#080C18]/90 backdrop-blur-2xl border-slate-200/80 dark:border-slate-800/70 py-3 shadow-xl shadow-black/5 dark:shadow-black/50'
-            : 'bg-transparent border-transparent backdrop-blur-none py-4'"
-        class="landing-header sticky top-0 z-50 w-full border-b transition-all duration-300">
-
-        <div class="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 gap-3">
-
-            {{-- Brand --}}
-            <a href="{{ route('landing') }}" class="flex items-center gap-2.5 group shrink-0">
-                <span class="relative grid size-9 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-600/30 overflow-hidden transition-transform group-hover:scale-105">
-                    <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></span>
-                    <i data-lucide="gem" class="size-4.5 relative z-10"></i>
+    {{-- Top Glassmorphic Pro Navbar --}}
+    <header :class="scrolled || mobileMenuOpen ? 'bg-white/95 dark:bg-[#0D1527]/95 backdrop-blur-xl border-slate-200 dark:border-slate-800/80 py-3 shadow-xl shadow-black/5 dark:shadow-black/40' : 'bg-transparent border-transparent backdrop-blur-none py-4'" class="landing-header sticky top-0 z-50 w-full border-b transition-all duration-300">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-3 sm:px-6 gap-2">
+            {{-- Brand Logo --}}
+            <a href="{{ route('landing') }}" wire:navigate class="flex items-center gap-2.5 sm:gap-3 group shrink-0">
+                <span class="grid size-9 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 text-white shadow-lg shadow-blue-600/40 transition-transform group-hover:scale-105">
+                    <x-ui.icon name="gem" class="size-5" />
                 </span>
-                <div class="flex flex-col leading-none">
-                    <span class="text-[1.15rem] font-black tracking-tight text-slate-900 dark:text-white">AdminKit</span>
-                    <span class="text-[9px] font-mono font-bold text-blue-500 dark:text-blue-400 mt-0.5">Enterprise v1.2</span>
+                <div class="flex flex-col">
+                    <span class="text-xl font-black tracking-tight text-slate-900 dark:text-white leading-none">AdminKit</span>
+                    <span class="text-[10px] font-mono text-blue-500 dark:text-blue-400 font-semibold leading-tight mt-0.5">v1.2.0</span>
                 </div>
             </a>
 
-            {{-- Desktop Nav --}}
-            <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600 dark:text-slate-300">
+            {{-- Navigation Links (Desktop) --}}
+            <nav class="hidden md:flex items-center gap-8 text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-300">
                 <a href="#features" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Features</a>
-                <a href="#showcase" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Preview</a>
+                <a href="#showcase" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Preview Demos</a>
                 <a href="#tech" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Tech Stack</a>
                 <a href="#quickstart" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Quickstart</a>
                 <a href="#faq" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">FAQ</a>
-                <a href="{{ route('page', ['path' => 'docs']) }}"
-                   class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-semibold">
-                    Docs
-                </a>
+                <a href="{{ route('page', ['path' => 'docs']) }}" wire:navigate class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Documentation</a>
             </nav>
 
-            {{-- CTA & Controls --}}
-            <div class="flex items-center gap-2 shrink-0">
-                <button type="button" x-on:click="$store.ui.toggleTheme($event)"
-                    class="size-9 grid place-items-center rounded-xl border border-slate-200 dark:border-slate-700/80 bg-white/80 dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-500/50 transition-all shadow-sm">
-                    <i data-lucide="moon" x-show="!$store.ui.isDark" class="size-4"></i>
-                    <i data-lucide="sun" x-show="$store.ui.isDark" x-cloak class="size-4"></i>
+            {{-- Right Actions & Mobile Hamburger --}}
+            <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+                {{-- Theme Switcher Button --}}
+                <button type="button" x-on:click="$store.ui.toggleTheme($event)" class="size-9 grid place-items-center rounded-xl border border-slate-200 dark:border-slate-700/80 bg-white dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:border-blue-500/60 transition-all shadow-md" title="Toggle Light / Dark Theme">
+                    <x-ui.icon name="moon" x-show="!$store.ui.isDark" class="size-4" />
+                    <x-ui.icon name="sun" x-show="$store.ui.isDark" class="size-4" />
                 </button>
 
                 <a href="https://github.com/yrizzz/adminkit" target="_blank"
-                   class="hidden sm:inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700/80 bg-white/80 dark:bg-slate-800/80 px-3.5 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:border-blue-500/50 hover:text-blue-600 dark:hover:text-blue-400 transition-all shadow-sm">
-                    <i data-lucide="github" class="size-3.5"></i>
-                    <span>GitHub</span>
-                    <span class="rounded-md bg-blue-600/15 dark:bg-blue-600/25 border border-blue-500/30 px-1.5 py-0.5 text-[10px] font-mono text-blue-600 dark:text-blue-400">3.2k</span>
+                   class="hidden sm:inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700/80 bg-white dark:bg-slate-800/80 px-3.5 py-2 text-xs font-semibold text-slate-800 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-700 hover:border-blue-500/60 transition-all shadow-md">
+                    <x-ui.icon name="github" class="size-4 text-slate-800 dark:text-white" />
+                    <span>Star on GitHub</span>
+                    <span class="ms-0.5 rounded-md bg-blue-600/30 px-1.5 py-0.5 text-[10px] font-mono text-blue-500 dark:text-blue-400 border border-blue-500/40">3.2k</span>
                 </a>
 
-                <a href="{{ route('dashboard') }}"
-                   class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-2 text-xs font-bold text-white shadow-md shadow-blue-600/25 hover:from-blue-500 hover:to-indigo-500 transition-all">
-                    Dashboard →
-                </a>
-
-                {{-- Hamburger --}}
-                <button type="button" x-on:click="mobileMenuOpen = !mobileMenuOpen"
-                    class="md:hidden p-2 rounded-xl border border-slate-200 dark:border-slate-700/80 bg-white/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 transition-colors">
-                    <i data-lucide="menu" x-show="!mobileMenuOpen" class="size-4.5"></i>
-                    <i data-lucide="x" x-show="mobileMenuOpen" x-cloak class="size-4.5"></i>
+                {{-- Hamburger Button (Mobile Only) --}}
+                <button type="button" x-on:click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 rounded-xl border border-slate-200 dark:border-slate-700/80 bg-white dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors shrink-0" aria-label="Toggle Navigation">
+                    <x-ui.icon name="menu" x-show="!mobileMenuOpen" class="size-5" />
+                    <x-ui.icon name="x" x-show="mobileMenuOpen" x-cloak class="size-5" />
                 </button>
             </div>
         </div>
 
-        {{-- Mobile Dropdown --}}
-        <div x-show="mobileMenuOpen" x-cloak
+        {{-- Mobile Navigation Dropdown --}}
+        <div x-show="mobileMenuOpen" 
+             x-cloak 
              x-transition:enter="transition ease-out duration-200"
              x-transition:enter-start="opacity-0 -translate-y-2"
              x-transition:enter-end="opacity-100 translate-y-0"
              x-transition:leave="transition ease-in duration-150"
              x-transition:leave-start="opacity-100 translate-y-0"
              x-transition:leave-end="opacity-0 -translate-y-2"
-             class="md:hidden border-t border-slate-200 dark:border-slate-800/80 bg-white/95 dark:bg-[#080C18]/98 px-4 py-5 space-y-2 shadow-2xl backdrop-blur-2xl">
-            <nav class="flex flex-col gap-1 text-sm font-semibold text-slate-700 dark:text-slate-200">
-                @foreach (['#features' => 'Features', '#showcase' => 'Preview', '#tech' => 'Tech Stack', '#quickstart' => 'Quickstart', '#faq' => 'FAQ'] as $href => $label)
-                    <a href="{{ $href }}" x-on:click="mobileMenuOpen = false"
-                       class="px-4 py-3 rounded-xl hover:bg-blue-600/10 hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex items-center justify-between">
-                        <span>{{ $label }}</span>
-                        <i data-lucide="chevron-right" class="size-3.5 opacity-40"></i>
+             class="md:hidden border-t border-slate-800/80 bg-[#0D1527]/98 px-4 py-4 space-y-3 shadow-2xl backdrop-blur-2xl"
+        >
+            <nav class="flex flex-col gap-1 text-sm sm:text-base font-semibold text-slate-200">
+                <a href="#features" x-on:click="mobileMenuOpen = false" class="px-4 py-3 rounded-xl hover:bg-blue-600/15 hover:text-white transition-colors flex items-center justify-between">
+                    <span>Features</span>
+                    <x-ui.icon name="chevron-right" class="size-4 text-slate-500" />
+                </a>
+                <a href="#showcase" x-on:click="mobileMenuOpen = false" class="px-4 py-3 rounded-xl hover:bg-blue-600/15 hover:text-white transition-colors flex items-center justify-between">
+                    <span>Preview Demos</span>
+                    <x-ui.icon name="chevron-right" class="size-4 text-slate-500" />
+                </a>
+                <a href="#tech" x-on:click="mobileMenuOpen = false" class="px-4 py-3 rounded-xl hover:bg-blue-600/15 hover:text-white transition-colors flex items-center justify-between">
+                    <span>Tech Stack</span>
+                    <x-ui.icon name="chevron-right" class="size-4 text-slate-500" />
+                </a>
+                <a href="#quickstart" x-on:click="mobileMenuOpen = false" class="px-4 py-3 rounded-xl hover:bg-blue-600/15 hover:text-white transition-colors flex items-center justify-between">
+                    <span>Quickstart</span>
+                    <x-ui.icon name="chevron-right" class="size-4 text-slate-500" />
+                </a>
+                <a href="#faq" x-on:click="mobileMenuOpen = false" class="px-4 py-3 rounded-xl hover:bg-blue-600/15 hover:text-white transition-colors flex items-center justify-between">
+                    <span>FAQ</span>
+                    <x-ui.icon name="chevron-right" class="size-4 text-slate-500" />
+                </a>
+
+                <div class="pt-2 space-y-2.5 border-t border-slate-800/60 mt-1">
+                    <a href="{{ route('page', ['path' => 'docs']) }}" wire:navigate x-on:click="mobileMenuOpen = false" class="h-12 w-full inline-flex items-center justify-between rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 px-4 text-sm font-extrabold text-white hover:from-blue-500 hover:to-blue-600 transition-all shadow-lg shadow-blue-600/30">
+                        <span class="flex items-center gap-2.5">
+                            <x-ui.icon name="book-open" class="size-4.5 text-white" />
+                            <span>Pro Documentation</span>
+                        </span>
+                        <x-ui.icon name="arrow-right" class="size-4.5 text-white" />
                     </a>
-                @endforeach
-                <div class="pt-2 mt-1 border-t border-slate-200 dark:border-slate-800/60 space-y-2.5">
-                    <a href="{{ route('page', ['path' => 'docs']) }}" x-on:click="mobileMenuOpen = false"
-                       class="w-full inline-flex items-center justify-center gap-2 h-11 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-sm font-bold text-white shadow-md shadow-blue-600/30">
-                        <i data-lucide="book-open" class="size-4"></i>Documentation
-                    </a>
-                    <a href="{{ route('dashboard') }}" x-on:click="mobileMenuOpen = false"
-                       class="w-full inline-flex items-center justify-center gap-2 h-11 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-semibold text-slate-800 dark:text-white">
-                        <i data-lucide="layout-dashboard" class="size-4 text-blue-500"></i>Dashboard
+                    <a href="https://github.com/yrizzz/adminkit" target="_blank" class="h-12 w-full inline-flex items-center justify-between rounded-xl border border-slate-700/90 bg-slate-800/80 px-4 text-sm font-bold text-white hover:bg-slate-700/90 transition-all backdrop-blur shadow-md">
+                        <span class="flex items-center gap-2.5">
+                            <x-ui.icon name="github" class="size-4.5 text-white" />
+                            <span>Star on GitHub</span>
+                        </span>
+                        <span class="rounded-md bg-blue-500/20 px-2 py-0.5 text-xs font-mono font-bold text-blue-400 border border-blue-500/30">3.2k</span>
                     </a>
                 </div>
             </nav>
         </div>
     </header>
 
+    {{-- Main Content --}}
     <main class="relative z-10">
 
-        {{-- ═══════════════════════════════════════════
-             HERO SECTION — Bento Grid Premium Layout
-        ════════════════════════════════════════════ --}}
-        <section class="relative min-h-[calc(100dvh-65px)] flex items-center py-12 lg:py-0 px-4 sm:px-6 overflow-hidden">
-            <div class="mx-auto max-w-7xl w-full">
+        {{-- HERO SECTION (100dvh Full Device Height) --}}
+        <section class="relative min-h-[calc(100dvh-65px)] flex items-center justify-center py-6 sm:py-16 px-4 sm:px-6 overflow-hidden">
+            <div class="mx-auto max-w-7xl relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center w-full">
+                
+                {{-- Left Text Column --}}
+                <div class="lg:col-span-6 space-y-5 sm:space-y-6 text-center lg:text-start">
+                    {{-- Pro Badges --}}
+                    <div class="inline-flex items-center gap-2.5 flex-wrap justify-center lg:justify-start">
+                        <span class="rounded-full bg-blue-600/20 px-4 py-1.5 text-xs font-extrabold text-blue-400 border border-blue-500/40 uppercase tracking-wider flex items-center gap-2 shadow-sm">
+                            <span class="size-2 rounded-full bg-blue-500 animate-pulse"></span>
+                            OPEN SOURCE MIT
+                        </span>
+                        <span class="rounded-full bg-emerald-600/20 px-4 py-1.5 text-xs font-extrabold text-emerald-400 border border-emerald-500/40 uppercase tracking-wider flex items-center gap-2 shadow-sm">
+                            <x-ui.icon name="file-code" class="size-3.5 text-emerald-400" />
+                            STATIC HTML VERSION (129 PAGES)
+                        </span>
+                        <span class="rounded-full bg-white dark:bg-slate-800/90 px-4 py-1.5 text-xs font-semibold text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700/80 backdrop-blur shadow-sm">
+                            100% Free Forever
+                        </span>
+                    </div>
 
-                {{-- Hero Badge --}}
-                <div class="mb-6 flex justify-center lg:justify-start">
-                    <a href="https://github.com/yrizzz/adminkit" target="_blank"
-                       class="group inline-flex items-center gap-2.5 rounded-full border border-blue-500/30 bg-blue-600/8 dark:bg-blue-600/12 px-4 py-2 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:border-blue-500/60 transition-all">
-                        <span class="size-1.5 rounded-full bg-blue-500 animate-pulse"></span>
-                        <span>Open Source · MIT License · Free Forever</span>
-                        <i data-lucide="arrow-right" class="size-3.5 opacity-60 group-hover:translate-x-0.5 transition-transform"></i>
-                    </a>
+                    {{-- Pro Headline --}}
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.12] text-slate-900 dark:text-white">
+                        Admin Dashboard <br />
+                        Modern, Clean, <br />
+                        and <span class="bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-600 dark:from-blue-400 dark:via-blue-50 dark:via-blue-500 dark:to-indigo-400 bg-clip-text text-transparent underline decoration-blue-500/40 underline-offset-8">Powerful Pro</span>
+                    </h1>
+
+                    {{-- Description --}}
+                    <p class="text-slate-650 dark:text-slate-300 text-sm sm:text-base leading-relaxed max-w-xl mx-auto lg:mx-0 font-normal">
+                        The ultimate enterprise admin panel boilerplate powered by <strong>Laravel 13, Livewire 4, and Tailwind CSS v4</strong>. Ships with <strong>13 dashboard templates</strong>, 40+ Blade components, real-time theme customizer, and <strong>129 pre-rendered Static HTML pages</strong> ready to deploy anywhere without a server.
+                    </p>
+
+                    {{-- Action Buttons --}}
+                    <div class="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 w-full sm:w-auto">
+                        <a href="https://github.com/yrizzz/adminkit" target="_blank"
+                           class="h-12 w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 px-6 text-sm sm:text-base font-extrabold text-white hover:from-blue-500 hover:to-blue-600 transition-all shadow-md shadow-blue-600/20 hover:scale-[1.01] active:scale-[0.99] shrink-0">
+                            <x-ui.icon name="star" class="size-4 fill-white" />
+                            <span>Star on GitHub</span>
+                            <span class="rounded bg-white/20 px-1.5 py-0.5 text-xs font-mono">3.2k</span>
+                        </a>
+
+                        <a href="{{ route('dashboard') }}" wire:navigate
+                           class="h-12 w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-xl border border-slate-200 dark:border-slate-700/90 bg-white dark:bg-slate-800/80 px-6 text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/90 hover:text-slate-900 dark:hover:text-white hover:border-blue-500/50 transition-all backdrop-blur shadow-md shrink-0">
+                            <x-ui.icon name="layout-dashboard" class="size-4 text-blue-500 dark:text-blue-400" />
+                            <span>Dashboard</span>
+                        </a>
+                    </div>
+
+                    {{-- Social Proof & Stats --}}
+                    <div class="pt-3 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                        <div class="flex items-center gap-3">
+                            <div class="flex -space-x-2 rounded-full overflow-hidden p-0.5">
+                                <span class="flex size-8 items-center justify-center rounded-full ring-2 ring-slate-50 dark:ring-[#070B14] bg-blue-600 text-white text-[10px] font-black leading-none tracking-tight">YZ</span>
+                                <span class="flex size-8 items-center justify-center rounded-full ring-2 ring-slate-50 dark:ring-[#070B14] bg-blue-700 text-white text-[10px] font-black leading-none tracking-tight">AK</span>
+                                <span class="flex size-8 items-center justify-center rounded-full ring-2 ring-slate-50 dark:ring-[#070B14] bg-indigo-600 text-white text-[10px] font-black leading-none tracking-tight">LV</span>
+                            </div>
+                            <span class="font-medium text-slate-650 dark:text-slate-300">Trusted by developers worldwide.</span>
+                        </div>
+                        <span class="hidden sm:inline text-slate-300 dark:text-slate-700">&bull;</span>
+                        <div class="flex items-center gap-1.5 font-mono text-blue-600 dark:text-blue-400 font-semibold">
+                            <x-ui.icon name="check-circle" class="size-4" />
+                            <span>Laravel 13 & Livewire 4</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+                {{-- Right Interactive Dashboard Showcase Mockup --}}
+                {{-- Right Developer Terminal & Feature Showcase Card --}}
+                <div class="lg:col-span-6 relative">
+                    {{-- Glowing Border Container --}}
+                    <div class="rounded-2xl border border-blue-500/30 bg-[#070B14] p-3 sm:p-4 shadow-2xl shadow-blue-900/40 backdrop-blur-2xl ring-1 ring-blue-500/20 space-y-3">
+                        
+                        {{-- Terminal Window Bar --}}
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between border-b border-slate-800/80 bg-[#0A1020] p-2.5 sm:px-3.5 sm:py-2.5 rounded-t-xl gap-2">
+                            <div class="flex items-center justify-between sm:justify-start w-full sm:w-auto px-1 sm:px-0">
+                                <div class="flex items-center gap-2">
+                                    <span class="size-3 rounded-full bg-red-500/80"></span>
+                                    <span class="size-3 rounded-full bg-amber-500/80"></span>
+                                    <span class="size-3 rounded-full bg-emerald-500/80"></span>
+                                    <span class="text-[11px] font-mono text-slate-400 ms-1">adminkit-cli</span>
+                                </div>
+                            </div>
 
-                    {{-- Left Text Column --}}
-                    <div class="lg:col-span-6 space-y-6 text-center lg:text-start">
+                            {{-- Selector Tabs --}}
+                            <div class="grid grid-cols-3 gap-1 bg-slate-900/90 p-1 rounded-lg border border-slate-800/80 w-full sm:w-auto">
+                                <button type="button" @click="activeDemo = 'sales'"
+                                        :class="activeDemo === 'sales' ? 'bg-blue-600 text-white font-bold shadow' : 'text-slate-400 hover:text-white'"
+                                        class="px-2 py-1 text-[10px] sm:text-xs rounded-md transition-all flex items-center justify-center gap-1">
+                                    <x-ui.icon name="terminal" class="size-3 sm:size-3.5" />
+                                    <span class="truncate">Quickstart</span>
+                                </button>
+                                <button type="button" @click="activeDemo = 'crypto'"
+                                        :class="activeDemo === 'crypto' ? 'bg-blue-600 text-white font-bold shadow' : 'text-slate-400 hover:text-white'"
+                                        class="px-2 py-1 text-[10px] sm:text-xs rounded-md transition-all flex items-center justify-center gap-1">
+                                    <x-ui.icon name="palette" class="size-3 sm:size-3.5" />
+                                    <span class="truncate">Tokens</span>
+                                </button>
+                                <button type="button" @click="activeDemo = 'ecommerce'"
+                                        :class="activeDemo === 'ecommerce' ? 'bg-blue-600 text-white font-bold shadow' : 'text-slate-400 hover:text-white'"
+                                        class="px-2 py-1 text-[10px] sm:text-xs rounded-md transition-all flex items-center justify-center gap-1">
+                                    <x-ui.icon name="layers" class="size-3 sm:size-3.5" />
+                                    <span class="truncate">Stack</span>
+                                </button>
+                            </div>
+                        </div>
 
-                        <h1 class="text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-6xl font-black tracking-tight leading-[1.1]">
-                            <span class="text-slate-900 dark:text-white">Enterprise Admin</span><br>
-                            <span class="text-slate-900 dark:text-white">Panel,</span>
-                            <span class="relative inline-block">
-                                <span class="bg-gradient-to-r from-blue-600 via-indigo-500 to-cyan-500 dark:from-blue-400 dark:via-indigo-400 dark:to-cyan-400 bg-clip-text text-transparent"> Built Right</span>
-                                <svg class="absolute -bottom-1 left-0 w-full" height="4" viewBox="0 0 200 4" preserveAspectRatio="none">
-                                    <path d="M0 3 Q50 0 100 2 Q150 4 200 1" stroke="url(#ug)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                                    <defs><linearGradient id="ug" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2563eb"/><stop offset="50%" stop-color="#6366f1"/><stop offset="100%" stop-color="#06b6d4"/></linearGradient></defs>
-                                </svg>
+                        {{-- Terminal Inner Viewport --}}
+                        <div class="rounded-b-xl border-t-0 border-slate-800/80 bg-[#04070F] overflow-hidden">
+                            
+                            {{-- TAB 1: QUICKSTART TERMINAL CODE --}}
+                            <div x-show="activeDemo === 'sales'" class="p-4 sm:p-5 space-y-4 font-mono text-xs">
+                                <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+                                    <div class="flex items-center gap-2">
+                                        <span class="size-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                                        <span class="text-slate-300 font-bold">Install & Run AdminKit</span>
+                                    </div>
+                                    <button type="button" x-on:click="copyText('git clone https://github.com/yrizzz/adminkit.git\ncd adminkit && composer install\nphp artisan dev', 'term')" class="px-2.5 py-1 rounded bg-slate-800 text-[10px] text-blue-400 hover:bg-slate-700 transition-colors">
+                                        <span x-text="copiedSnippet === 'term' ? 'Copied! ✓' : 'Copy Code'"></span>
+                                    </button>
+                                </div>
+
+                                <pre class="overflow-x-auto text-slate-300 leading-relaxed space-y-1 font-mono text-[11px] sm:text-xs">
+<span class="text-slate-500"># 1. Clone AdminKit Repository</span>
+<span class="text-blue-400">git clone</span> https://github.com/yrizzz/adminkit.git
+<span class="text-blue-400">cd</span> adminkit && <span class="text-emerald-400">composer install</span>
+
+<span class="text-slate-500"># 2. Setup Environment & Encryption Key</span>
+<span class="text-blue-400">cp</span> .env.example .env
+<span class="text-purple-400">php artisan</span> key:generate
+
+<span class="text-slate-500"># 3. Launch Development Server (Vite + Laravel)</span>
+<span class="text-purple-400">php artisan</span> dev</pre>
+                            </div>
+
+                            {{-- TAB 2: DESIGN SYSTEM TOKENS --}}
+                            <div x-show="activeDemo === 'crypto'" x-cloak class="p-4 sm:p-5 space-y-3">
+                                <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+                                    <span class="text-xs font-bold text-white flex items-center gap-2">
+                                        <x-ui.icon name="sparkles" class="size-4 text-blue-400" />
+                                        Design Tokens & Variables
+                                    </span>
+                                    <span class="text-[10px] font-mono text-blue-400 bg-blue-600/20 px-2 py-0.5 rounded border border-blue-500/30">TAILWIND V4</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                                    <div class="rounded-xl border border-slate-800/80 bg-slate-900/60 p-3 space-y-1">
+                                        <span class="text-[10px] text-slate-400 uppercase font-semibold">Primary Accent</span>
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-xs font-extrabold text-white">Electric Blue</span>
+                                            <span class="size-3.5 rounded-full bg-blue-600 border border-blue-400"></span>
+                                        </div>
+                                    </div>
+                                    <div class="rounded-xl border border-slate-800/80 bg-slate-900/60 p-3 space-y-1">
+                                        <span class="text-[10px] text-slate-400 uppercase font-semibold">Dark Background</span>
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-xs font-extrabold text-white">Obsidian #070B14</span>
+                                            <span class="size-3.5 rounded-full bg-[#070B14] border border-slate-700"></span>
+                                        </div>
+                                    </div>
+                                    <div class="rounded-xl border border-slate-800/80 bg-slate-900/60 p-3 space-y-1">
+                                        <span class="text-[10px] text-slate-400 uppercase font-semibold">UI Components</span>
+                                        <span class="text-xs font-extrabold text-blue-400 block">40+ Blade & Livewire 4</span>
+                                    </div>
+                                    <div class="rounded-xl border border-slate-800/80 bg-slate-900/60 p-3 space-y-1">
+                                        <span class="text-[10px] text-slate-400 uppercase font-semibold">Typography</span>
+                                        <span class="text-xs font-extrabold text-white block">Instrument Sans</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- TAB 3: TECH STACK --}}
+                            <div x-show="activeDemo === 'ecommerce'" x-cloak class="p-4 sm:p-5 space-y-3 text-xs">
+                                <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+                                    <span class="text-xs font-bold text-white flex items-center gap-2">
+                                        <x-ui.icon name="cpu" class="size-4 text-blue-400" />
+                                        Core Stack Specs
+                                    </span>
+                                    <span class="text-[10px] font-mono text-emerald-400 bg-emerald-600/20 px-2 py-0.5 rounded border border-emerald-500/30">100% PRODUCTION READY</span>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex items-center justify-between p-2.5 rounded-xl border border-slate-800/80 bg-slate-900/60">
+                                        <span class="text-slate-300 font-bold">Laravel Framework</span>
+                                        <span class="font-mono text-blue-400 font-bold">v13.x</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-2.5 rounded-xl border border-slate-800/80 bg-slate-900/60">
+                                        <span class="text-slate-300 font-bold">Livewire Engine</span>
+                                        <span class="font-mono text-blue-400 font-bold">v4.x</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-2.5 rounded-xl border border-slate-800/80 bg-slate-900/60">
+                                        <span class="text-slate-300 font-bold">Tailwind CSS</span>
+                                        <span class="font-mono text-blue-400 font-bold">v4.0</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        {{-- Footer Status Bar --}}
+                        <div class="flex items-center justify-between text-[11px] text-slate-400 px-2 pt-1">
+                            <span class="flex items-center gap-1.5 text-blue-400 font-mono font-semibold">
+                                <x-ui.icon name="shield-check" class="size-3.5" />
+                                MIT Open Source
                             </span>
-                        </h1>
+                            <span class="font-mono text-emerald-400 font-semibold">● Operational</span>
+                        </div>
 
-                        <p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
-                            The ultimate boilerplate powered by <strong class="text-slate-900 dark:text-white font-semibold">Laravel 13 &amp; Livewire 4</strong>. Ships with 13 dashboard templates, 40+ Blade components, live theme customizer, and SPA navigation — all free.
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        {{-- KEY FEATURES SECTION ("Built for Developers") --}}
+        <section id="features" class="py-14 lg:py-24 px-4 sm:px-6 max-w-7xl mx-auto space-y-12 lg:space-y-16">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <div>
+                    <span class="inline-block rounded-full bg-blue-600/20 px-4 py-1.5 text-xs font-extrabold text-blue-600 dark:text-blue-400 border border-blue-500/40 uppercase tracking-wider">KEY FEATURES</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight">Built for Developers</h2>
+                <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">Everything you need to build fast, modern, and highly scalable admin dashboards.</p>
+            </div>
+
+            {{-- 6 Feature Cards Grid --}}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {{-- 1. Modern & Clean UI --}}
+                <div data-aos="fade-up" style="transition-delay: 0ms;" class="rounded-2xl border border-slate-200 dark:border-slate-800/80 bg-white dark:bg-slate-900/60 p-6 space-y-4 hover:border-blue-500/50 hover:bg-slate-50 dark:hover:bg-slate-900/90 transition-all duration-300 group hover:-translate-y-1 shadow-lg backdrop-blur">
+                    <div class="size-12 rounded-xl bg-blue-600/15 border border-blue-500/30 text-blue-600 dark:text-blue-400 grid place-items-center group-hover:bg-blue-600 group-hover:text-white transition-all shadow-md">
+                        <x-ui.icon name="palette" class="size-6" />
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Modern & Clean UI</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                        Modern, clean, user-centric design with world-class interface aesthetics and flawless typography.
+                    </p>
+                </div>
+
+                {{-- 2. Fully Responsive --}}
+                <div data-aos="fade-up" style="transition-delay: 100ms;" class="rounded-2xl border border-slate-200 dark:border-slate-800/80 bg-white dark:bg-slate-900/60 p-6 space-y-4 hover:border-blue-500/50 hover:bg-slate-50 dark:hover:bg-slate-900/90 transition-all duration-300 group hover:-translate-y-1 shadow-lg backdrop-blur">
+                    <div class="size-12 rounded-xl bg-blue-600/15 border border-blue-500/30 text-blue-600 dark:text-blue-400 grid place-items-center group-hover:bg-blue-600 group-hover:text-white transition-all shadow-md">
+                        <x-ui.icon name="layout" class="size-6" />
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Fully Responsive</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                        Flawless layout adaptation across all devices, from mobile smartphones to ultrawide desktop monitors.
+                    </p>
+                </div>
+
+                {{-- 3. Rich Component Library --}}
+                <div data-aos="fade-up" style="transition-delay: 200ms;" class="rounded-2xl border border-slate-200 dark:border-slate-800/80 bg-white dark:bg-slate-900/60 p-6 space-y-4 hover:border-blue-500/50 hover:bg-slate-50 dark:hover:bg-slate-900/90 transition-all duration-300 group hover:-translate-y-1 shadow-lg backdrop-blur">
+                    <div class="size-12 rounded-xl bg-blue-600/15 border border-blue-500/30 text-blue-600 dark:text-blue-400 grid place-items-center group-hover:bg-blue-600 group-hover:text-white transition-all shadow-md">
+                        <x-ui.icon name="cpu" class="size-6" />
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Rich Component Library</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                        Comprehensive suite of production-ready Blade UI components, fully customizable for your application architecture.
+                    </p>
+                </div>
+
+                {{-- 4. Developer Friendly --}}
+                <div data-aos="fade-up" style="transition-delay: 300ms;" class="rounded-2xl border border-slate-200 dark:border-slate-800/80 bg-white dark:bg-slate-900/60 p-6 space-y-4 hover:border-blue-500/50 hover:bg-slate-50 dark:hover:bg-slate-900/90 transition-all duration-300 group hover:-translate-y-1 shadow-lg backdrop-blur">
+                    <div class="size-12 rounded-xl bg-blue-600/15 border border-blue-500/30 text-blue-600 dark:text-blue-400 grid place-items-center group-hover:bg-blue-600 group-hover:text-white transition-all shadow-md">
+                        <x-ui.icon name="code" class="size-6" />
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Developer Friendly</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                        Clean and well-organized codebase structure, effortless to adapt for any business logic and API requirements.
+                    </p>
+                </div>
+
+                {{-- 5. Static HTML Version --}}
+                <div data-aos="fade-up" style="transition-delay: 400ms;" class="rounded-2xl border border-emerald-500/30 bg-white dark:bg-slate-900/60 p-6 space-y-4 hover:border-emerald-500/60 hover:bg-slate-50 dark:hover:bg-slate-900/90 transition-all duration-300 group hover:-translate-y-1 shadow-lg backdrop-blur">
+                    <div class="size-12 rounded-xl bg-emerald-600/15 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 grid place-items-center group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-md">
+                        <x-ui.icon name="file-code" class="size-6" />
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Static HTML Export</h3>
+                        <span class="rounded-full bg-emerald-600/20 px-2.5 py-0.5 text-[10px] font-mono font-bold text-emerald-400 border border-emerald-500/30">129 PAGES</span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                        Export all 129 pre-built pages into pure static HTML files with one simple PHP command. Deploy to GitHub Pages, Netlify, or CDN without server requirement.
+                    </p>
+                </div>
+
+                {{-- 6. 100% Open Source --}}
+                <div data-aos="fade-up" style="transition-delay: 500ms;" class="rounded-2xl border border-slate-200 dark:border-slate-800/80 bg-white dark:bg-slate-900/60 p-6 space-y-4 hover:border-blue-500/50 hover:bg-slate-50 dark:hover:bg-slate-900/90 transition-all duration-300 group hover:-translate-y-1 shadow-lg backdrop-blur">
+                    <div class="size-12 rounded-xl bg-blue-600/15 border border-blue-500/30 text-blue-600 dark:text-blue-400 grid place-items-center group-hover:bg-blue-600 group-hover:text-white transition-all shadow-md">
+                        <x-ui.icon name="github" class="size-6" />
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">100% Open Source</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                        Free forever under the permissive MIT license, passionately crafted for the entire open-source developer community.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        {{-- PREVIEW SECTION ("Explore AdminKit Inside & Out") --}}
+        <section id="showcase" class="py-14 lg:py-24 px-4 sm:px-6 max-w-7xl mx-auto space-y-12 lg:space-y-16">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <div>
+                    <span class="inline-block rounded-full bg-blue-600/20 px-4 py-1.5 text-xs font-extrabold text-blue-600 dark:text-blue-400 border border-blue-500/40 uppercase tracking-wider">PREVIEW DEMOS</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight">Explore AdminKit Inside & Out</h2>
+                <p class="text-slate-650 dark:text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">A glimpse of core view templates and UI components available in AdminKit.</p>
+            </div>
+
+            {{-- 4 Page Preview Cards --}}
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {{-- Card 1: Dashboard --}}
+                <div data-aos="fade-up" style="transition-delay: 0ms;" class="rounded-2xl border border-slate-200 dark:border-slate-800/80 bg-white dark:bg-slate-900/70 overflow-hidden space-y-3 p-4 hover:border-blue-500/60 hover:bg-slate-50 dark:hover:bg-slate-900/90 transition-all cursor-pointer group hover:-translate-y-1 shadow-md" @click="activeDemo = 'sales'">
+                    <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 h-36 flex flex-col justify-between group-hover:scale-[1.02] transition-transform">
+                        <div class="flex items-center justify-between text-[11px] font-bold text-blue-600 dark:text-blue-400">
+                            <span>Dashboard</span>
+                            <span class="size-2 rounded-full bg-blue-500"></span>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="h-2 w-3/4 rounded bg-blue-600/40"></div>
+                            <div class="h-2 w-1/2 rounded bg-slate-200 dark:bg-slate-850"></div>
+                        </div>
+                        <div class="h-10 w-full rounded bg-blue-600/20 border border-blue-500/30"></div>
+                    </div>
+                    <div>
+                        <h4 class="text-base font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Dashboard Overview</h4>
+                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1">Modern analytics dashboard with real-time widgets and interactive charts.</p>
+                    </div>
+                </div>
+
+                {{-- Card 2: Tables --}}
+                <div data-aos="fade-up" style="transition-delay: 100ms;" class="rounded-2xl border border-slate-200 dark:border-slate-800/80 bg-white dark:bg-slate-900/70 overflow-hidden space-y-3 p-4 hover:border-blue-500/60 hover:bg-slate-50 dark:hover:bg-slate-900/90 transition-all cursor-pointer group hover:-translate-y-1 shadow-md" @click="activeDemo = 'ecommerce'">
+                    <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 h-36 flex flex-col justify-between group-hover:scale-[1.02] transition-transform">
+                        <div class="flex items-center justify-between text-[11px] font-bold text-blue-600 dark:text-blue-400">
+                            <span>Tables</span>
+                            <span class="size-2 rounded-full bg-blue-500"></span>
+                        </div>
+                        <div class="space-y-1.5">
+                            <div class="h-2 w-full rounded bg-slate-200 dark:bg-slate-850"></div>
+                            <div class="h-2 w-full rounded bg-slate-200/60 dark:bg-slate-850/60"></div>
+                            <div class="h-2 w-full rounded bg-slate-200/40 dark:bg-slate-850/40"></div>
+                        </div>
+                        <div class="h-4 w-1/3 rounded bg-blue-600/30"></div>
+                    </div>
+                    <div>
+                        <h4 class="text-base font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Data Tables</h4>
+                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1">Responsive data tables with instant sorting, searching, and pagination.</p>
+                    </div>
+                </div>
+
+                {{-- Card 3: Forms --}}
+                <div data-aos="fade-up" style="transition-delay: 200ms;" class="rounded-2xl border border-slate-200 dark:border-slate-800/80 bg-white dark:bg-slate-900/70 overflow-hidden space-y-3 p-4 hover:border-blue-500/60 hover:bg-slate-50 dark:hover:bg-slate-900/90 transition-all cursor-pointer group hover:-translate-y-1 shadow-md" @click="activeDemo = 'crm'">
+                    <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 h-36 flex flex-col justify-between group-hover:scale-[1.02] transition-transform">
+                        <div class="flex items-center justify-between text-[11px] font-bold text-blue-600 dark:text-blue-400">
+                            <span>Forms</span>
+                            <span class="size-2 rounded-full bg-blue-500"></span>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="h-5 w-full rounded border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900"></div>
+                            <div class="h-5 w-full rounded border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900"></div>
+                        </div>
+                        <div class="h-6 w-full rounded bg-blue-600 text-white text-[10px] grid place-items-center font-bold">Submit</div>
+                    </div>
+                    <div>
+                        <h4 class="text-base font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Form Elements</h4>
+                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1">Complete collection of styled form controls ready for immediate integration.</p>
+                    </div>
+                </div>
+
+                {{-- Card 4: Charts --}}
+                <div data-aos="fade-up" style="transition-delay: 300ms;" class="rounded-2xl border border-slate-200 dark:border-slate-800/80 bg-white dark:bg-slate-900/70 overflow-hidden space-y-3 p-4 hover:border-blue-500/60 hover:bg-slate-50 dark:hover:bg-slate-900/90 transition-all cursor-pointer group hover:-translate-y-1 shadow-md" @click="activeDemo = 'sales'">
+                    <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 h-36 flex flex-col justify-between group-hover:scale-[1.02] transition-transform">
+                        <div class="flex items-center justify-between text-[11px] font-bold text-blue-600 dark:text-blue-400">
+                            <span>Charts</span>
+                            <span class="size-2 rounded-full bg-blue-500"></span>
+                        </div>
+                        <div class="h-16 w-full flex items-end justify-between gap-1 pt-2">
+                            <div class="w-full bg-blue-600/30 rounded-t h-[30%]"></div>
+                            <div class="w-full bg-blue-600/50 rounded-t h-[70%]"></div>
+                            <div class="w-full bg-blue-600/40 rounded-t h-[50%]"></div>
+                            <div class="w-full bg-blue-500 rounded-t h-[90%]"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-base font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Interactive Charts</h4>
+                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1">Seamless data visualization integrations using Chart.js & ApexCharts.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center pt-2">
+                <a href="{{ route('page', ['path' => 'docs']) }}" wire:navigate
+                   class="inline-flex items-center gap-2 rounded-xl border border-blue-500/40 bg-blue-600/5 dark:bg-blue-600/10 px-6 py-3.5 text-xs sm:text-sm font-bold text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white transition-all shadow-md">
+                    <span>Explore All Pages & Documentation &rarr;</span>
+                </a>
+            </div>
+        </section>
+
+        {{-- TECHNOLOGY STACK SECTION ("Built with Modern Technologies") --}}
+        <section id="tech" class="py-14 lg:py-24 px-4 sm:px-6 max-w-7xl mx-auto space-y-10 lg:space-y-14">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <div>
+                    <span class="inline-block rounded-full bg-blue-600/20 px-4 py-1.5 text-xs font-extrabold text-blue-600 dark:text-blue-400 border border-blue-500/40 uppercase tracking-wider">TECHNOLOGY STACK</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight">Built with Modern Technologies</h2>
+                <p class="text-slate-650 dark:text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">Powered by industry-standard tools trusted by millions of developers worldwide.</p>
+            </div>
+
+            {{-- Responsive Tech Stack Cards Grid --}}
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-4 max-w-5xl mx-auto">
+                {{-- 1. Laravel 13 --}}
+                <div class="group relative rounded-2xl border border-slate-200 dark:border-red-500/20 bg-white dark:bg-slate-900/60 p-3 sm:p-4 hover:border-red-500/60 dark:hover:border-red-500/60 hover:bg-slate-50 dark:hover:bg-slate-900/80 hover:shadow-lg transition-all duration-300 flex items-center gap-3">
+                    <div class="size-9 sm:size-11 rounded-xl bg-red-500/15 border border-red-500/30 grid place-items-center text-red-500 dark:text-red-400 shrink-0 group-hover:scale-105 transition-transform">
+                        <x-ui.icon name="cpu" class="size-4 sm:size-5" />
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <div class="flex items-center justify-between gap-1">
+                            <span class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white truncate">Laravel 13</span>
+                            <span class="text-[9px] font-mono font-bold text-red-500 dark:text-red-450 bg-red-500/10 px-1.5 py-0.5 rounded border border-red-500/20 shrink-0">v13</span>
+                        </div>
+                        <p class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium truncate">PHP Framework</p>
+                    </div>
+                </div>
+
+                {{-- 2. Livewire 4 --}}
+                <div class="group relative rounded-2xl border border-slate-200 dark:border-pink-500/20 bg-white dark:bg-slate-900/60 p-3 sm:p-4 hover:border-pink-500/60 dark:hover:border-pink-500/60 hover:bg-slate-50 dark:hover:bg-slate-900/80 hover:shadow-lg transition-all duration-300 flex items-center gap-3">
+                    <div class="size-9 sm:size-11 rounded-xl bg-pink-500/15 border border-pink-500/30 grid place-items-center text-pink-500 dark:text-pink-400 shrink-0 group-hover:scale-105 transition-transform">
+                        <x-ui.icon name="zap" class="size-4 sm:size-5" />
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <div class="flex items-center justify-between gap-1">
+                            <span class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white truncate">Livewire 4</span>
+                            <span class="text-[9px] font-mono font-bold text-pink-500 dark:text-pink-450 bg-pink-500/10 px-1.5 py-0.5 rounded border border-pink-500/20 shrink-0">v4</span>
+                        </div>
+                        <p class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium truncate">Full-Stack SPA</p>
+                    </div>
+                </div>
+
+                {{-- 3. Tailwind CSS v4 --}}
+                <div class="group relative rounded-2xl border border-slate-200 dark:border-sky-400/20 bg-white dark:bg-slate-900/60 p-3 sm:p-4 hover:border-sky-400/60 dark:hover:border-sky-400/60 hover:bg-slate-50 dark:hover:bg-slate-900/80 hover:shadow-lg transition-all duration-300 flex items-center gap-3">
+                    <div class="size-9 sm:size-11 rounded-xl bg-sky-500/15 border border-sky-400/30 grid place-items-center text-sky-500 dark:text-sky-400 shrink-0 group-hover:scale-105 transition-transform">
+                        <x-ui.icon name="palette" class="size-4 sm:size-5" />
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <div class="flex items-center justify-between gap-1">
+                            <span class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white truncate">Tailwind v4</span>
+                            <span class="text-[9px] font-mono font-bold text-sky-550 dark:text-sky-400 bg-sky-400/10 px-1.5 py-0.5 rounded border border-sky-400/20 shrink-0">v4.0</span>
+                        </div>
+                        <p class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium truncate">CSS Engine</p>
+                    </div>
+                </div>
+
+                {{-- 4. Chart.js --}}
+                <div class="group relative rounded-2xl border border-slate-200 dark:border-amber-400/20 bg-white dark:bg-slate-900/60 p-3 sm:p-4 hover:border-amber-400/60 dark:hover:border-amber-400/60 hover:bg-slate-50 dark:hover:bg-slate-900/80 hover:shadow-lg transition-all duration-300 flex items-center gap-3">
+                    <div class="size-9 sm:size-11 rounded-xl bg-amber-500/15 border border-amber-400/30 grid place-items-center text-amber-500 dark:text-amber-400 shrink-0 group-hover:scale-105 transition-transform">
+                        <x-ui.icon name="bar-chart-2" class="size-4 sm:size-5" />
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <div class="flex items-center justify-between gap-1">
+                            <span class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white truncate">Chart.js</span>
+                            <span class="text-[9px] font-mono font-bold text-amber-550 dark:text-amber-400 bg-amber-400/10 px-1.5 py-0.5 rounded border border-amber-400/20 shrink-0">v4.4</span>
+                        </div>
+                        <p class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium truncate">Interactive Charts</p>
+                    </div>
+                </div>
+
+                {{-- 5. Alpine.js --}}
+                <div class="group relative rounded-2xl border border-slate-200 dark:border-teal-400/20 bg-white dark:bg-slate-900/60 p-3 sm:p-4 hover:border-teal-400/60 dark:hover:border-teal-400/60 hover:bg-slate-50 dark:hover:bg-slate-900/80 hover:shadow-lg transition-all duration-300 flex items-center gap-3">
+                    <div class="size-9 sm:size-11 rounded-xl bg-teal-500/15 border border-teal-400/30 grid place-items-center text-teal-500 dark:text-teal-400 shrink-0 group-hover:scale-105 transition-transform">
+                        <x-ui.icon name="code" class="size-4 sm:size-5" />
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <div class="flex items-center justify-between gap-1">
+                            <span class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white truncate">Alpine.js</span>
+                            <span class="text-[9px] font-mono font-bold text-teal-550 dark:text-teal-400 bg-teal-400/10 px-1.5 py-0.5 rounded border border-teal-400/20 shrink-0">v3</span>
+                        </div>
+                        <p class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium truncate">Micro JS Library</p>
+                    </div>
+                </div>
+
+                {{-- 6. PHP 8.4 --}}
+                <div class="group relative rounded-2xl border border-slate-200 dark:border-indigo-400/20 bg-white dark:bg-slate-900/60 p-3 sm:p-4 hover:border-indigo-400/60 dark:hover:border-indigo-400/60 hover:bg-slate-50 dark:hover:bg-slate-900/80 hover:shadow-lg transition-all duration-300 flex items-center gap-3">
+                    <div class="size-9 sm:size-11 rounded-xl bg-indigo-500/15 border border-indigo-400/30 grid place-items-center text-indigo-500 dark:text-indigo-400 shrink-0 group-hover:scale-105 transition-transform">
+                        <x-ui.icon name="terminal" class="size-4 sm:size-5" />
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <div class="flex items-center justify-between gap-1">
+                            <span class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white truncate">PHP 8.4</span>
+                            <span class="text-[9px] font-mono font-bold text-indigo-550 dark:text-indigo-400 bg-indigo-400/10 px-1.5 py-0.5 rounded border border-indigo-400/20 shrink-0">v8.4</span>
+                        </div>
+                        <p class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium truncate">Server Runtime</p>
+                    </div>
+                </div>
+
+                {{-- 7. Blade Icons --}}
+                <div class="group relative rounded-2xl border border-slate-200 dark:border-blue-400/20 bg-white dark:bg-slate-900/60 p-3 sm:p-4 hover:border-blue-400/60 dark:hover:border-blue-400/60 hover:bg-slate-50 dark:hover:bg-slate-900/80 hover:shadow-lg transition-all duration-300 flex items-center gap-3">
+                    <div class="size-9 sm:size-11 rounded-xl bg-blue-500/15 border border-blue-400/30 grid place-items-center text-blue-500 dark:text-blue-400 shrink-0 group-hover:scale-105 transition-transform">
+                        <x-ui.icon name="layers" class="size-4 sm:size-5" />
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <div class="flex items-center justify-between gap-1">
+                            <span class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white truncate">Blade Icons</span>
+                            <span class="text-[9px] font-mono font-bold text-blue-500 dark:text-blue-400 bg-blue-400/10 px-1.5 py-0.5 rounded border border-blue-400/20 shrink-0">40+</span>
+                        </div>
+                        <p class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium truncate">Lucide Icons</p>
+                    </div>
+                </div>
+
+                {{-- 8. Vite Engine --}}
+                <div class="group relative rounded-2xl border border-slate-200 dark:border-purple-400/20 bg-white dark:bg-slate-900/60 p-3 sm:p-4 hover:border-purple-400/60 dark:hover:border-purple-400/60 hover:bg-slate-50 dark:hover:bg-slate-900/80 hover:shadow-lg transition-all duration-300 flex items-center gap-3">
+                    <div class="size-9 sm:size-11 rounded-xl bg-purple-500/15 border border-purple-400/30 grid place-items-center text-purple-500 dark:text-purple-400 shrink-0 group-hover:scale-105 transition-transform">
+                        <x-ui.icon name="sparkles" class="size-4 sm:size-5" />
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <div class="flex items-center justify-between gap-1">
+                            <span class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white truncate">Vite Engine</span>
+                            <span class="text-[9px] font-mono font-bold text-purple-550 dark:text-purple-400 bg-purple-400/10 px-1.5 py-0.5 rounded border border-purple-400/20 shrink-0">v6</span>
+                        </div>
+                        <p class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium truncate">Hot Module Reload</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {{-- SPLIT SECTION: "One Template, Endless Possibilities" & Interactive Terminal & Stats --}}
+        <section id="quickstart" class="py-14 lg:py-24 px-4 sm:px-6 max-w-7xl mx-auto space-y-12 lg:space-y-16">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                
+                {{-- Left: Use cases --}}
+                <div class="lg:col-span-4 rounded-2xl border border-slate-200 dark:border-slate-800/80 bg-white dark:bg-slate-900/60 p-6 sm:p-8 space-y-6 flex flex-col justify-between shadow-xl backdrop-blur">
+                    <div class="space-y-4">
+                        <div>
+                            <span class="inline-block rounded-full bg-blue-600/20 px-3.5 py-1 text-xs font-extrabold text-blue-600 dark:text-blue-400 border border-blue-500/40 uppercase tracking-wider">VERSATILE USE CASES</span>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl lg:text-3xl font-black text-slate-900 dark:text-white">One Template, Endless Possibilities</h3>
+                        <p class="text-xs sm:text-sm text-slate-650 dark:text-slate-300 leading-relaxed">
+                            AdminKit features a modular design architecture engineered to streamline any enterprise management platform.
                         </p>
 
-                        {{-- Action Buttons --}}
-                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3">
-                            <a href="https://github.com/yrizzz/adminkit" target="_blank"
-                               class="group relative h-12 w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 text-sm font-extrabold text-white shadow-lg shadow-blue-600/30 hover:from-blue-500 hover:to-indigo-500 hover:scale-[1.02] active:scale-[0.98] transition-all overflow-hidden">
-                                <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></span>
-                                <i data-lucide="star" class="size-4 fill-white relative z-10"></i>
-                                <span class="relative z-10">Star on GitHub</span>
-                                <span class="relative z-10 rounded-md bg-white/25 px-1.5 py-0.5 text-[10px] font-mono">3.2k</span>
-                            </a>
-                            <a href="{{ route('dashboard') }}"
-                               class="h-12 w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-xl border border-slate-200 dark:border-slate-700/90 bg-white dark:bg-slate-800/80 px-6 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:border-blue-500/50 hover:text-blue-600 dark:hover:text-blue-400 transition-all shadow-sm backdrop-blur">
-                                <i data-lucide="layout-dashboard" class="size-4 text-blue-500 dark:text-blue-400"></i>
-                                Live Preview
-                            </a>
-                        </div>
-
-                        {{-- Social Proof --}}
-                        <div class="flex items-center justify-center lg:justify-start gap-4 pt-1 text-xs text-slate-500 dark:text-slate-400">
+                        <div class="space-y-3 pt-2 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-200">
                             <div class="flex items-center gap-2.5">
-                                <div class="flex -space-x-2">
-                                    @foreach (['YZ' => 'bg-blue-600', 'AK' => 'bg-indigo-600', 'LV' => 'bg-cyan-600', 'MK' => 'bg-violet-600'] as $initials => $color)
-                                        <span class="flex size-7 items-center justify-center rounded-full ring-2 ring-white dark:ring-[#05080F] {{ $color }} text-white text-[9px] font-black">{{ $initials }}</span>
-                                    @endforeach
-                                </div>
-                                <span class="font-medium text-slate-600 dark:text-slate-300">Trusted by 1,200+ devs</span>
+                                <x-ui.icon name="check-circle" class="size-4.5 text-blue-500 dark:text-blue-400 shrink-0" />
+                                <span>Enterprise Admin & Management Systems</span>
                             </div>
-                            <span class="text-slate-300 dark:text-slate-700">·</span>
-                            <div class="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-semibold">
-                                <i data-lucide="check-circle" class="size-3.5"></i>
-                                Laravel 13 + Livewire 4
+                            <div class="flex items-center gap-2.5">
+                                <x-ui.icon name="check-circle" class="size-4.5 text-blue-500 dark:text-blue-400 shrink-0" />
+                                <span>Analytics & Real-time Reporting Engine</span>
                             </div>
-                        </div>
-                    </div>
-
-                    {{-- Right Bento Hero Panel --}}
-                    <div class="lg:col-span-6 relative">
-                        {{-- Main Terminal Box --}}
-                        <div class="rounded-2xl border border-blue-500/20 dark:border-blue-500/30 bg-white dark:bg-[#070B14] shadow-2xl shadow-blue-900/20 dark:shadow-blue-900/50 ring-1 ring-blue-500/10 overflow-hidden">
-
-                            {{-- Window Bar --}}
-                            <div class="flex items-center justify-between bg-slate-100 dark:bg-[#0A0F1E] px-4 py-3 border-b border-slate-200/80 dark:border-slate-800/80">
-                                <div class="flex items-center gap-2">
-                                    <span class="size-3 rounded-full bg-red-400/80"></span>
-                                    <span class="size-3 rounded-full bg-amber-400/80"></span>
-                                    <span class="size-3 rounded-full bg-emerald-400/80"></span>
-                                    <span class="ms-2 text-[11px] font-mono text-slate-500 dark:text-slate-400">adminkit-cli — zsh</span>
-                                </div>
-                                <div class="flex items-center gap-1 bg-slate-200 dark:bg-slate-800 rounded-lg p-1">
-                                    @foreach (['composer' => 'Composer', 'git' => 'Git Clone', 'artisan' => 'Artisan'] as $tab => $label)
-                                        <button type="button" @click="activeTab = '{{ $tab }}'"
-                                            :class="activeTab === '{{ $tab }}' ? 'bg-white dark:bg-blue-600 text-slate-900 dark:text-white shadow-sm' : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'"
-                                            class="px-2.5 py-1 rounded-md text-[10px] font-semibold transition-all">
-                                            {{ $label }}
-                                        </button>
-                                    @endforeach
-                                </div>
+                            <div class="flex items-center gap-2.5">
+                                <x-ui.icon name="check-circle" class="size-4.5 text-blue-500 dark:text-blue-400 shrink-0" />
+                                <span>CRM & ERP Sales Pipeline Dashboard</span>
                             </div>
-
-                            {{-- Terminal Body --}}
-                            <div class="bg-[#060A14] dark:bg-[#04070F] p-5 font-mono text-[12px] min-h-[200px] relative">
-                                {{-- Composer Tab --}}
-                                <div x-show="activeTab === 'composer'" class="space-y-2 text-slate-300 leading-relaxed">
-                                    <div class="flex items-center gap-2 mb-3 pb-2 border-b border-slate-800">
-                                        <span class="size-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                                        <span class="text-slate-400 text-[10px]">Install AdminKit via Composer</span>
-                                        <button @click="copyCommand('composer create-project yrizzz/adminkit my-app\ncd my-app && php artisan dev', 'c1')"
-                                            class="ms-auto px-2 py-0.5 rounded bg-slate-700 hover:bg-blue-600 text-[10px] text-slate-300 hover:text-white transition-colors">
-                                            <span x-text="copiedSnippet === 'c1' ? 'Copied! ✓' : 'Copy'"></span>
-                                        </button>
-                                    </div>
-                                    <div><span class="text-slate-500"># Create project</span></div>
-                                    <div><span class="text-blue-400">$</span> composer create-project <span class="text-emerald-400">yrizzz/adminkit</span> my-app</div>
-                                    <div class="mt-2"><span class="text-slate-500"># Boot dev server</span></div>
-                                    <div><span class="text-blue-400">$</span> cd my-app && <span class="text-purple-400">php artisan</span> dev</div>
-                                    <div class="mt-2 text-emerald-400 text-[10px]">✓ Server started on http://localhost:8000</div>
-                                </div>
-
-                                {{-- Git Tab --}}
-                                <div x-show="activeTab === 'git'" x-cloak class="space-y-2 text-slate-300 leading-relaxed">
-                                    <div class="flex items-center gap-2 mb-3 pb-2 border-b border-slate-800">
-                                        <span class="size-1.5 rounded-full bg-blue-400 animate-pulse"></span>
-                                        <span class="text-slate-400 text-[10px]">Clone from GitHub</span>
-                                        <button @click="copyCommand('git clone https://github.com/yrizzz/adminkit.git\ncd adminkit && composer install && npm install', 'c2')"
-                                            class="ms-auto px-2 py-0.5 rounded bg-slate-700 hover:bg-blue-600 text-[10px] text-slate-300 hover:text-white transition-colors">
-                                            <span x-text="copiedSnippet === 'c2' ? 'Copied! ✓' : 'Copy'"></span>
-                                        </button>
-                                    </div>
-                                    <div><span class="text-slate-500"># Clone repository</span></div>
-                                    <div><span class="text-blue-400">$</span> git clone <span class="text-cyan-400">https://github.com/yrizzz/adminkit.git</span></div>
-                                    <div class="mt-2"><span class="text-slate-500"># Install deps</span></div>
-                                    <div><span class="text-blue-400">$</span> cd adminkit && <span class="text-emerald-400">composer install</span> && <span class="text-emerald-400">npm install</span></div>
-                                    <div class="mt-2 text-emerald-400 text-[10px]">✓ Dependencies installed successfully</div>
-                                </div>
-
-                                {{-- Artisan Tab --}}
-                                <div x-show="activeTab === 'artisan'" x-cloak class="space-y-2 text-slate-300 leading-relaxed">
-                                    <div class="flex items-center gap-2 mb-3 pb-2 border-b border-slate-800">
-                                        <span class="size-1.5 rounded-full bg-purple-400 animate-pulse"></span>
-                                        <span class="text-slate-400 text-[10px]">Setup Environment</span>
-                                        <button @click="copyCommand('cp .env.example .env\nphp artisan key:generate\nphp artisan migrate --seed\nphp artisan dev', 'c3')"
-                                            class="ms-auto px-2 py-0.5 rounded bg-slate-700 hover:bg-blue-600 text-[10px] text-slate-300 hover:text-white transition-colors">
-                                            <span x-text="copiedSnippet === 'c3' ? 'Copied! ✓' : 'Copy'"></span>
-                                        </button>
-                                    </div>
-                                    <div><span class="text-blue-400">$</span> cp .env.example .env</div>
-                                    <div><span class="text-blue-400">$</span> <span class="text-purple-400">php artisan</span> key:generate</div>
-                                    <div><span class="text-blue-400">$</span> <span class="text-purple-400">php artisan</span> migrate --seed</div>
-                                    <div><span class="text-blue-400">$</span> <span class="text-purple-400">php artisan</span> dev</div>
-                                    <div class="mt-2 text-emerald-400 text-[10px]">✓ Application ready — 129 pages generated</div>
-                                </div>
+                            <div class="flex items-center gap-2.5">
+                                <x-ui.icon name="check-circle" class="size-4.5 text-blue-500 dark:text-blue-400 shrink-0" />
+                                <span>Project & Team Workflow Workspace</span>
+                            </div>
+                            <div class="flex items-center gap-2.5">
+                                <x-ui.icon name="check-circle" class="size-4.5 text-blue-500 dark:text-blue-400 shrink-0" />
+                                <span>E-commerce Storefront & Point of Sale (POS)</span>
+                            </div>
+                            <div class="flex items-center gap-2.5">
+                                <x-ui.icon name="check-circle" class="size-4.5 text-blue-500 dark:text-blue-400 shrink-0" />
+                                <span>SaaS Application & SaaS Admin Scaffold</span>
                             </div>
                         </div>
-
-                        {{-- Mini Stat Cards Row --}}
-                        <div class="grid grid-cols-3 gap-3 mt-4">
-                            @foreach ([
-                                ['3.2k+', 'GitHub Stars', 'star', 'text-amber-500'],
-                                ['129', 'HTML Pages', 'file-code', 'text-blue-500'],
-                                ['40+', 'UI Components', 'cpu', 'text-indigo-500'],
-                            ] as [$num, $label, $ico, $color])
-                                <div class="rounded-xl border border-slate-200 dark:border-slate-800/80 bg-white dark:bg-slate-900/60 p-3.5 text-center shadow-sm backdrop-blur">
-                                    <div class="flex justify-center mb-1.5">
-                                        <i data-lucide="{{ $ico }}" class="size-4 {{ $color }}"></i>
-                                    </div>
-                                    <div class="text-xl font-black text-slate-900 dark:text-white leading-none">{{ $num }}</div>
-                                    <div class="text-[10px] text-slate-500 dark:text-slate-400 mt-1 font-medium">{{ $label }}</div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        {{-- ═══════════════════════════════════════════
-             MARQUEE TECH BADGE STRIP
-        ════════════════════════════════════════════ --}}
-        <div class="relative overflow-hidden border-y border-slate-200 dark:border-slate-800/60 bg-white/60 dark:bg-slate-900/40 backdrop-blur py-4">
-            <div class="flex gap-12 items-center animate-[marquee_25s_linear_infinite] whitespace-nowrap">
-                @foreach ([
-                    ['Laravel 13', 'flame', 'text-red-500'],
-                    ['Livewire 4', 'zap', 'text-blue-500'],
-                    ['Tailwind CSS v4', 'wind', 'text-cyan-500'],
-                    ['Alpine.js 3', 'layers', 'text-teal-500'],
-                    ['Chart.js', 'bar-chart-2', 'text-purple-500'],
-                    ['Lucide Icons', 'aperture', 'text-indigo-500'],
-                    ['Vite 8', 'rocket', 'text-amber-500'],
-                    ['PHP 8.3+', 'code-2', 'text-violet-500'],
-                    ['MIT License', 'shield-check', 'text-emerald-500'],
-                    ['SPA Navigate', 'mouse-pointer-click', 'text-blue-500'],
-                ] as $t)
-                    <span class="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 dark:text-slate-300">
-                        <i data-lucide="{{ $t[1] }}" class="size-4 {{ $t[2] }}"></i>
-                        {{ $t[0] }}
-                    </span>
-                @endforeach
-                {{-- Duplicate for seamless loop --}}
-                @foreach ([
-                    ['Laravel 13', 'flame', 'text-red-500'],
-                    ['Livewire 4', 'zap', 'text-blue-500'],
-                    ['Tailwind CSS v4', 'wind', 'text-cyan-500'],
-                    ['Alpine.js 3', 'layers', 'text-teal-500'],
-                    ['Chart.js', 'bar-chart-2', 'text-purple-500'],
-                    ['Lucide Icons', 'aperture', 'text-indigo-500'],
-                    ['Vite 8', 'rocket', 'text-amber-500'],
-                    ['PHP 8.3+', 'code-2', 'text-violet-500'],
-                    ['MIT License', 'shield-check', 'text-emerald-500'],
-                    ['SPA Navigate', 'mouse-pointer-click', 'text-blue-500'],
-                ] as $t)
-                    <span class="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 dark:text-slate-300">
-                        <i data-lucide="{{ $t[1] }}" class="size-4 {{ $t[2] }}"></i>
-                        {{ $t[0] }}
-                    </span>
-                @endforeach
-            </div>
-            <div class="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white dark:from-[#05080F] to-transparent z-10 pointer-events-none"></div>
-            <div class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white dark:from-[#05080F] to-transparent z-10 pointer-events-none"></div>
-        </div>
-
-        {{-- ═══════════════════════════════════════════
-             FEATURES SECTION — Modern Bento Grid
-        ════════════════════════════════════════════ --}}
-        <section id="features" class="py-16 lg:py-28 px-4 sm:px-6 max-w-7xl mx-auto">
-            <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
-                <span class="inline-block rounded-full bg-blue-600/15 border border-blue-500/30 px-4 py-1.5 text-xs font-extrabold text-blue-600 dark:text-blue-400 uppercase tracking-wider">Key Features</span>
-                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight">Built for Developers,<br><span class="text-blue-600 dark:text-blue-400">Loved by Teams</span></h2>
-                <p class="text-slate-600 dark:text-slate-300 text-base leading-relaxed">Everything you need to ship fast, scalable admin dashboards without starting from scratch.</p>
-            </div>
-
-            {{-- Bento Grid --}}
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-
-                {{-- Large Feature Card --}}
-                <div class="lg:col-span-2 rounded-3xl border border-slate-200 dark:border-slate-800/70 bg-white dark:bg-slate-900/60 p-7 sm:p-8 space-y-4 hover:border-blue-500/40 hover:shadow-xl hover:shadow-blue-600/8 hover:-translate-y-1 transition-all duration-300 group overflow-hidden relative">
-                    <div class="absolute -right-16 -top-16 size-52 bg-blue-600/5 dark:bg-blue-600/8 rounded-full blur-2xl group-hover:bg-blue-600/10 transition-all"></div>
-                    <div class="size-12 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white grid place-items-center shadow-lg shadow-blue-600/30">
-                        <i data-lucide="palette" class="size-6"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">Live Theme Customizer</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">Real-time sidebar colors, navbar themes, HSL accent presets, dark/light toggle, gradient builder, and curved layout mode — all without page refresh.</p>
-                    <div class="flex flex-wrap gap-2 pt-2">
-                        @foreach (['Dark Mode', 'Light Mode', 'Curved Layout', 'Gradient Sidebar', '7 Accents', 'RTL Support'] as $badge)
-                            <span class="rounded-full bg-blue-600/10 dark:bg-blue-600/15 border border-blue-500/25 px-3 py-1 text-[11px] font-semibold text-blue-600 dark:text-blue-400">{{ $badge }}</span>
-                        @endforeach
                     </div>
                 </div>
 
-                <div class="rounded-3xl border border-slate-200 dark:border-slate-800/70 bg-white dark:bg-slate-900/60 p-7 space-y-4 hover:border-blue-500/40 hover:shadow-xl hover:shadow-blue-600/8 hover:-translate-y-1 transition-all duration-300 group overflow-hidden relative">
-                    <div class="absolute -right-10 -bottom-10 size-36 bg-indigo-600/5 dark:bg-indigo-600/8 rounded-full blur-2xl"></div>
-                    <div class="size-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white grid place-items-center shadow-lg shadow-indigo-600/30">
-                        <i data-lucide="layout-dashboard" class="size-6"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">13 Dashboard Variants</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">Sales, CRM, Analytics, Ecommerce, HRM, Jobs, NFT, Crypto, Projects, Timeline, and more — all production-ready.</p>
-                </div>
-
-                <div class="rounded-3xl border border-slate-200 dark:border-slate-800/70 bg-white dark:bg-slate-900/60 p-7 space-y-4 hover:border-blue-500/40 hover:shadow-xl hover:shadow-blue-600/8 hover:-translate-y-1 transition-all duration-300 group overflow-hidden relative">
-                    <div class="size-12 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 text-white grid place-items-center shadow-lg shadow-cyan-600/30">
-                        <i data-lucide="zap" class="size-6"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">SPA Wire Navigation</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">Zero page reload transitions powered by Livewire wire:navigate with smooth view-transition animations.</p>
-                </div>
-
-                <div class="rounded-3xl border border-slate-200 dark:border-slate-800/70 bg-white dark:bg-slate-900/60 p-7 space-y-4 hover:border-blue-500/40 hover:shadow-xl hover:shadow-blue-600/8 hover:-translate-y-1 transition-all duration-300 group overflow-hidden relative">
-                    <div class="size-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white grid place-items-center shadow-lg shadow-emerald-600/30">
-                        <i data-lucide="cpu" class="size-6"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">40+ Blade Components</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">Cards, modals, tables, forms, charts, alerts, badges, buttons — reusable UI atoms with full slot support.</p>
-                </div>
-
-                <div class="lg:col-span-2 rounded-3xl border border-slate-200 dark:border-slate-800/70 bg-white dark:bg-slate-900/60 p-7 sm:p-8 space-y-4 hover:border-blue-500/40 hover:shadow-xl hover:shadow-blue-600/8 hover:-translate-y-1 transition-all duration-300 group overflow-hidden relative">
-                    <div class="absolute -left-12 -bottom-12 size-48 bg-violet-600/5 dark:bg-violet-600/8 rounded-full blur-2xl"></div>
-                    <div class="size-12 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 text-white grid place-items-center shadow-lg shadow-violet-600/30">
-                        <i data-lucide="code-2" class="size-6"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">Static HTML Export — 129 Pages</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">Run one command and get 129 fully-rendered static HTML files ready to deploy on any CDN, GitHub Pages, or Netlify. No server required.</p>
-                    <div class="rounded-xl bg-slate-900 dark:bg-[#04070F] p-3.5 font-mono text-xs text-slate-300 border border-slate-800">
-                        <span class="text-blue-400">$</span> php scripts/export-html.php<br>
-                        <span class="text-emerald-400">✓ Successfully generated 129 static HTML pages in dist/</span>
-                    </div>
-                </div>
-
-                <div class="rounded-3xl border border-slate-200 dark:border-slate-800/70 bg-white dark:bg-slate-900/60 p-7 space-y-4 hover:border-blue-500/40 hover:shadow-xl hover:shadow-blue-600/8 hover:-translate-y-1 transition-all duration-300 group">
-                    <div class="size-12 rounded-2xl bg-gradient-to-br from-rose-500 to-pink-600 text-white grid place-items-center shadow-lg shadow-rose-600/30">
-                        <i data-lucide="shield-check" class="size-6"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">MIT Open Source</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">100% free forever. Use it in personal and commercial projects with no licensing fees or royalties.</p>
-                </div>
-            </div>
-        </section>
-
-        {{-- ═══════════════════════════════════════════
-             PREVIEW / SHOWCASE SECTION
-        ════════════════════════════════════════════ --}}
-        <section id="showcase" class="py-16 lg:py-28 px-4 sm:px-6 max-w-7xl mx-auto">
-            <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
-                <span class="inline-block rounded-full bg-blue-600/15 border border-blue-500/30 px-4 py-1.5 text-xs font-extrabold text-blue-600 dark:text-blue-400 uppercase tracking-wider">Preview Demos</span>
-                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight">Explore AdminKit<br>Inside &amp; Out</h2>
-                <p class="text-slate-600 dark:text-slate-300 text-base leading-relaxed">Browse through the collection of pages, components, and themes available in AdminKit.</p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                @foreach ([
-                    ['Dashboard Overview', 'Main analytics dashboard with real-time widgets, charts, and KPI metrics.', 'layout-dashboard', 'from-blue-500 to-indigo-600', 'bg-blue-600/10', route('dashboard')],
-                    ['UI Components', '40+ production-ready Blade components including modals, forms, tables, and more.', 'cpu', 'from-violet-500 to-purple-600', 'bg-violet-600/10', route('ui.elements')],
-                    ['Authentication', 'Beautiful auth pages: Login, Register, Reset Password, Lock Screen, 2FA and more.', 'lock-keyhole', 'from-emerald-500 to-teal-600', 'bg-emerald-600/10', route('page', ['path' => 'sign-in'])],
-                    ['Documentation', 'Full architecture guide, component API reference, quickstart, and live playground.', 'book-open', 'from-rose-500 to-pink-600', 'bg-rose-600/10', route('page', ['path' => 'docs'])],
-                ] as [$title, $desc, $ico, $grad, $bg, $href])
-                    <a href="{{ $href }}"
-                       class="group rounded-2xl border border-slate-200 dark:border-slate-800/70 bg-white dark:bg-slate-900/60 p-5 space-y-4 hover:border-blue-500/40 hover:shadow-xl hover:shadow-blue-600/8 hover:-translate-y-1.5 transition-all duration-300 block">
-                        <div class="rounded-xl {{ $bg }} dark:bg-opacity-20 p-6 flex items-center justify-center group-hover:scale-105 transition-transform">
-                            <div class="size-10 rounded-xl bg-gradient-to-br {{ $grad }} text-white grid place-items-center shadow-lg">
-                                <i data-lucide="{{ $ico }}" class="size-5"></i>
-                            </div>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{{ $title }}</h4>
-                            <p class="text-xs text-slate-600 dark:text-slate-300 mt-1.5 leading-relaxed">{{ $desc }}</p>
-                        </div>
-                        <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400 group-hover:gap-2.5 transition-all">
-                            View Demo <i data-lucide="arrow-right" class="size-3"></i>
-                        </div>
-                    </a>
-                @endforeach
-            </div>
-
-            {{-- Stats Row --}}
-            <div class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-5">
-                @foreach ([
-                    ['13', 'Dashboard Templates', 'text-blue-600 dark:text-blue-400'],
-                    ['129', 'Static HTML Pages', 'text-indigo-600 dark:text-indigo-400'],
-                    ['40+', 'Blade Components', 'text-violet-600 dark:text-violet-400'],
-                    ['100%', 'Responsive & Free', 'text-emerald-600 dark:text-emerald-400'],
-                ] as [$num, $label, $color])
-                    <div class="rounded-2xl border border-slate-200 dark:border-slate-800/70 bg-white dark:bg-slate-900/60 p-6 text-center shadow-sm">
-                        <div class="text-4xl font-black {{ $color }}">{{ $num }}</div>
-                        <div class="text-sm text-slate-500 dark:text-slate-400 mt-1.5 font-medium">{{ $label }}</div>
-                    </div>
-                @endforeach
-            </div>
-        </section>
-
-        {{-- ═══════════════════════════════════════════
-             TECH STACK SECTION
-        ════════════════════════════════════════════ --}}
-        <section id="tech" class="py-16 lg:py-28 px-4 sm:px-6 bg-slate-100/60 dark:bg-slate-900/30">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
-                    <span class="inline-block rounded-full bg-blue-600/15 border border-blue-500/30 px-4 py-1.5 text-xs font-extrabold text-blue-600 dark:text-blue-400 uppercase tracking-wider">Tech Stack</span>
-                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight">Cutting-Edge Stack,<br>Enterprise-Grade</h2>
-                    <p class="text-slate-600 dark:text-slate-300 text-base leading-relaxed">Powered by the best modern PHP ecosystem tools.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                    @foreach ([
-                        ['Laravel 13', 'The world\'s most elegant PHP framework — expressive syntax, robust features, zero friction.', 'flame', 'from-red-500 to-orange-500', 'v13.x', 'Production Ready'],
-                        ['Livewire 4', 'Full-stack reactive Blade components with wire:navigate SPA routing and real-time updates.', 'zap', 'from-blue-500 to-cyan-500', 'v4.x', 'SPA Built-in'],
-                        ['Tailwind CSS v4', 'Utility-first CSS framework with HSL design tokens, custom properties, and CSS layers.', 'wind', 'from-cyan-500 to-teal-500', 'v4.0', 'Zero Config'],
-                        ['Alpine.js 3', 'Lightweight reactive JavaScript layer for interactive UI without heavy frameworks.', 'layers', 'from-teal-500 to-emerald-500', 'v3.x', 'Lightweight'],
-                        ['Chart.js', 'Beautiful responsive charts — line, bar, doughnut, radar with dynamic theme sync.', 'bar-chart-2', 'from-violet-500 to-purple-500', 'Latest', 'Dark Mode Sync'],
-                        ['Vite 8', 'Lightning fast build tool with HMR, instant dev server, and optimized production bundles.', 'rocket', 'from-amber-500 to-yellow-500', 'v8.x', 'Sub 2s Build'],
-                    ] as [$name, $desc, $ico, $grad, $version, $badge])
-                        <div class="rounded-2xl border border-slate-200 dark:border-slate-800/70 bg-white dark:bg-slate-900/60 p-6 space-y-4 hover:border-blue-500/40 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
-                            <div class="flex items-center justify-between">
-                                <div class="size-11 rounded-xl bg-gradient-to-br {{ $grad }} text-white grid place-items-center shadow-md group-hover:scale-105 transition-transform">
-                                    <i data-lucide="{{ $ico }}" class="size-5"></i>
-                                </div>
-                                <div class="text-right">
-                                    <div class="text-[10px] font-mono font-bold text-blue-600 dark:text-blue-400 bg-blue-600/10 dark:bg-blue-600/15 rounded-full px-2.5 py-1">{{ $version }}</div>
-                                </div>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-slate-900 dark:text-white">{{ $name }}</h3>
-                                <p class="text-xs text-slate-600 dark:text-slate-300 mt-1.5 leading-relaxed">{{ $desc }}</p>
-                            </div>
-                            <span class="inline-block rounded-full bg-emerald-600/10 dark:bg-emerald-600/15 border border-emerald-500/25 px-2.5 py-1 text-[10px] font-semibold text-emerald-600 dark:text-emerald-400">{{ $badge }}</span>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-
-        {{-- ═══════════════════════════════════════════
-             QUICKSTART SECTION
-        ════════════════════════════════════════════ --}}
-        <section id="quickstart" class="py-16 lg:py-28 px-4 sm:px-6 max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                <div class="space-y-6">
-                    <span class="inline-block rounded-full bg-blue-600/15 border border-blue-500/30 px-4 py-1.5 text-xs font-extrabold text-blue-600 dark:text-blue-400 uppercase tracking-wider">Quickstart</span>
-                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight">Up and Running<br>in <span class="text-blue-600 dark:text-blue-400">3 Minutes</span></h2>
-                    <p class="text-slate-600 dark:text-slate-300 text-base leading-relaxed">Get your admin dashboard live with a single command. AdminKit takes care of the boilerplate so you can focus on your product.</p>
-
+                {{-- Middle: Interactive Terminal Box --}}
+                <div class="lg:col-span-5 rounded-2xl border border-slate-200 dark:border-slate-800/80 bg-white dark:bg-slate-900/90 p-4 sm:p-8 space-y-4 shadow-xl flex flex-col justify-between backdrop-blur overflow-hidden">
                     <div class="space-y-4">
-                        @foreach ([
-                            ['1', 'Clone or Install', 'git clone or composer create-project to bootstrap the project.', 'download-cloud'],
-                            ['2', 'Configure Environment', 'Copy .env.example, generate app key, and set your database.', 'settings'],
-                            ['3', 'Launch Dev Server', 'Run php artisan dev to start Vite + Laravel simultaneously.', 'rocket'],
-                        ] as [$step, $title, $desc, $ico])
-                            <div class="flex items-start gap-4">
-                                <span class="flex size-10 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white text-sm font-black shadow-md shadow-blue-600/30">{{ $step }}</span>
-                                <div>
-                                    <h4 class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                                        <i data-lucide="{{ $ico }}" class="size-3.5 text-blue-500"></i>
-                                        {{ $title }}
-                                    </h4>
-                                    <p class="text-sm text-slate-600 dark:text-slate-300 mt-0.5">{{ $desc }}</p>
-                                </div>
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3 gap-2">
+                            <div class="flex items-center gap-2">
+                                <span class="rounded-full bg-blue-600/20 px-3 py-0.5 text-[11px] font-bold text-blue-600 dark:text-blue-400 border border-blue-500/30">FAST INSTALLATION</span>
                             </div>
-                        @endforeach
+
+                            {{-- Tab Switches --}}
+                            <div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-950 p-1 rounded-lg border border-slate-200 dark:border-slate-800 text-[11px]">
+                                <button type="button" @click="activeTab = 'composer'" :class="activeTab === 'composer' ? 'bg-blue-600 text-white font-bold' : 'text-slate-500 dark:text-slate-400'" class="px-2.5 py-0.5 rounded">Composer</button>
+                                <button type="button" @click="activeTab = 'git'" :class="activeTab === 'git' ? 'bg-blue-600 text-white font-bold' : 'text-slate-500 dark:text-slate-400'" class="px-2.5 py-0.5 rounded">Git Clone</button>
+                            </div>
+                        </div>
+
+                        {{-- Code Window Composer --}}
+                        <div x-show="activeTab === 'composer'" class="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#050912] p-3.5 sm:p-4 font-mono text-xs text-slate-800 dark:text-slate-200 space-y-3 relative group overflow-hidden">
+                            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/60 pb-2">
+                                <span class="text-slate-500 text-[10px]"># Step 1: Create fresh project</span>
+                                <button type="button" @click="copyCommand('composer create-project yrizzz/adminkit my-app')" class="px-2 py-1 rounded bg-slate-200 dark:bg-slate-800 hover:bg-blue-600 dark:hover:bg-blue-600 text-slate-700 dark:text-slate-300 hover:text-white dark:hover:text-white transition-all text-[10px] flex items-center gap-1 shrink-0">
+                                    <x-ui.icon name="copy" class="size-3" />
+                                    <span x-text="copied ? 'Copied!' : 'Copy'">Copy</span>
+                                </button>
+                            </div>
+
+                            <div class="text-blue-600 dark:text-blue-400 font-bold overflow-x-auto break-all sm:break-normal text-[11px] sm:text-xs leading-relaxed py-1">$ composer create-project yrizzz/adminkit my-app</div>
+                            
+                            <div class="text-slate-500 text-[10px] pt-1"># Step 2: Boot local dev server</div>
+                            <div class="text-blue-600 dark:text-blue-400 font-bold overflow-x-auto break-all sm:break-normal text-[11px] sm:text-xs leading-relaxed">$ cd my-app && php artisan dev</div>
+                        </div>
+
+                        {{-- Code Window Git --}}
+                        <div x-show="activeTab === 'git'" x-cloak class="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#050912] p-3.5 sm:p-4 font-mono text-xs text-slate-800 dark:text-slate-200 space-y-3 relative group overflow-hidden">
+                            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/60 pb-2">
+                                <span class="text-slate-500 text-[10px]"># Step 1: Clone repository</span>
+                                <button type="button" @click="copyCommand('git clone https://github.com/yrizzz/adminkit.git')" class="px-2 py-1 rounded bg-slate-200 dark:bg-slate-800 hover:bg-blue-600 dark:hover:bg-blue-600 text-slate-700 dark:text-slate-300 hover:text-white dark:hover:text-white transition-all text-[10px] flex items-center gap-1 shrink-0">
+                                    <x-ui.icon name="copy" class="size-3" />
+                                    <span x-text="copied ? 'Copied!' : 'Copy'">Copy</span>
+                                </button>
+                            </div>
+
+                            <div class="text-blue-600 dark:text-blue-400 font-bold overflow-x-auto break-all sm:break-normal text-[11px] sm:text-xs leading-relaxed py-1">$ git clone https://github.com/yrizzz/adminkit.git</div>
+                            
+                            <div class="text-slate-500 text-[10px] pt-1"># Step 2: Install dependencies</div>
+                            <div class="text-blue-600 dark:text-blue-400 font-bold overflow-x-auto break-all sm:break-normal text-[11px] sm:text-xs leading-relaxed">$ composer install && npm install</div>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Right: Stats List --}}
+                <div class="lg:col-span-3 rounded-2xl border border-slate-200 dark:border-slate-800/80 bg-white dark:bg-slate-900/60 p-6 space-y-4 flex flex-col justify-around text-center lg:text-start shadow-xl backdrop-blur">
+                    <div class="space-y-1">
+                        <div class="text-3xl font-black text-blue-600 dark:text-blue-400">3.2k+</div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 font-semibold">GitHub Stars</div>
                     </div>
 
-                    <a href="{{ route('page', ['path' => 'docs']) }}"
-                       class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:gap-3 transition-all">
-                        Full Documentation <i data-lucide="arrow-right" class="size-4"></i>
+                    <div class="space-y-1 border-t border-slate-200 dark:border-slate-800/80 pt-3">
+                        <div class="text-3xl font-black text-slate-900 dark:text-white">100+</div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 font-semibold">UI Components</div>
+                    </div>
+
+                    <div class="space-y-1 border-t border-slate-200 dark:border-slate-800/80 pt-3">
+                        <div class="text-3xl font-black text-slate-900 dark:text-white">50+</div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 font-semibold">Pre-built Pages</div>
+                    </div>
+
+                    <div class="space-y-1 border-t border-slate-200 dark:border-slate-800/80 pt-3">
+                        <div class="text-3xl font-black text-blue-600 dark:text-blue-400">100%</div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 font-semibold">Responsive & Free MIT</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        {{-- FAQ ACCORDION SECTION --}}
+        <section id="faq" class="py-14 lg:py-24 px-4 sm:px-6 max-w-4xl mx-auto space-y-10 lg:space-y-14">
+            <div class="text-center space-y-4">
+                <div>
+                    <span class="inline-block rounded-full bg-blue-600/20 px-4 py-1.5 text-xs font-extrabold text-blue-600 dark:text-blue-400 border border-blue-500/40 uppercase tracking-wider">FAQ</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight">Frequently Asked Questions</h2>
+                <p class="text-slate-650 dark:text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">Everything you need to know about using and licensing AdminKit.</p>
+            </div>
+
+            <div class="space-y-3.5">
+                {{-- FAQ Item 1 --}}
+                <div class="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/70 overflow-hidden shadow-md">
+                    <button type="button" @click="activeFaq = activeFaq === 1 ? null : 1"
+                            class="w-full p-4.5 sm:p-5 text-start font-bold text-base sm:text-lg text-slate-900 dark:text-white flex items-center justify-between gap-4">
+                        <span>Is AdminKit completely free to use?</span>
+                        <span class="inline-block transition-transform shrink-0" :class="activeFaq === 1 ? 'rotate-180' : ''">
+                            <x-ui.icon name="chevron-down" class="size-5 text-blue-500 dark:text-blue-400" />
+                        </span>
+                    </button>
+                    <div x-show="activeFaq === 1" x-cloak class="px-4.5 sm:px-5 pb-5 text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-200 dark:border-slate-800/60 pt-3.5">
+                        Yes! AdminKit is released as 100% Open Source under the MIT License. You are free to use it for personal, commercial, or client projects without any licensing fees or royalty costs.
+                    </div>
+                </div>
+
+                {{-- FAQ Item 2 --}}
+                <div class="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/70 overflow-hidden shadow-md">
+                    <button type="button" @click="activeFaq = activeFaq === 2 ? null : 2"
+                            class="w-full p-4.5 sm:p-5 text-start font-bold text-base sm:text-lg text-slate-900 dark:text-white flex items-center justify-between gap-4">
+                        <span>Which Laravel & Livewire versions are supported?</span>
+                        <span class="inline-block transition-transform shrink-0" :class="activeFaq === 2 ? 'rotate-180' : ''">
+                            <x-ui.icon name="chevron-down" class="size-5 text-blue-500 dark:text-blue-400" />
+                        </span>
+                    </button>
+                    <div x-show="activeFaq === 2" x-cloak class="px-4.5 sm:px-5 pb-5 text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-200 dark:border-slate-800/60 pt-3.5">
+                        AdminKit is crafted natively for <strong class="text-slate-900 dark:text-white">Laravel 13</strong> and <strong class="text-slate-900 dark:text-white">Livewire 4</strong>, leveraging <strong class="text-slate-900 dark:text-white">Tailwind CSS v4</strong> with automatic SPA wire-navigation.
+                    </div>
+                </div>
+
+                {{-- FAQ Item 3 --}}
+                <div class="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/70 overflow-hidden shadow-md">
+                    <button type="button" @click="activeFaq = activeFaq === 3 ? null : 3"
+                            class="w-full p-4.5 sm:p-5 text-start font-bold text-base sm:text-lg text-slate-900 dark:text-white flex items-center justify-between gap-4">
+                        <span>Does AdminKit support Dark Mode & Custom Themes?</span>
+                        <span class="inline-block transition-transform shrink-0" :class="activeFaq === 3 ? 'rotate-180' : ''">
+                            <x-ui.icon name="chevron-down" class="size-5 text-blue-500 dark:text-blue-400" />
+                        </span>
+                    </button>
+                    <div x-show="activeFaq === 3" x-cloak class="px-4.5 sm:px-5 pb-5 text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-200 dark:border-slate-800/60 pt-3.5">
+                        Absolutely! AdminKit comes integrated with a Live Theme Customizer powered by HSL CSS variables, enabling real-time Light/Dark mode toggling and 7 vibrant accent colors.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {{-- BIG CALL TO ACTION BANNER ("Ready to build your next project?") --}}
+        <section class="py-12 lg:py-20 px-4 sm:px-6 max-w-7xl mx-auto">
+            <div class="rounded-3xl bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-600 p-6 sm:p-14 shadow-2xl relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8 text-center lg:text-start">
+                {{-- Watermark background icon --}}
+                <x-ui.icon name="gem" class="absolute -right-10 -bottom-10 size-72 text-white/10 pointer-events-none" />
+
+                <div class="space-y-3 max-w-2xl relative z-10">
+                    <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">
+                        Ready to build your next project?
+                    </h2>
+                    <p class="text-blue-100 text-xs sm:text-base">
+                        AdminKit is completely open-source and free to use. Star the repository on GitHub and support the development ★
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center gap-3.5 justify-center relative z-10 w-full lg:w-auto shrink-0">
+                    <a href="https://github.com/yrizzz/adminkit" target="_blank"
+                       class="h-12 w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-xl bg-white px-6 text-sm font-black text-blue-700 hover:bg-slate-100 transition-all shadow-lg hover:scale-[1.01] active:scale-[0.99] shrink-0">
+                        <x-ui.icon name="star" class="size-4 fill-blue-700" />
+                        <span>Star on GitHub</span>
+                        <span class="ms-1 rounded bg-blue-100 px-1.5 py-0.5 text-xs text-blue-800 font-mono">3.2k</span>
+                    </a>
+
+                    <a href="{{ route('dashboard') }}" wire:navigate
+                       class="h-12 w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-xl border border-white/40 bg-white/10 px-6 text-sm font-semibold text-white hover:bg-white/20 transition-all backdrop-blur shrink-0">
+                        <x-ui.icon name="layout-dashboard" class="size-4 text-white" />
+                        <span>Dashboard</span>
                     </a>
                 </div>
-
-                {{-- Code Block --}}
-                <div class="rounded-2xl border border-slate-200 dark:border-slate-800/80 bg-white dark:bg-slate-900/60 overflow-hidden shadow-xl">
-                    <div class="flex items-center justify-between px-4 py-3 bg-slate-100 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700/60">
-                        <div class="flex items-center gap-1.5">
-                            <span class="size-2.5 rounded-full bg-red-400/80"></span>
-                            <span class="size-2.5 rounded-full bg-amber-400/80"></span>
-                            <span class="size-2.5 rounded-full bg-emerald-400/80"></span>
-                        </div>
-                        <span class="text-[11px] font-mono text-slate-500 dark:text-slate-400">install.sh</span>
-                        <button @click="copyCommand('git clone https://github.com/yrizzz/adminkit.git\ncd adminkit\ncomposer install && npm install\ncp .env.example .env && php artisan key:generate\nphp artisan dev', 'qs')"
-                            class="text-[11px] px-2.5 py-1 rounded-lg bg-blue-600 text-white hover:bg-blue-500 transition-colors font-semibold">
-                            <span x-text="copiedSnippet === 'qs' ? 'Copied! ✓' : 'Copy All'"></span>
-                        </button>
-                    </div>
-                    <pre class="p-5 font-mono text-xs text-slate-700 dark:text-slate-300 leading-7 overflow-x-auto bg-white dark:bg-slate-900/60"><span class="text-slate-400 dark:text-slate-500"># 1. Clone repository</span>
-<span class="text-blue-600 dark:text-blue-400">git clone</span> https://github.com/yrizzz/adminkit.git
-<span class="text-blue-600 dark:text-blue-400">cd</span> adminkit
-
-<span class="text-slate-400 dark:text-slate-500"># 2. Install dependencies</span>
-<span class="text-emerald-600 dark:text-emerald-400">composer install</span> && npm install
-
-<span class="text-slate-400 dark:text-slate-500"># 3. Configure environment</span>
-<span class="text-blue-600 dark:text-blue-400">cp</span> .env.example .env
-<span class="text-purple-600 dark:text-purple-400">php artisan</span> key:generate
-
-<span class="text-slate-400 dark:text-slate-500"># 4. Launch dev server</span>
-<span class="text-purple-600 dark:text-purple-400">php artisan</span> dev
-
-<span class="text-emerald-600 dark:text-emerald-400">✓ Ready at http://localhost:8000</span></pre>
-                </div>
             </div>
         </section>
 
-        {{-- ═══════════════════════════════════════════
-             FAQ SECTION
-        ════════════════════════════════════════════ --}}
-        <section id="faq" class="py-16 lg:py-28 px-4 sm:px-6 bg-slate-100/60 dark:bg-slate-900/30">
-            <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-14 space-y-4">
-                    <span class="inline-block rounded-full bg-blue-600/15 border border-blue-500/30 px-4 py-1.5 text-xs font-extrabold text-blue-600 dark:text-blue-400 uppercase tracking-wider">FAQ</span>
-                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight">Frequently Asked<br>Questions</h2>
-                    <p class="text-slate-600 dark:text-slate-300 text-base">Everything you need to know about using and licensing AdminKit.</p>
-                </div>
-
-                <div class="space-y-3">
-                    @foreach ([
-                        [1, 'Is AdminKit completely free to use?', 'Yes! AdminKit is released as 100% Open Source under the MIT License. You can use it freely for personal, commercial, or client projects without any licensing fees or royalties.'],
-                        [2, 'Which Laravel & Livewire versions are supported?', 'AdminKit is built natively for <strong>Laravel 13</strong> and <strong>Livewire 4</strong>, powered by <strong>Tailwind CSS v4</strong> with Alpine.js 3 and automatic SPA wire-navigation.'],
-                        [3, 'Does it support Dark Mode and Custom Themes?', 'Absolutely! AdminKit ships with a Live Theme Customizer — real-time dark/light toggle, HSL accent presets, gradient sidebar builder, curved layout mode, and RTL direction support.'],
-                        [4, 'Can I export it as static HTML?', 'Yes! Run <code class="bg-slate-200 dark:bg-slate-800 px-1.5 py-0.5 rounded text-sm font-mono">php scripts/export-html.php</code> to generate 129 fully rendered static HTML pages in the <code class="bg-slate-200 dark:bg-slate-800 px-1.5 py-0.5 rounded text-sm font-mono">dist/</code> folder — no server required for deployment.'],
-                        [5, 'How do I contribute to AdminKit?', 'Fork the GitHub repository, create a feature branch, make your improvements, and open a pull request. Check the Issues page for good first-issue tasks to tackle.'],
-                    ] as [$id, $q, $a])
-                        <div class="rounded-2xl border border-slate-200 dark:border-slate-800/70 bg-white dark:bg-slate-900/70 overflow-hidden shadow-sm hover:border-blue-500/40 transition-colors">
-                            <button type="button" @click="activeFaq = activeFaq === {{ $id }} ? null : {{ $id }}"
-                                    class="w-full p-5 text-start font-bold text-base text-slate-900 dark:text-white flex items-center justify-between gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
-                                <span>{{ $q }}</span>
-                                <span :class="activeFaq === {{ $id }} ? 'rotate-45 text-blue-500' : 'text-slate-400'" class="shrink-0 transition-all duration-200">
-                                    <i data-lucide="plus" class="size-5"></i>
-                                </span>
-                            </button>
-                            <div x-show="activeFaq === {{ $id }}" x-cloak
-                                 x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
-                                 class="px-5 pb-5 text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-200 dark:border-slate-800/60 pt-4">
-                                {!! $a !!}
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-
-        {{-- ═══════════════════════════════════════════
-             CTA BANNER
-        ════════════════════════════════════════════ --}}
-        <section class="py-16 lg:py-24 px-4 sm:px-6 max-w-7xl mx-auto">
-            <div class="relative rounded-3xl bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-700 p-10 sm:p-16 shadow-2xl shadow-blue-700/30 overflow-hidden text-center">
-                <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.15),transparent_60%)]"></div>
-                <div class="absolute -right-16 -bottom-16 size-80 bg-white/5 rounded-full blur-3xl"></div>
-                <div class="absolute -left-16 -top-16 size-60 bg-white/5 rounded-full blur-3xl"></div>
-
-                <div class="relative z-10 space-y-6 max-w-3xl mx-auto">
-                    <div class="inline-flex items-center gap-2 rounded-full bg-white/15 border border-white/25 px-4 py-2 text-xs font-bold text-white">
-                        <span class="size-2 rounded-full bg-white animate-pulse"></span>
-                        Open Source · Free Forever
-                    </div>
-                    <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">
-                        Ready to Build Your<br>Next Project?
-                    </h2>
-                    <p class="text-blue-100 text-base max-w-xl mx-auto">
-                        AdminKit is completely open-source and free to use. Star the repository to support the project and stay updated with the latest releases.
-                    </p>
-                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2">
-                        <a href="https://github.com/yrizzz/adminkit" target="_blank"
-                           class="h-13 w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-xl bg-white px-8 text-sm font-extrabold text-blue-700 hover:bg-slate-100 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg">
-                            <i data-lucide="star" class="size-4 fill-blue-700"></i>
-                            Star on GitHub
-                            <span class="rounded-md bg-blue-100 px-1.5 py-0.5 text-[11px] font-mono text-blue-800">3.2k</span>
-                        </a>
-                        <a href="{{ route('dashboard') }}"
-                           class="h-13 w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-xl border border-white/30 bg-white/10 px-8 text-sm font-semibold text-white hover:bg-white/20 transition-all backdrop-blur">
-                            <i data-lucide="layout-dashboard" class="size-4"></i>
-                            Live Dashboard
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
-    {{-- ═══════════════════════════════════════════
-         FOOTER
-    ════════════════════════════════════════════ --}}
-    <footer class="bg-white dark:bg-[#06090F] border-t border-slate-200 dark:border-slate-800/70 pt-16 pb-10 px-4 sm:px-6 relative z-10">
-        <div class="mx-auto max-w-7xl">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+    {{-- MODERN RESPONSIVE FOOTER --}}
+    <footer class="bg-[#F8FAFC] dark:bg-[#050A14] border-t border-slate-200 dark:border-none pt-16 pb-10 px-4 sm:px-6 relative z-10 overflow-hidden">
+        {{-- Shimmer Animated Top Accent Line (Thin & Elegant) --}}
+        <div class="absolute top-0 inset-x-0 h-[1px] bg-slate-200 dark:bg-slate-800/40 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/70 to-transparent w-full animate-shimmer-slow"></div>
+        </div>
 
+        <div class="mx-auto max-w-7xl space-y-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-10">
+                
                 {{-- Brand Column --}}
                 <div class="lg:col-span-2 space-y-4">
-                    <a href="{{ route('landing') }}" class="flex items-center gap-2.5 group w-fit">
-                        <span class="grid size-9 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-600/30 transition-transform group-hover:scale-105">
-                            <i data-lucide="gem" class="size-4"></i>
+                    <a href="{{ route('landing') }}" wire:navigate class="flex items-center gap-2.5 group w-fit">
+                        <span class="grid size-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 text-white shadow-lg shadow-blue-600/40 relative overflow-hidden group-hover:scale-105 transition-transform">
+                            <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shimmer-fast"></span>
+                            <x-ui.icon name="gem" class="size-5 relative z-10" />
                         </span>
-                        <span class="text-xl font-black tracking-tight text-slate-900 dark:text-white">AdminKit</span>
+                        <span class="text-2xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-blue-600 to-slate-900 dark:from-white dark:via-blue-300 dark:to-white animate-text-shimmer">AdminKit</span>
                     </a>
-                    <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-xs">
-                        Modern enterprise admin dashboard boilerplate built with Laravel 13, Livewire 4, and Tailwind CSS v4.
+                    
+                    <p class="text-sm sm:text-base text-slate-650 dark:text-slate-300 leading-relaxed max-w-sm">
+                        Modern, clean, and powerful admin panel boilerplate for your enterprise projects. Built with Laravel 13, Livewire 4, and Tailwind CSS v4.
                     </p>
-                    <div class="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-600/8 dark:bg-emerald-600/12 px-3.5 py-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-                        <span class="size-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                        All Systems Operational (99.99%)
+
+                    <div class="inline-flex items-center gap-2 rounded-full border border-blue-500/20 dark:border-blue-500/30 bg-blue-600/5 dark:bg-blue-600/10 px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-blue-600 dark:text-blue-400 relative overflow-hidden group">
+                        <span class="absolute inset-0 bg-gradient-to-r from-transparent via-blue-400/15 dark:via-blue-400/25 to-transparent animate-shimmer-slow"></span>
+                        <span class="size-2 rounded-full bg-blue-500 animate-pulse"></span>
+                        <span class="relative z-10">All Systems Operational (99.99%)</span>
                     </div>
                 </div>
 
-                <div class="space-y-4">
-                    <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-white">Navigation</h4>
-                    <ul class="space-y-2.5 text-sm text-slate-600 dark:text-slate-300">
+                {{-- Column 1: LINKS --}}
+                <div class="space-y-3.5">
+                    <h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white">LINKS</h4>
+                    <ul class="space-y-2.5 text-sm text-slate-600 dark:text-slate-300 font-medium">
                         <li><a href="#features" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Features</a></li>
-                        <li><a href="#showcase" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Preview</a></li>
-                        <li><a href="{{ route('page', ['path' => 'docs']) }}" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Documentation</a></li>
+                        <li><a href="#showcase" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Demos</a></li>
+                        <li><a href="{{ route('page', ['path' => 'docs']) }}" wire:navigate class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Documentation</a></li>
                         <li><a href="#quickstart" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Quickstart</a></li>
                         <li><a href="#faq" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">FAQ</a></li>
                     </ul>
                 </div>
 
-                <div class="space-y-4">
-                    <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-white">Resources</h4>
-                    <ul class="space-y-2.5 text-sm text-slate-600 dark:text-slate-300">
+                {{-- Column 2: RESOURCES --}}
+                <div class="space-y-3.5">
+                    <h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white">RESOURCES</h4>
+                    <ul class="space-y-2.5 text-sm text-slate-600 dark:text-slate-300 font-medium">
                         <li><a href="https://github.com/yrizzz/adminkit" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">GitHub Repository</a></li>
-                        <li><a href="https://github.com/yrizzz/adminkit/issues" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Issue Tracker</a></li>
+                        <li><a href="https://github.com/yrizzz/adminkit/issues" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Issues</a></li>
                         <li><a href="https://github.com/yrizzz/adminkit/discussions" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Discussions</a></li>
-                        <li><a href="https://github.com/yrizzz/adminkit/blob/main/LICENSE" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">MIT License</a></li>
+                        <li><a href="https://github.com/yrizzz/adminkit/blob/main/LICENSE" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">License (MIT)</a></li>
                     </ul>
                 </div>
 
-                <div class="space-y-4">
-                    <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-white">Support</h4>
-                    <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">Questions or ideas? Open an issue on GitHub.</p>
+                {{-- Column 3: SUPPORT --}}
+                <div class="space-y-3.5">
+                    <h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white">SUPPORT</h4>
+                    <p class="text-sm text-slate-650 dark:text-slate-300 leading-relaxed">Have questions or feature suggestions? Open an issue on GitHub.</p>
                     <a href="https://github.com/yrizzz/adminkit/issues" target="_blank"
-                       class="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-slate-800/80 px-4 py-2.5 text-xs font-bold text-slate-800 dark:text-white hover:border-blue-500/50 hover:text-blue-600 dark:hover:text-blue-400 transition-all shadow-sm">
-                        <i data-lucide="github" class="size-4"></i>
-                        Open GitHub Issue
+                       class="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-slate-800/80 px-4 py-2.5 text-xs sm:text-sm font-bold text-slate-800 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-700 hover:border-blue-500/50 transition-all shadow-md">
+                        <x-ui.icon name="github" class="size-4 text-slate-650 dark:text-white" />
+                        <span>Create GitHub Issue</span>
                     </a>
                 </div>
+
             </div>
 
-            <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800/70 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500 dark:text-slate-400">
-                <p>&copy; {{ date('Y') }} AdminKit. Built with <span class="text-red-500">♥</span> for Laravel Developers.</p>
-                <div class="flex items-center gap-5">
-                    <a href="https://github.com/yrizzz/adminkit" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex items-center gap-1.5">
-                        <i data-lucide="github" class="size-4"></i> GitHub
-                    </a>
-                    <a href="{{ route('page', ['path' => 'docs']) }}" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Docs</a>
-                    <a href="{{ route('dashboard') }}" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Dashboard</a>
-                </div>
+            {{-- Bottom Footer Bar --}}
+            <div class="relative pt-8 text-center border-t border-slate-200 dark:border-slate-800/80 overflow-hidden">
+                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">
+                    &copy; {{ date('Y') }} AdminKit. Built with <span class="text-red-500">❤️</span> for Laravel Developers.
+                </p>
             </div>
         </div>
     </footer>
-
-    @push('scripts')
-    <style>
-        @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    </style>
-    @endpush
 </div>
