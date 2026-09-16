@@ -201,13 +201,12 @@ aside.customizer-drawer {
 
 html.dark aside.main-sidebar,
 html[data-sidebar-color='dark'] aside.main-sidebar {
-    background-color: #070B14 !important;
-    background-image: none !important;
+    background: linear-gradient(180deg, #060810 0%, #10142a 55%, #1c1a3d 100%) !important;
     color: #e2e8f0 !important;
-    border-right: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-right: 1px solid rgba(167, 139, 250, 0.14) !important;
     --sidebar-foreground: 210 40% 90%;
     --sidebar-muted: 215 20% 70%;
-    --sidebar-accent: 217.2 28% 14%;
+    --sidebar-accent: 250 28% 18%;
 }
 html[data-sidebar-color='light'] aside.main-sidebar {
     background-color: #ffffff !important;
@@ -1692,20 +1691,20 @@ html[data-layout-fluid="true"] .main-content-container {
     /* 1. Backdrop behind layout — must match aside.main-sidebar's actual bg exactly,
        otherwise the corner where the sidebar meets the curved card shows a seam. */
     html[data-app-layout='true'][data-curved-layout='true'][data-layout='vertical'] {
-        background-color: #070B14 !important;
+        background: linear-gradient(180deg, #060810 0%, #10142a 55%, #1c1a3d 100%) !important;
         overflow: hidden !important;
     }
     html[data-app-layout='true'].dark[data-curved-layout='true'][data-layout='vertical'] {
-        background-color: #070B14 !important;
+        background: linear-gradient(180deg, #060810 0%, #10142a 55%, #1c1a3d 100%) !important;
         overflow: hidden !important;
     }
 
     /* Dynamic Sidebar Backdrop for Curved Layout */
     html[data-app-layout='true'][data-sidebar-color='dark'][data-curved-layout='true'][data-layout='vertical'] {
-        background-color: #070B14 !important;
+        background: linear-gradient(180deg, #060810 0%, #10142a 55%, #1c1a3d 100%) !important;
     }
     html[data-app-layout='true'].dark[data-sidebar-color='dark'][data-curved-layout='true'][data-layout='vertical'] {
-        background-color: #070B14 !important;
+        background: linear-gradient(180deg, #060810 0%, #10142a 55%, #1c1a3d 100%) !important;
     }
     html[data-app-layout='true'][data-sidebar-color='light'][data-curved-layout='true'][data-layout='vertical'] {
         background-color: #ffffff !important;
