@@ -74,25 +74,25 @@
 }
 
 .dark {
-    --background: 222 47% 5.5%;
+    --background: 231 46% 6%;
     --foreground: 213 31% 94%;
 
-    --card: 222 45% 11%;
+    --card: 231 42% 12%;
     --card-foreground: 213 31% 94%;
 
-    --popover: 222 45% 11%;
+    --popover: 231 42% 12%;
     --popover-foreground: 213 31% 94%;
 
     --primary: 221 83% 53%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 222 36% 10%;
+    --secondary: 231 34% 12%;
     --secondary-foreground: 213 31% 94%;
 
-    --muted: 222 36% 10%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 231 34% 12%;
+    --muted-foreground: 220 16% 68%;
 
-    --accent: 222 36% 11%;
+    --accent: 231 34% 13%;
     --accent-foreground: 213 31% 96%;
 
     --destructive: 0 72% 51%;
@@ -102,15 +102,15 @@
     --warning: 38 92% 50%;
     --info: 199 89% 48%;
 
-    --border: 222 24% 18%;
-    --input: 222 24% 18%;
+    --border: 245 30% 24%;
+    --input: 245 30% 24%;
     --ring: 221 83% 53%;
 
-    --sidebar: 222 47% 6.5%;
-    --sidebar-foreground: 215 20% 75%;
-    --sidebar-muted: 215 16% 50%;
-    --sidebar-border: 222 30% 12%;
-    --sidebar-accent: 222 36% 11%;
+    --sidebar: 231 46% 7%;
+    --sidebar-foreground: 220 20% 78%;
+    --sidebar-muted: 220 16% 52%;
+    --sidebar-border: 245 26% 18%;
+    --sidebar-accent: 250 28% 18%;
     --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-primary: var(--primary);
 }
@@ -775,8 +775,8 @@ header[data-navbar-color='custom_gradient'] {
         @apply rounded-xl border border-border bg-card text-card-foreground shadow-sm;
     }
     .dark .ak-card {
-        background-color: #10182a !important;
-        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        background-color: hsl(var(--card)) !important;
+        border: 1.5px solid hsl(var(--border) / 0.8) !important;
         box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
     }
     html:not(.dark) .ak-card {
@@ -1790,9 +1790,9 @@ html[data-layout-fluid="true"] .main-content-container {
 
     html[data-app-layout='true'].dark[data-curved-layout='true'][data-layout='vertical'] .app-curved-inner {
         position: relative !important;
-        background-color: #10182a !important;
+        background-color: hsl(var(--card)) !important;
         border-radius: 2.25rem !important;
-        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border: 1.5px solid hsl(var(--border) / 0.8) !important;
         box-shadow: 0 12px 40px -8px rgba(0, 0, 0, 0.35), inset 0 1px 0 0 rgba(255, 255, 255, 0.04) !important;
         height: 100% !important;
         max-height: 100% !important;
@@ -1816,8 +1816,8 @@ html[data-layout-fluid="true"] .main-content-container {
     }
 
     html[data-app-layout='true'].dark[data-navbar-color='default'][data-curved-layout='true'][data-layout='vertical'] .app-curved-inner > header {
-        background-color: #10182a !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+        background-color: hsl(var(--card)) !important;
+        border-bottom: 1.5px solid hsl(var(--border) / 0.8) !important;
     }
 
     html[data-app-layout='true'][data-navbar-color='dark'][data-curved-layout='true'][data-layout='vertical'] .app-curved-inner > header {
@@ -1859,10 +1859,10 @@ html[data-layout-fluid="true"] .main-content-container {
     }
 
     html[data-app-layout='true'].dark[data-curved-layout='true'][data-layout='vertical'] .app-curved-inner footer {
-        background-color: #10182a !important;
+        background-color: hsl(var(--card)) !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
-        border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-top: 1.5px solid hsl(var(--border) / 0.8) !important;
         border-bottom-left-radius: 2.25rem !important;
         border-bottom-right-radius: 2.25rem !important;
     }
