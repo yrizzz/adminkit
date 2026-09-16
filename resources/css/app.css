@@ -74,25 +74,25 @@
 }
 
 .dark {
-    --background: 231 46% 6%;
+    --background: 222 32% 6%;
     --foreground: 213 31% 94%;
 
-    --card: 231 42% 12%;
+    --card: 222 30% 8.5%;
     --card-foreground: 213 31% 94%;
 
-    --popover: 231 42% 12%;
+    --popover: 222 30% 8.5%;
     --popover-foreground: 213 31% 94%;
 
     --primary: 221 83% 53%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 231 34% 12%;
+    --secondary: 222 24% 11%;
     --secondary-foreground: 213 31% 94%;
 
-    --muted: 231 34% 12%;
-    --muted-foreground: 220 16% 68%;
+    --muted: 222 24% 11%;
+    --muted-foreground: 220 12% 65%;
 
-    --accent: 231 34% 13%;
+    --accent: 222 24% 12%;
     --accent-foreground: 213 31% 96%;
 
     --destructive: 0 72% 51%;
@@ -102,15 +102,15 @@
     --warning: 38 92% 50%;
     --info: 199 89% 48%;
 
-    --border: 245 30% 24%;
-    --input: 245 30% 24%;
+    --border: 222 18% 17%;
+    --input: 222 18% 17%;
     --ring: 221 83% 53%;
 
-    --sidebar: 231 46% 7%;
-    --sidebar-foreground: 220 20% 78%;
-    --sidebar-muted: 220 16% 52%;
-    --sidebar-border: 245 26% 18%;
-    --sidebar-accent: 250 28% 18%;
+    --sidebar: 222 32% 6%;
+    --sidebar-foreground: 220 14% 75%;
+    --sidebar-muted: 220 10% 50%;
+    --sidebar-border: 222 18% 14%;
+    --sidebar-accent: 222 22% 13%;
     --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-primary: var(--primary);
 }
@@ -201,12 +201,13 @@ aside.customizer-drawer {
 
 html.dark aside.main-sidebar,
 html[data-sidebar-color='dark'] aside.main-sidebar {
-    background: linear-gradient(180deg, #060810 0%, #10142a 55%, #1c1a3d 100%) !important;
+    background-color: #0a0e18 !important;
+    background-image: none !important;
     color: #e2e8f0 !important;
-    border-right: 1px solid rgba(167, 139, 250, 0.14) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
     --sidebar-foreground: 210 40% 90%;
     --sidebar-muted: 215 20% 70%;
-    --sidebar-accent: 250 28% 18%;
+    --sidebar-accent: 222 22% 14%;
 }
 html[data-sidebar-color='light'] aside.main-sidebar {
     background-color: #ffffff !important;
@@ -1691,20 +1692,20 @@ html[data-layout-fluid="true"] .main-content-container {
     /* 1. Backdrop behind layout — must match aside.main-sidebar's actual bg exactly,
        otherwise the corner where the sidebar meets the curved card shows a seam. */
     html[data-app-layout='true'][data-curved-layout='true'][data-layout='vertical'] {
-        background: linear-gradient(180deg, #060810 0%, #10142a 55%, #1c1a3d 100%) !important;
+        background-color: #0a0e18 !important;
         overflow: hidden !important;
     }
     html[data-app-layout='true'].dark[data-curved-layout='true'][data-layout='vertical'] {
-        background: linear-gradient(180deg, #060810 0%, #10142a 55%, #1c1a3d 100%) !important;
+        background-color: #0a0e18 !important;
         overflow: hidden !important;
     }
 
     /* Dynamic Sidebar Backdrop for Curved Layout */
     html[data-app-layout='true'][data-sidebar-color='dark'][data-curved-layout='true'][data-layout='vertical'] {
-        background: linear-gradient(180deg, #060810 0%, #10142a 55%, #1c1a3d 100%) !important;
+        background-color: #0a0e18 !important;
     }
     html[data-app-layout='true'].dark[data-sidebar-color='dark'][data-curved-layout='true'][data-layout='vertical'] {
-        background: linear-gradient(180deg, #060810 0%, #10142a 55%, #1c1a3d 100%) !important;
+        background-color: #0a0e18 !important;
     }
     html[data-app-layout='true'][data-sidebar-color='light'][data-curved-layout='true'][data-layout='vertical'] {
         background-color: #ffffff !important;
