@@ -102,8 +102,8 @@
     --warning: 38 92% 50%;
     --info: 199 89% 48%;
 
-    --border: 222 18% 17%;
-    --input: 222 18% 17%;
+    --border: 222 16% 26%;
+    --input: 222 16% 26%;
     --ring: 221 83% 53%;
 
     --sidebar: 222 32% 6%;
@@ -777,7 +777,7 @@ header[data-navbar-color='custom_gradient'] {
     }
     .dark .ak-card {
         background-color: hsl(var(--card)) !important;
-        border: 1.5px solid hsl(var(--border) / 0.8) !important;
+        border: 1.5px solid hsl(var(--border)) !important;
         box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
     }
     html:not(.dark) .ak-card {
@@ -1793,7 +1793,7 @@ html[data-layout-fluid="true"] .main-content-container {
         position: relative !important;
         background-color: hsl(var(--card)) !important;
         border-radius: 2.25rem !important;
-        border: 1.5px solid hsl(var(--border) / 0.8) !important;
+        border: 1.5px solid hsl(var(--border)) !important;
         box-shadow: 0 12px 40px -8px rgba(0, 0, 0, 0.35), inset 0 1px 0 0 rgba(255, 255, 255, 0.04) !important;
         height: 100% !important;
         max-height: 100% !important;
@@ -1818,7 +1818,7 @@ html[data-layout-fluid="true"] .main-content-container {
 
     html[data-app-layout='true'].dark[data-navbar-color='default'][data-curved-layout='true'][data-layout='vertical'] .app-curved-inner > header {
         background-color: hsl(var(--card)) !important;
-        border-bottom: 1.5px solid hsl(var(--border) / 0.8) !important;
+        border-bottom: 1.5px solid hsl(var(--border)) !important;
     }
 
     html[data-app-layout='true'][data-navbar-color='dark'][data-curved-layout='true'][data-layout='vertical'] .app-curved-inner > header {
@@ -1863,7 +1863,7 @@ html[data-layout-fluid="true"] .main-content-container {
         background-color: hsl(var(--card)) !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
-        border-top: 1.5px solid hsl(var(--border) / 0.8) !important;
+        border-top: 1.5px solid hsl(var(--border)) !important;
         border-bottom-left-radius: 2.25rem !important;
         border-bottom-right-radius: 2.25rem !important;
     }
