@@ -77,10 +77,10 @@
     --background: 222 47% 5.5%;
     --foreground: 213 31% 94%;
 
-    --card: 222 44% 8%;
+    --card: 222 45% 11%;
     --card-foreground: 213 31% 94%;
 
-    --popover: 222 44% 8%;
+    --popover: 222 45% 11%;
     --popover-foreground: 213 31% 94%;
 
     --primary: 221 83% 53%;
@@ -776,9 +776,9 @@ header[data-navbar-color='custom_gradient'] {
         @apply rounded-xl border border-border bg-card text-card-foreground shadow-sm;
     }
     .dark .ak-card {
-        background-color: #0B101D !important;
-        border: 1px solid rgba(255, 255, 255, 0.12) !important;
-        box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+        background-color: #10182a !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
     }
     html:not(.dark) .ak-card {
         background-color: #ffffff !important;
@@ -1689,28 +1689,29 @@ html[data-layout-fluid="true"] .main-content-container {
 
 /* ── Curved Content Layout / Border Melengkung Sticky & Smooth Internal Scroll ── */
 @media (min-width: 1024px) {
-    /* 1. Backdrop behind layout */
+    /* 1. Backdrop behind layout — must match aside.main-sidebar's actual bg exactly,
+       otherwise the corner where the sidebar meets the curved card shows a seam. */
     html[data-app-layout='true'][data-curved-layout='true'][data-layout='vertical'] {
-        background-color: #0f172a !important;
+        background-color: #070B14 !important;
         overflow: hidden !important;
     }
     html[data-app-layout='true'].dark[data-curved-layout='true'][data-layout='vertical'] {
-        background-color: #050811 !important;
+        background-color: #070B14 !important;
         overflow: hidden !important;
     }
 
     /* Dynamic Sidebar Backdrop for Curved Layout */
     html[data-app-layout='true'][data-sidebar-color='dark'][data-curved-layout='true'][data-layout='vertical'] {
-        background-color: #0f172a !important;
+        background-color: #070B14 !important;
     }
     html[data-app-layout='true'].dark[data-sidebar-color='dark'][data-curved-layout='true'][data-layout='vertical'] {
-        background-color: #050811 !important;
+        background-color: #070B14 !important;
     }
     html[data-app-layout='true'][data-sidebar-color='light'][data-curved-layout='true'][data-layout='vertical'] {
-        background-color: #cbd5e1 !important;
+        background-color: #ffffff !important;
     }
     html[data-app-layout='true'].dark[data-sidebar-color='light'][data-curved-layout='true'][data-layout='vertical'] {
-        background-color: #1e293b !important;
+        background-color: #ffffff !important;
     }
     html[data-app-layout='true'][data-sidebar-color='primary'][data-curved-layout='true'][data-layout='vertical'] {
         background-color: hsl(var(--primary)) !important;
@@ -1790,10 +1791,10 @@ html[data-layout-fluid="true"] .main-content-container {
 
     html[data-app-layout='true'].dark[data-curved-layout='true'][data-layout='vertical'] .app-curved-inner {
         position: relative !important;
-        background-color: #0b101d !important;
+        background-color: #10182a !important;
         border-radius: 2.25rem !important;
-        border: 1px solid rgba(255, 255, 255, 0.12) !important;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        box-shadow: 0 12px 40px -8px rgba(0, 0, 0, 0.35), inset 0 1px 0 0 rgba(255, 255, 255, 0.04) !important;
         height: 100% !important;
         max-height: 100% !important;
         min-height: 0 !important;
@@ -1816,8 +1817,8 @@ html[data-layout-fluid="true"] .main-content-container {
     }
 
     html[data-app-layout='true'].dark[data-navbar-color='default'][data-curved-layout='true'][data-layout='vertical'] .app-curved-inner > header {
-        background-color: #0b101d !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+        background-color: #10182a !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
     }
 
     html[data-app-layout='true'][data-navbar-color='dark'][data-curved-layout='true'][data-layout='vertical'] .app-curved-inner > header {
@@ -1859,10 +1860,10 @@ html[data-layout-fluid="true"] .main-content-container {
     }
 
     html[data-app-layout='true'].dark[data-curved-layout='true'][data-layout='vertical'] .app-curved-inner footer {
-        background-color: #0b101d !important;
+        background-color: #10182a !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
-        border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
         border-bottom-left-radius: 2.25rem !important;
         border-bottom-right-radius: 2.25rem !important;
     }
